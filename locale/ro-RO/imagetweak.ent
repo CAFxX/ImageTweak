@@ -1,0 +1,35 @@
+<!ENTITY pref.window.title "ImageTweak - Opţiuni">
+<!ENTITY pref.prefpane.label "Opţiuni afişare imagine">
+<!ENTITY pref.bgcolor.label "Culoare fundal">
+<!ENTITY pref.autoresize.label "Redimensionare imagini la încărcare">
+<!ENTITY pref.clip_movement.label "Limitează mişcarea imaginii">
+<!ENTITY pref.zoomexp.label "Factor zoom (&#37;)">
+<!ENTITY pref.zoomonpointer.label "Zoom la cursor">
+<!ENTITY pref.zoomtype.label "Tipuri zoom active">
+<!ENTITY pref.zoomtype.default.label "Tip zoom prestabilit">
+<!ENTITY pref.zoomtype.full.label "Încadrare în fereastră">
+<!ENTITY pref.zoomtype.fill.label "Umple fereastra">
+<!ENTITY pref.zoomtype.free.label "Permisiv">
+<!ENTITY pref.zoomtype.unscaled.label "1:1 (original)">
+<!ENTITY pref.shortcut.label "Scurtături active (Ctrl + Click dreapta)">
+<!ENTITY pref.shortcut.img.label "Imagini (IMG)">
+<!ENTITY pref.shortcut.bg.label "Fundaluri">
+<!ENTITY pref.invertmousewheel.label "Inversează direcţia de zoom a rotiţei">
+<!ENTITY pref.invertkeyboard.label "Inversează navigaţia din tastatura">
+<!ENTITY pref.startfromtopleft.label "Plasează imaginea în stânga-sus">
+<!ENTITY pref.bgcolor.tooltip "Culoarea de fundal folosită la afişarea imaginilor">
+<!ENTITY pref.autoresize.tooltip "Redimensionează automat imaginile mai mari decat fereastra pentru a se incadra in fereastră la incarcare">
+<!ENTITY pref.clip_movement.tooltip "Permite deplasarea imaginii doar în fereastră">
+<!ENTITY pref.zoomexp.tooltip "Factor de mărire/micşorare (200&#37; inseamnă dublare/injumatatire la fiecare acţiune)">
+<!ENTITY pref.zoomonpointer.tooltip "Zoom către cursorul de la mouse când se foloseşte rotiţa">
+<!ENTITY pref.zoomtype.full.tooltip "Activează modul încadrare în fereastră la dublu-click">
+<!ENTITY pref.zoomtype.fill.tooltip "Activează modul umplere fereastră la dublu click">
+<!ENTITY pref.zoomtype.free.tooltip "Activează modul permisiv (se poate face zoom şi tragere cu mouse-ul) la dublu click">
+<!ENTITY pref.zoomtype.unscaled.tooltip "Activează modul 1:1 (original) la dublu click">
+<!ENTITY pref.shortcut.img.tooltip "Activează scurtăturile pentru imaginile folosite în paginile Web">
+<!ENTITY pref.shortcut.bg.tooltip "Activează scurtăturile pentru fundalurile folosite în paginile Web">
+<!ENTITY pref.invertmousewheel.tooltip "Inversează direcţia de zoom a rotitei mouse-ului">
+<!ENTITY pref.invertkeyboard.tooltip "Inversează directia de deplasare a imaginii la folosirea tastelor săgeti">
+<!ENTITY pref.startfromtopleft.tooltip "Plasează imaginea în coltul din stanga-sus dacă este mai mare decât fereastra">
+<!ENTITY pref.pressf1forhelp.label "Apasa F1 pentru a vizualiza documentaţia online">
+<!ENTITY about.window.title "ImageTweak - Despre">

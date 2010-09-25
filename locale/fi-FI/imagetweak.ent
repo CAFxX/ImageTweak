@@ -1,0 +1,35 @@
+<!ENTITY pref.window.title "ImageTweak - Asetukset">
+<!ENTITY pref.prefpane.label "Kuvan näyttöasetukset">
+<!ENTITY pref.bgcolor.label "Taustan väri">
+<!ENTITY pref.autoresize.label "Muuta kuvan kokoa automaattisesti latauksen yhteydessä">
+<!ENTITY pref.clip_movement.label "Rajaa kuvan liikkumisaluetta">
+<!ENTITY pref.zoomexp.label "Zoomaus painalluksella(&#37;)">
+<!ENTITY pref.zoomonpointer.label "Zoomaa hiiren osoittimella">
+<!ENTITY pref.zoomtype.label "Sallitut zoomauksen tyypit">
+<!ENTITY pref.zoomtype.default.label "Oletus zoomaus">
+<!ENTITY pref.zoomtype.full.label "Sovita ikkunaan">
+<!ENTITY pref.zoomtype.fill.label "Täytä ikkuna">
+<!ENTITY pref.zoomtype.free.label "Vapaa tila">
+<!ENTITY pref.zoomtype.unscaled.label "1:1">
+<!ENTITY pref.shortcut.label "Ota pikakuvakkeet käyttöön (ctrl+klikkaus oikealla)">
+<!ENTITY pref.shortcut.img.label "Kuvat (IMG)">
+<!ENTITY pref.shortcut.bg.label "Taustat">
+<!ENTITY pref.invertmousewheel.label "Käännä hiiren rullalla zoomauksen suunta">
+<!ENTITY pref.invertkeyboard.label "Käännä näppäimistöllä navigointi">
+<!ENTITY pref.startfromtopleft.label "Aseta kuva ylävasemmalle">
+<!ENTITY pref.bgcolor.tooltip "Aseta taustan väri jota käytetään näytettäessä kuvia">
+<!ENTITY pref.autoresize.tooltip "Muuta ikkunaa suurempien kuvien kokoa automaattisesti ladatessa">
+<!ENTITY pref.clip_movement.tooltip "Ota kuvan liikuttaminen käyttöön vain ikkunassa">
+<!ENTITY pref.zoomexp.tooltip "Zoomauksen määrä per painallus (200&#37; tarkoittaa että kuvan koko kaksinkertaistuu/puolittuu per painallus)">
+<!ENTITY pref.zoomonpointer.tooltip "Zoomaa kohti hiiren osoitinta kun käytetään hiiren rullaa">
+<!ENTITY pref.zoomtype.full.tooltip "Ota sovita ikkunaan-näkymä käyttöön kaksoisklikatessa">
+<!ENTITY pref.zoomtype.fill.tooltip "Ota täytä ikkuna-näkymä käyttöön kaksoisklikatessa">
+<!ENTITY pref.zoomtype.free.tooltip "Ota vapaa näkymä (zoomattava ja vedettävä) käyttöön kaksoisklikatessa">
+<!ENTITY pref.zoomtype.unscaled.tooltip "Ota skaalaamaton näkymä käyttöön kaksoisklikatessa">
+<!ENTITY pref.shortcut.img.tooltip "Ota pikakuvake kuviin käyttöön internet-sivuilla">
+<!ENTITY pref.shortcut.bg.tooltip "Ota pikakuvake taustoihin käyttöön internet-sivuilla">
+<!ENTITY pref.invertmousewheel.tooltip "Käännä hiiren rullan suunata zoomatessa">
+<!ENTITY pref.invertkeyboard.tooltip "Käännä nuolinäppäimien suunata liikkuessa">
+<!ENTITY pref.startfromtopleft.tooltip "Sijoita kuva vasempaan yläkulmaan kun se on isompi kuin ikkuna">
+<!ENTITY pref.pressf1forhelp.label "Press F1 to display the online help">
+<!ENTITY about.window.title "Tietoja ImageTweakista">

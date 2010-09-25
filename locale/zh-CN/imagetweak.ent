@@ -1,0 +1,35 @@
+<!ENTITY pref.window.title "ImageTweak - 选项">
+<!ENTITY pref.prefpane.label "图片显示设置">
+<!ENTITY pref.bgcolor.label "背景颜色">
+<!ENTITY pref.autoresize.label "载入时自动缩放图片">
+<!ENTITY pref.clip_movement.label "限制图片移动范围">
+<!ENTITY pref.zoomexp.label "缩放系数(&#37;)">
+<!ENTITY pref.zoomonpointer.label "在鼠标位置缩放">
+<!ENTITY pref.zoomtype.label "启用缩放模式">
+<!ENTITY pref.zoomtype.default.label "默认缩放模式">
+<!ENTITY pref.zoomtype.full.label "适应窗口">
+<!ENTITY pref.zoomtype.fill.label "填充窗口">
+<!ENTITY pref.zoomtype.free.label "自由模式">
+<!ENTITY pref.zoomtype.unscaled.label "1:1">
+<!ENTITY pref.shortcut.label "启用快捷键(ctrl+右键)">
+<!ENTITY pref.shortcut.img.label "图片(IMG)">
+<!ENTITY pref.shortcut.bg.label "背景">
+<!ENTITY pref.invertmousewheel.label "反向鼠标滚轮缩放方向">
+<!ENTITY pref.invertkeyboard.label "反向键盘控制">
+<!ENTITY pref.startfromtopleft.label "对齐图片到左上方">
+<!ENTITY pref.bgcolor.tooltip "设置查看图片时的背景颜色">
+<!ENTITY pref.autoresize.tooltip "载入时自动缩放大于窗口的图片">
+<!ENTITY pref.clip_movement.tooltip "使图片只允许在窗口内移动">
+<!ENTITY pref.zoomexp.tooltip "每次缩放系数(200&#37; 表示每次放大两倍或缩小一半)">
+<!ENTITY pref.zoomonpointer.tooltip "使用滚轮时以鼠标指针为中心缩放">
+<!ENTITY pref.zoomtype.full.tooltip "双击使图片适应窗口">
+<!ENTITY pref.zoomtype.fill.tooltip "双击使图片充满窗口">
+<!ENTITY pref.zoomtype.free.tooltip "双击以自由查看图片, 可以缩放和拖动">
+<!ENTITY pref.zoomtype.unscaled.tooltip "双击显示图片原始大小">
+<!ENTITY pref.shortcut.img.tooltip "启用在页面中对图片的快捷键">
+<!ENTITY pref.shortcut.bg.tooltip "启用在页面中对背景的快捷键">
+<!ENTITY pref.invertmousewheel.tooltip "反向鼠标滚轮缩放的方向">
+<!ENTITY pref.invertkeyboard.tooltip "反向键盘方向键的滚动方向">
+<!ENTITY pref.startfromtopleft.tooltip "当图片大于窗口时对齐到左上方">
+<!ENTITY pref.pressf1forhelp.label "按下 F1 显示在线帮助">
+<!ENTITY about.window.title "ImageTweak - 关于">

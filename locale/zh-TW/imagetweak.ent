@@ -1,0 +1,35 @@
+<!ENTITY pref.window.title "ImageTweak - 設定">
+<!ENTITY pref.prefpane.label "團片顯示設定">
+<!ENTITY pref.bgcolor.label "背景顏色">
+<!ENTITY pref.autoresize.label "載入時自動縮放圖片">
+<!ENTITY pref.clip_movement.label "剪下圖片可以一定範圍">
+<!ENTITY pref.zoomexp.label "放大倍率">
+<!ENTITY pref.zoomonpointer.label "以滑鼠指向位置放大">
+<!ENTITY pref.zoomtype.label "開啟縮放種類">
+<!ENTITY pref.zoomtype.default.label "預設縮放類型">
+<!ENTITY pref.zoomtype.full.label "符合視窗">
+<!ENTITY pref.zoomtype.fill.label "全視窗">
+<!ENTITY pref.zoomtype.free.label "任意模式">
+<!ENTITY pref.zoomtype.unscaled.label "1:1">
+<!ENTITY pref.shortcut.label "開啟快速鍵(ctrl+滑鼠右鍵)">
+<!ENTITY pref.shortcut.img.label "圖片(IMG)">
+<!ENTITY pref.shortcut.bg.label "背景">
+<!ENTITY pref.invertmousewheel.label "反向滑鼠滾輪縮放方向">
+<!ENTITY pref.invertkeyboard.label "反向鍵盤控制">
+<!ENTITY pref.startfromtopleft.label "圖片對齊於左上方">
+<!ENTITY pref.bgcolor.tooltip "設定預覽圖片時的背景顏色">
+<!ENTITY pref.autoresize.tooltip "載入時自動縮放圖片大於視窗">
+<!ENTITY pref.clip_movement.tooltip "允許圖片只在視窗中可以被移動">
+<!ENTITY pref.zoomexp.tooltip "逐次放大倍率(200&#37; 指 每一次2倍放大或縮小)">
+<!ENTITY pref.zoomonpointer.tooltip "當使用滑鼠滾輪時依滑鼠指向位置縮放">
+<!ENTITY pref.zoomtype.full.tooltip "開啟點滑鼠兩下讓圖片符合視窗">
+<!ENTITY pref.zoomtype.fill.tooltip "開啟點滑鼠兩下全畫面預覽">
+<!ENTITY pref.zoomtype.free.tooltip "開啟自由預覽（可縮放、可拖曳）當雙鍵滑鼠右鍵時">
+<!ENTITY pref.zoomtype.unscaled.tooltip "開啟點滑鼠兩下未運算預覽">
+<!ENTITY pref.shortcut.img.tooltip "開啟在頁面中對圖片使用快捷鍵">
+<!ENTITY pref.shortcut.bg.tooltip "開啟在頁面中對背景使用快捷鍵">
+<!ENTITY pref.invertmousewheel.tooltip "反向滑鼠滾輪縮放方向">
+<!ENTITY pref.invertkeyboard.tooltip "反轉縮放圖示標示位置">
+<!ENTITY pref.startfromtopleft.tooltip "當圖片大於視窗時將圖片對齊於左上方">
+<!ENTITY pref.pressf1forhelp.label "按下 F1 瀏覽線上說明">
+<!ENTITY about.window.title "關於 ImageTweak">

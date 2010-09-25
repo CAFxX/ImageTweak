@@ -1,0 +1,35 @@
+<!ENTITY pref.window.title "ImageTweak - Možnosti">
+<!ENTITY pref.prefpane.label "Možnosti zobrazovania obrázku">
+<!ENTITY pref.bgcolor.label "Farba pozadia">
+<!ENTITY pref.autoresize.label "Automaticky zmeniť veľkosť obrázku pri nahraní">
+<!ENTITY pref.clip_movement.label "Clip image movement range">
+<!ENTITY pref.zoomexp.label "Zoom">
+<!ENTITY pref.zoomonpointer.label "Zoomovať na kurzor myši">
+<!ENTITY pref.zoomtype.label "Povolené typy zoomu">
+<!ENTITY pref.zoomtype.default.label "Pôvodný zoom">
+<!ENTITY pref.zoomtype.full.label "Vtesnať do okna">
+<!ENTITY pref.zoomtype.fill.label "Vyplniť okno">
+<!ENTITY pref.zoomtype.free.label "Voľný mód">
+<!ENTITY pref.zoomtype.unscaled.label "1:1">
+<!ENTITY pref.shortcut.label "Povoliť skratky (ctrl+pravýklik)">
+<!ENTITY pref.shortcut.img.label "Obrázky (IMG)">
+<!ENTITY pref.shortcut.bg.label "Pozadia">
+<!ENTITY pref.invertmousewheel.label "Prehodiť smer zoomu na koliesku myši">
+<!ENTITY pref.invertkeyboard.label "Prehodiť klávesnicovú navigáciu">
+<!ENTITY pref.startfromtopleft.label "Umiestniť obrázok vľavo hore">
+<!ENTITY pref.bgcolor.tooltip "Nastaviť farbu pozadia pri zobrazovaní obrázkov">
+<!ENTITY pref.autoresize.tooltip "Automaticky zmeniť veľkosť obrázkov väčších ako okno v ktorom sa načítavajú">
+<!ENTITY pref.clip_movement.tooltip "Povoliľ pohyb obrázku len vrámci okna">
+<!ENTITY pref.zoomexp.tooltip "Faktor zoomu (200&#37; znamená ho zdvojnásobiť pri každom kroku)">
+<!ENTITY pref.zoomonpointer.tooltip "Zoomovať ku kurzoru myši pri používaní scrollovacieho tlačidla">
+<!ENTITY pref.zoomtype.full.tooltip "Povoliť vtesnanie do okna pri dvojkliku">
+<!ENTITY pref.zoomtype.fill.tooltip "Povoliť vyplnenie okna pri dvojkliku">
+<!ENTITY pref.zoomtype.free.tooltip "Povoliť voľné zobrazenie (zoomovateľné a prenášateľné) pri dvojkliku">
+<!ENTITY pref.zoomtype.unscaled.tooltip "Povoliť neškálované zobrazenie pri dvojkliku">
+<!ENTITY pref.shortcut.img.tooltip "Povoliť skratku pre obrázky použité v stránkach">
+<!ENTITY pref.shortcut.bg.tooltip "Povoliť skratku pre pozadia použité v stránkach">
+<!ENTITY pref.invertmousewheel.tooltip "Invert the mouse wheel scrolling direction for zooming">
+<!ENTITY pref.invertkeyboard.tooltip "Invert the arrow keys direction for scrolling">
+<!ENTITY pref.startfromtopleft.tooltip "Place the image at the top left when it is bigger than the window">
+<!ENTITY pref.pressf1forhelp.label "Stlačte F1 pre zobrazenie online nápovedy">
+<!ENTITY about.window.title "ImageTweak - O rozšírení">
