@@ -1,0 +1,35 @@
+<!ENTITY pref.window.title "ImageTweak - опције">
+<!ENTITY pref.prefpane.label "Опције приказивања слика">
+<!ENTITY pref.bgcolor.label "Боја позадине">
+<!ENTITY pref.autoresize.label "Аутоматски промени величину слике приликом учитавања">
+<!ENTITY pref.clip_movement.label "Замрзни подручје у косе се лика креће">
+<!ENTITY pref.zoomexp.label "Зум">
+<!ENTITY pref.zoomonpointer.label "Зумирај показивачем миша">
+<!ENTITY pref.zoomtype.label "Омогућене врсте зумова">
+<!ENTITY pref.zoomtype.default.label "подразумевани зум">
+<!ENTITY pref.zoomtype.full.label "Прилагоди прозору">
+<!ENTITY pref.zoomtype.fill.label "Приказ преко целог прозора">
+<!ENTITY pref.zoomtype.free.label "Слободан режим">
+<!ENTITY pref.zoomtype.unscaled.label "1:1">
+<!ENTITY pref.shortcut.label "Омогућене пречице (ктрл + десни клик)">
+<!ENTITY pref.shortcut.img.label "Слике  IMG)">
+<!ENTITY pref.shortcut.bg.label "Позадине">
+<!ENTITY pref.invertmousewheel.label "Обрни смер зумирања точкићем миша">
+<!ENTITY pref.invertkeyboard.label "Обрни смер управљања тастатуром">
+<!ENTITY pref.startfromtopleft.label "Слику постави у горњи леви угао">
+<!ENTITY pref.bgcolor.tooltip "Подеси боју позадине која се користи за слике">
+<!ENTITY pref.autoresize.tooltip "Аутоматски промени величину слике наком учитавања, тако да попуни прозор">
+<!ENTITY pref.clip_movement.tooltip "Дозволи да се слика помера само унутар прозора">
+<!ENTITY pref.zoomexp.tooltip "Степен увећања ((200&#37; значи да се удвостручава при сваком кораку)">
+<!ENTITY pref.zoomonpointer.tooltip "Точкићем приближи место на коме се налази показивач миша">
+<!ENTITY pref.zoomtype.full.tooltip "Омогући приказ преко целог екрана кад се двапут кликнем">
+<!ENTITY pref.zoomtype.fill.tooltip "Увећај преко целог екрана када двапут кликнем">
+<!ENTITY pref.zoomtype.free.tooltip "Омогући „слободно гледање” (могуће увећавање и превлачење) када двапут кликнем">
+<!ENTITY pref.zoomtype.unscaled.tooltip "Врати на стварну величину">
+<!ENTITY pref.shortcut.img.tooltip "Омогући пречицу за слике које се користе у веб страницама">
+<!ENTITY pref.shortcut.bg.tooltip "Омогући пречицу за позадине које се користе у веб страницама">
+<!ENTITY pref.invertmousewheel.tooltip "Обрни смер зумирања точкићем миша">
+<!ENTITY pref.invertkeyboard.tooltip "Обрни смер управљања тастатуром">
+<!ENTITY pref.startfromtopleft.tooltip "Слику постави у горњи леви угао, ако је већа од прозора">
+<!ENTITY pref.pressf1forhelp.label "Притисните F1 да бисте видели помоћ (на мрежи)">
+<!ENTITY about.window.title "О додатку">

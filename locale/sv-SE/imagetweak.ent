@@ -1,0 +1,35 @@
+<!ENTITY pref.window.title "Inställningar för ImageTweak">
+<!ENTITY pref.prefpane.label "Bildvisning">
+<!ENTITY pref.bgcolor.label "Bakgrundsfärg">
+<!ENTITY pref.autoresize.label "Ändra storlek automatiskt när bild laddas">
+<!ENTITY pref.clip_movement.label "Begränsa bildens rörelseyta">
+<!ENTITY pref.zoomexp.label "Zoomningsfaktor (&#37;)">
+<!ENTITY pref.zoomonpointer.label "Zooma in mot muspekare">
+<!ENTITY pref.zoomtype.label "Zoomningstyper">
+<!ENTITY pref.zoomtype.default.label "Standard-zoomtyp">
+<!ENTITY pref.zoomtype.full.label "Anpassa till fönster">
+<!ENTITY pref.zoomtype.fill.label "Fyll fönster">
+<!ENTITY pref.zoomtype.free.label "Frihandsvisning">
+<!ENTITY pref.zoomtype.unscaled.label "1:1">
+<!ENTITY pref.shortcut.label "Genvägar (Ctrl+Högerklick)">
+<!ENTITY pref.shortcut.img.label "Bilder (IMG)">
+<!ENTITY pref.shortcut.bg.label "Bakgrundsbilder">
+<!ENTITY pref.invertmousewheel.label "Invertera zoomning med mushjulet">
+<!ENTITY pref.invertkeyboard.label "Invertera tangentbordsnavigeringen">
+<!ENTITY pref.startfromtopleft.label "Placera bilden uppe till vänster">
+<!ENTITY pref.bgcolor.tooltip "Ange bakgrundsfärgen som används när bilder visas">
+<!ENTITY pref.autoresize.tooltip "Ändra automatiskt storlek på bilder större än fönstret när de laddas">
+<!ENTITY pref.clip_movement.tooltip "Tillåt endast att bilden flyttas inom fönstret">
+<!ENTITY pref.zoomexp.tooltip "Stegvis zoomningsfaktor (200&#37; innebär att storleken dubblas/halveras med varje steg)">
+<!ENTITY pref.zoomonpointer.tooltip "Zooma mot den punkt där muspekaren pekar, när mushjulet används">
+<!ENTITY pref.zoomtype.full.tooltip "Aktivera Anpassa till fönster-vyn vid dubbelklick">
+<!ENTITY pref.zoomtype.fill.tooltip "Aktivera Fyll fönster-vyn vid dubbelklick">
+<!ENTITY pref.zoomtype.free.tooltip "Aktivera Frihandsvisning (zoomnings- och flyttbarhet) vid dubbelklick">
+<!ENTITY pref.zoomtype.unscaled.tooltip "Aktivera den oskalade vyn (skala 1:1) vid dubbelklick">
+<!ENTITY pref.shortcut.img.tooltip "Aktivera genvägen för bilder som används på webbsidor">
+<!ENTITY pref.shortcut.bg.tooltip "Aktivera genvägen för bakgrundsbilder som används på webbsidor">
+<!ENTITY pref.invertmousewheel.tooltip "Invertera mushjulets zoomningsriktning (in/ut)">
+<!ENTITY pref.invertkeyboard.tooltip "Invertera piltangenternas flyttriktning vid bildrullning">
+<!ENTITY pref.startfromtopleft.tooltip "Placera bilden längst upp till vänster när den är större än fönstret">
+<!ENTITY pref.pressf1forhelp.label "Tryck på F1 för att visa ImageTweaks hjälpwebbsida (på engelska)">
+<!ENTITY about.window.title "Om ImageTweak">
