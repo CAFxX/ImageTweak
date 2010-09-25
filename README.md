@@ -1,3 +1,4 @@
+![ImageTweak icon](http://github.com/CAFxX/ImageTweak/raw/master/skin/imagetweak32.png)
 # ImageTweak
 Mozilla Firefox add-on for improving the image viewing UX
 
