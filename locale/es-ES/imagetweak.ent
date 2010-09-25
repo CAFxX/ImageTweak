@@ -1,0 +1,35 @@
+<!ENTITY pref.window.title "ImageTweak - Opciones">
+<!ENTITY pref.prefpane.label "Opciones de visualización">
+<!ENTITY pref.bgcolor.label "Color de fondo">
+<!ENTITY pref.autoresize.label "Redimensionar automáticamente">
+<!ENTITY pref.clip_movement.label "Rango de movimientos">
+<!ENTITY pref.zoomexp.label "Zoom (&#37;)">
+<!ENTITY pref.zoomonpointer.label "Zoom con el puntero del ratón">
+<!ENTITY pref.zoomtype.label "Habilitar zoom">
+<!ENTITY pref.zoomtype.default.label "Zoom por defecto">
+<!ENTITY pref.zoomtype.full.label "Ajustar a la ventana">
+<!ENTITY pref.zoomtype.fill.label "Llenar ventana">
+<!ENTITY pref.zoomtype.free.label "Modo libre">
+<!ENTITY pref.zoomtype.unscaled.label "1:1">
+<!ENTITY pref.shortcut.label "Habilitar atajos (Ctrl+botón derecho)">
+<!ENTITY pref.shortcut.img.label "Imágenes (IMG)">
+<!ENTITY pref.shortcut.bg.label "Fondos">
+<!ENTITY pref.invertmousewheel.label "Invertir la dirección de zoom con la rueda del ratón">
+<!ENTITY pref.invertkeyboard.label "Invertir la navegación con el teclado">
+<!ENTITY pref.startfromtopleft.label "Colocar la imagen en la esquina izquierda">
+<!ENTITY pref.bgcolor.tooltip "Establecer el color de fondo a usar al mostrar imágenes">
+<!ENTITY pref.autoresize.tooltip "Redimensionar automáticamente las imágenes mayores que la ventana para ajustarlas al cargar">
+<!ENTITY pref.clip_movement.tooltip "Permitir mover la imagen sólo dentro de la ventana">
+<!ENTITY pref.zoomexp.tooltip "Incremento de zoom (200&#37; significa doblar o disminuir a la mitad en cada paso)">
+<!ENTITY pref.zoomonpointer.tooltip "Hacer zoom hacia el puntero del ratón al usar la rueda">
+<!ENTITY pref.zoomtype.full.tooltip "Ajustar la imagen a la ventana al hacer doble clic">
+<!ENTITY pref.zoomtype.fill.tooltip "Completar la ventana al hacer doble clic">
+<!ENTITY pref.zoomtype.free.tooltip "Habilitar la vista libre (es posible hacer zoom y arrastrar) al hacer doble clic">
+<!ENTITY pref.zoomtype.unscaled.tooltip "Habilitar la vista sin escalar al hacer doble clic">
+<!ENTITY pref.shortcut.img.tooltip "Habilitar los atajos usados para imágenes en páginas web">
+<!ENTITY pref.shortcut.bg.tooltip "Habilitar los atajos usados para fondos en páginas web">
+<!ENTITY pref.invertmousewheel.tooltip "Invierte la dirección del zoom al usar la rueda del ratón">
+<!ENTITY pref.invertkeyboard.tooltip "Invierte la dirección de las teclas al desplazarse">
+<!ENTITY pref.startfromtopleft.tooltip "Coloca la imagen en la esquina izquierda cuando es mayor que la ventana">
+<!ENTITY pref.pressf1forhelp.label "Pulse F1 para mostrar la ayuda online">
+<!ENTITY about.window.title "ImageTweak - Acerca de">

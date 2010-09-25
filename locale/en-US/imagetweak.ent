@@ -1,0 +1,35 @@
+<!ENTITY pref.window.title "ImageTweak - Options">
+<!ENTITY pref.prefpane.label "Image display options">
+<!ENTITY pref.bgcolor.label "Background color">
+<!ENTITY pref.autoresize.label "Automatically resize images on load">
+<!ENTITY pref.clip_movement.label "Clip image movement range">
+<!ENTITY pref.zoomexp.label "Zoom factor (&#37;)">
+<!ENTITY pref.zoomonpointer.label "Zoom on mouse pointer">
+<!ENTITY pref.zoomtype.label "Enabled zoom types">
+<!ENTITY pref.zoomtype.default.label "Default zoom type">
+<!ENTITY pref.zoomtype.full.label "Fit to window">
+<!ENTITY pref.zoomtype.fill.label "Fill window">
+<!ENTITY pref.zoomtype.free.label "Free mode">
+<!ENTITY pref.zoomtype.unscaled.label "1:1">
+<!ENTITY pref.shortcut.label "Enabled shortcuts (ctrl+rightclick)">
+<!ENTITY pref.shortcut.img.label "Images (IMG)">
+<!ENTITY pref.shortcut.bg.label "Backgrounds">
+<!ENTITY pref.invertmousewheel.label "Invert the mousewheel zoom direction">
+<!ENTITY pref.invertkeyboard.label "Invert the keyboard navigation">
+<!ENTITY pref.startfromtopleft.label "Place image at top left">
+<!ENTITY pref.bgcolor.tooltip "Set the background color used when displaying images">
+<!ENTITY pref.autoresize.tooltip "Automatically resize images bigger than the window to fit upon loading">
+<!ENTITY pref.clip_movement.tooltip "Allow the image to be moved only within the window">
+<!ENTITY pref.zoomexp.tooltip "Zoom step factor (200&#37; means to double/halve at each step)">
+<!ENTITY pref.zoomonpointer.tooltip "Zoom towards the mouse pointer when using the scrollwheel">
+<!ENTITY pref.zoomtype.full.tooltip "Enable the fit-to-window view when double-clicking">
+<!ENTITY pref.zoomtype.fill.tooltip "Enable the fill window view when double-clicking">
+<!ENTITY pref.zoomtype.free.tooltip "Enable the free view (zoomable and draggable) when double-clicking">
+<!ENTITY pref.zoomtype.unscaled.tooltip "Enable the unscaled view when double-clicking">
+<!ENTITY pref.shortcut.img.tooltip "Enable the shortcut for images used in web pages">
+<!ENTITY pref.shortcut.bg.tooltip "Enable the shortcut for backgrounds used in web pages">
+<!ENTITY pref.invertmousewheel.tooltip "Invert the mouse wheel scrolling direction for zooming">
+<!ENTITY pref.invertkeyboard.tooltip "Invert the arrow keys direction for scrolling">
+<!ENTITY pref.startfromtopleft.tooltip "Place the image at the top left when it is bigger than the window">
+<!ENTITY pref.pressf1forhelp.label "Press F1 to display the online help">
+<!ENTITY about.window.title "ImageTweak - About">

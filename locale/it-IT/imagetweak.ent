@@ -1,0 +1,35 @@
+<!ENTITY pref.window.title "ImageTweak - Opzioni">
+<!ENTITY pref.prefpane.label "Opzioni di visualizzazione delle immagini">
+<!ENTITY pref.bgcolor.label "Colore di sfondo">
+<!ENTITY pref.autoresize.label "Ridimensiona automaticamente le immagini">
+<!ENTITY pref.clip_movement.label "Limita il movimento delle immagini">
+<!ENTITY pref.zoomexp.label "Fattore di zoom (&#37;)">
+<!ENTITY pref.zoomonpointer.label "Zoom sul puntatore del mouse">
+<!ENTITY pref.zoomtype.label "Tipi di zoom attivi">
+<!ENTITY pref.zoomtype.default.label "Modalità predefinita">
+<!ENTITY pref.zoomtype.full.label "Immagine intera">
+<!ENTITY pref.zoomtype.fill.label "Riempi la finestra">
+<!ENTITY pref.zoomtype.free.label "Modalità libera">
+<!ENTITY pref.zoomtype.unscaled.label "1:1">
+<!ENTITY pref.shortcut.label "Shortcut attivi (ctrl+click destro)">
+<!ENTITY pref.shortcut.img.label "Immagini (IMG)">
+<!ENTITY pref.shortcut.bg.label "Sfondi">
+<!ENTITY pref.invertmousewheel.label "Inverti la direzione di zoom da mouse">
+<!ENTITY pref.invertkeyboard.label "Inverti la navigazione da tastiera">
+<!ENTITY pref.startfromtopleft.label "Immagine in alto a destra">
+<!ENTITY pref.bgcolor.tooltip "Imposta il colore di sfondo utilizzato quando vengono visualizzate le immagini">
+<!ENTITY pref.autoresize.tooltip "Se una immagine é più larga della finestra verrà inizialmente visualizzata ridimensionata">
+<!ENTITY pref.clip_movement.tooltip "Permette il movimento dell&apos;immagine solo all&apos;interno della finestra">
+<!ENTITY pref.zoomexp.tooltip "Fattore del passo di zoom (es. 200&#37; raddoppia/dimezza ad ogni passo)">
+<!ENTITY pref.zoomonpointer.tooltip "Zooma verso il puntatore quando si utilizza la rotella del mouse">
+<!ENTITY pref.zoomtype.full.tooltip "Attiva il ridimensionamento alla finestra">
+<!ENTITY pref.zoomtype.fill.tooltip "Attiva il riempimento della finestra">
+<!ENTITY pref.zoomtype.free.tooltip "Attiva la modalità libera (zoom e posizione arbitrari)">
+<!ENTITY pref.zoomtype.unscaled.tooltip "Attiva la visuale non ridimensionata">
+<!ENTITY pref.shortcut.img.tooltip "Attiva la scorciatoia per le immagini utilizzate nelle pagine web">
+<!ENTITY pref.shortcut.bg.tooltip "Attiva la scorciatoia per gli sfondi utilizzati nelle pagine web">
+<!ENTITY pref.invertmousewheel.tooltip "Inverte la direzione della rotella del mouse per lo zoom">
+<!ENTITY pref.invertkeyboard.tooltip "Inverte la direzione delle frecce di direzione per lo scorrimento">
+<!ENTITY pref.startfromtopleft.tooltip "Posiziona l&apos;immagine in alto a destra quando è più grande della finestra">
+<!ENTITY pref.pressf1forhelp.label "Premi F1 per visualizzare la guida in linea">
+<!ENTITY about.window.title "ImageTweak - Informazioni">

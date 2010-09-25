@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+	<Description about="urn:mozilla:install-manifest">
+		<em:id>{DB2EA31C-58F5-48b7-8D60-CB0739257904}</em:id>
+		<em:name>ImageTweak</em:name>
+		<em:version>0.19</em:version>
+		<em:description>Enhances the vision of direct images</em:description>
+		<em:creator>CAFxX</em:creator>
+		<em:homepageURL>http://cafxx.strayorange.com/ImageTweak</em:homepageURL>
+		<em:aboutURL>chrome://imagetweak/content/about.xul</em:aboutURL>
+		<em:optionsURL>chrome://imagetweak/content/prefs.xul</em:optionsURL>
+		<em:iconURL>chrome://imagetweak/skin/imagetweak32.png</em:iconURL>
+		<em:targetApplication>
+			<Description>
+				<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+				<em:minVersion>3.5</em:minVersion>
+				<em:maxVersion>3.6a1pre</em:maxVersion>
+			</Description>
+		</em:targetApplication>
+	</Description>
+</RDF>

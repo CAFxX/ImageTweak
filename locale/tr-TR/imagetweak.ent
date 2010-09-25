@@ -1,0 +1,35 @@
+<!ENTITY pref.window.title "ImageTweak - Seçenekleri">
+<!ENTITY pref.prefpane.label "Resim gösterme seçenekleri">
+<!ENTITY pref.bgcolor.label "Arkaplan rengi">
+<!ENTITY pref.autoresize.label "Başlangıçta resimleri otomatik boyutlandır">
+<!ENTITY pref.clip_movement.label "Resmin hareket alanını sabitle">
+<!ENTITY pref.zoomexp.label "Yakınlaştırma ölçeği (&#37;)">
+<!ENTITY pref.zoomonpointer.label "Fare işaretçisinde yakınlaştır">
+<!ENTITY pref.zoomtype.label "Yakınlaştırma tiplerini etkinleştir">
+<!ENTITY pref.zoomtype.default.label "Varsayılan yakınlaştırma">
+<!ENTITY pref.zoomtype.full.label "Pencereye sığdır">
+<!ENTITY pref.zoomtype.fill.label "Pencereyi kapla">
+<!ENTITY pref.zoomtype.free.label "Serbest mod">
+<!ENTITY pref.zoomtype.unscaled.label "1:1">
+<!ENTITY pref.shortcut.label "Kısayolları etkinleştir (Ctrl+Sağ tık)">
+<!ENTITY pref.shortcut.img.label "Resimler">
+<!ENTITY pref.shortcut.bg.label "Arkaplanlar">
+<!ENTITY pref.invertmousewheel.label "Fare tekerleğinde yakınlaştırma yönünü ters çevir">
+<!ENTITY pref.invertkeyboard.label "Klavye gezintisinde yönü ters çevir">
+<!ENTITY pref.startfromtopleft.label "Resmi üst sola yerleştir">
+<!ENTITY pref.bgcolor.tooltip "Resimler gösterilirken arkaplan rengini belirtir.">
+<!ENTITY pref.autoresize.tooltip "Pencereden daha büyük resimleri otomatik boyutlandırır.">
+<!ENTITY pref.clip_movement.tooltip "Resmin sadece pencere içindeyken sabitlenmesini sağlar.">
+<!ENTITY pref.zoomexp.tooltip "Yakınlaştırma adımının ölçeği (&#37;200, her adımda iki katına/yarı yarıya yakınlaştırmayı ifade eder).">
+<!ENTITY pref.zoomonpointer.tooltip "Fare tekerleği ile yakınlaştırırken fare işaretçisinin bulunduğu alana doğru yakınlaştırır.">
+<!ENTITY pref.zoomtype.full.tooltip "Çift tıklanırken pencereye sığdırmayı etkinleştirir.">
+<!ENTITY pref.zoomtype.fill.tooltip "Çif tıklanırken pencereyi kaplamayı etkinleştirir.">
+<!ENTITY pref.zoomtype.free.tooltip "Çift tıklanırken serbest modu (yakınlaştırılabilir ve taşınabilir) etkinleştirir.">
+<!ENTITY pref.zoomtype.unscaled.tooltip "Çift tıklanırken boyutlandırılmamış halini etkinleştirir.">
+<!ENTITY pref.shortcut.img.tooltip "Web sayfalarında kullanılan resimler için kısayolları etkinleştirir.">
+<!ENTITY pref.shortcut.bg.tooltip "Web sayfalarında kullanılan arkaplanlar için kısayolu etkinleştirir.">
+<!ENTITY pref.invertmousewheel.tooltip "Yakınlaştırırken fare tekerleğinin yönünü ters çevirir.">
+<!ENTITY pref.invertkeyboard.tooltip "Kaydırırken yön tuşlarının yönünü ters çevirir.">
+<!ENTITY pref.startfromtopleft.tooltip "Pencereden büyük resmi sol üst köşeye yerleştir.">
+<!ENTITY pref.pressf1forhelp.label "Çevrimiçi yardım için (F1)">
+<!ENTITY about.window.title "ImageTweak - Hakkında">

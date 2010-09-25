@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<changelog>
+	<version name="0.1">
+		<added>image background set to gray</added>
+		<added>black image border</added>
+	</version>
+	<version name="0.2">
+		<added>images are now centered in the window</added>
+	</version>
+	<version name="0.3">
+		<removed>code borrowed from AllowRightClick (to prevent conflicts between the two extensions)</changed>
+	</version>
+	<version name="0.4">
+		<fixed>images in cache won't trigger onload</fixed>
+	</version>
+	<version name="0.5">
+		<changed>initial fx3 support</changed>
+		<changed>other changes</changed>
+	</version>
+	<version name="0.6">
+		<changed>full code rewrite</changed>
+		<added>zooming and dragging</added>
+		<added>browser.enable_automatic_image_resizing is now supported</added>
+	</version>
+	<version name="0.7">
+		<changed>maxVersion 3.0b4</changed>
+	</version>
+	<version name="0.8">
+		<added>zoom presets</added>
+	</version>
+	<version name="0.9">
+		<added>zoom ratio in titlebar</added>
+		<added>exposed browser.enable_automatic_image_resizing in options</added>
+		<added>keyboard navigation</added>
+		<removed>stop dragging on pointer out of browser</removed>
+	</version>
+	<version name="0.10">
+		<added>made extension localizable</added>
+		<added>it-IT locale</added>
+	</version>
+	<version name="0.11">
+		<changed>if modifier keys are pressed, ignore the keyboard event</changed>
+		<added>de-DE locale (Tuxman)</added>
+	</version>
+	<version name="0.11.1">
+		<fixed>de-DE locale</fixed>
+	</version>
+	<version name="0.12">
+		<fixed>http://forums.mozillazine.org/viewtopic.php?p=3292809#3292809</fixed>
+		<fixed>http://forums.mozillazine.org/viewtopic.php?p=3306502#3306502</fixed>
+		<changed>mouse wheel handler, repaint</changed>
+		<added>fr-FR, ja-JP, nl-NL, pl-PL and pt-BR locales</added>
+	</version>
+	<version name="0.13">
+		<fixed>http://forums.mozillazine.org/viewtopic.php?p=3322373#3322373 (2)</fixed>
+		<added>http://forums.mozillazine.org/viewtopic.php?p=3320387#3320387 (3)</added>
+		<changed>reworked some preference code</changed>
+	</version>
+	<version name="0.14">
+		<added>http://forums.mozillazine.org/viewtopic.php?p=3322373#3322373 (3)</added>
+		<added>http://forums.mozillazine.org/viewtopic.php?p=3339126#3339126</added>
+		<added>http://forums.mozillazine.org/viewtopic.php?p=3322373#3322373 (1) - zoom-on-pointer</added>
+		<added>sk-SK locale</added>
+	</version>
+	<version name="0.15">
+		<added>tooltips to pref window</added>
+		<changed>3.0.* maxversion</changed>
+		<changed>zoom factor now stored as string to allow floating point values</changed>
+		<changed>other changes I can't recall right now ;-)</changed>
+	</version>
+	<version name="0.15.1">
+		<fixed>en-US locale (http://forums.mozillazine.org/viewtopic.php?p=3382631#3382631)</fixed>
+	</version>
+	<version name="0.15.2">
+		<fixed>addressed failed review suggestions - ImageTweak is now out of the sandbox!</fixed>
+	</version>
+	<version name="0.16">
+		<changed>prevent the image from moving outside the viewport (extension.imagetweak.clip_movement pref)</changed>
+		<changed>major rewrite of code (OOization)</changed>
+		<added>fill view (extensions.imagetweak.zoomtype.fill pref)</added>
+		<added>ru-RU, zh-CN locales</added>
+		<fixed>flickering on image load (thanks to http://yettocome.blogspot.com/2007/03/do-you-want-to-find-out-what-browser.html)</fixed>
+		<added>ability to (manually) perform drag'n'drop (hold ctrl before start dragging)</added>
+		<added>view mode keyboard shortcuts (1, 2, 3, 4)</added>
+		<added>basic autoscroll (thanks max1million!)</added>
+		<added>thanks in the about box</added>
+		<added>ability to choose the default zoom type</added>
+		<added>ability to place image in the top left corner of the window (pixel and fill modes)</added>
+		<added>few comments here and there XD</added>
+	</version>
+	<version name="0.17">
+		<fixed>autoscroll does not work on regular pages after viewing image (http://forums.mozillazine.org/viewtopic.php?p=4337705#p4337705)</fixed>
+		<added>new scrolling/zooming inputs</added>
+		<added>hidden pref extensions.imagetweak.legacyscrolling</added>
+		<changed>refreshed locales from babelzilla</changed>
+	</version>
+	<version name="0.17.1">
+		<changed>maxVersion 3.1b2pre</changed>
+		<changed>disabled logging that was left enabled when 0.17 was released</changed>
+	</version>
+	<version name="0.18">
+		<changed>maxVersion 3.2a1pre</changed>
+		<added>support for rotation in fx 3.1+</added>
+		<fixed>infinite loop when displaying images smaller than window with both 1:1 and free mode disabled (http://forums.mozillazine.org/viewtopic.php?p=4918365#p4918365)</fixed>
+		<fixed>firefox's builtin page-zoom has been disabled</fixed>
+		<added>support for ImageDocument inside frames and iframes</added>
+		<changed>better ImageDocument title structure</changed>
+		<added>0 and ctrl+0 reset the view to the default one</added>
+		<added>hidden pref extensions.imagetweak.bordercolor (suggestion by Margot)</added>
+		<added>locales ar, fi-FI, es-ES, uk-UA</added>
+		<added>"Press F1 for help" in pref window</added>
+		<added>open image in new tab (ctrl+alt+right-click) (suggestion by rob hino)</added>
+		<added>open image in new tab and focus (shift+ctrl+alt+right-click)</added>
+		<added>soft movement clipping</added>
+		<changed>clip_movement pref is now a integer to allow for soft movement clipping (values: 0-3)</changed>
+		<changed>event.detail handling in OnMouseWheel (workaround for sysnumlines issue)</changed>
+		<removed>logging code from release build</removed>
+	</version>
+	<version name="0.18.1">
+		<changed>refreshed locales</changed>
+	</version>
+	<version name="0.18.2">
+		<changed>bumped maxVersion to 3.6a1pre</changed>
+	</version>
+	<version name="0.19">
+		<added>proper drag&drop support</added>
+		<fixed>mouse pointer out of browser</fixed>
+                <removed>support for fx 3.0-</removed>
+	</version>
+</changelog>
+<todo>
+	<changed>deep changes on how the extension works (fixed viewport to moving viewport)</changed>
+	<fixed>smooth scrolling</fixed>
+	<added>comments</added>
+	<added>brightness slider in pref window</added>
+	<added>context menu (why, oh, why?)</added>
+</todo>

@@ -1,0 +1,35 @@
+<!ENTITY pref.window.title "ImageTweak - オプション">
+<!ENTITY pref.prefpane.label "画像表示オプション">
+<!ENTITY pref.bgcolor.label "背景色">
+<!ENTITY pref.autoresize.label "読み込み時に画像を自動リサイズする">
+<!ENTITY pref.clip_movement.label "画像の移動範囲を制限する">
+<!ENTITY pref.zoomexp.label "拡大係数 (&#37;)">
+<!ENTITY pref.zoomonpointer.label "マウスポインタに拡大する">
+<!ENTITY pref.zoomtype.label "利用可能な拡大形式">
+<!ENTITY pref.zoomtype.default.label "既定の拡大形式">
+<!ENTITY pref.zoomtype.full.label "ウィンドウに合わせる">
+<!ENTITY pref.zoomtype.fill.label "ウィンドウをいっぱいにする">
+<!ENTITY pref.zoomtype.free.label "自由様式">
+<!ENTITY pref.zoomtype.unscaled.label "1:1">
+<!ENTITY pref.shortcut.label "ショートカット有効 (Ctrl+右クリック)">
+<!ENTITY pref.shortcut.img.label "画像 (IMG)">
+<!ENTITY pref.shortcut.bg.label "背景">
+<!ENTITY pref.invertmousewheel.label "マウスホイールの拡大方向を反転する">
+<!ENTITY pref.invertkeyboard.label "キーボードナビゲーションを反転する">
+<!ENTITY pref.startfromtopleft.label "画像を左上に配置する">
+<!ENTITY pref.bgcolor.tooltip "画像を表示する時に利用する背景色を設定します">
+<!ENTITY pref.autoresize.tooltip "読み込みの際にウィンドウよりも大きな画像が収まるよう自動リサイズします">
+<!ENTITY pref.clip_movement.tooltip "画像をウィンドウ内部でのみ動かすようにします">
+<!ENTITY pref.zoomexp.tooltip "拡大段階係数 (200&#37; は段階ごとに二倍・半分にすることを意味します)">
+<!ENTITY pref.zoomonpointer.tooltip "スクロールホイール利用時にマウスポインタに向かって拡大します">
+<!ENTITY pref.zoomtype.full.tooltip "ダブルクリック時にウィンドウに合わせた表示を有効にします">
+<!ENTITY pref.zoomtype.fill.tooltip "ダブルクリック時にウィンドウいっぱいの表示を有効にします">
+<!ENTITY pref.zoomtype.free.tooltip "ダブルクリック時に拡大とドラッグが可能な自由表示を有効にします">
+<!ENTITY pref.zoomtype.unscaled.tooltip "ダブルクリック時の元倍率表示を有効にします">
+<!ENTITY pref.shortcut.img.tooltip "ウェブページの中で利用されている画像に関してショートカットを有効にします">
+<!ENTITY pref.shortcut.bg.tooltip "ウェブページの中で利用されている背景に関してショートカットを有効にします">
+<!ENTITY pref.invertmousewheel.tooltip "拡大に関するマウスホイールのスクロール方向を反転します">
+<!ENTITY pref.invertkeyboard.tooltip "スクロールに関する矢印キーの方向を反転します">
+<!ENTITY pref.startfromtopleft.tooltip "ウィンドウより大きな画像を左上に配置します">
+<!ENTITY pref.pressf1forhelp.label "F1 を押してオンラインヘルプを表示">
+<!ENTITY about.window.title "ImageTweak について">

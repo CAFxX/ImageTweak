@@ -1,0 +1,35 @@
+<!ENTITY pref.window.title "ImageTweak - اعدادات">
+<!ENTITY pref.prefpane.label "خيارات عرض صورة">
+<!ENTITY pref.bgcolor.label "لون الخلفية">
+<!ENTITY pref.autoresize.label "تصغير حجم الصور تلقائيا عند التحميل">
+<!ENTITY pref.clip_movement.label "كليب صورة الحركة مجموعة">
+<!ENTITY pref.zoomexp.label "عامل تكبير (&#37;)">
+<!ENTITY pref.zoomonpointer.label "تكبير على مؤشر الماوس">
+<!ENTITY pref.zoomtype.label "تفعيل أنواع التصغير - التكبير">
+<!ENTITY pref.zoomtype.default.label "نوع التصغير - التكبير الافتراضي">
+<!ENTITY pref.zoomtype.full.label "تناسب مع النافذة">
+<!ENTITY pref.zoomtype.fill.label "املأ النافذة">
+<!ENTITY pref.zoomtype.free.label "الوضع المجاني">
+<!ENTITY pref.zoomtype.unscaled.label "1:1">
+<!ENTITY pref.shortcut.label "تفعيل الاختصارات (ctrl+rightclick)">
+<!ENTITY pref.shortcut.img.label "صور (IMG)">
+<!ENTITY pref.shortcut.bg.label "خلفيات">
+<!ENTITY pref.invertmousewheel.label "عكس اتجاه عجلة الماوس تكبير">
+<!ENTITY pref.invertkeyboard.label "عكس التصفح لوحة المفاتيح">
+<!ENTITY pref.startfromtopleft.label "صورة المكان في أعلى اليسار">
+<!ENTITY pref.bgcolor.tooltip "حدد لون الخلفية المستخدمة عند عرض الصور">
+<!ENTITY pref.autoresize.tooltip "تلقائيا غير حجم الصور الاكبر من النافذة لتصبح مناسبه عند التحميل">
+<!ENTITY pref.clip_movement.tooltip "السماح بنقل الصورة فقط داخل النافذة">
+<!ENTITY pref.zoomexp.tooltip "خطوة تكبير عامل (200 ٪ لمضاعفة وسائل / النصف في كل خطوة من خطوات)">
+<!ENTITY pref.zoomonpointer.tooltip "تكبير نحو مؤشر الماوس عند استخدام scrollwheel">
+<!ENTITY pref.zoomtype.full.tooltip "تفعيل التناسب مع عرض النافذة عند الضغط مرتين">
+<!ENTITY pref.zoomtype.fill.tooltip "تمكين ملء عرض النافذة عند النقر المزدوج">
+<!ENTITY pref.zoomtype.free.tooltip "تمكين العرض الحر (zoomable وdraggable) عند النقر مرتين">
+<!ENTITY pref.zoomtype.unscaled.tooltip "تمكين عرض غير مقاس عند النقر مرتين">
+<!ENTITY pref.shortcut.img.tooltip "لتمكين الاختصار للصور المستخدمة في صفحات الويب">
+<!ENTITY pref.shortcut.bg.tooltip "تمكين الاختصار للخلفيات المستخدمة في صفحات الويب">
+<!ENTITY pref.invertmousewheel.tooltip "عكس عجلة الماوس لاتجاه التمرير تكبير">
+<!ENTITY pref.invertkeyboard.tooltip "عكس مفاتيح الأسهم لاتجاه التمرير">
+<!ENTITY pref.startfromtopleft.tooltip "وضع صورة في أعلى اليسار عندما تكون اكبر من النافذة">
+<!ENTITY pref.pressf1forhelp.label "اضغط F1 لعرض المساعدة المباشرة">
+<!ENTITY about.window.title "ImageTweak - حول">

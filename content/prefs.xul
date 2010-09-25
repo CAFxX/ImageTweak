@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE prefwindow SYSTEM "chrome://imagetweak/locale/imagetweak.ent">
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<prefwindow type="prefwindow" title="&pref.window.title;" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<script type="application/x-javascript" src="chrome://imagetweak/content/imagetweak.js" /> 
+	<script type="application/x-javascript"><![CDATA[
+		function ImageTweakValidatePref() {
+			if (document.getElementById("imagetweak_zoomtype_default").value == "") {
+				document.getElementById("imagetweak_zoomtype_default").value = document.getElementById("imagetweak_autoresize").value ? "fit" : "pixel";
+			} else {
+				document.getElementById("imagetweak_autoresize").value = (document.getElementById("imagetweak_zoomtype_default").value != "pixel");
+			}
+			if (!(document.getElementById("imagetweak_zoomtype_full").value || 
+				document.getElementById("imagetweak_zoomtype_fill").value || 
+				document.getElementById("imagetweak_zoomtype_unscaled").value)) {
+				document.getElementById("imagetweak_zoomtype_unscaled").value = true;
+			}
+			document.getElementById("imagetweak_zoomtype_default_full").disabled = !document.getElementById("imagetweak_zoomtype_full").value;
+			document.getElementById("imagetweak_zoomtype_default_fill").disabled = !document.getElementById("imagetweak_zoomtype_fill").value;
+			document.getElementById("imagetweak_zoomtype_default_unscaled").disabled = !document.getElementById("imagetweak_zoomtype_unscaled").value;
+			while (document.getElementById("imagetweak_zoomtype_default_radiogroup").selectedItem.disabled) {
+				document.getElementById("imagetweak_zoomtype_default_radiogroup").selectedIndex = (document.getElementById("imagetweak_zoomtype_default_radiogroup").selectedIndex + 1) % 3;
+			}
+		}
+
+		function ImageTweakInitPrefPane() {
+			var i, prefs = document.getElementsByTagName("preference");
+			for (i=0; i<prefs.length; i++) {
+					prefs[i].onchange = ImageTweakValidatePref;
+			}
+			ImageTweakValidatePref();
+		}
+	]]></script>
+	<prefpane label="&pref.prefpane.label;" image="chrome://imagetweak/skin/imagetweak.png" onpaneload="ImageTweakInitPrefPane()">
+		<keyset>
+			<key keycode="VK_F1" oncommand="ImageTweakHelper.browse('http://cafxx.strayorange.com/ImageTweak Help');" />
+		</keyset>
+		<preferences>
+			<preference id="imagetweak_bgcolor" name="extensions.imagetweak.bgcolor" type="string"/>
+			<preference id="imagetweak_zoomexp" name="extensions.imagetweak.zoomexp2" type="string"/>
+			<preference id="imagetweak_autoresize" name="browser.enable_automatic_image_resizing" type="bool"/>
+			<preference id="imagetweak_clip_movement" name="extensions.imagetweak.clip_movement" type="int"/>
+			<preference id="imagetweak_zoomtype_free" name="extensions.imagetweak.zoomtype.free" type="bool"/>
+			<preference id="imagetweak_zoomtype_full" name="extensions.imagetweak.zoomtype.full" type="bool"/>
+			<preference id="imagetweak_zoomtype_fill" name="extensions.imagetweak.zoomtype.fill" type="bool"/>
+			<preference id="imagetweak_zoomtype_unscaled" name="extensions.imagetweak.zoomtype.unscaled" type="bool"/>
+			<preference id="imagetweak_zoomtype_default" name="extensions.imagetweak.zoomtype.default" type="string"/>
+			<preference id="imagetweak_shortcut_img" name="extensions.imagetweak.shortcut.img" type="bool"/>
+			<preference id="imagetweak_shortcut_bg" name="extensions.imagetweak.shortcut.bg" type="bool"/>
+			<preference id="imagetweak_zoomonpointer" name="extensions.imagetweak.zoomonpointer" type="bool"/>
+			<preference id="imagetweak_invertmousewheel" name="extensions.imagetweak.invertmousewheel" type="bool"/>
+			<preference id="imagetweak_invertkeyboard" name="extensions.imagetweak.invertkeyboard" type="bool"/>
+			<preference id="imagetweak_startfromtopleft" name="extensions.imagetweak.startfromtopleft" type="bool"/>
+		</preferences>
+		<vbox>
+			<groupbox>
+				<vbox>
+					<hbox align="center">
+						<label value="&pref.bgcolor.label;" flex="1" control="imagetweak_bgcolor_textbox" tooltiptext="&pref.bgcolor.tooltip;"/>
+						<textbox preference="imagetweak_bgcolor" width="100px" id="imagetweak_bgcolor_textbox" tooltiptext="&pref.bgcolor.tooltip;"/>
+					</hbox>
+					<hbox align="center">
+						<label value="&pref.zoomexp.label;" flex="1" control="imagetweak_zoomexp_textbox" tooltiptext="&pref.zoomexp.tooltip;"/>
+						<textbox preference="imagetweak_zoomexp" width="100px" id="imagetweak_zoomexp_textbox" tooltiptext="&pref.zoomexp.tooltip;" 
+							onsynctopreference="return parseFloat(document.getElementById('imagetweak_zoomexp_textbox').value)" />
+					</hbox>
+					<checkbox preference="imagetweak_clip_movement" label="&pref.clip_movement.label;" tooltiptext="&pref.clip_movement.tooltip;" id="imagetweak_clip_movement_checkbox" 
+						onsynctopreference="return document.getElementById('imagetweak_clip_movement_checkbox').checked ? 3 : 0;"
+						onsyncfrompreference="return document.getElementById('imagetweak_clip_movement').value != 0;"/>
+					<checkbox preference="imagetweak_startfromtopleft" label="&pref.startfromtopleft.label;" tooltiptext="&pref.startfromtopleft.tooltip;"/>
+					<checkbox preference="imagetweak_zoomonpointer" label="&pref.zoomonpointer.label;" tooltiptext="&pref.zoomonpointer.tooltip;"/>
+					<checkbox preference="imagetweak_invertmousewheel" label="&pref.invertmousewheel.label;" tooltiptext="&pref.invertmousewheel.tooltip;"/>
+					<checkbox preference="imagetweak_invertkeyboard" label="&pref.invertkeyboard.label;" tooltiptext="&pref.invertkeyboard.tooltip;"/>
+					<separator />
+					<hbox>
+						<vbox>
+							<label value="&pref.zoomtype.label;"/>
+							<checkbox preference="imagetweak_zoomtype_full" label="&pref.zoomtype.full.label;" tooltiptext="&pref.zoomtype.full.tooltip;"/>
+							<checkbox preference="imagetweak_zoomtype_fill" label="&pref.zoomtype.fill.label;" tooltiptext="&pref.zoomtype.fill.tooltip;"/>
+							<checkbox preference="imagetweak_zoomtype_unscaled" label="&pref.zoomtype.unscaled.label;" tooltiptext="&pref.zoomtype.unscaled.tooltip;"/>
+							<checkbox preference="imagetweak_zoomtype_free" label="&pref.zoomtype.free.label;" tooltiptext="&pref.zoomtype.free.tooltip;"/>
+						</vbox>
+						<vbox>
+							<label value="&pref.zoomtype.default.label;"/>
+							<radiogroup preference="imagetweak_zoomtype_default" id="imagetweak_zoomtype_default_radiogroup">
+								<radio label="&pref.zoomtype.full.label;" value="fit" id="imagetweak_zoomtype_default_full" />
+								<radio label="&pref.zoomtype.fill.label;" value="fill" id="imagetweak_zoomtype_default_fill" />
+								<radio label="&pref.zoomtype.unscaled.label;" value="pixel" id="imagetweak_zoomtype_default_unscaled" />
+							</radiogroup>
+						</vbox>
+					</hbox>
+					<separator />
+					<label value="&pref.shortcut.label;"/>
+					<checkbox preference="imagetweak_shortcut_img" label="&pref.shortcut.img.label;" tooltiptext="&pref.shortcut.img.tooltip;"/>
+					<checkbox preference="imagetweak_shortcut_bg" label="&pref.shortcut.bg.label;" tooltiptext="&pref.shortcut.bg.tooltip;"/>
+				</vbox>
+			</groupbox>
+			<label value="&pref.pressf1forhelp.label;" />
+		</vbox>
+	</prefpane>
+</prefwindow>
