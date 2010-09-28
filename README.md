@@ -1,9 +1,10 @@
 # ImageTweak ![ImageTweak icon](http://github.com/CAFxX/ImageTweak/raw/master/skin/imagetweak32.png)
-Mozilla Firefox add-on for improving the image viewing UX
-[Official page](http://cafxx.strayorange.com/ImageTweak) 
-[GitHub repository](http://github.com/CAFxX/ImageTweak) 
-[Official download page](https://addons.mozilla.org/en-US/firefox/addon/3683) 
-[Author](mailto:imagetweak@cafxx.strayorange.com) 
+Mozilla Firefox add-on for improving the image viewing UX 
+
+[Official page](http://cafxx.strayorange.com/ImageTweak) - 
+[GitHub repository](http://github.com/CAFxX/ImageTweak) - 
+[Official download page](https://addons.mozilla.org/en-US/firefox/addon/3683) - 
+[Author](mailto:imagetweak@cafxx.strayorange.com)
 
 ## Downloads
 This GitHub repository contains the latest code of ImageTweak, which may be unstable and generally unsuitable for most users.
