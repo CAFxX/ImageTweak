@@ -23,6 +23,7 @@
 		<text class="link" onclick="ImageTweakHelper.browse('http://forums.mozillazine.org/viewtopic.php?p=3247649')" value="Support thread on MozillaZine.org"/>
 		<text class="link" onclick="ImageTweakHelper.browse('https://addons.mozilla.org/en-US/firefox/addon/3683')" value="Extension page on addons.mozilla.org"/>
 		<text class="link" onclick="ImageTweakHelper.browse('http://cafxx.strayorange.com/ImageTweak')" value="ImageTweak homepage"/>
+		<text class="link" onclick="ImageTweakHelper.browse('http://github.com/CAFxX/ImageTweak')" value="ImageTweak GitHub repository"/>
 		<separator class="thin"/>
 		<hbox>
 			<vbox align="start">
