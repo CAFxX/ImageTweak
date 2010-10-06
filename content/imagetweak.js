@@ -286,8 +286,11 @@ ImageTweak.prototype.OnMouseMove = function OnMouseMove(event) {
 };
 
 ImageTweak.prototype.OnMouseWheel = function OnMouseWheel(event) { 
-        if ( event.altKey || event.shiftKey || event.metaKey ) {
+        if ( event.shiftKey || event.metaKey ) {
                 return true;
+		} else if ( event.ctrlKey && event.altKey ) {
+				this.PerformRotation( event.detail > 0 ? 90 : -90 );
+				event.preventDefault();
         } else if ( ( this.GetPref( "LegacyScrolling" ) && !event.ctrlKey ) || ( !this.GetPref( "LegacyScrolling" ) && event.ctrlKey ) ) {
                 var ZoomDelta = ( event.detail > 0 ? 1 : -1 ) * ( this.GetPref( "InvertMouseWheel" ) ? 1 : -1 ); 
                 this.PerformZoom( ZoomDelta, this.ClientXPrev, this.ClientYPrev ); // workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=352179 - darn you, mozilla!
