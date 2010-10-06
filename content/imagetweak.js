@@ -94,7 +94,7 @@ function ImageTweak( hWindow ) {
                 this.Inited = false; // initialization flag
                 this.TimeoutHandle = null; // Timeout handle used during image loading
                 this.ScrollIntervalHandle = null; // Interval handle used for scrolling
-                this.ScrollInterval = 10; //ms
+                this.ScrollInterval = 25; //ms
                 this.ImageMax = 32767; // maximum physical image size
         }
         this.Prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
@@ -265,13 +265,13 @@ ImageTweak.prototype.OnDragOverWindow = function OnDragOverWindow(event) {
 };
 
 ImageTweak.prototype.OnMouseDown = function OnMouseDown(event) {
-        if (event.button == 1 && event.ctrlKey == false && this.GetPref("Scrolling")) {
+        if ( event.button == 1 && event.ctrlKey == false && this.GetPref("Scrolling") ) {
                 if ( this.Scrolling ) {
-                        this.StopScroll(event);
+						this.StopScroll(event);
                 } else {
-                        this.StartScroll(event);
+						this.StartScroll(event);
                 }
-        }
+		}
 };
 
 ImageTweak.prototype.OnMouseUp = function OnMouseUp(event) {
@@ -304,6 +304,7 @@ ImageTweak.prototype.OnKeyPress = function OnKeyPress(event) {
                 return true;
         }
         var MoveDelta = ( Math.min( this.Window.innerWidth, this.Window.innerHeight ) / 10 ) * ( this.GetPref("InvertKeyboard") ? -1 : 1 );
+        var MovePageDelta = ( this.Window.innerHeight ) * ( this.GetPref("InvertKeyboard") ? -1 : 1 );
         var EventIsHandled = true;
         if ( event.ctrlKey ) {
                 switch (event.keyCode + event.charCode) {
@@ -328,6 +329,8 @@ ImageTweak.prototype.OnKeyPress = function OnKeyPress(event) {
                         case 50: /* 2 */                        this.PerformZoomTypeSwitch( "fill" ); break;
                         case 51: /* 3 */                        this.PerformZoomTypeSwitch( "pixel" ); break;
                         case 52: /* 4 */                        this.PerformZoomTypeSwitch( "free" ); break;
+						case 34: /* page down */				this.PerformMove( 0, -MovePageDelta ); break;
+						case 33: /* page up */					this.PerformMove( 0, MovePageDelta ); break;
                         default:                                EventIsHandled = false;
                 }
         }
@@ -424,7 +427,7 @@ ImageTweak.prototype.StartScroll = function StartScroll(event) {
                         event.preventDefault(); 
                 }
                 if ( !this.ScrollIntervalHandle ) {
-                        hImageTweak = this;
+                        var hImageTweak = this;
                         this.ScrollIntervalHandle = setInterval( function (offset) { hImageTweak.PerformScroll(offset); }, this.ScrollInterval );
                 }
         } else {
@@ -541,6 +544,12 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
                 this.Browser = gBrowser.getBrowserForDocument( this.Window.top.document );
                 this.BrowserAutoscroll = this.Browser.getAttribute("autoscroll");
                 this.Browser.setAttribute("autoscroll", "false");
+				// other stylings
+				this.Document.body.style.overflow = "hidden";
+				this.Document.body.style.width = "100%";
+				this.Document.body.style.height = "100%";
+				this.Document.body.style.margin = "0";
+				this.Document.body.style.padding = "0";
                 // initialize our structure
                 this.Title = this.Document.title; // this has to go after disabling automatic_image_resizing
                 this.ZoomMax = Math.min( this.ImageMax / this.Image.naturalWidth, this.ImageMax / this.Image.naturalHeight );
