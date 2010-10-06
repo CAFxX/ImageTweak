@@ -1,43 +1,55 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE prefwindow SYSTEM "chrome://imagetweak/locale/imagetweak.ent">
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://imagetweak/skin/imagetweak.css" type="text/css"?>
 
-<prefwindow type="prefwindow" title="&pref.window.title;" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<prefwindow type="prefwindow" title="&pref.window.title;" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" ondialogaccept="ImageTweak.SendFeedback();">
 	<script type="application/x-javascript" src="chrome://imagetweak/content/imagetweak.js" /> 
 	<script type="application/x-javascript"><![CDATA[
-		function ImageTweakValidatePref() {
-			if (document.getElementById("imagetweak_zoomtype_default").value == "") {
-				document.getElementById("imagetweak_zoomtype_default").value = document.getElementById("imagetweak_autoresize").value ? "fit" : "pixel";
-			} else {
-				document.getElementById("imagetweak_autoresize").value = (document.getElementById("imagetweak_zoomtype_default").value != "pixel");
+		ImageTweak.PrefWindow = {
+			Validate: function Validate() {
+				if (document.getElementById("imagetweak_zoomtype_default").value == "") {
+					document.getElementById("imagetweak_zoomtype_default").value = document.getElementById("imagetweak_autoresize").value ? "fit" : "pixel";
+				} else {
+					document.getElementById("imagetweak_autoresize").value = (document.getElementById("imagetweak_zoomtype_default").value != "pixel");
+				}
+				if (!(document.getElementById("imagetweak_zoomtype_full").value || 
+					document.getElementById("imagetweak_zoomtype_fill").value || 
+					document.getElementById("imagetweak_zoomtype_unscaled").value)) {
+					document.getElementById("imagetweak_zoomtype_unscaled").value = true;
+				}
+				document.getElementById("imagetweak_zoomtype_default_full").disabled = !document.getElementById("imagetweak_zoomtype_full").value;
+				document.getElementById("imagetweak_zoomtype_default_fill").disabled = !document.getElementById("imagetweak_zoomtype_fill").value;
+				document.getElementById("imagetweak_zoomtype_default_unscaled").disabled = !document.getElementById("imagetweak_zoomtype_unscaled").value;
+				while (document.getElementById("imagetweak_zoomtype_default_radiogroup").selectedItem.disabled) {
+					document.getElementById("imagetweak_zoomtype_default_radiogroup").selectedIndex = (document.getElementById("imagetweak_zoomtype_default_radiogroup").selectedIndex + 1) % 3;
+				}
+			},
+			
+			Init: function Init() {
+				var i, prefs = document.getElementsByTagName("preference");
+				for (i=0; i<prefs.length; i++) {
+						prefs[i].onchange = ImageTweak.PrefWindow.Validate;
+				}
+				var FeedbackPref = document.getElementById("imagetweak_feedback");
+				FeedbackPref.onchange = function(e) {
+					if ( FeedbackPref.value == true ) {
+						var params = { choice: null };
+						document.defaultView.openDialog( "chrome://imagetweak/content/feedback.xul", "ImageTweakFeedback", "chrome,centerscreen,modal,child", params );
+						FeedbackPref.value = params.choice;
+					}
+				}
+				ImageTweak.PrefWindow.Validate();
 			}
-			if (!(document.getElementById("imagetweak_zoomtype_full").value || 
-				document.getElementById("imagetweak_zoomtype_fill").value || 
-				document.getElementById("imagetweak_zoomtype_unscaled").value)) {
-				document.getElementById("imagetweak_zoomtype_unscaled").value = true;
-			}
-			document.getElementById("imagetweak_zoomtype_default_full").disabled = !document.getElementById("imagetweak_zoomtype_full").value;
-			document.getElementById("imagetweak_zoomtype_default_fill").disabled = !document.getElementById("imagetweak_zoomtype_fill").value;
-			document.getElementById("imagetweak_zoomtype_default_unscaled").disabled = !document.getElementById("imagetweak_zoomtype_unscaled").value;
-			while (document.getElementById("imagetweak_zoomtype_default_radiogroup").selectedItem.disabled) {
-				document.getElementById("imagetweak_zoomtype_default_radiogroup").selectedIndex = (document.getElementById("imagetweak_zoomtype_default_radiogroup").selectedIndex + 1) % 3;
-			}
-		}
-
-		function ImageTweakInitPrefPane() {
-			var i, prefs = document.getElementsByTagName("preference");
-			for (i=0; i<prefs.length; i++) {
-					prefs[i].onchange = ImageTweakValidatePref;
-			}
-			ImageTweakValidatePref();
 		}
 	]]></script>
-	<prefpane label="&pref.prefpane.label;" image="chrome://imagetweak/skin/imagetweak.png" onpaneload="ImageTweakInitPrefPane()">
+	<prefpane label="&pref.prefpane.label;" image="chrome://imagetweak/skin/imagetweak.png" onpaneload="ImageTweak.PrefWindow.Init()">
 		<keyset>
 			<key keycode="VK_F1" oncommand="ImageTweakHelper.browse('http://cafxx.strayorange.com/ImageTweak Help');" />
 		</keyset>
 		<preferences>
 			<preference id="imagetweak_bgcolor" name="extensions.imagetweak.bgcolor" type="string"/>
+			<preference id="imagetweak_bordercolor" name="extensions.imagetweak.bordercolor" type="string"/>
 			<preference id="imagetweak_zoomexp" name="extensions.imagetweak.zoomexp2" type="string"/>
 			<preference id="imagetweak_autoresize" name="browser.enable_automatic_image_resizing" type="bool"/>
 			<preference id="imagetweak_clip_movement" name="extensions.imagetweak.clip_movement" type="int"/>
@@ -52,26 +64,27 @@
 			<preference id="imagetweak_invertmousewheel" name="extensions.imagetweak.invertmousewheel" type="bool"/>
 			<preference id="imagetweak_invertkeyboard" name="extensions.imagetweak.invertkeyboard" type="bool"/>
 			<preference id="imagetweak_startfromtopleft" name="extensions.imagetweak.startfromtopleft" type="bool"/>
+			<preference id="imagetweak_legacyscrolling" name="extensions.imagetweak.legacyscrolling" type="bool"/>
+			<preference id="imagetweak_feedback" name="extensions.imagetweak.feedback" type="bool"/>
 		</preferences>
 		<vbox>
-			<groupbox>
-				<vbox>
+			<hbox>
+				<groupbox>
+					<caption label="General" />
 					<hbox align="center">
 						<label value="&pref.bgcolor.label;" flex="1" control="imagetweak_bgcolor_textbox" tooltiptext="&pref.bgcolor.tooltip;"/>
 						<textbox preference="imagetweak_bgcolor" width="100px" id="imagetweak_bgcolor_textbox" tooltiptext="&pref.bgcolor.tooltip;"/>
+					</hbox>
+					<hbox align="center">
+						<label value="&pref.bordercolor.label;" flex="1" control="imagetweak_bordercolor_textbox" tooltiptext="&pref.bordercolor.tooltip;"/>
+						<textbox preference="imagetweak_bordercolor" width="100px" id="imagetweak_bordercolor_textbox" tooltiptext="&pref.bordercolor.tooltip;"/>
 					</hbox>
 					<hbox align="center">
 						<label value="&pref.zoomexp.label;" flex="1" control="imagetweak_zoomexp_textbox" tooltiptext="&pref.zoomexp.tooltip;"/>
 						<textbox preference="imagetweak_zoomexp" width="100px" id="imagetweak_zoomexp_textbox" tooltiptext="&pref.zoomexp.tooltip;" 
 							onsynctopreference="return parseFloat(document.getElementById('imagetweak_zoomexp_textbox').value)" />
 					</hbox>
-					<checkbox preference="imagetweak_clip_movement" label="&pref.clip_movement.label;" tooltiptext="&pref.clip_movement.tooltip;" id="imagetweak_clip_movement_checkbox" 
-						onsynctopreference="return document.getElementById('imagetweak_clip_movement_checkbox').checked ? 3 : 0;"
-						onsyncfrompreference="return document.getElementById('imagetweak_clip_movement').value != 0;"/>
 					<checkbox preference="imagetweak_startfromtopleft" label="&pref.startfromtopleft.label;" tooltiptext="&pref.startfromtopleft.tooltip;"/>
-					<checkbox preference="imagetweak_zoomonpointer" label="&pref.zoomonpointer.label;" tooltiptext="&pref.zoomonpointer.tooltip;"/>
-					<checkbox preference="imagetweak_invertmousewheel" label="&pref.invertmousewheel.label;" tooltiptext="&pref.invertmousewheel.tooltip;"/>
-					<checkbox preference="imagetweak_invertkeyboard" label="&pref.invertkeyboard.label;" tooltiptext="&pref.invertkeyboard.tooltip;"/>
 					<separator />
 					<hbox>
 						<vbox>
@@ -91,11 +104,28 @@
 						</vbox>
 					</hbox>
 					<separator />
+					<checkbox preference="imagetweak_feedback" label="&pref.feedback.label;" tooltiptext="&pref.feedback.tooltip;"/>
+				</groupbox>
+				<groupbox>
+					<caption label="Input" />
+					<checkbox preference="imagetweak_clip_movement" label="&pref.clip_movement.label;" tooltiptext="&pref.clip_movement.tooltip;" id="imagetweak_clip_movement_checkbox" 
+						onsynctopreference="return document.getElementById('imagetweak_clip_movement_checkbox').checked ? 3 : 0;"
+						onsyncfrompreference="return document.getElementById('imagetweak_clip_movement').value != 0;"/>
+					<checkbox preference="imagetweak_zoomonpointer" label="&pref.zoomonpointer.label;" tooltiptext="&pref.zoomonpointer.tooltip;"/>
+					<checkbox preference="imagetweak_invertkeyboard" label="&pref.invertkeyboard.label;" tooltiptext="&pref.invertkeyboard.tooltip;"/>
+					<separator />
+					<label value="&pref.mousewheel.label;"/>
+					<checkbox preference="imagetweak_invertmousewheel" label="&pref.invertmousewheel.label;" tooltiptext="&pref.invertmousewheel.tooltip;"/>
+					<radiogroup preference="imagetweak_legacyscrolling" id="imagetweak_legacyscrolling_radiogroup">
+						<radio label="&pref.legacyscrolling.enabled.label;" value="true" id="imagetweak_legacyscrolling_enabled" />
+						<radio label="&pref.legacyscrolling.disabled.label;" value="false" id="imagetweak_legacyscrolling_disabled" />
+					</radiogroup>
+					<separator />
 					<label value="&pref.shortcut.label;"/>
 					<checkbox preference="imagetweak_shortcut_img" label="&pref.shortcut.img.label;" tooltiptext="&pref.shortcut.img.tooltip;"/>
 					<checkbox preference="imagetweak_shortcut_bg" label="&pref.shortcut.bg.label;" tooltiptext="&pref.shortcut.bg.tooltip;"/>
-				</vbox>
-			</groupbox>
+				</groupbox>
+			</hbox>
 			<label value="&pref.pressf1forhelp.label;" />
 		</vbox>
 	</prefpane>

@@ -31,5 +31,4 @@
 <!ENTITY pref.invertmousewheel.tooltip "反向鼠标滚轮缩放的方向">
 <!ENTITY pref.invertkeyboard.tooltip "反向键盘方向键的滚动方向">
 <!ENTITY pref.startfromtopleft.tooltip "当图片大于窗口时对齐到左上方">
-<!ENTITY pref.pressf1forhelp.label "按下 F1 显示在线帮助">
 <!ENTITY about.window.title "ImageTweak - 关于">

@@ -116,22 +116,11 @@
 		<changed>event.detail handling in OnMouseWheel (workaround for sysnumlines issue)</changed>
 		<removed>logging code from release build</removed>
 	</version>
-	<version name="0.18.1">
-		<changed>refreshed locales</changed>
-	</version>
-	<version name="0.18.2">
-		<changed>bumped maxVersion to 3.6a1pre</changed>
-	</version>
-	<version name="0.19">
-		<added>proper drag&drop support</added>
-		<fixed>mouse pointer out of browser</fixed>
-                <removed>support for fx 3.0-</removed>
-	</version>
 </changelog>
 <todo>
 	<changed>deep changes on how the extension works (fixed viewport to moving viewport)</changed>
 	<fixed>smooth scrolling</fixed>
 	<added>comments</added>
+	<fixed>mouse pointer out of browser</fixed>
 	<added>brightness slider in pref window</added>
-	<added>context menu (why, oh, why?)</added>
 </todo>

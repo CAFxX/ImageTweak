@@ -31,5 +31,4 @@
 <!ENTITY pref.invertmousewheel.tooltip "拡大に関するマウスホイールのスクロール方向を反転します">
 <!ENTITY pref.invertkeyboard.tooltip "スクロールに関する矢印キーの方向を反転します">
 <!ENTITY pref.startfromtopleft.tooltip "ウィンドウより大きな画像を左上に配置します">
-<!ENTITY pref.pressf1forhelp.label "F1 を押してオンラインヘルプを表示">
 <!ENTITY about.window.title "ImageTweak について">

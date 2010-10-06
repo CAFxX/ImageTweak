@@ -12,8 +12,8 @@
 <!ENTITY pref.zoomtype.free.label "Swobodny">
 <!ENTITY pref.zoomtype.unscaled.label "1:1">
 <!ENTITY pref.shortcut.label "Włącz skrót (Ctrl+prawy przycisk myszy) dla">
-<!ENTITY pref.shortcut.img.label "obrazków">
-<!ENTITY pref.shortcut.bg.label "teł">
+<!ENTITY pref.shortcut.img.label "Obrazków">
+<!ENTITY pref.shortcut.bg.label "Teł">
 <!ENTITY pref.invertmousewheel.label "Odwróć kierunki skalowania kółkiem myszy">
 <!ENTITY pref.invertkeyboard.label "Odwróć kierunki nawigacji klawiaturą">
 <!ENTITY pref.startfromtopleft.label "Umieszczaj obrazek w lewym górnym rogu">
@@ -31,5 +31,4 @@
 <!ENTITY pref.invertmousewheel.tooltip "Odwróć kierunki skalowania z użyciem kółka myszy">
 <!ENTITY pref.invertkeyboard.tooltip "Odwróć kierunki przesuwania obrazków z użyciem klawiszy ze strzałkami">
 <!ENTITY pref.startfromtopleft.tooltip "Umieszczaj obrazki w lewym górnym rogu okna, jeżeli są one od niego większe">
-<!ENTITY pref.pressf1forhelp.label "Naciśnij F1, aby wyświetlić internetową pomoc.">
 <!ENTITY about.window.title "ImageTweak - informacje">

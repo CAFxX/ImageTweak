@@ -31,5 +31,4 @@
 <!ENTITY pref.invertmousewheel.tooltip "Käännä hiiren rullan suunata zoomatessa">
 <!ENTITY pref.invertkeyboard.tooltip "Käännä nuolinäppäimien suunata liikkuessa">
 <!ENTITY pref.startfromtopleft.tooltip "Sijoita kuva vasempaan yläkulmaan kun se on isompi kuin ikkuna">
-<!ENTITY pref.pressf1forhelp.label "Press F1 to display the online help">
 <!ENTITY about.window.title "Tietoja ImageTweakista">

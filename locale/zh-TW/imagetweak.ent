@@ -31,5 +31,4 @@
 <!ENTITY pref.invertmousewheel.tooltip "反向滑鼠滾輪縮放方向">
 <!ENTITY pref.invertkeyboard.tooltip "反轉縮放圖示標示位置">
 <!ENTITY pref.startfromtopleft.tooltip "當圖片大於視窗時將圖片對齊於左上方">
-<!ENTITY pref.pressf1forhelp.label "按下 F1 瀏覽線上說明">
 <!ENTITY about.window.title "關於 ImageTweak">

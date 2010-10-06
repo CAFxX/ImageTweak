@@ -1,0 +1,34 @@
+<!ENTITY pref.window.title "ImageTweak - opties">
+<!ENTITY pref.prefpane.label "Opties voor weergave van afbeeldingen">
+<!ENTITY pref.bgcolor.label "Achtergrondkleur">
+<!ENTITY pref.autoresize.label "Afmetingen van afbeeldingen automatisch instellen bij laden">
+<!ENTITY pref.clip_movement.label "Bewegingsgebied afbeelding beperken">
+<!ENTITY pref.zoomexp.label "Inzoomfactor (&#37;)">
+<!ENTITY pref.zoomonpointer.label "Zoomen op muisaanwijzer">
+<!ENTITY pref.zoomtype.label "Ingeschakelde zoomtypes">
+<!ENTITY pref.zoomtype.default.label "Standaard zoomtype">
+<!ENTITY pref.zoomtype.full.label "Aanpassen aan venster">
+<!ENTITY pref.zoomtype.fill.label "Venster opvullen">
+<!ENTITY pref.zoomtype.free.label "Vrije modus">
+<!ENTITY pref.zoomtype.unscaled.label "1:1">
+<!ENTITY pref.shortcut.label "Ingeschakelde sneltoetsen (ctrl + klik)">
+<!ENTITY pref.shortcut.img.label "Afbeeldingen (IMG)">
+<!ENTITY pref.shortcut.bg.label "Achtergronden">
+<!ENTITY pref.invertmousewheel.label "Muiswielzoomrichting omdraaien">
+<!ENTITY pref.invertkeyboard.label "Toetsenbordnavigatie omdraaien">
+<!ENTITY pref.startfromtopleft.label "Afbeelding linksboven plaatsen">
+<!ENTITY pref.bgcolor.tooltip "Te gebruiken achtergrondkleur instellen bij weergave afbeeldingen">
+<!ENTITY pref.autoresize.tooltip "Afbeeldingen bij laden automatisch in venster laten passen indien ze groter zijn">
+<!ENTITY pref.clip_movement.tooltip "De afbeelding uitsluitend laten verplaatsen binnen het venster">
+<!ENTITY pref.zoomexp.tooltip "Zoomstapfactor (200&#37; betekent verdubbelen/halveren bij elke stap)">
+<!ENTITY pref.zoomonpointer.tooltip "Naar de muisaanwijzer zoomen bij gebruik scrollwiel">
+<!ENTITY pref.zoomtype.full.tooltip "Aan-venster-aanpassen-beeld inschakelen bij dubbelklikken">
+<!ENTITY pref.zoomtype.fill.tooltip "Venster vullen inschakelen bij dubbelklikken">
+<!ENTITY pref.zoomtype.free.tooltip "Vrij beeld (zoombaar en verplaatsbaar) inschakelen bij dubbelklikken">
+<!ENTITY pref.zoomtype.unscaled.tooltip "Werkelijk beeld inschakelen bij dubbelklikken">
+<!ENTITY pref.shortcut.img.tooltip "Sneltoets voor in webpagina’s gebruikte afbeeldingen inschakelen">
+<!ENTITY pref.shortcut.bg.tooltip "Sneltoets voor achtergronden in webpagina’s inschakelen">
+<!ENTITY pref.invertmousewheel.tooltip "Scrollrichting van het muiswiel omdraaien voor zoomen">
+<!ENTITY pref.invertkeyboard.tooltip "Pijltoetsrichting omdraaien voor scrollen">
+<!ENTITY pref.startfromtopleft.tooltip "Afbeelding linksboven plaatsen wanneer deze groter is dan het venster">
+<!ENTITY about.window.title "Over ImageTweak">

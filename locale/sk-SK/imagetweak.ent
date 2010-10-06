@@ -31,5 +31,4 @@
 <!ENTITY pref.invertmousewheel.tooltip "Invert the mouse wheel scrolling direction for zooming">
 <!ENTITY pref.invertkeyboard.tooltip "Invert the arrow keys direction for scrolling">
 <!ENTITY pref.startfromtopleft.tooltip "Place the image at the top left when it is bigger than the window">
-<!ENTITY pref.pressf1forhelp.label "Stlačte F1 pre zobrazenie online nápovedy">
 <!ENTITY about.window.title "ImageTweak - O rozšírení">

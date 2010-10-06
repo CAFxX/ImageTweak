@@ -1,19 +1,19 @@
 <!ENTITY pref.window.title "Параметри ImageTweak">
-<!ENTITY pref.prefpane.label "Параметри відображення зображення">
+<!ENTITY pref.prefpane.label "Image display options">
 <!ENTITY pref.bgcolor.label "Колір фону:">
-<!ENTITY pref.autoresize.label "Автоматично змінювати розмір зображення при завантажені">
+<!ENTITY pref.autoresize.label "Automatically resize images on load">
 <!ENTITY pref.clip_movement.label "Clip image movement range">
-<!ENTITY pref.zoomexp.label "Масштаб (&#37;)">
+<!ENTITY pref.zoomexp.label "Zoom factor (&#37;)">
 <!ENTITY pref.zoomonpointer.label "Zoom on mouse pointer">
 <!ENTITY pref.zoomtype.label "Enabled zoom types">
 <!ENTITY pref.zoomtype.default.label "Default zoom type">
 <!ENTITY pref.zoomtype.full.label "Fit to window">
 <!ENTITY pref.zoomtype.fill.label "Fill window">
-<!ENTITY pref.zoomtype.free.label "Довільний режим">
+<!ENTITY pref.zoomtype.free.label "Free mode">
 <!ENTITY pref.zoomtype.unscaled.label "1:1">
 <!ENTITY pref.shortcut.label "Enabled shortcuts (ctrl+rightclick)">
-<!ENTITY pref.shortcut.img.label "Зображення (IMG)">
-<!ENTITY pref.shortcut.bg.label "Фон">
+<!ENTITY pref.shortcut.img.label "Images (IMG)">
+<!ENTITY pref.shortcut.bg.label "Backgrounds">
 <!ENTITY pref.invertmousewheel.label "Invert the mousewheel zoom direction">
 <!ENTITY pref.invertkeyboard.label "Invert the keyboard navigation">
 <!ENTITY pref.startfromtopleft.label "Place image at top left">
@@ -31,5 +31,4 @@
 <!ENTITY pref.invertmousewheel.tooltip "Invert the mouse wheel scrolling direction for zooming">
 <!ENTITY pref.invertkeyboard.tooltip "Invert the arrow keys direction for scrolling">
 <!ENTITY pref.startfromtopleft.tooltip "Place the image at the top left when it is bigger than the window">
-<!ENTITY pref.pressf1forhelp.label "Натисніть F1 для відображення онлайнової довідки.">
 <!ENTITY about.window.title "Про ImageTweak">

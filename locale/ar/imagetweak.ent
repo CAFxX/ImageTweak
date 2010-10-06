@@ -31,5 +31,4 @@
 <!ENTITY pref.invertmousewheel.tooltip "عكس عجلة الماوس لاتجاه التمرير تكبير">
 <!ENTITY pref.invertkeyboard.tooltip "عكس مفاتيح الأسهم لاتجاه التمرير">
 <!ENTITY pref.startfromtopleft.tooltip "وضع صورة في أعلى اليسار عندما تكون اكبر من النافذة">
-<!ENTITY pref.pressf1forhelp.label "اضغط F1 لعرض المساعدة المباشرة">
 <!ENTITY about.window.title "ImageTweak - حول">

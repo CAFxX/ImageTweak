@@ -31,5 +31,4 @@
 <!ENTITY pref.invertmousewheel.tooltip "Инвертировать направление колёсика мыши при увеличении">
 <!ENTITY pref.invertkeyboard.tooltip "Инвертировать направление стрелок для прокрутки">
 <!ENTITY pref.startfromtopleft.tooltip "Place the image at the top left when it is bigger than the window">
-<!ENTITY pref.pressf1forhelp.label "Press F1 to display the online help">
 <!ENTITY about.window.title "ImageTweak - О Прогамме">

@@ -33,3 +33,11 @@
 <!ENTITY pref.startfromtopleft.tooltip "Posiziona l&apos;immagine in alto a destra quando è più grande della finestra">
 <!ENTITY pref.pressf1forhelp.label "Premi F1 per visualizzare la guida in linea">
 <!ENTITY about.window.title "ImageTweak - Informazioni">
+
+<!ENTITY pref.mousewheel.label "Impostazioni della rotellina del mouse">
+<!ENTITY pref.legacyscrolling.enabled.label "Usa la rotellina per zoomare">
+<!ENTITY pref.legacyscrolling.disabled.label "Usa la rotellina per scrollare">
+<!ENTITY pref.feedback.label "Fornisci statistiche anonime sull&apos;uso">
+<!ENTITY pref.feedback.tooltip "Le informazioni raccolte saranno utilizzate unicamente per migliorare ImageTweak">
+<!ENTITY pref.bordercolor.label "Colore del bordo">
+<!ENTITY pref.bordercolor.tooltip "Imposta il colore del bordo intorno all&apos;immagine">

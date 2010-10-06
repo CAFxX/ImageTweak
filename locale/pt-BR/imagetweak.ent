@@ -31,5 +31,4 @@
 <!ENTITY pref.invertmousewheel.tooltip "Inverter a rolagem do mouse na direção zoom">
 <!ENTITY pref.invertkeyboard.tooltip "Inverter as teclas de direção na rolagem">
 <!ENTITY pref.startfromtopleft.tooltip "Posicionar a imagem no topo esquerdo quando for maior que a janela">
-<!ENTITY pref.pressf1forhelp.label "Pressione F1 para mostrar ajuda online">
 <!ENTITY about.window.title "ImageTweak - Sobre">

@@ -2,7 +2,7 @@
 <!DOCTYPE window SYSTEM "chrome://imagetweak/locale/imagetweak.ent">
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 
-<window class="dialog" title="&about.window.title;" orient="vertical" onload="ImageTweakInitAboutWindow()" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<window class="dialog" title="&about.window.title;" orient="vertical" onload="ImageTweak.AboutWindow.Init()" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	<vbox align="start">
 		<html:style>
 			.link {
@@ -43,8 +43,6 @@
 				<text value="chuzo (es-ES)"/>
 				<text value="Sappa (uk-UA)"/>
 				<text value="lord1980 (ar)"/>
-				<text value="kkmic (ro-RO)"/>
-				<text value="erkanyv (tr-TR)"/>
 			</vbox>
 			<vbox align="end">
 				<text style="font-weight: bold;" value="Thanks"/>
@@ -63,12 +61,11 @@
 	</vbox>
 	<script type="application/x-javascript" src="chrome://imagetweak/content/imagetweak.js" /> 
 	<script type="application/x-javascript">
-		function ImageTweakInitAboutWindow() {
-			document.getElementById("imagetweak_about_title").innerHTML += " " + 
-				Components.classes["@mozilla.org/extensions/manager;1"]
-					.getService(Components.interfaces.nsIExtensionManager)
-					.getItemForID("{DB2EA31C-58F5-48b7-8D60-CB0739257904}").version;
-			sizeToContent();
-		};
+		ImageTweak.AboutWindow = {
+			Init: function Init() {
+				document.getElementById("imagetweak_about_title").innerHTML += " " + ImageTweak.Helper.GetVersion();
+				sizeToContent();
+			}
+		}
 	</script>
 </window>
