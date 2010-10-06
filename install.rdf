@@ -3,7 +3,7 @@
 	<Description about="urn:mozilla:install-manifest">
 		<em:id>{DB2EA31C-58F5-48b7-8D60-CB0739257904}</em:id>
 		<em:name>ImageTweak</em:name>
-		<em:version>0.20</em:version>
+		<em:version>0.21</em:version>
 		<em:description>Enhances your image viewing experience</em:description>
 		<em:creator>CAFxX</em:creator>
 		<em:homepageURL>http://cafxx.strayorange.com/ImageTweak</em:homepageURL>
