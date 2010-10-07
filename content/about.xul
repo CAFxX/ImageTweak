@@ -28,12 +28,12 @@
 		<hbox>
 			<vbox align="start">
 				<text style="font-weight: bold;" value="Translators"/>
-				<text value="Tuxman (de-DE)"/>
+				<text value="Tuxman (de)"/>
 				<text value="CAFxX (en-US)"/>
-				<text value="papoo (fr-FR)"/>
+				<text value="papoo (fr)"/>
 				<text value="CAFxX (it-IT)"/>
 				<text value="drry (ja-JP)"/>
-				<text value="markh (nl-NL)"/>
+				<text value="markh (nl)"/>
 				<text value="Wacław Jacek (pl-PL)"/>
 				<text value="humbertosartini (pt-BR)"/>
 				<text value="egaz (ru-RU)"/>
@@ -46,6 +46,8 @@
 				<text value="lord1980 (ar)"/>
 				<text value="kkmic (ro-RO)"/>
 				<text value="erkanyv (tr-TR)"/>
+				<text value="DakSrbija (sr)"/>
+				<text value="Lakrits (sv-SE)"/>
 			</vbox>
 			<vbox align="end">
 				<text style="font-weight: bold;" value="Thanks"/>
