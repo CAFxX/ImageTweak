@@ -15,3 +15,14 @@ If you only want to install ImageTweak in Firefox head over to [addons.mozilla.o
 You can contribute code to ImageTweak by sending patches or pull requests, a [list of planned features](http://github.com/CAFxX/ImageTweak/wiki) is available. Alternatively you can make donations to support the development of ImageTweak on [addons.mozilla.org](https://addons.mozilla.org/en-US/firefox/addon/3683). 
 
 You can also help by [reporting bugs](http://github.com/CAFxX/ImageTweak/issues) (please, try to be as acccurate as possible by including your OS, browser version, extensions installed, plugins and exact steps to reproduce the bug: if I can't reproduce it, most likely I won't be able to fix it!), [suggesting new features](http://github.com/CAFxX/ImageTweak/wiki) or by [translating ImageTweak in your language](http://www.babelzilla.org/).
+
+## Extension compatibility
+Other extension can use the following function to test for the presence of ImageTweak:
+
+	function isImageTweakEnabled() {
+		try {
+			return ImageTweakHelper.Enabled();
+		} catch (ex) {
+			return false;
+		}
+	}

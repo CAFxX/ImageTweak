@@ -63,6 +63,10 @@ var ImageTweakHelper = {
                 var browser = wm.getMostRecentWindow("navigator:browser").getBrowser();
                 browser.selectedTab = browser.addTab(url);
         },
+		
+		enabled: function() {
+			return true;
+		}
 };
 
 /***********************************************************************************************************************************************************/
