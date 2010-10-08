@@ -6,13 +6,7 @@ Mozilla Firefox add-on for improving the image viewing UX
 [GitHub repository](http://github.com/CAFxX/ImageTweak) - 
 [Contact me](mailto:imagetweak@cafxx.strayorange.com)
 
-## Description
 ImageTweak is an add-on for Firefox, Iceweasel and SeaMonkey that enhances the vision of images in the browser by allowing zooming, rotating and viewing them against a custom/neutral/dark/black background.
-
-## Downloads
-This GitHub repository contains the latest code of ImageTweak, which may be unstable and generally unsuitable for most users.
-
-If you only want to install ImageTweak head over to [addons.mozilla.org](https://addons.mozilla.org/en-US/firefox/addon/3683).
 
 ## Contribute
 You can contribute code to ImageTweak by sending patches or pull requests, a [list of planned features](http://github.com/CAFxX/ImageTweak/wiki) is available. Alternatively you can make donations to support the development of ImageTweak on [addons.mozilla.org](https://addons.mozilla.org/en-US/firefox/addon/3683). 
