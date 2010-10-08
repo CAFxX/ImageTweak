@@ -584,10 +584,6 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
 };
 
 function ImageTweakEntryPoint() {
-    // remove the old unused zoomexp pref
-    if ( Components.classes["@mozilla.org/content-pref/service;1"] ) {
-        Components.classes["@mozilla.org/content-pref/service;1"].getService(Components.interfaces.nsIContentPrefService).removePref(null, "extensions.imagetweak.zoomexp");
-    }
     var ImageTweakStartEventHandler = function(e) {
         var hWindow;
         // find the handle to the window where the event occurred
