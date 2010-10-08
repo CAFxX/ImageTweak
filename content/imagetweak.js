@@ -66,6 +66,10 @@ const ImageTweakHelper = {
 
     enabled: function() {
         return true;
+    },
+        
+    enabledForDocument: function(doc) {
+        return typeof( doc.ImageTweak.Image ) != "undefined";
     }
 };
 
@@ -538,7 +542,7 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
     } else if ( !this.Image.naturalWidth ) {
         // we are not ready yet... keep waiting...
         if ( this.TimeoutHandle != null ) {
-                clearTimeout( this.TimeoutHandle );
+            clearTimeout( this.TimeoutHandle );
         }
         this.TimeoutHandle = setTimeout( function() { hImageTweak.PluginEventListeners(); }, 50 );
     } else {
