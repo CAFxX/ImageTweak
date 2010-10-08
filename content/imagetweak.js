@@ -208,6 +208,7 @@ ImageTweak.prototype.Repaint = function Repaint() {
         var CurTitleRotation = ( this.Rotation % 360 != 0 ? ", " + ( ( ( this.Rotation % 360 ) + 360 ) % 360 ) + "°" : "" );
         var CurTitle = this.Title.substring( 0, this.Title.lastIndexOf( ")" ) ) + CurTitleZoom + CurTitleRotation + ")";
         if ( this.Document.title != CurTitle ) this.Document.title = CurTitle;
+		this.Document.body.style.backgroundColor = this.GetPref("BackgroundColor");
         
         if ( this.Scrolling ) {
                 this.StartScroll();
@@ -551,7 +552,7 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
                 this.Browser = gBrowser.getBrowserForDocument( this.Window.top.document );
                 this.BrowserAutoscroll = this.Browser.getAttribute("autoscroll");
                 this.Browser.setAttribute("autoscroll", "false");
-				// other stylings
+				// document styles
 				this.Document.body.style.overflow = "hidden";
 				this.Document.body.style.width = "100%";
 				this.Document.body.style.height = "100%";
@@ -561,8 +562,6 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
                 this.Title = this.Document.title; // this has to go after disabling automatic_image_resizing
                 this.ZoomMax = Math.min( this.ImageMax / this.Image.naturalWidth, this.ImageMax / this.Image.naturalHeight );
                 this.DefaultZoomType();
-                // basic customizations
-                this.Document.body.style.cssText += "background-color:" + this.GetPref("BackgroundColor") + "; overflow:hidden;";
                 // plugin our (supa-dupa!) event listeners
                 this.Document.addEventListener( 'DOMMouseScroll', function(e) { hImageTweak.OnMouseWheel(e); }, false );
                 this.Document.addEventListener( 'mousemove', function(e) { hImageTweak.OnMouseMove(e); }, false );
