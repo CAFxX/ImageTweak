@@ -23,7 +23,7 @@
 const ImageTweakHelper = {
     // shamelessly taken from mozilla/browser/base/content/nsContextMenu.js
     getComputedURL: function(aElem, aProp) {
-        var url = aElem.ownerDocument.defaultView.getComputedStyle(aElem, "").getPropertyCSSValue(aProp);
+        var url = aElem.ownerDocument.defaultView.getComputedStyle(aElem, "").getPropertyCSSValue(aProp)[0]; // FIXME: what's the [0] for?!?!
         return url.primitiveType == CSSPrimitiveValue.CSS_URI ? url.getStringValue() : null;
     },
 
@@ -80,8 +80,7 @@ function ImageTweak( hWindow ) {
     this.Window = hWindow; // reference to the current window
     this.Document = this.Window.document; // reference to the current document
     if ( this.Document instanceof ImageDocument ) {
-        //this.Browser = gBrowser.getBrowserForDocument( this.Document );
-        this.Browser = null;
+        this.Browser = gBrowser.getBrowserForDocument( this.Document );
         this.BrowserAutoscroll = false;
         this.Image = this.Document.images[0]; // in a nsImageDocument there's just one image
         this.Zoom = 1; // start zoom = 1 (will be overriden later)
@@ -375,14 +374,23 @@ ImageTweak.prototype.RegularDocumentOnMouseClick = function RegularDocumentOnMou
         } else if ( event.ctrlKey ) {
             Target = this.Targets.OpenInCurrentTab;
         }
-    }
-    if ( event.target.tagName == "IMG" && this.GetPref("ShortcutImg") ) {
-        URL = event.target.src;
-    } else if ( ImageTweakHelper.getComputedURL( event.target, "background-image" ) != "" && this.GetPref("ShortcutBg") ) {
-        URL = makeURLAbsolute( event.target.baseURI, ImageTweakHelper.getComputedURL( event.target, "background-image" ) )
+        URL = this.GetElementImageURL( event.target );
     }
     if ( URL != "" && Target( URL ) ) {
         event.preventDefault();
+    }
+};
+
+ImageTweak.prototype.RegularDocumentOnMouseDoubleClick = function RegularDocumentOnMouseDoubleClick(event) {
+    var Target = this.Targets.DoNotOpen;
+    var URL = "";
+    if ( event.button == 2 ) {
+        Target = this.Targets.OpenInCurrentTab;
+        URL = this.GetElementImageURL( event.target );
+    }
+    if ( URL != "" && Target( URL ) ) {
+        event.preventDefault();
+        document.getElementById("contentAreaContextMenu").hidePopup(); 
     }
 };
 
@@ -532,13 +540,23 @@ ImageTweak.prototype.PerformZoomTypeSwitch = function PerformZoomTypeSwitch( img
     this.Repaint();
 };
 
+ImageTweak.prototype.GetElementImageURL = function GetElementImageURL(elem) {
+    if ( elem.tagName == "IMG" && this.GetPref("ShortcutImg") )
+        return elem.src;
+    var bgImgUrl = ImageTweakHelper.getComputedURL( elem, "background-image" );
+    if ( bgImgUrl != "" && bgImgUrl != null && this.GetPref("ShortcutBg") ) 
+        return makeURLAbsolute( elem.baseURI, bgImgUrl );
+    return "";
+}
+
 ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
     var hImageTweak = this;
     if ( this.Inited ) {
     } else if ( ( this.Document instanceof ImageDocument ) === false ) {
         // not a standalone image! so, what? let's plug in our supa-dupa source image click handler
         this.Inited = true;
-        this.Document.addEventListener( 'click',        function(e) { hImageTweak.RegularDocumentOnMouseClick(e); }, false );
+        this.Document.addEventListener( 'click', function(e) { hImageTweak.RegularDocumentOnMouseClick(e); }, false );
+        this.Document.addEventListener( 'dblclick', function(e) { hImageTweak.RegularDocumentOnMouseDoubleClick(e); }, false );
     } else if ( !this.Image.naturalWidth ) {
         // we are not ready yet... keep waiting...
         if ( this.TimeoutHandle != null ) {
