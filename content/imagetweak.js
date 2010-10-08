@@ -361,29 +361,29 @@ ImageTweak.prototype.Targets = {
 };
 
 ImageTweak.prototype.RegularDocumentOnMouseClick = function RegularDocumentOnMouseClick(event) {
-        var Target = this.Targets.DoNotOpen;
-        var URL = "";
-        if ( event.button == 2 ) {
-                if ( event.ctrlKey && event.altKey && event.shiftKey ) {
-                        Target = this.Targets.OpenInNewWindow;
-                } else if ( event.ctrlKey && event.altKey ) {
-                        Target = this.Targets.OpenInNewTab;
-                } else if ( event.ctrlKey ) {
-                        Target = this.Targets.OpenInCurrentTab;
-                }
+    var Target = this.Targets.DoNotOpen;
+    var URL = "";
+    if ( event.button == 2 ) {
+        if ( event.ctrlKey && event.altKey && event.shiftKey ) {
+            Target = this.Targets.OpenInNewWindow;
+        } else if ( event.ctrlKey && event.altKey ) {
+            Target = this.Targets.OpenInNewTab;
+        } else if ( event.ctrlKey ) {
+            Target = this.Targets.OpenInCurrentTab;
         }
-        if ( event.target.tagName == "IMG" && this.GetPref("ShortcutImg") ) {
-                URL = event.target.src;
-        } else if ( ImageTweakHelper.getComputedURL( event.target, "background-image" ) != "" && this.GetPref("ShortcutBg") ) {
-                URL = makeURLAbsolute( event.target.baseURI, ImageTweakHelper.getComputedURL( event.target, "background-image" ) )
-        }
-        if ( URL != "" && Target( URL ) ) {
-                event.preventDefault();
-        }
+    }
+    if ( event.target.tagName == "IMG" && this.GetPref("ShortcutImg") ) {
+        URL = event.target.src;
+    } else if ( ImageTweakHelper.getComputedURL( event.target, "background-image" ) != "" && this.GetPref("ShortcutBg") ) {
+        URL = makeURLAbsolute( event.target.baseURI, ImageTweakHelper.getComputedURL( event.target, "background-image" ) )
+    }
+    if ( URL != "" && Target( URL ) ) {
+        event.preventDefault();
+    }
 };
 
 ImageTweak.prototype.OnUnload = function OnUnload(event) {
-        this.Browser.setAttribute("autoscroll", this.BrowserAutoscroll);
+    this.Browser.setAttribute("autoscroll", this.BrowserAutoscroll);
 };
 
 /* Internal functions **************************************************************************************************************************************/
