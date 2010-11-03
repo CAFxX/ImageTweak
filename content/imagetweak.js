@@ -1,8 +1,10 @@
 ﻿/************************************************************************************************************************************************************
 
         ImageTweak
-        2006-2009 CAFxX
+        2006-2010 CAFxX
         http://cafxx.strayorange.com
+		
+		Suggestions? Bug reports? Send them to imagetweak@cafxx.strayorange.com.
 
         LICENSE
                 This program is free software: you can redistribute it and/or modify
@@ -408,7 +410,7 @@ ImageTweak.prototype.PerformZoom = function PerformZoom(delta, px, py) {
 ImageTweak.prototype.PerformRotation = function PerformRotation( degrees ) {
     this.Rotation += degrees;
     this.Repaint();
-}
+};
 
 ImageTweak.prototype.StartScroll = function StartScroll(event) {
     if ( this.Window.innerWidth < this.Image.width || this.Window.innerHeight < this.Image.height || this.GetPref("ClipMovement") == false ) {
@@ -526,7 +528,7 @@ ImageTweak.prototype.GetElementImageURL = function GetElementImageURL(elem) {
     if ( bgImgUrl != "" && bgImgUrl != null && this.GetPref("ShortcutBg") ) 
         return makeURLAbsolute( elem.baseURI, bgImgUrl );
     return "";
-}
+};
 
 ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
     var hImageTweak = this;
@@ -602,7 +604,6 @@ function ImageTweakEntryPoint() {
             hWindow.document.ImageTweak.PluginEventListeners();
         }
     }
-    //var browser = document.getElementById("appcontent");
     gBrowser.addEventListener("load", ImageTweakStartEventHandler, true);
     gBrowser.addEventListener("focus", ImageTweakStartEventHandler, true);
     gBrowser.addEventListener("DOMContentLoaded", ImageTweakStartEventHandler, true);
