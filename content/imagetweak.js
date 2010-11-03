@@ -51,7 +51,36 @@ const ImageTweakHelper = {
         
     enabledForDocument: function(doc) {
         return typeof( doc.ImageTweak.Image ) != "undefined";
-    }
+    },
+	
+	// ImageTweakHelper.entryPoint is the global entry point for imagetweak
+	// This function is called from overlay.xul
+	entryPoint: function() {
+		gBrowser.addEventListener("load", ImageTweakHelper.startEventHandler, true);
+		gBrowser.addEventListener("focus", ImageTweakHelper.startEventHandler, true);
+		gBrowser.addEventListener("DOMContentLoaded", ImageTweakHelper.startEventHandler, true);
+		gBrowser.addEventListener("DOMFrameContentLoaded", ImageTweakHelper.startEventHandler, true);
+		gBrowser.tabContainer.addEventListener("TabOpen", ImageTweakHelper.startEventHandler, true);
+	},
+	
+	// startEventHandler handles all the pageload, tabopen, tabfocus, etc. events registered in entryPoint
+	startEventHandler: function(e) {
+		var hWindow;
+		// find the handle to the window where the event occurred
+		if ( e.originalTarget && e.originalTarget.defaultView )
+			hWindow = e.originalTarget.defaultView;
+		else if ( e.originalTarget && e.originalTarget.contentWindow )
+			hWindow = e.originalTarget.contentWindow;
+		else if ( e.target && e.target.linkedBrowser && e.target.linkedBrowser.contentWindow )
+			hWindow = e.target.linkedBrowser.contentWindow;
+		// if we found it, start ImageTweak
+		if ( hWindow && hWindow.document ) {
+			if ( !hWindow.document.ImageTweak ) {
+				hWindow.document.ImageTweak = new ImageTweak( hWindow );
+			}
+			hWindow.document.ImageTweak.PluginEventListeners();
+		}
+	}
 };
 
 /***********************************************************************************************************************************************************/
@@ -585,29 +614,3 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
         this.Repaint();
     }
 };
-
-function ImageTweakEntryPoint() {
-    var ImageTweakStartEventHandler = function(e) {
-        var hWindow;
-        // find the handle to the window where the event occurred
-        if ( e.originalTarget && e.originalTarget.defaultView )
-            hWindow = e.originalTarget.defaultView;
-        else if ( e.originalTarget && e.originalTarget.contentWindow )
-            hWindow = e.originalTarget.contentWindow;
-        else if ( e.target && e.target.linkedBrowser && e.target.linkedBrowser.contentWindow )
-            hWindow = e.target.linkedBrowser.contentWindow;
-        // if we found it, start ImageTweak
-        if ( hWindow && hWindow.document ) {
-            if ( !hWindow.document.ImageTweak ) {
-                hWindow.document.ImageTweak = new ImageTweak( hWindow );
-            }
-            hWindow.document.ImageTweak.PluginEventListeners();
-        }
-    }
-    gBrowser.addEventListener("load", ImageTweakStartEventHandler, true);
-    gBrowser.addEventListener("focus", ImageTweakStartEventHandler, true);
-    gBrowser.addEventListener("DOMContentLoaded", ImageTweakStartEventHandler, true);
-    gBrowser.addEventListener("DOMFrameContentLoaded", ImageTweakStartEventHandler, true);
-    gBrowser.tabContainer.addEventListener("TabOpen", ImageTweakStartEventHandler, true);
-};
-
