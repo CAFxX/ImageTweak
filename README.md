@@ -3,6 +3,7 @@ Mozilla Firefox add-on for improving the image viewing UX
 
 [Homepage](http://cafxx.strayorange.com/ImageTweak) - 
 [Downloads](https://addons.mozilla.org/en-US/firefox/addon/3683) - 
+[User guide](https://github.com/CAFxX/ImageTweak/wiki/ImageTweak-user-guide) - 
 [Source code (GitHub)](http://github.com/CAFxX/ImageTweak) - 
 [Contact me](mailto:imagetweak@cafxx.strayorange.com)
 
@@ -11,6 +12,9 @@ ImageTweak is an add-on for Firefox, Iceweasel and SeaMonkey that enhances the v
 ImageTweak is free software licensed under the terms of the [GPLv3](http://www.gnu.org/licenses/gpl-3.0-standalone.html).
 
 ![GPLv3 logo](http://www.gnu.org/graphics/gplv3-88x31.png)
+
+## User guide
+An updated [user guide](https://github.com/CAFxX/ImageTweak/wiki/ImageTweak-user-guide) is available.
 
 ## Contribute
 You can contribute code to ImageTweak by sending patches or pull requests, a [list of planned features](http://github.com/CAFxX/ImageTweak/wiki) is available. Alternatively you can make donations to support the development of ImageTweak on [addons.mozilla.org](https://addons.mozilla.org/en-US/firefox/addon/3683). 

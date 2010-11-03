@@ -34,7 +34,7 @@
 	]]></script>
 	<prefpane label="&pref.prefpane.label;" image="chrome://imagetweak/skin/imagetweak.png" onpaneload="ImageTweakInitPrefPane()">
 		<keyset>
-			<key keycode="VK_F1" oncommand="ImageTweakHelper.browse('http://cafxx.strayorange.com/ImageTweak Help');" />
+			<key keycode="VK_F1" oncommand="ImageTweakHelper.browse('https://github.com/CAFxX/ImageTweak/wiki/ImageTweak-user-guide');" />
 		</keyset>
 		<preferences>
 			<preference id="imagetweak_bgcolor" name="extensions.imagetweak.bgcolor" type="string"/>
