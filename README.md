@@ -24,7 +24,6 @@ You can also help by [reporting bugs](http://github.com/CAFxX/ImageTweak/issues)
 ## Extension compatibility
 Other extensions that wish to play nice with ImageTweak can use the following functions to test for the presence of ImageTweak.
 
-```js
 	// Check if ImageTweak is installed and enabled:
 	function isImageTweakEnabled() {
 		try {
@@ -34,7 +33,7 @@ Other extensions that wish to play nice with ImageTweak can use the following fu
 		}
 	}
 
-	// Check if if the document doc is being displayed using ImageTweak
+	// Check if if the document **doc** is being displayed using ImageTweak
 	function isImageTweakDocument(doc) {
 		try {
 			return ImageTweakHelper.enabledForDocument(doc);
@@ -42,4 +41,3 @@ Other extensions that wish to play nice with ImageTweak can use the following fu
 			return false;
 		}
 	}
-```
