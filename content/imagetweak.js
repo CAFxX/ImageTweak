@@ -36,27 +36,6 @@ const ImageTweakHelper = {
         return Math.min( max, Math.max( value, min ) );
     },
 
-    // compare the running version of firefox to the one passed
-    // returns <0, 0, >0 if the running version is older, the same or newer, respectively
-    compareVersionNumber: function(compareVersion) {
-        var info = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
-        var currentVersion = info.version.split("."); // Returns "2.0.0.1" for Firefox version 2.0.0.1
-        var compareVersion = compareVersion.split(".");
-        for ( i=0; i<4; i++ ) {
-            if ( currentVersion[i] == undefined )
-                currentVersion[i] = 0;
-            else
-                currentVersion[i] = parseInt(currentVersion[i]);
-            if ( compareVersion[i] == undefined )
-                compareVersion[i] = 0;
-            else
-                compareVersion[i] = parseInt(compareVersion[i]);
-            if ( compareVersion[i] != currentVersion[i] )
-                return currentVersion[i] - compareVersion[i];
-        }
-        return 0;
-    },
-
     // opens a new tab and browse to the specified URL
     browse: function(url) {
         var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
