@@ -33,7 +33,7 @@ Other extensions that wish to play nice with ImageTweak can use the following fu
 		}
 	}
 
-	// Check if if the document **doc** is being displayed using ImageTweak
+	// Check if if the document doc is being displayed using ImageTweak
 	function isImageTweakDocument(doc) {
 		try {
 			return ImageTweakHelper.enabledForDocument(doc);
