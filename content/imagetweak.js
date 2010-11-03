@@ -25,10 +25,13 @@ function ImageTweak( hWindow ) {
     this.Window = hWindow; // reference to the current window
     this.Document = this.Window.document; // reference to the current document
     this.Listeners = [];
-    if ( this.Document instanceof ImageDocument ) {
+	if ( this.IsImageTweakDocument() ) {
         this.Browser = gBrowser.getBrowserForDocument( this.Document );
         this.BrowserAutoscroll = false;
-        this.Image = this.Document.images[0]; // in a nsImageDocument there's just one image
+		if ( this.IsImageDocument() )
+			this.Image = this.Document.images[0]; // in a nsImageDocument there's just one image
+		else // if this.IsVideoDocument()
+			this.Image = this.Document.body.children[0]; // in a nsVideoDocument there's just one video
         this.Zoom = 1; // start zoom = 1 (will be overriden later)
         this.ZoomMax = null; // max zoom to be used (to keep the image smaller than ImageMax pixel)
         this.CenterX = 0; // coordinates of the center of the image on the screen
@@ -65,10 +68,10 @@ ImageTweak.prototype.ScreenCoordinates = function ScreenCoordinates() {
         case "pixel":   Coordinates.CurZoom = 1; break;
     }
 
-    var boundingWidth       = ImageTweak.clip( this.RotatedWidth() * Coordinates.CurZoom,             1, this.ImageMax );
-    var boundingHeight      = ImageTweak.clip( this.RotatedHeight() * Coordinates.CurZoom,            1, this.ImageMax );
-    Coordinates.imgWidth    = ImageTweak.clip( this.Image.naturalWidth * Coordinates.CurZoom,         1, this.ImageMax );
-    Coordinates.imgHeight   = ImageTweak.clip( this.Image.naturalHeight * Coordinates.CurZoom,        1, this.ImageMax );
+    var boundingWidth       = ImageTweak.clip( this.RotatedWidth() * Coordinates.CurZoom,  1, this.ImageMax );
+    var boundingHeight      = ImageTweak.clip( this.RotatedHeight() * Coordinates.CurZoom, 1, this.ImageMax );
+    Coordinates.imgWidth    = ImageTweak.clip( this.NaturalWidth() * Coordinates.CurZoom,  1, this.ImageMax );
+    Coordinates.imgHeight   = ImageTweak.clip( this.NaturalHeight() * Coordinates.CurZoom, 1, this.ImageMax );
 
     switch (this.ZoomType) {
         case "free":
@@ -132,9 +135,15 @@ ImageTweak.prototype.Repaint = function Repaint() {
             "-moz-transform: rotate(" + this.Rotation + "deg);";
     if ( this.Image.style.cssText != CurCSS ) this.Image.style.cssText = CurCSS;
 
-    var CurTitleZoom = ", " + Math.round( Coordinates.CurZoom * 100 ) + "%";
-    var CurTitleRotation = ( this.Rotation % 360 != 0 ? ", " + ( ( ( this.Rotation % 360 ) + 360 ) % 360 ) + "°" : "" );
-    var CurTitle = this.Title.substring( 0, this.Title.lastIndexOf( ")" ) ) + CurTitleZoom + CurTitleRotation + ")";
+	var CurTitleZoom = Math.round( Coordinates.CurZoom * 100 ) + "%";
+	var CurTitleRotation = ( this.Rotation % 360 != 0 ? ", " + ( ( ( this.Rotation % 360 ) + 360 ) % 360 ) + "°" : "" );
+	var CurTitle;
+	if ( this.IsImageDocument() ) 
+		CurTitle = this.Title.substring( 0, this.Title.lastIndexOf( ")" ) ) + ", " + CurTitleZoom + CurTitleRotation + ")";
+	else if ( this.IsVideoDocument() && ( CurTitleZoom != "100%" || CurTitleRotation != "" ) )
+		CurTitle = this.Title + " (" + CurTitleZoom + CurTitleRotation + ")";
+	else
+		CurTitle = this.Title;
     if ( this.Document.title != CurTitle ) 
         this.Document.title = CurTitle;
     this.Document.body.style.backgroundColor = ImageTweak.pref.BackgroundColor;
@@ -240,6 +249,7 @@ ImageTweak.prototype.OnKeyPress = function OnKeyPress(event) {
     if ( event.ctrlKey ) {
         switch (event.keyCode + event.charCode) {
             case 43: /* plus sign */                this.PerformZoom( 1 ); break;
+			case 61: /* equal sign */               this.PerformZoom( 1 ); break;
             case 45: /* minus sign */               this.PerformZoom( -1 ); break;
             case 48: /* 0 */                        this.DefaultZoomType(); break;
             default:                                return;
@@ -403,6 +413,8 @@ ImageTweak.prototype.PerformScroll = function PerformScroll(offset) {
 };
 
 ImageTweak.prototype.ConvertToFree = function ConvertToFree() {
+	//if ( this.IsVideoDocument() )
+		//return;
     if ( this.ZoomType == "free" )
         return;
     var Coordinates = this.ScreenCoordinates();
@@ -414,12 +426,26 @@ ImageTweak.prototype.ConvertToFree = function ConvertToFree() {
 
 ImageTweak.prototype.RotatedWidth = function RotatedWidth() {
     var RotationRadians = this.Rotation / 180 * Math.PI;
-    return this.Image.naturalWidth * Math.abs( Math.cos( RotationRadians ) ) + this.Image.naturalHeight * Math.abs( Math.sin( RotationRadians ) );
+    return this.NaturalWidth() * Math.abs( Math.cos( RotationRadians ) ) + this.NaturalHeight() * Math.abs( Math.sin( RotationRadians ) );
 };
 
 ImageTweak.prototype.RotatedHeight = function RotatedHeight() {
     var RotationRadians = this.Rotation / 180 * Math.PI;
-    return this.Image.naturalWidth * Math.abs( Math.sin( RotationRadians ) ) + this.Image.naturalHeight * Math.abs( Math.cos( RotationRadians ) );
+    return this.NaturalWidth() * Math.abs( Math.sin( RotationRadians ) ) + this.NaturalHeight() * Math.abs( Math.cos( RotationRadians ) );
+};
+
+ImageTweak.prototype.NaturalWidth = function NaturalWidth() {
+	if ( this.IsImageDocument() )
+		return this.Image.naturalWidth;
+	else if ( this.IsVideoDocument() )
+		return this.Image.videoWidth;
+};
+
+ImageTweak.prototype.NaturalHeight = function NaturalHeight() {
+	if ( this.IsImageDocument() )
+		return this.Image.naturalHeight;
+	else if ( this.IsVideoDocument() )
+		return this.Image.videoHeight;
 };
 
 ImageTweak.prototype.FitZoom = function FitZoom() {
@@ -475,6 +501,17 @@ ImageTweak.prototype.PerformZoomTypeSwitch = function PerformZoomTypeSwitch( img
     }
     this.ZoomType = imgZoomType;
     this.Repaint();
+};
+
+ImageTweak.prototype.IsImageDocument = function IsImageDocument() {	return this.Document instanceof ImageDocument;
+};
+
+ImageTweak.prototype.IsVideoDocument = function IsVideoDocument() {
+	return this.Document instanceof HTMLDocument && this.Document.body.children.length == 1 && this.Document.body.children[0] instanceof HTMLVideoElement;
+};
+
+ImageTweak.prototype.IsImageTweakDocument = function IsImageTweakDocument() {
+	return this.IsImageDocument() || this.IsVideoDocument();
 };
 
 ImageTweak.prototype.GetResamplingAlgorithm = function GetResamplingAlgorithm() {
@@ -536,7 +573,8 @@ ImageTweak.prototype.addEventListener = function addEventListener(target, eventN
 ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
     var hImageTweak = this;
     if ( this.Inited ) {
-    } else if ( ( this.Document instanceof ImageDocument ) === false ) {
+		// duplicate call, nothing to do!
+	} else if ( !this.IsImageTweakDocument() ) { 
         // not a standalone image! so, what? let's plug in our supa-dupa source image click handler
         this.Document.addEventListener( 'click', function(e) { hImageTweak.RegularDocumentOnMouseClick(e); }, false );
         this.Document.addEventListener( 'dblclick', function(e) { hImageTweak.RegularDocumentOnMouseDoubleClick(e); }, false );
@@ -544,7 +582,7 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
         if (ImageTweak.pref.ContentDetectable)
             this.InjectContentFlag();
         this.Inited = true;
-    } else if ( !this.Image.naturalWidth ) {
+    } else if ( !this.NaturalWidth() ) {
         // we are not ready yet... keep waiting...
         if ( this.TimeoutHandle != null )
             clearTimeout( this.TimeoutHandle );
@@ -552,12 +590,14 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
             hImageTweak.PluginEventListeners(); 
         }, 50 );
     } else {
-        // disable all automatic_image_resizing-related behaviours
-        this.Document.restoreImage();
-        this.Image.removeEventListener( 'click', this.Document, false );
-        this.Image.removeEventListener( 'resize', this.Document, false );
-        this.Image.removeEventListener( 'keypress', this.Document, false );
-        this.Image.style.cursor = "auto";
+		if ( this.IsImageDocument() ) {
+	        // disable all automatic_image_resizing-related behaviours
+			this.Document.restoreImage();
+			this.Image.removeEventListener( 'click', this.Document, false );
+			this.Image.removeEventListener( 'resize', this.Document, false );
+			this.Image.removeEventListener( 'keypress', this.Document, false );
+			this.Image.style.cursor = "auto";
+		}
         // disable autoscrolling for this window
         this.Browser = gBrowser.getBrowserForDocument( this.Window.top.document );
         this.BrowserAutoscroll = this.Browser.getAttribute("autoscroll");
@@ -570,26 +610,27 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
         this.Document.body.style.padding = "0";
         // initialize our structure
         this.Title = this.Document.title; // this has to go after disabling automatic_image_resizing
-        this.ZoomMax = Math.min( this.ImageMax / this.Image.naturalWidth, this.ImageMax / this.Image.naturalHeight );
+		this.ZoomMax = Math.min( this.ImageMax / this.NaturalWidth(), this.ImageMax / this.NaturalHeight() );
         this.DefaultZoomType();
         // plugin our (supa-dupa!) event listeners
         this.addEventListener( this.Image, 'load', function(e) { hImageTweak.ImageOnLoad(e); }, false );
-        this.addEventListener( this.Document, 'DOMMouseScroll', function(e) { hImageTweak.OnMouseWheel(e); }, false );
-        this.addEventListener( this.Document, 'mousemove', function(e) { hImageTweak.OnMouseMove(e); }, false );
-        this.addEventListener( this.Document, 'mouseup', function(e) { hImageTweak.OnMouseUp(e); }, true );
-        this.addEventListener( this.Document, 'mousedown', function(e) { hImageTweak.OnMouseDown(e); }, true );
-        this.addEventListener( this.Document, 'dblclick', function(e) { hImageTweak.OnDoubleClick(e); }, false );
         this.addEventListener( this.Window, 'unload', function(e) { hImageTweak.OnUnload(e); }, false );
         this.addEventListener( this.Window, 'resize', function(e) { hImageTweak.OnResize(e); }, false );
         this.addEventListener( this.Window, 'keypress', function(e) { hImageTweak.OnKeyPress(e); }, false );
-        this.addEventListener( this.Window, 'drag', function(e) { hImageTweak.OnDrag(e); }, false );
-        this.addEventListener( this.Window, 'dragstart', function(e) { hImageTweak.OnDragStart(e); }, false );
-        this.addEventListener( this.Window, 'dragend', function(e) { hImageTweak.OnDragEnd(e); }, false );
-        this.addEventListener( this.Window, 'dragenter', function(e) { hImageTweak.OnDragEnterWindow(e); }, false );
-        this.addEventListener( this.Window, 'dragleave', function(e) { hImageTweak.OnDragExitWindow(e); }, false );
-        this.addEventListener( this.Window, 'dragover', function(e) { hImageTweak.OnDragOverWindow(e); }, false ); // WTF!!!!
-        this.addEventListener( this.Window, 'keyup', function(e) { hImageTweak.OnSelection(e); }, false ); 
-        this.addEventListener( this.Window, 'mouseup', function(e) { hImageTweak.OnSelection(e); }, false ); 
+		if ( this.IsImageDocument() ) {
+	        this.addEventListener( this.Document, 'DOMMouseScroll', function(e) { hImageTweak.OnMouseWheel(e); }, false );
+    	    this.addEventListener( this.Document, 'mousemove', function(e) { hImageTweak.OnMouseMove(e); }, false );
+        	this.addEventListener( this.Document, 'mouseup', function(e) { hImageTweak.OnMouseUp(e); }, true );
+	        this.addEventListener( this.Document, 'dblclick', function(e) { hImageTweak.OnDoubleClick(e); }, false );
+    	    this.addEventListener( this.Window, 'drag', function(e) { hImageTweak.OnDrag(e); }, false );
+        	this.addEventListener( this.Window, 'dragstart', function(e) { hImageTweak.OnDragStart(e); }, false );
+	        this.addEventListener( this.Window, 'dragend', function(e) { hImageTweak.OnDragEnd(e); }, false );
+    	    this.addEventListener( this.Window, 'dragenter', function(e) { hImageTweak.OnDragEnterWindow(e); }, false );
+        	this.addEventListener( this.Window, 'dragleave', function(e) { hImageTweak.OnDragExitWindow(e); }, false );
+	        this.addEventListener( this.Window, 'dragover', function(e) { hImageTweak.OnDragOverWindow(e); }, false ); // WTF!!!!
+    	    this.addEventListener( this.Window, 'keyup', function(e) { hImageTweak.OnSelection(e); }, false ); 
+        	this.addEventListener( this.Window, 'mouseup', function(e) { hImageTweak.OnSelection(e); }, false ); 
+		}
         // go! go! go!
         this.Inited = true;
         this.Repaint();
