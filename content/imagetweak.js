@@ -45,8 +45,8 @@ const ImageTweakHelper = {
         browser.selectedTab = browser.addTab(url);
     },
 
-    enabled: function() {
-        return true;
+    enabled: function(doc) {
+        return doc ? ImageTweakHelper.enabledForDocument(doc) : true;
     },
         
     enabledForDocument: function(doc) {
