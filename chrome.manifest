@@ -10,9 +10,10 @@ locale  imagetweak fr    locale/fr/
 locale  imagetweak it-IT locale/it-IT/
 locale  imagetweak ja-JP locale/ja-JP/
 locale  imagetweak nl    locale/nl/
-locale  imagetweak pl-PL locale/pl-PL/
+locale  imagetweak pl    locale/pl/
 locale  imagetweak pt-BR locale/pt-BR/
 locale  imagetweak ro-RO locale/ro-RO/
+locale  imagetweak ru    locale/ru/
 locale  imagetweak ru-RU locale/ru-RU/
 locale  imagetweak sk-SK locale/sk-SK/
 locale  imagetweak sr    locale/sr/

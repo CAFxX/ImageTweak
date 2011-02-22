@@ -1,0 +1,35 @@
+<!ENTITY pref.window.title "ImageTweak - Настройки">
+<!ENTITY pref.prefpane.label "Настройки отображения изображения">
+<!ENTITY pref.bgcolor.label "Цвет фона">
+<!ENTITY pref.autoresize.label "Автоматически изменять масштаб изображения при загрузке">
+<!ENTITY pref.clip_movement.label "Ограничить зону перемещения изображения">
+<!ENTITY pref.zoomexp.label "Коэффициент изменения масштаба">
+<!ENTITY pref.zoomonpointer.label "Масштабировать к курсору мыши">
+<!ENTITY pref.zoomtype.label "Включённые типы масштабирования">
+<!ENTITY pref.zoomtype.default.label "Тип масштабирования по умолчанию">
+<!ENTITY pref.zoomtype.full.label "По высоте">
+<!ENTITY pref.zoomtype.fill.label "По ширине">
+<!ENTITY pref.zoomtype.free.label "Свободный режим">
+<!ENTITY pref.zoomtype.unscaled.label "Оригинальный размер">
+<!ENTITY pref.shortcut.label "Включить горячие клавиши(ctrl + пкм)">
+<!ENTITY pref.shortcut.img.label "Для изображений(IMG)">
+<!ENTITY pref.shortcut.bg.label "Для фоновых изображений">
+<!ENTITY pref.invertmousewheel.label "Инвертировать направление колёсика мыши при увеличении">
+<!ENTITY pref.invertkeyboard.label "Инвертировать клавиатурное управление">
+<!ENTITY pref.startfromtopleft.label "Отображать изображения в левом верхнем углу">
+<!ENTITY pref.bgcolor.tooltip "Установить цвет фона используемого при показе изображений">
+<!ENTITY pref.autoresize.tooltip "Автоматически изменять масштаб изображений больших, чем размеры окна, во время загрузки">
+<!ENTITY pref.clip_movement.tooltip "Разрешить перемещать изображение только в границах окна">
+<!ENTITY pref.zoomexp.tooltip "Коэффициент изменения масштаба(200&#37; означает изменение изображения в два раза/в половину за каждый шаг масштабирования)">
+<!ENTITY pref.zoomonpointer.tooltip "Масштабирование относительно положения курсора мыши(во время использования колёсика мыши)">
+<!ENTITY pref.zoomtype.full.tooltip "Включить отображение по высоте окна по двойному клику">
+<!ENTITY pref.zoomtype.fill.tooltip "Включить отображение по ширине окна по двойному клику">
+<!ENTITY pref.zoomtype.free.tooltip "Включить свободный режим(возможность масштабирования и перемещения) по двойному клику">
+<!ENTITY pref.zoomtype.unscaled.tooltip "Включить отображение немасштабированного по двойному клику">
+<!ENTITY pref.shortcut.img.tooltip "Включить горячую клавишу для изображений на веб-странице">
+<!ENTITY pref.shortcut.bg.tooltip "Включить горячую клавишу для фоновых изображений на веб-странице">
+<!ENTITY pref.invertmousewheel.tooltip "Инвертировать направление колёсика мыши при увеличении">
+<!ENTITY pref.invertkeyboard.tooltip "Инвертировать направление стрелок для прокрутки">
+<!ENTITY pref.startfromtopleft.tooltip "Отображение изображения в левом верхнем углу, если оно больше размеров окна">
+<!ENTITY pref.pressf1forhelp.label "Нажмите F1 для онлайн-справки">
+<!ENTITY about.window.title "ImageTweak - О дополнении">

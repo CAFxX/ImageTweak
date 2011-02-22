@@ -6,9 +6,9 @@
 <!ENTITY pref.zoomexp.label "Масштаб (&#37;)">
 <!ENTITY pref.zoomonpointer.label "Zoom on mouse pointer">
 <!ENTITY pref.zoomtype.label "Enabled zoom types">
-<!ENTITY pref.zoomtype.default.label "Default zoom type">
-<!ENTITY pref.zoomtype.full.label "Fit to window">
-<!ENTITY pref.zoomtype.fill.label "Fill window">
+<!ENTITY pref.zoomtype.default.label "Типовий тип масштабування">
+<!ENTITY pref.zoomtype.full.label "Вписати у вікно">
+<!ENTITY pref.zoomtype.fill.label "Заповнити вікно">
 <!ENTITY pref.zoomtype.free.label "Довільний режим">
 <!ENTITY pref.zoomtype.unscaled.label "1:1">
 <!ENTITY pref.shortcut.label "Enabled shortcuts (ctrl+rightclick)">
@@ -17,7 +17,7 @@
 <!ENTITY pref.invertmousewheel.label "Invert the mousewheel zoom direction">
 <!ENTITY pref.invertkeyboard.label "Invert the keyboard navigation">
 <!ENTITY pref.startfromtopleft.label "Place image at top left">
-<!ENTITY pref.bgcolor.tooltip "Set the background color used when displaying images">
+<!ENTITY pref.bgcolor.tooltip "Set the background color used when displaying images (CSS color or percentage, 0&#37; being black and 100&#37; being white)">
 <!ENTITY pref.autoresize.tooltip "Automatically resize images bigger than the window to fit upon loading">
 <!ENTITY pref.clip_movement.tooltip "Allow the image to be moved only within the window">
 <!ENTITY pref.zoomexp.tooltip "Zoom step factor (200&#37; means to double/halve at each step)">
