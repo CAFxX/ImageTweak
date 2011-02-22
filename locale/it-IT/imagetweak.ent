@@ -17,7 +17,7 @@
 <!ENTITY pref.invertmousewheel.label "Inverti la direzione di zoom da mouse">
 <!ENTITY pref.invertkeyboard.label "Inverti la navigazione da tastiera">
 <!ENTITY pref.startfromtopleft.label "Immagine in alto a destra">
-<!ENTITY pref.bgcolor.tooltip "Imposta il colore di sfondo utilizzato quando vengono visualizzate le immagini">
+<!ENTITY pref.bgcolor.tooltip "Imposta il colore di sfondo utilizzato quando vengono visualizzate le immagini (colore CSS o percentuale, dove 0&#37; é nero e 100&#37; é bianco)">
 <!ENTITY pref.autoresize.tooltip "Se una immagine é più larga della finestra verrà inizialmente visualizzata ridimensionata">
 <!ENTITY pref.clip_movement.tooltip "Permette il movimento dell&apos;immagine solo all&apos;interno della finestra">
 <!ENTITY pref.zoomexp.tooltip "Fattore del passo di zoom (es. 200&#37; raddoppia/dimezza ad ogni passo)">

@@ -80,6 +80,15 @@ const ImageTweakHelper = {
 			}
 			hWindow.document.ImageTweak.PluginEventListeners();
 		}
+	},
+	
+	parseColorExtended: function(v) {
+		var match = /([0-9]*([.,][0-9]*)?)\s*%/.exec(v);
+		if (match) {
+			var L = ImageTweakHelper.clip( Math.round( parseFloat(match[1]) / 100 * 255 ), 0, 255 );
+			return "rgb("+L+","+L+","+L+")";
+		} 
+		return v;
 	}
 };
 
@@ -120,24 +129,24 @@ function ImageTweak( hWindow ) {
 // this structure holds informations about the preferences used by ImageTweak
 // see ImageTweak.GetPref for further informations
 ImageTweak.prototype.Preferences = {
-    AutomaticResizing:              { pref: "browser.enable_automatic_image_resizing"                                                                                                               },
-    ZoomTypeFitEnabled:             { pref: "extensions.imagetweak.zoomtype.full"                                                                                                                   }, // originally called "ZoomTypeFullEnabled"
-    ZoomTypeFillEnabled:            { pref: "extensions.imagetweak.zoomtype.fill"                                                                                                                   },
-    ZoomTypeFreeEnabled:            { pref: "extensions.imagetweak.zoomtype.free"                                                                                                                   },
-    ZoomTypeUnscaledEnabled:        { pref: "extensions.imagetweak.zoomtype.unscaled"                                                                                                               },
-    DefaultZoomType:                { pref: "extensions.imagetweak.zoomtype.default"                                                                                                                },
-    ClipMovement:                   { pref: "extensions.imagetweak.clip_movement"                                                                                                                   },
-    BackgroundColor:                { pref: "extensions.imagetweak.bgcolor"                                                                                                                         },
-    BorderColor:                    { pref: "extensions.imagetweak.bordercolor"                                                                                                                     },
-    ZoomFactor:                     { pref: "extensions.imagetweak.zoomexp2",                       parse: function(v) { return parseFloat(v)/100.0; }                                              },
-    ShortcutImg:                    { pref: "extensions.imagetweak.shortcut.img"                                                                                                                    },
-    ShortcutBg:                     { pref: "extensions.imagetweak.shortcut.bg"                                                                                                                     },
-    ZoomOnPointer:                  { pref: "extensions.imagetweak.zoomonpointer"                                                                                                                   },
-    InvertMouseWheel:               { pref: "extensions.imagetweak.invertmousewheel"                                                                                                                },
-    InvertKeyboard:                 { pref: "extensions.imagetweak.invertkeyboard"                                                                                                                  },
-    StartFromTopLeft:               { pref: "extensions.imagetweak.startfromtopleft"                                                                                                                },
-    Scrolling:                      { pref: "general.autoScroll"                                                                                                                                    },
-    LegacyScrolling:                { pref: "extensions.imagetweak.legacyscrolling"                                                                                                                 },
+    AutomaticResizing:              { pref: "browser.enable_automatic_image_resizing"                                                                    },
+    ZoomTypeFitEnabled:             { pref: "extensions.imagetweak.zoomtype.full"                                                                        }, // originally called "ZoomTypeFullEnabled"
+    ZoomTypeFillEnabled:            { pref: "extensions.imagetweak.zoomtype.fill"                                                                        },
+    ZoomTypeFreeEnabled:            { pref: "extensions.imagetweak.zoomtype.free"                                                                        },
+    ZoomTypeUnscaledEnabled:        { pref: "extensions.imagetweak.zoomtype.unscaled"                                                                    },
+    DefaultZoomType:                { pref: "extensions.imagetweak.zoomtype.default"                                                                     },
+    ClipMovement:                   { pref: "extensions.imagetweak.clip_movement"                                                                        },
+    BackgroundColor:                { pref: "extensions.imagetweak.bgcolor",                        parse: ImageTweakHelper.parseColorExtended           },
+    BorderColor:                    { pref: "extensions.imagetweak.bordercolor",                    parse: ImageTweakHelper.parseColorExtended           },
+    ZoomFactor:                     { pref: "extensions.imagetweak.zoomexp2",                       parse: function(v) { return parseFloat(v)/100.0; }   },
+    ShortcutImg:                    { pref: "extensions.imagetweak.shortcut.img"                                                                         },
+    ShortcutBg:                     { pref: "extensions.imagetweak.shortcut.bg"                                                                          },
+    ZoomOnPointer:                  { pref: "extensions.imagetweak.zoomonpointer"                                                                        },
+    InvertMouseWheel:               { pref: "extensions.imagetweak.invertmousewheel"                                                                     },
+    InvertKeyboard:                 { pref: "extensions.imagetweak.invertkeyboard"                                                                       },
+    StartFromTopLeft:               { pref: "extensions.imagetweak.startfromtopleft"                                                                     },
+    Scrolling:                      { pref: "general.autoScroll"                                                                                         },
+    LegacyScrolling:                { pref: "extensions.imagetweak.legacyscrolling"                                                                      },
 };
 
 // compute the current coordinates of the image (such as width, height, top, left, etc) using the parameters specified in the ImageTweak object

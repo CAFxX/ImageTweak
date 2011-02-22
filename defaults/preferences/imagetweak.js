@@ -1,8 +1,8 @@
 /*
- Default preferences for ImageTweak
- */
+	Default preferences for ImageTweak
+*/
 
-pref("extensions.imagetweak.bgcolor", "#333333");
+pref("extensions.imagetweak.bgcolor", "20%");
 pref("extensions.imagetweak.zoomexp2", "200");
 pref("extensions.imagetweak.zoomtype.full", true);
 pref("extensions.imagetweak.zoomtype.unscaled", true);
