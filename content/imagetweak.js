@@ -31,7 +31,7 @@ const ImageTweakHelper = {
 
     // clips value to min < value < max
     clip: function(value, min, max) {
-        if ( max == undefined ) {
+        if ( typeof max == "undefined" ) {
             max = Math.abs(min);
             min = -min;
         }
@@ -50,7 +50,7 @@ const ImageTweakHelper = {
     },
         
     enabledForDocument: function(doc) {
-        return typeof( doc.ImageTweak.Image ) != "undefined";
+        return typeof doc.ImageTweak.Image != "undefined";
     },
 	
 	// ImageTweakHelper.entryPoint is the global entry point for imagetweak
@@ -433,7 +433,7 @@ ImageTweak.prototype.PerformZoom = function PerformZoom(delta, px, py) {
     if ( imgZoomNew <= this.ZoomMax ) {
         var imgZoomRatio = imgZoomNew / this.Zoom;
         var imgZoomDirRatio = imgZoomRatio * ( delta < 0 ? -1 : 1 );
-        if ( px != undefined && this.GetPref("ZoomOnPointer") && imgZoomNew >= this.FitZoom() ) {
+        if ( typeof px != "undefined" && this.GetPref("ZoomOnPointer") && imgZoomNew >= this.FitZoom() ) {
             this.CenterX = px - this.Window.innerWidth / 2 + (this.CenterX + this.Window.innerWidth / 2 - px) * imgZoomRatio;
             this.CenterY = py - this.Window.innerHeight / 2 + (this.CenterY + this.Window.innerHeight / 2 - py) * imgZoomRatio;
         } else {
@@ -544,10 +544,10 @@ ImageTweak.prototype.ZoomTypes = {
 };
 
 ImageTweak.prototype.PerformZoomTypeSwitch = function PerformZoomTypeSwitch( imgZoomType, SkipCondition ) {
-    if ( imgZoomType == undefined ) {
+    if ( typeof imgZoomType == "undefined" ) {
         imgZoomType = this.ZoomTypes[ this.ZoomType ].next;
         SkipCondition = false;
-    } else if ( SkipCondition == undefined ) {
+    } else if ( typeof SkipCondition == "undefined" ) {
         SkipCondition = true;
     } else {
         SkipCondition = false;
