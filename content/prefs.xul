@@ -22,6 +22,7 @@
 			while (document.getElementById("imagetweak_zoomtype_default_radiogroup").selectedItem.disabled) {
 				document.getElementById("imagetweak_zoomtype_default_radiogroup").selectedIndex = (document.getElementById("imagetweak_zoomtype_default_radiogroup").selectedIndex + 1) % 3;
 			}
+			document.getElementById("imagetweak_bgcolor_colorpicker").color = ImageTweakHelper.parseColorExtended(document.getElementById("imagetweak_bgcolor_textbox").value);
 		}
 
 		function ImageTweakInitPrefPane() {
@@ -30,13 +31,19 @@
 					prefs[i].onchange = ImageTweakValidatePref;
 			}
 			ImageTweakValidatePref();
+			
+			document.getElementById("imagetweak_bgcolor_colorpicker").onchange = function() {
+				var textbox = document.getElementById("imagetweak_bgcolor_textbox");
+				textbox.value = this.color;
+				document.getElementById("imagetweak_preferences").fireChangedEvent(textbox);
+			};
 		}
 	]]></script>
 	<prefpane label="&pref.prefpane.label;" image="chrome://imagetweak/skin/imagetweak.png" onpaneload="ImageTweakInitPrefPane()">
 		<keyset>
 			<key keycode="VK_F1" oncommand="ImageTweakHelper.browse('https://github.com/CAFxX/ImageTweak/wiki/ImageTweak-user-guide');" />
 		</keyset>
-		<preferences>
+		<preferences id="imagetweak_preferences">
 			<preference id="imagetweak_bgcolor" name="extensions.imagetweak.bgcolor" type="string"/>
 			<preference id="imagetweak_zoomexp" name="extensions.imagetweak.zoomexp2" type="string"/>
 			<preference id="imagetweak_autoresize" name="browser.enable_automatic_image_resizing" type="bool"/>
@@ -58,8 +65,8 @@
 				<vbox>
 					<hbox align="center">
 						<label value="&pref.bgcolor.label;" flex="1" control="imagetweak_bgcolor_textbox" tooltiptext="&pref.bgcolor.tooltip;"/>
-						<colorpicker type="button" id="imagetweak_bgcolor_colorpicker" onchange="document.getElementById('imagetweak_bgcolor_textbox').value = this.color;"/>
-						<textbox preference="imagetweak_bgcolor" width="100px" id="imagetweak_bgcolor_textbox" tooltiptext="&pref.bgcolor.tooltip;" onchange="document.getElementById('imagetweak_bgcolor_colorpicker').color = ImageTweakHelper.parseColorExtended(this.value);"/>
+						<colorpicker type="button" id="imagetweak_bgcolor_colorpicker"/>
+						<textbox preference="imagetweak_bgcolor" width="100px" id="imagetweak_bgcolor_textbox" tooltiptext="&pref.bgcolor.tooltip;"/>
 					</hbox>
 					<hbox align="center">
 						<label value="&pref.zoomexp.label;" flex="1" control="imagetweak_zoomexp_textbox" tooltiptext="&pref.zoomexp.tooltip;"/>
