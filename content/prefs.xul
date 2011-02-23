@@ -58,7 +58,8 @@
 				<vbox>
 					<hbox align="center">
 						<label value="&pref.bgcolor.label;" flex="1" control="imagetweak_bgcolor_textbox" tooltiptext="&pref.bgcolor.tooltip;"/>
-						<textbox preference="imagetweak_bgcolor" width="100px" id="imagetweak_bgcolor_textbox" tooltiptext="&pref.bgcolor.tooltip;"/>
+						<colorpicker type="button" id="imagetweak_bgcolor_colorpicker" onchange="document.getElementById('imagetweak_bgcolor_textbox').value = this.color;"/>
+						<textbox preference="imagetweak_bgcolor" width="100px" id="imagetweak_bgcolor_textbox" tooltiptext="&pref.bgcolor.tooltip;" onchange="document.getElementById('imagetweak_bgcolor_colorpicker').color = ImageTweakHelper.parseColorExtended(this.value);"/>
 					</hbox>
 					<hbox align="center">
 						<label value="&pref.zoomexp.label;" flex="1" control="imagetweak_zoomexp_textbox" tooltiptext="&pref.zoomexp.tooltip;"/>
