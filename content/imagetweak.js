@@ -247,31 +247,31 @@ ImageTweak.prototype.OnResize = function OnResize(event) {
 };
 
 ImageTweak.prototype.OnDragStart = function OnDragStart(event) {
-	this.Dragging = true;
-	event.dataTransfer.setData("text/uri-list", this.Image.URL);
-	event.dataTransfer.setData("text/plain", this.Image.URL);
-	this.Document.body.style.cursor = "move";
-	this.ClientXDrag = this.ClientXPrev;
-	this.ClientYDrag = this.ClientYPrev;
+    this.Dragging = true;
+    event.dataTransfer.setData("text/uri-list", this.Image.URL);
+    event.dataTransfer.setData("text/plain", this.Image.URL);
+    this.Document.body.style.cursor = "move";
+    this.ClientXDrag = this.ClientXPrev;
+    this.ClientYDrag = this.ClientYPrev;
 };
 
 ImageTweak.prototype.OnDragEnd = function OnDragEnd(event) {
-	this.Dragging = false;
-	this.Document.body.style.cursor = "auto";
+    this.Dragging = false;
+    this.Document.body.style.cursor = "auto";
 };
 
 ImageTweak.prototype.OnDrag = function OnDrag(event) {
-	this.PerformMove( this.ClientXDrag - this.ClientXPrev, this.ClientYDrag - this.ClientYPrev );
+    this.PerformMove( this.ClientXDrag - this.ClientXPrev, this.ClientYDrag - this.ClientYPrev );
     this.ClientXPrev = this.ClientXDrag;
     this.ClientYPrev = this.ClientYDrag;
 };
 
 ImageTweak.prototype.OnDragEnterWindow = function OnDragEnterWindow(event) {
-	event.dataTransfer.effectAllowed = "none";
+    event.dataTransfer.effectAllowed = "none";
 };
 
 ImageTweak.prototype.OnDragExitWindow = function OnDragExitWindow(event) {
-	event.dataTransfer.effectAllowed = "all";
+    event.dataTransfer.effectAllowed = "all";
 };
 
 ImageTweak.prototype.OnDragOverWindow = function OnDragOverWindow(event) {
@@ -584,8 +584,8 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
         if ( this.TimeoutHandle != null )
             clearTimeout( this.TimeoutHandle );
         this.TimeoutHandle = setTimeout( function() { 
-			hImageTweak.PluginEventListeners(); 
-		}, 50 );
+            hImageTweak.PluginEventListeners(); 
+        }, 50 );
     } else {
         // disable all automatic_image_resizing-related behaviours
         this.Document.restoreImage();
