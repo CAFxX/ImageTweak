@@ -3,8 +3,8 @@
         ImageTweak
         2006-2010 CAFxX
         http://cafxx.strayorange.com
-		
-		Suggestions? Bug reports? Send them to imagetweak@cafxx.strayorange.com.
+        
+        Suggestions? Bug reports? Send them to imagetweak@cafxx.strayorange.com.
 
         LICENSE
                 This program is free software: you can redistribute it and/or modify
@@ -52,44 +52,44 @@ const ImageTweakHelper = {
     enabledForDocument: function(doc) {
         return typeof doc.ImageTweak.Image != "undefined";
     },
-	
-	// ImageTweakHelper.entryPoint is the global entry point for imagetweak
-	// This function is called from overlay.xul
-	entryPoint: function() {
-		gBrowser.addEventListener("load", ImageTweakHelper.startEventHandler, true);
-		gBrowser.addEventListener("focus", ImageTweakHelper.startEventHandler, true);
-		gBrowser.addEventListener("DOMContentLoaded", ImageTweakHelper.startEventHandler, true);
-		gBrowser.addEventListener("DOMFrameContentLoaded", ImageTweakHelper.startEventHandler, true);
-		gBrowser.tabContainer.addEventListener("TabOpen", ImageTweakHelper.startEventHandler, true);
-	},
-	
-	// startEventHandler handles all the pageload, tabopen, tabfocus, etc. events registered in entryPoint
-	startEventHandler: function(e) {
-		var hWindow;
-		// find the handle to the window where the event occurred
-		if ( e.originalTarget && e.originalTarget.defaultView )
-			hWindow = e.originalTarget.defaultView;
-		else if ( e.originalTarget && e.originalTarget.contentWindow )
-			hWindow = e.originalTarget.contentWindow;
-		else if ( e.target && e.target.linkedBrowser && e.target.linkedBrowser.contentWindow )
-			hWindow = e.target.linkedBrowser.contentWindow;
-		// if we found it, start ImageTweak
-		if ( hWindow && hWindow.document ) {
-			if ( !hWindow.document.ImageTweak ) {
-				hWindow.document.ImageTweak = new ImageTweak( hWindow );
-			}
-			hWindow.document.ImageTweak.PluginEventListeners();
-		}
-	},
-	
-	parseColorExtended: function(v) {
-		var match = /([0-9]*([.,][0-9]*)?)\s*%/.exec(v);
-		if (match) {
-			var L = ImageTweakHelper.clip( Math.round( parseFloat(match[1]) / 100 * 255 ), 0, 255 );
-			return "rgb("+L+","+L+","+L+")";
-		} 
-		return v;
-	}
+    
+    // ImageTweakHelper.entryPoint is the global entry point for imagetweak
+    // This function is called from overlay.xul
+    entryPoint: function() {
+        gBrowser.addEventListener("load", ImageTweakHelper.startEventHandler, true);
+        gBrowser.addEventListener("focus", ImageTweakHelper.startEventHandler, true);
+        gBrowser.addEventListener("DOMContentLoaded", ImageTweakHelper.startEventHandler, true);
+        gBrowser.addEventListener("DOMFrameContentLoaded", ImageTweakHelper.startEventHandler, true);
+        gBrowser.tabContainer.addEventListener("TabOpen", ImageTweakHelper.startEventHandler, true);
+    },
+    
+    // startEventHandler handles all the pageload, tabopen, tabfocus, etc. events registered in entryPoint
+    startEventHandler: function(e) {
+        var hWindow;
+        // find the handle to the window where the event occurred
+        if ( e.originalTarget && e.originalTarget.defaultView )
+            hWindow = e.originalTarget.defaultView;
+        else if ( e.originalTarget && e.originalTarget.contentWindow )
+            hWindow = e.originalTarget.contentWindow;
+        else if ( e.target && e.target.linkedBrowser && e.target.linkedBrowser.contentWindow )
+            hWindow = e.target.linkedBrowser.contentWindow;
+        // if we found it, start ImageTweak
+        if ( hWindow && hWindow.document ) {
+            if ( !hWindow.document.ImageTweak ) {
+                hWindow.document.ImageTweak = new ImageTweak( hWindow );
+            }
+            hWindow.document.ImageTweak.PluginEventListeners();
+        }
+    },
+    
+    parseColorExtended: function(v) {
+        var match = /([0-9]*([.,][0-9]*)?)\s*%/.exec(v);
+        if (match) {
+            var L = ImageTweakHelper.clip( Math.round( parseFloat(match[1]) / 100 * 255 ), 0, 255 );
+            return "rgb("+L+","+L+","+L+")";
+        } 
+        return v;
+    }
 };
 
 /***********************************************************************************************************************************************************/
@@ -247,43 +247,31 @@ ImageTweak.prototype.OnResize = function OnResize(event) {
 };
 
 ImageTweak.prototype.OnDragStart = function OnDragStart(event) {
-    // if ( event.button == 0 ) {
-        this.Dragging = true;
-        //event.dataTransfer.mozSetDataAt("image/png", this.Image, 0);
-        //event.dataTransfer.mozSetDataAt("application/x-moz-file", this.Image, 0);
-        event.dataTransfer.setData("text/uri-list", this.Image.URL);
-        event.dataTransfer.setData("text/plain", this.Image.URL);
-        this.Document.body.style.cursor = "move";
-        this.ClientXDrag = this.ClientXPrev;
-        this.ClientYDrag = this.ClientYPrev;
-    // }
+	this.Dragging = true;
+	event.dataTransfer.setData("text/uri-list", this.Image.URL);
+	event.dataTransfer.setData("text/plain", this.Image.URL);
+	this.Document.body.style.cursor = "move";
+	this.ClientXDrag = this.ClientXPrev;
+	this.ClientYDrag = this.ClientYPrev;
 };
 
 ImageTweak.prototype.OnDragEnd = function OnDragEnd(event) {
-    // if ( event.button == 0 ) {
-        this.Dragging = false;
-        this.Document.body.style.cursor = "auto";
-    // }
+	this.Dragging = false;
+	this.Document.body.style.cursor = "auto";
 };
 
 ImageTweak.prototype.OnDrag = function OnDrag(event) {
-    // if ( this.Dragging && this.ClientXPrev != null ) {
-        this.PerformMove( this.ClientXDrag - this.ClientXPrev, this.ClientYDrag - this.ClientYPrev );
-    // }
+	this.PerformMove( this.ClientXDrag - this.ClientXPrev, this.ClientYDrag - this.ClientYPrev );
     this.ClientXPrev = this.ClientXDrag;
     this.ClientYPrev = this.ClientYDrag;
 };
 
 ImageTweak.prototype.OnDragEnterWindow = function OnDragEnterWindow(event) {
-    // if ( event.button == 0 ) {
-        event.dataTransfer.effectAllowed = "none";
-    // }
+	event.dataTransfer.effectAllowed = "none";
 };
 
 ImageTweak.prototype.OnDragExitWindow = function OnDragExitWindow(event) {
-    // if ( event.button == 0 ) {
-        event.dataTransfer.effectAllowed = "all";
-    // }
+	event.dataTransfer.effectAllowed = "all";
 };
 
 ImageTweak.prototype.OnDragOverWindow = function OnDragOverWindow(event) {
@@ -325,9 +313,9 @@ ImageTweak.prototype.OnMouseWheel = function OnMouseWheel(event) {
     } else if ( ( this.GetPref( "LegacyScrolling" ) && event.ctrlKey ) || ( !this.GetPref( "LegacyScrolling" ) && !event.ctrlKey ) ) {
         var MoveDelta = ( event.detail > 0 ? 1 : -1 ) * ( this.GetPref( "InvertMouseWheel" ) ? 1 : -1 ) * Math.min( this.Window.innerWidth, this.Window.innerHeight ) / 10;
         if (event.axis == event.HORIZONTAL_AXIS)
-			this.PerformMove( MoveDelta, 0 );
-		else 
-			this.PerformMove( 0, MoveDelta );
+            this.PerformMove( MoveDelta, 0 );
+        else 
+            this.PerformMove( 0, MoveDelta );
         event.preventDefault();
     }
 };
@@ -362,8 +350,8 @@ ImageTweak.prototype.OnKeyPress = function OnKeyPress(event) {
             case 50: /* 2 */                        this.PerformZoomTypeSwitch( "fill" ); break;
             case 51: /* 3 */                        this.PerformZoomTypeSwitch( "pixel" ); break;
             case 52: /* 4 */                        this.PerformZoomTypeSwitch( "free" ); break;
-            case 34: /* page down */				this.PerformMove( 0, -MovePageDelta ); break;
-            case 33: /* page up */					this.PerformMove( 0, MovePageDelta ); break;
+            case 34: /* page down */                this.PerformMove( 0, -MovePageDelta ); break;
+            case 33: /* page up */                    this.PerformMove( 0, MovePageDelta ); break;
             default:                                EventIsHandled = false;
         }
     }
@@ -572,13 +560,13 @@ ImageTweak.prototype.GetElementImageURL = function GetElementImageURL(elem) {
 };
 
 ImageTweak.prototype.InjectContentFlag = function InjectContentFlag() {
-	// http://stackoverflow.com/questions/5089941/allow-content-documents-to-detect-my-firefox-addon
-	var s = new Components.utils.Sandbox(this.Window);
-	s.window = this.Window;
-	Components.utils.evalInSandbox(
-		"window.wrappedJSObject.navigator.__defineGetter__('imageViewer', function(){ return true; });", 
-		s
-	);
+    // http://stackoverflow.com/questions/5089941/allow-content-documents-to-detect-my-firefox-addon
+    var s = new Components.utils.Sandbox(this.Window);
+    s.window = this.Window;
+    Components.utils.evalInSandbox(
+        "window.wrappedJSObject.navigator.__defineGetter__('imageViewer', function(){ return true; });", 
+        s
+    );
 };
 
 ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
@@ -586,17 +574,18 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
     if ( this.Inited ) {
     } else if ( ( this.Document instanceof ImageDocument ) === false ) {
         // not a standalone image! so, what? let's plug in our supa-dupa source image click handler
-        this.Inited = true;
         this.Document.addEventListener( 'click', function(e) { hImageTweak.RegularDocumentOnMouseClick(e); }, false );
         this.Document.addEventListener( 'dblclick', function(e) { hImageTweak.RegularDocumentOnMouseDoubleClick(e); }, false );
-		// inject the navigator.imageViewer flag
-		this.InjectContentFlag();
+        // inject the navigator.imageViewer flag
+        this.InjectContentFlag();
+        this.Inited = true;
     } else if ( !this.Image.naturalWidth ) {
         // we are not ready yet... keep waiting...
-        if ( this.TimeoutHandle != null ) {
+        if ( this.TimeoutHandle != null )
             clearTimeout( this.TimeoutHandle );
-        }
-        this.TimeoutHandle = setTimeout( function() { hImageTweak.PluginEventListeners(); }, 50 );
+        this.TimeoutHandle = setTimeout( function() { 
+			hImageTweak.PluginEventListeners(); 
+		}, 50 );
     } else {
         // disable all automatic_image_resizing-related behaviours
         this.Document.restoreImage();
