@@ -21,7 +21,7 @@ You can contribute code to ImageTweak by sending patches or pull requests, a [li
 
 You can also help by [reporting bugs](http://github.com/CAFxX/ImageTweak/issues) (please, try to be as acccurate as possible by including your OS, browser version, extensions installed, plugins and exact steps to reproduce the bug: if I can't reproduce it, most likely I won't be able to fix it!), [suggesting new features](http://github.com/CAFxX/ImageTweak/wiki) or by [translating ImageTweak in your language](http://www.babelzilla.org/).
 
-## Extension compatibility
+## Detecting ImageTweak from other extensions (chrome code)
 Other extensions that wish to play nice with ImageTweak can use the following function to test for the presence of ImageTweak.
 
 	/* 
