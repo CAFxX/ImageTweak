@@ -10,15 +10,17 @@
 		<em:aboutURL>chrome://imagetweak/content/about.xul</em:aboutURL>
 		<em:optionsURL>chrome://imagetweak/content/prefs.xul</em:optionsURL>
 		<em:iconURL>chrome://imagetweak/skin/imagetweak32.png</em:iconURL>
-		<em:targetApplication><!-- Firefox/Iceweasel -->
+		<em:targetApplication>
 			<Description>
+				<!-- Firefox/Iceweasel -->
 				<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
 				<em:minVersion>3.5</em:minVersion>
-				<em:maxVersion>4.0b8pre</em:maxVersion>
+				<em:maxVersion>4.0.*</em:maxVersion>
 			</Description>
 		</em:targetApplication>
-		<em:targetApplication><!-- SeaMonkey -->
+		<em:targetApplication>
 			<Description>
+				<!-- SeaMonkey -->
 				<em:id>{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}</em:id>
 				<em:minVersion>2.0</em:minVersion>
 				<em:maxVersion>2.1b1</em:maxVersion>

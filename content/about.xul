@@ -18,7 +18,7 @@
 		<html:div id="imagetweak_about_title" style="font-weight: bold; font-size: large;">
 			ImageTweak
 		</html:div>
-		<text value="2006-2010 Carlo Alberto Ferraris (CAFxX)"/>
+		<text value="2006-2011 Carlo Alberto Ferraris (CAFxX)"/>
 		<separator class="thin"/>
 		<text class="link" onclick="ImageTweakHelper.browse('https://github.com/CAFxX/ImageTweak/wiki/ImageTweak-user-guide')" value="ImageTweak user guide"/>
 		<text class="link" onclick="ImageTweakHelper.browse('http://forums.mozillazine.org/viewtopic.php?p=3247649')" value="Support thread on MozillaZine.org"/>
