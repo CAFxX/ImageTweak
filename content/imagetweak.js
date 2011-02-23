@@ -118,14 +118,16 @@ ImageTweak.prototype.ScreenCoordinates = function ScreenCoordinates() {
 // It also updates the title displayed in the titlebar
 ImageTweak.prototype.Repaint = function Repaint() {
     var Coordinates = this.ScreenCoordinates();
-
+	var ShadowBlur = Math.sqrt( this.Window.innerWidth * this.Window.innerHeight ) / 50;
+	
     var CurCSS = "position:absolute;" +
             "border:"   + ( ImageTweak.getPref("BorderColor") != "" ? "1px solid " + ImageTweak.getPref("BorderColor") : "none" ) + ";" +
             "left:"     + Math.round(Coordinates.imgLeft)       + "px;" +
             "top:"      + Math.round(Coordinates.imgTop)        + "px;" +
             "width:"    + Math.round(Coordinates.imgWidth)      + "px;" +
             "height:"   + Math.round(Coordinates.imgHeight)     + "px;" +
-            "-moz-transform: rotate(" + this.Rotation + "deg);";
+            "-moz-transform: rotate(" + this.Rotation + "deg);" +
+			"-moz-box-shadow: 0 0 " + Math.round(ShadowBlur) + "px 0 black;";
     if ( this.Image.style.cssText != CurCSS ) this.Image.style.cssText = CurCSS;
 
     var CurTitleZoom = ", " + Math.round( Coordinates.CurZoom * 100 ) + "%";
