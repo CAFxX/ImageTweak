@@ -324,7 +324,10 @@ ImageTweak.prototype.OnMouseWheel = function OnMouseWheel(event) {
         event.preventDefault();
     } else if ( ( this.GetPref( "LegacyScrolling" ) && event.ctrlKey ) || ( !this.GetPref( "LegacyScrolling" ) && !event.ctrlKey ) ) {
         var MoveDelta = ( event.detail > 0 ? 1 : -1 ) * ( this.GetPref( "InvertMouseWheel" ) ? 1 : -1 ) * Math.min( this.Window.innerWidth, this.Window.innerHeight ) / 10;
-        this.PerformMove( 0, MoveDelta );
+        if (event.axis == event.HORIZONTAL_AXIS)
+			this.PerformMove( MoveDelta, 0 );
+		else 
+			this.PerformMove( 0, MoveDelta );
         event.preventDefault();
     }
 };
