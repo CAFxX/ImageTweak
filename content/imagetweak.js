@@ -571,6 +571,16 @@ ImageTweak.prototype.GetElementImageURL = function GetElementImageURL(elem) {
     return "";
 };
 
+ImageTweak.prototype.InjectContentFlag = function InjectContentFlag() {
+	// http://stackoverflow.com/questions/5089941/allow-content-documents-to-detect-my-firefox-addon
+	var s = new Components.utils.Sandbox(this.Window);
+	s.window = this.Window;
+	Components.utils.evalInSandbox(
+		"window.wrappedJSObject.navigator.__defineGetter__('imageViewer', function(){ return true; });", 
+		s
+	);
+};
+
 ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
     var hImageTweak = this;
     if ( this.Inited ) {
@@ -579,6 +589,8 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
         this.Inited = true;
         this.Document.addEventListener( 'click', function(e) { hImageTweak.RegularDocumentOnMouseClick(e); }, false );
         this.Document.addEventListener( 'dblclick', function(e) { hImageTweak.RegularDocumentOnMouseDoubleClick(e); }, false );
+		// inject the navigator.imageViewer flag
+		this.InjectContentFlag();
     } else if ( !this.Image.naturalWidth ) {
         // we are not ready yet... keep waiting...
         if ( this.TimeoutHandle != null ) {

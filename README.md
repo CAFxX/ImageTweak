@@ -39,4 +39,19 @@ Other extensions that wish to play nice with ImageTweak can use the following fu
 		}
 	}
 
+## Detecting ImageTweak from web pages (content code)
+Since version 0.21 ImageTweak injects the imageViewer flag in the navigator object. 
+Web pages that want to know if an advanced image viewer is available in the browser
+can query navigator.imageViewer:
+
+	if (navigator.imageViewer) {
+		// an advanced image viewer is available in the browser
+	} else {
+		// no advanced image viewer available
+	}
 	
+Please note that the flag does not contain any information about the name or version
+of the extension that is providing the image viewer.
+
+Websites may check for this flag to decide between using their custom image viewer 
+or letting the native image viewer do its job.
