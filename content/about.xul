@@ -3,76 +3,76 @@
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 
 <window class="dialog" title="&about.window.title;" orient="vertical" onload="ImageTweakInitAboutWindow()" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	<vbox align="start">
-		<html:style>
-			.link {
-				color: #0000FF;
-				text-decoration: none;
-				cursor: pointer;
-			}
-			.link:hover {
-				text-decoration: underline ;
-			}
-		</html:style>
-		<image src="chrome://imagetweak/skin/imagetweak48.png" width="48" height="48"/>
-		<html:div id="imagetweak_about_title" style="font-weight: bold; font-size: large;">
-			ImageTweak
-		</html:div>
-		<text value="2006-2011 Carlo Alberto Ferraris (CAFxX)"/>
-		<separator class="thin"/>
-		<text class="link" onclick="ImageTweakHelper.browse('https://github.com/CAFxX/ImageTweak/wiki/ImageTweak-user-guide')" value="ImageTweak user guide"/>
-		<text class="link" onclick="ImageTweakHelper.browse('http://forums.mozillazine.org/viewtopic.php?p=3247649')" value="Support thread on MozillaZine.org"/>
-		<text class="link" onclick="ImageTweakHelper.browse('https://addons.mozilla.org/en-US/firefox/addon/3683')" value="Extension page on addons.mozilla.org"/>
-		<text class="link" onclick="ImageTweakHelper.browse('http://cafxx.strayorange.com/ImageTweak')" value="ImageTweak homepage"/>
-		<text class="link" onclick="ImageTweakHelper.browse('http://github.com/CAFxX/ImageTweak')" value="ImageTweak GitHub repository"/>
-		<separator class="thin"/>
-		<hbox>
-			<vbox align="start">
-				<text style="font-weight: bold;" value="Translators"/>
-				<text value="Tuxman (de)"/>
-				<text value="CAFxX (en-US)"/>
-				<text value="papoo (fr)"/>
-				<text value="CAFxX (it-IT)"/>
-				<text value="drry (ja-JP)"/>
-				<text value="markh (nl)"/>
-				<text value="Wacław Jacek (pl-PL)"/>
-				<text value="humbertosartini (pt-BR)"/>
-				<text value="egaz (ru-RU)"/>
-				<text value="Holco (sk-SK)"/>
-				<text value="WangKing (zh-CN)"/>
-				<text value="toomore (zh-TW)"/>
-				<text value="MiK546 (fi-FI)"/>
-				<text value="chuzo (es-ES)"/>
-				<text value="Sappa (uk-UA)"/>
-				<text value="lord1980 (ar)"/>
-				<text value="kkmic (ro-RO)"/>
-				<text value="erkanyv (tr-TR)"/>
-				<text value="DakSrbija (sr)"/>
-				<text value="Lakrits (sv-SE)"/>
-			</vbox>
-			<vbox align="end">
-				<text style="font-weight: bold;" value="Thanks"/>
-				<text value="damien18"/>
-				<text value="DeathWolf"/>
-				<text value="Friar Tuck"/>
-				<text value="makondo"/>
-				<text value="max1million"/>
-				<text value="Tuxman"/>
-				<text value="wossName"/>
-				<text value=""/>
-				<text value="babelzilla.org"/>
-				<text value="mozillazine.org"/>
-			</vbox>
-		</hbox>
-	</vbox>
-	<script type="application/x-javascript" src="chrome://imagetweak/content/imagetweak.js" /> 
-	<script type="application/x-javascript">
-		function ImageTweakInitAboutWindow() {
-			document.getElementById("imagetweak_about_title").innerHTML += " " + 
-				Components.classes["@mozilla.org/extensions/manager;1"]
-					.getService(Components.interfaces.nsIExtensionManager)
-					.getItemForID("{DB2EA31C-58F5-48b7-8D60-CB0739257904}").version;
-			sizeToContent();
-		};
-	</script>
+    <vbox align="start">
+        <html:style>
+            .link {
+                color: #0000FF;
+                text-decoration: none;
+                cursor: pointer;
+            }
+            .link:hover {
+                text-decoration: underline ;
+            }
+        </html:style>
+        <image src="chrome://imagetweak/skin/imagetweak48.png" width="48" height="48"/>
+        <html:div id="imagetweak_about_title" style="font-weight: bold; font-size: large;">
+            ImageTweak
+        </html:div>
+        <text value="2006-2011 Carlo Alberto Ferraris (CAFxX)"/>
+        <separator class="thin"/>
+        <text class="link" onclick="ImageTweakHelper.browse('https://github.com/CAFxX/ImageTweak/wiki/ImageTweak-user-guide')" value="ImageTweak user guide"/>
+        <text class="link" onclick="ImageTweakHelper.browse('http://forums.mozillazine.org/viewtopic.php?p=3247649')" value="Support thread on MozillaZine.org"/>
+        <text class="link" onclick="ImageTweakHelper.browse('https://addons.mozilla.org/en-US/firefox/addon/3683')" value="Extension page on addons.mozilla.org"/>
+        <text class="link" onclick="ImageTweakHelper.browse('http://cafxx.strayorange.com/ImageTweak')" value="ImageTweak homepage"/>
+        <text class="link" onclick="ImageTweakHelper.browse('http://github.com/CAFxX/ImageTweak')" value="ImageTweak GitHub repository"/>
+        <separator class="thin"/>
+        <hbox>
+            <vbox align="start">
+                <text style="font-weight: bold;" value="Translators"/>
+                <text value="Tuxman (de)"/>
+                <text value="CAFxX (en-US)"/>
+                <text value="papoo (fr)"/>
+                <text value="CAFxX (it-IT)"/>
+                <text value="drry (ja-JP)"/>
+                <text value="markh (nl)"/>
+                <text value="Wacław Jacek (pl-PL)"/>
+                <text value="humbertosartini (pt-BR)"/>
+                <text value="egaz (ru-RU)"/>
+                <text value="Holco (sk-SK)"/>
+                <text value="WangKing (zh-CN)"/>
+                <text value="toomore (zh-TW)"/>
+                <text value="MiK546 (fi-FI)"/>
+                <text value="chuzo (es-ES)"/>
+                <text value="Sappa (uk-UA)"/>
+                <text value="lord1980 (ar)"/>
+                <text value="kkmic (ro-RO)"/>
+                <text value="erkanyv (tr-TR)"/>
+                <text value="DakSrbija (sr)"/>
+                <text value="Lakrits (sv-SE)"/>
+            </vbox>
+            <vbox align="end">
+                <text style="font-weight: bold;" value="Thanks"/>
+                <text value="damien18"/>
+                <text value="DeathWolf"/>
+                <text value="Friar Tuck"/>
+                <text value="makondo"/>
+                <text value="max1million"/>
+                <text value="Tuxman"/>
+                <text value="wossName"/>
+                <text value=""/>
+                <text value="babelzilla.org"/>
+                <text value="mozillazine.org"/>
+            </vbox>
+        </hbox>
+    </vbox>
+    <script type="application/x-javascript" src="chrome://imagetweak/content/imagetweak.js" /> 
+    <script type="application/x-javascript">
+        function ImageTweakInitAboutWindow() {
+            document.getElementById("imagetweak_about_title").innerHTML += " " + 
+                Components.classes["@mozilla.org/extensions/manager;1"]
+                    .getService(Components.interfaces.nsIExtensionManager)
+                    .getItemForID("{DB2EA31C-58F5-48b7-8D60-CB0739257904}").version;
+            sizeToContent();
+        };
+    </script>
 </window>
