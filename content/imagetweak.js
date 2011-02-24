@@ -22,77 +22,6 @@
 
 ************************************************************************************************************************************************************/
 
-const ImageTweakHelper = {
-    // shamelessly taken from mozilla/browser/base/content/nsContextMenu.js
-    getComputedURL: function(aElem, aProp) {
-        var url = aElem.ownerDocument.defaultView.getComputedStyle(aElem, "").getPropertyCSSValue(aProp)[0]; // FIXME: what's the [0] for?!?!
-        return url.primitiveType == CSSPrimitiveValue.CSS_URI ? url.getStringValue() : null;
-    },
-
-    // clips value to min < value < max
-    clip: function(value, min, max) {
-        if ( typeof max == "undefined" ) {
-            max = Math.abs(min);
-            min = -min;
-        }
-        return Math.min( max, Math.max( value, min ) );
-    },
-
-    // opens a new tab and browse to the specified URL
-    browse: function(url) {
-        var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
-        var browser = wm.getMostRecentWindow("navigator:browser").getBrowser();
-        browser.selectedTab = browser.addTab(url);
-    },
-
-    enabled: function(doc) {
-        return doc ? ImageTweakHelper.enabledForDocument(doc) : true;
-    },
-        
-    enabledForDocument: function(doc) {
-        return typeof doc.ImageTweak.Image != "undefined";
-    },
-    
-    // ImageTweakHelper.entryPoint is the global entry point for imagetweak
-    // This function is called from overlay.xul
-    entryPoint: function() {
-        gBrowser.addEventListener("load", ImageTweakHelper.startEventHandler, true);
-        gBrowser.addEventListener("focus", ImageTweakHelper.startEventHandler, true);
-        gBrowser.addEventListener("DOMContentLoaded", ImageTweakHelper.startEventHandler, true);
-        gBrowser.addEventListener("DOMFrameContentLoaded", ImageTweakHelper.startEventHandler, true);
-        gBrowser.tabContainer.addEventListener("TabOpen", ImageTweakHelper.startEventHandler, true);
-    },
-    
-    // startEventHandler handles all the pageload, tabopen, tabfocus, etc. events registered in entryPoint
-    startEventHandler: function(e) {
-        var hWindow;
-        // find the handle to the window where the event occurred
-        if ( e.originalTarget && e.originalTarget.defaultView )
-            hWindow = e.originalTarget.defaultView;
-        else if ( e.originalTarget && e.originalTarget.contentWindow )
-            hWindow = e.originalTarget.contentWindow;
-        else if ( e.target && e.target.linkedBrowser && e.target.linkedBrowser.contentWindow )
-            hWindow = e.target.linkedBrowser.contentWindow;
-        // if we found it, start ImageTweak
-        if ( hWindow && hWindow.document ) {
-            if ( !hWindow.document.ImageTweak ) {
-                hWindow.document.ImageTweak = new ImageTweak( hWindow );
-            }
-            hWindow.document.ImageTweak.PluginEventListeners();
-        }
-    },
-    
-    parseColorExtended: function(v) {
-        var match = /([0-9]*([.,][0-9]*)?)\s*%/.exec(v);
-        if (match) {
-            var L = ImageTweakHelper.clip( Math.round( parseFloat(match[1]) / 100 * 255 ), 0, 255 );
-            return "rgb("+L+","+L+","+L+")";
-        } 
-        return v;
-    }
-};
-
-/***********************************************************************************************************************************************************/
 
 // creates the ImageTweak object for the specified window
 function ImageTweak( hWindow ) {
@@ -136,8 +65,8 @@ ImageTweak.prototype.Preferences = {
     ZoomTypeUnscaledEnabled:        { pref: "extensions.imagetweak.zoomtype.unscaled"                                                                    },
     DefaultZoomType:                { pref: "extensions.imagetweak.zoomtype.default"                                                                     },
     ClipMovement:                   { pref: "extensions.imagetweak.clip_movement"                                                                        },
-    BackgroundColor:                { pref: "extensions.imagetweak.bgcolor",                        parse: ImageTweakHelper.parseColorExtended           },
-    BorderColor:                    { pref: "extensions.imagetweak.bordercolor",                    parse: ImageTweakHelper.parseColorExtended           },
+    BackgroundColor:                { pref: "extensions.imagetweak.bgcolor",                        parse: ImageTweak.parseColorExtended                 },
+    BorderColor:                    { pref: "extensions.imagetweak.bordercolor",                    parse: ImageTweak.parseColorExtended                 },
     ZoomFactor:                     { pref: "extensions.imagetweak.zoomexp2",                       parse: function(v) { return parseFloat(v)/100.0; }   },
     ShortcutImg:                    { pref: "extensions.imagetweak.shortcut.img"                                                                         },
     ShortcutBg:                     { pref: "extensions.imagetweak.shortcut.bg"                                                                          },
@@ -160,10 +89,10 @@ ImageTweak.prototype.ScreenCoordinates = function ScreenCoordinates() {
         case "pixel":   Coordinates.CurZoom = 1; break;
     }
 
-    var boundingWidth       = ImageTweakHelper.clip( this.RotatedWidth() * Coordinates.CurZoom,             1, this.ImageMax );
-    var boundingHeight      = ImageTweakHelper.clip( this.RotatedHeight() * Coordinates.CurZoom,            1, this.ImageMax );
-    Coordinates.imgWidth    = ImageTweakHelper.clip( this.Image.naturalWidth * Coordinates.CurZoom,         1, this.ImageMax );
-    Coordinates.imgHeight   = ImageTweakHelper.clip( this.Image.naturalHeight * Coordinates.CurZoom,        1, this.ImageMax );
+    var boundingWidth       = ImageTweak.clip( this.RotatedWidth() * Coordinates.CurZoom,             1, this.ImageMax );
+    var boundingHeight      = ImageTweak.clip( this.RotatedHeight() * Coordinates.CurZoom,            1, this.ImageMax );
+    Coordinates.imgWidth    = ImageTweak.clip( this.Image.naturalWidth * Coordinates.CurZoom,         1, this.ImageMax );
+    Coordinates.imgHeight   = ImageTweak.clip( this.Image.naturalHeight * Coordinates.CurZoom,        1, this.ImageMax );
 
     switch (this.ZoomType) {
         case "free":
@@ -175,21 +104,21 @@ ImageTweak.prototype.ScreenCoordinates = function ScreenCoordinates() {
                     Coordinates.CurY = this.CenterY;
                     break;
                 case 1:
-                    Coordinates.CurX = this.CenterX = ImageTweakHelper.clip( this.CenterX, Math.abs( ( boundingWidth - this.Window.innerWidth ) / 2 ) );
-                    Coordinates.CurY = this.CenterY = ImageTweakHelper.clip( this.CenterY, Math.abs( ( boundingHeight - this.Window.innerHeight ) / 2 ) );
+                    Coordinates.CurX = this.CenterX = ImageTweak.clip( this.CenterX, Math.abs( ( boundingWidth - this.Window.innerWidth ) / 2 ) );
+                    Coordinates.CurY = this.CenterY = ImageTweak.clip( this.CenterY, Math.abs( ( boundingHeight - this.Window.innerHeight ) / 2 ) );
                     break;
                 case 2:
-                    Coordinates.CurX = this.CenterX = ImageTweakHelper.clip( this.CenterX, Math.abs( ( boundingWidth + this.Window.innerWidth ) / 2 ) );
-                    Coordinates.CurY = this.CenterY = ImageTweakHelper.clip( this.CenterY, Math.abs( ( boundingHeight + this.Window.innerHeight ) / 2 ) );
+                    Coordinates.CurX = this.CenterX = ImageTweak.clip( this.CenterX, Math.abs( ( boundingWidth + this.Window.innerWidth ) / 2 ) );
+                    Coordinates.CurY = this.CenterY = ImageTweak.clip( this.CenterY, Math.abs( ( boundingHeight + this.Window.innerHeight ) / 2 ) );
                     break;
                 case true:
                 case 3:
-                    Coordinates.CurX = this.CenterX = ImageTweakHelper.clip( this.CenterX, Math.max( 0, ( boundingWidth - this.Window.innerWidth ) / 2 ) );
-                    Coordinates.CurY = this.CenterY = ImageTweakHelper.clip( this.CenterY, Math.max( 0, ( boundingHeight - this.Window.innerHeight ) / 2 ) );
+                    Coordinates.CurX = this.CenterX = ImageTweak.clip( this.CenterX, Math.max( 0, ( boundingWidth - this.Window.innerWidth ) / 2 ) );
+                    Coordinates.CurY = this.CenterY = ImageTweak.clip( this.CenterY, Math.max( 0, ( boundingHeight - this.Window.innerHeight ) / 2 ) );
                     break;
                 case 4:
-                    Coordinates.CurX = this.CenterX = ImageTweakHelper.clip( this.CenterX, Math.max( 0, ( boundingWidth + this.Window.innerWidth ) / 2 ) );
-                    Coordinates.CurY = this.CenterY = ImageTweakHelper.clip( this.CenterY, Math.max( 0, ( boundingHeight + this.Window.innerHeight ) / 2 ) );
+                    Coordinates.CurX = this.CenterX = ImageTweak.clip( this.CenterX, Math.max( 0, ( boundingWidth + this.Window.innerWidth ) / 2 ) );
+                    Coordinates.CurY = this.CenterY = ImageTweak.clip( this.CenterY, Math.max( 0, ( boundingHeight + this.Window.innerHeight ) / 2 ) );
                     break;
             }
             break;
@@ -553,7 +482,7 @@ ImageTweak.prototype.PerformZoomTypeSwitch = function PerformZoomTypeSwitch( img
 ImageTweak.prototype.GetElementImageURL = function GetElementImageURL(elem) {
     if ( elem.tagName == "IMG" && this.GetPref("ShortcutImg") )
         return elem.src;
-    var bgImgUrl = ImageTweakHelper.getComputedURL( elem, "background-image" );
+    var bgImgUrl = ImageTweak.getComputedURL( elem, "background-image" );
     if ( bgImgUrl != "" && bgImgUrl != null && this.GetPref("ShortcutBg") ) 
         return makeURLAbsolute( elem.baseURI, bgImgUrl );
     return "";
@@ -627,3 +556,73 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
         this.Repaint();
     }
 };
+
+// shamelessly taken from mozilla/browser/base/content/nsContextMenu.js
+ImageTweak.getComputedURL = function(aElem, aProp) {
+	var url = aElem.ownerDocument.defaultView.getComputedStyle(aElem, "").getPropertyCSSValue(aProp)[0]; // FIXME: what's the [0] for?!?!
+	return url.primitiveType == CSSPrimitiveValue.CSS_URI ? url.getStringValue() : null;
+};
+
+// clips value to min < value < max
+ImageTweak.clip = function(value, min, max) {
+	if ( typeof max == "undefined" ) {
+		max = Math.abs(min);
+		min = -min;
+	}
+	return Math.min( max, Math.max( value, min ) );
+};
+
+// opens a new tab and browse to the specified URL
+ImageTweak.browse = function(url) {
+	var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
+	var browser = wm.getMostRecentWindow("navigator:browser").getBrowser();
+	browser.selectedTab = browser.addTab(url);
+};
+
+ImageTweak.enabled = function(doc) {
+	return doc ? ImageTweak.enabledForDocument(doc) : true;
+};
+	
+ImageTweak.enabledForDocument = function(doc) {
+	return typeof doc.ImageTweak.Image != "undefined";
+};
+
+// ImageTweak.entryPoint is the global entry point for imagetweak
+// This function is called from overlay.xul
+ImageTweak.entryPoint = function() {
+	gBrowser.addEventListener("load", ImageTweak.startEventHandler, true);
+	gBrowser.addEventListener("focus", ImageTweak.startEventHandler, true);
+	gBrowser.addEventListener("DOMContentLoaded", ImageTweak.startEventHandler, true);
+	gBrowser.addEventListener("DOMFrameContentLoaded", ImageTweak.startEventHandler, true);
+	gBrowser.tabContainer.addEventListener("TabOpen", ImageTweak.startEventHandler, true);
+};
+
+// startEventHandler handles all the pageload, tabopen, tabfocus, etc. events registered in entryPoint
+ImageTweak.startEventHandler = function(e) {
+	var hWindow;
+	// find the handle to the window where the event occurred
+	if ( e.originalTarget && e.originalTarget.defaultView )
+		hWindow = e.originalTarget.defaultView;
+	else if ( e.originalTarget && e.originalTarget.contentWindow )
+		hWindow = e.originalTarget.contentWindow;
+	else if ( e.target && e.target.linkedBrowser && e.target.linkedBrowser.contentWindow )
+		hWindow = e.target.linkedBrowser.contentWindow;
+	// if we found it, start ImageTweak
+	if ( hWindow && hWindow.document ) {
+		if ( !hWindow.document.ImageTweak ) {
+			hWindow.document.ImageTweak = new ImageTweak( hWindow );
+		}
+		hWindow.document.ImageTweak.PluginEventListeners();
+	}
+};
+
+ImageTweak.parseColorExtended = function(v) {
+	var match = /([0-9]*([.,][0-9]*)?)\s*%/.exec(v);
+	if (match) {
+		var L = ImageTweak.clip( Math.round( parseFloat(match[1]) / 100 * 255 ), 0, 255 );
+		return "rgb("+L+","+L+","+L+")";
+	} 
+	return v;
+};
+
+

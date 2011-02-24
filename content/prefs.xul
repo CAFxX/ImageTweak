@@ -21,7 +21,7 @@
             $("zoomtype_default_unscaled").disabled = !$("zoomtype_unscaled").value;
             while ($("zoomtype_default_radiogroup").selectedItem.disabled)
                 $("zoomtype_default_radiogroup").selectedIndex = ($("zoomtype_default_radiogroup").selectedIndex + 1) % 3;
-            $("bgcolor_colorpicker").color = ImageTweakHelper.parseColorExtended($("bgcolor_textbox").value);
+            $("bgcolor_colorpicker").color = ImageTweak.parseColorExtended($("bgcolor_textbox").value);
         }
 
         function ImageTweakInitPrefPane() {
@@ -39,7 +39,7 @@
     ]]></script>
     <prefpane label="&pref.prefpane.label;" image="chrome://imagetweak/skin/imagetweak.png" onpaneload="ImageTweakInitPrefPane()">
         <keyset>
-            <key keycode="VK_F1" oncommand="ImageTweakHelper.browse('https://github.com/CAFxX/ImageTweak/wiki/ImageTweak-user-guide');" />
+            <key keycode="VK_F1" oncommand="ImageTweak.browse('https://github.com/CAFxX/ImageTweak/wiki/ImageTweak-user-guide');" />
         </keyset>
         <preferences id="imagetweak_preferences">
             <preference id="imagetweak_bgcolor" name="extensions.imagetweak.bgcolor" type="string"/>

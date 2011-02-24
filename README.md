@@ -33,7 +33,7 @@ Other extensions that wish to play nice with ImageTweak can use the following fu
 	*/
 	function isImageTweakEnabled(doc) {
 		try {
-			return ImageTweakHelper ? ImageTweakHelper.enabled(doc) : false;
+			return ImageTweak ? ImageTweak.enabled(doc) : false;
 		} catch (e) {
 			return false;
 		}
