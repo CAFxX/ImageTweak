@@ -28,10 +28,7 @@ function ImageTweak( hWindow ) {
 	if ( this.IsImageTweakDocument() ) {
         this.Browser = gBrowser.getBrowserForDocument( this.Document );
         this.BrowserAutoscroll = false;
-		if ( this.IsImageDocument() )
-			this.Image = this.Document.images[0]; // in a nsImageDocument there's just one image
-		else // if this.IsVideoDocument()
-			this.Image = this.Document.body.children[0]; // in a nsVideoDocument there's just one video
+		this.Image = this.Document.querySelector("img, video");
         this.Zoom = 1; // start zoom = 1 (will be overriden later)
         this.ZoomMax = null; // max zoom to be used (to keep the image smaller than ImageMax pixel)
         this.CenterX = 0; // coordinates of the center of the image on the screen
