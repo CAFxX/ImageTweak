@@ -52,30 +52,6 @@ function ImageTweak( hWindow ) {
         this.ScrollInterval = 25; //ms
         this.ImageMax = 32767; // maximum physical image size
     }
-    this.Prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
-};
-
-// this structure holds informations about the preferences used by ImageTweak
-// see ImageTweak.GetPref for further informations
-ImageTweak.prototype.Preferences = {
-    AutomaticResizing:              { pref: "browser.enable_automatic_image_resizing"                                                                    },
-    ZoomTypeFitEnabled:             { pref: "extensions.imagetweak.zoomtype.full"                                                                        }, // originally called "ZoomTypeFullEnabled"
-    ZoomTypeFillEnabled:            { pref: "extensions.imagetweak.zoomtype.fill"                                                                        },
-    ZoomTypeFreeEnabled:            { pref: "extensions.imagetweak.zoomtype.free"                                                                        },
-    ZoomTypeUnscaledEnabled:        { pref: "extensions.imagetweak.zoomtype.unscaled"                                                                    },
-    DefaultZoomType:                { pref: "extensions.imagetweak.zoomtype.default"                                                                     },
-    ClipMovement:                   { pref: "extensions.imagetweak.clip_movement"                                                                        },
-    BackgroundColor:                { pref: "extensions.imagetweak.bgcolor",                        parse: ImageTweak.parseColorExtended                 },
-    BorderColor:                    { pref: "extensions.imagetweak.bordercolor",                    parse: ImageTweak.parseColorExtended                 },
-    ZoomFactor:                     { pref: "extensions.imagetweak.zoomexp2",                       parse: function(v) { return parseFloat(v)/100.0; }   },
-    ShortcutImg:                    { pref: "extensions.imagetweak.shortcut.img"                                                                         },
-    ShortcutBg:                     { pref: "extensions.imagetweak.shortcut.bg"                                                                          },
-    ZoomOnPointer:                  { pref: "extensions.imagetweak.zoomonpointer"                                                                        },
-    InvertMouseWheel:               { pref: "extensions.imagetweak.invertmousewheel"                                                                     },
-    InvertKeyboard:                 { pref: "extensions.imagetweak.invertkeyboard"                                                                       },
-    StartFromTopLeft:               { pref: "extensions.imagetweak.startfromtopleft"                                                                     },
-    Scrolling:                      { pref: "general.autoScroll"                                                                                         },
-    LegacyScrolling:                { pref: "extensions.imagetweak.legacyscrolling"                                                                      },
 };
 
 // compute the current coordinates of the image (such as width, height, top, left, etc) using the parameters specified in the ImageTweak object
@@ -96,7 +72,7 @@ ImageTweak.prototype.ScreenCoordinates = function ScreenCoordinates() {
 
     switch (this.ZoomType) {
         case "free":
-            switch ( this.GetPref("ClipMovement") ) {
+            switch ( ImageTweak.getPref("ClipMovement") ) {
                 case false:
                 case 0:
                 default:
@@ -124,7 +100,7 @@ ImageTweak.prototype.ScreenCoordinates = function ScreenCoordinates() {
             break;
         case "fill":
         case "pixel":
-            if ( this.GetPref("StartFromTopLeft") ) {
+            if ( ImageTweak.getPref("StartFromTopLeft") ) {
                 Coordinates.CurX = this.Window.innerWidth < boundingWidth ? -( this.Window.innerWidth - boundingWidth ) / 2 : 0;
                 Coordinates.CurY = this.Window.innerHeight < boundingHeight ? -( this.Window.innerHeight - boundingHeight ) / 2 : 0;
                 break;
@@ -147,7 +123,7 @@ ImageTweak.prototype.Repaint = function Repaint() {
     var Coordinates = this.ScreenCoordinates();
 
     var CurCSS = "position:absolute;" +
-            "border:"   + ( this.GetPref("BorderColor") != "" ? "1px solid " + this.GetPref("BorderColor") : "none" ) + ";" +
+            "border:"   + ( ImageTweak.getPref("BorderColor") != "" ? "1px solid " + ImageTweak.getPref("BorderColor") : "none" ) + ";" +
             "left:"     + Math.round(Coordinates.imgLeft)       + "px;" +
             "top:"      + Math.round(Coordinates.imgTop)        + "px;" +
             "width:"    + Math.round(Coordinates.imgWidth)      + "px;" +
@@ -160,7 +136,7 @@ ImageTweak.prototype.Repaint = function Repaint() {
     var CurTitle = this.Title.substring( 0, this.Title.lastIndexOf( ")" ) ) + CurTitleZoom + CurTitleRotation + ")";
     if ( this.Document.title != CurTitle ) 
         this.Document.title = CurTitle;
-    this.Document.body.style.backgroundColor = this.GetPref("BackgroundColor");
+    this.Document.body.style.backgroundColor = ImageTweak.getPref("BackgroundColor");
 
     if ( this.Scrolling )
         this.StartScroll();
@@ -209,7 +185,7 @@ ImageTweak.prototype.OnDragOverWindow = function OnDragOverWindow(event) {
 };
 
 ImageTweak.prototype.OnMouseDown = function OnMouseDown(event) {
-    if ( event.button == 1 && event.ctrlKey == false && this.GetPref("Scrolling") ) {
+    if ( event.button == 1 && event.ctrlKey == false && ImageTweak.getPref("Scrolling") ) {
         if ( this.Scrolling ) {
             this.StopScroll(event);
         } else {
@@ -235,12 +211,12 @@ ImageTweak.prototype.OnMouseWheel = function OnMouseWheel(event) {
     } else if ( event.ctrlKey && event.altKey ) {
         this.PerformRotation( event.detail > 0 ? 90 : -90 );
         event.preventDefault();
-    } else if ( ( this.GetPref( "LegacyScrolling" ) && !event.ctrlKey ) || ( !this.GetPref( "LegacyScrolling" ) && event.ctrlKey ) ) {
-        var ZoomDelta = ( event.detail > 0 ? 1 : -1 ) * ( this.GetPref( "InvertMouseWheel" ) ? 1 : -1 );
+    } else if ( ( ImageTweak.getPref( "LegacyScrolling" ) && !event.ctrlKey ) || ( !ImageTweak.getPref( "LegacyScrolling" ) && event.ctrlKey ) ) {
+        var ZoomDelta = ( event.detail > 0 ? 1 : -1 ) * ( ImageTweak.getPref( "InvertMouseWheel" ) ? 1 : -1 );
         this.PerformZoom( ZoomDelta, this.ClientXPrev, this.ClientYPrev ); // workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=352179 - darn you, mozilla!
         event.preventDefault();
-    } else if ( ( this.GetPref( "LegacyScrolling" ) && event.ctrlKey ) || ( !this.GetPref( "LegacyScrolling" ) && !event.ctrlKey ) ) {
-        var MoveDelta = ( event.detail > 0 ? 1 : -1 ) * ( this.GetPref( "InvertMouseWheel" ) ? 1 : -1 ) * Math.min( this.Window.innerWidth, this.Window.innerHeight ) / 10;
+    } else if ( ( ImageTweak.getPref( "LegacyScrolling" ) && event.ctrlKey ) || ( !ImageTweak.getPref( "LegacyScrolling" ) && !event.ctrlKey ) ) {
+        var MoveDelta = ( event.detail > 0 ? 1 : -1 ) * ( ImageTweak.getPref( "InvertMouseWheel" ) ? 1 : -1 ) * Math.min( this.Window.innerWidth, this.Window.innerHeight ) / 10;
         if (event.axis == event.HORIZONTAL_AXIS)
             this.PerformMove( MoveDelta, 0 );
         else 
@@ -253,8 +229,8 @@ ImageTweak.prototype.OnKeyPress = function OnKeyPress(event) {
     if ( event.altKey || event.metaKey ) {
         return true;
     }
-    var MoveDelta = ( Math.min( this.Window.innerWidth, this.Window.innerHeight ) / 10 ) * ( this.GetPref("InvertKeyboard") ? -1 : 1 );
-    var MovePageDelta = ( this.Window.innerHeight ) * ( this.GetPref("InvertKeyboard") ? -1 : 1 );
+    var MoveDelta = ( Math.min( this.Window.innerWidth, this.Window.innerHeight ) / 10 ) * ( ImageTweak.getPref("InvertKeyboard") ? -1 : 1 );
+    var MovePageDelta = ( this.Window.innerHeight ) * ( ImageTweak.getPref("InvertKeyboard") ? -1 : 1 );
     var EventIsHandled = true;
     if ( event.ctrlKey ) {
         switch (event.keyCode + event.charCode) {
@@ -280,7 +256,7 @@ ImageTweak.prototype.OnKeyPress = function OnKeyPress(event) {
             case 51: /* 3 */                        this.PerformZoomTypeSwitch( "pixel" ); break;
             case 52: /* 4 */                        this.PerformZoomTypeSwitch( "free" ); break;
             case 34: /* page down */                this.PerformMove( 0, -MovePageDelta ); break;
-            case 33: /* page up */                    this.PerformMove( 0, MovePageDelta ); break;
+            case 33: /* page up */                  this.PerformMove( 0, MovePageDelta ); break;
             default:                                EventIsHandled = false;
         }
     }
@@ -348,12 +324,12 @@ ImageTweak.prototype.PerformMove = function PerformMove(dx, dy) {
 
 ImageTweak.prototype.PerformZoom = function PerformZoom(delta, px, py) {
     this.ConvertToFree();
-    var imgZoomFactor = this.GetPref("ZoomFactor");
+    var imgZoomFactor = ImageTweak.getPref("ZoomFactor");
     var imgZoomNew = Math.pow(imgZoomFactor, Math.round(delta + Math.log(this.Zoom) / Math.log(imgZoomFactor)));
     if ( imgZoomNew <= this.ZoomMax ) {
         var imgZoomRatio = imgZoomNew / this.Zoom;
         var imgZoomDirRatio = imgZoomRatio * ( delta < 0 ? -1 : 1 );
-        if ( typeof px != "undefined" && this.GetPref("ZoomOnPointer") && imgZoomNew >= this.FitZoom() ) {
+        if ( typeof px != "undefined" && ImageTweak.getPref("ZoomOnPointer") && imgZoomNew >= this.FitZoom() ) {
             this.CenterX = px - this.Window.innerWidth / 2 + (this.CenterX + this.Window.innerWidth / 2 - px) * imgZoomRatio;
             this.CenterY = py - this.Window.innerHeight / 2 + (this.CenterY + this.Window.innerHeight / 2 - py) * imgZoomRatio;
         } else {
@@ -371,9 +347,9 @@ ImageTweak.prototype.PerformRotation = function PerformRotation( degrees ) {
 };
 
 ImageTweak.prototype.StartScroll = function StartScroll(event) {
-    if ( this.Window.innerWidth < this.Image.width || this.Window.innerHeight < this.Image.height || this.GetPref("ClipMovement") == false ) {
+    if ( this.Window.innerWidth < this.Image.width || this.Window.innerHeight < this.Image.height || ImageTweak.getPref("ClipMovement") == false ) {
         this.Scrolling = true;
-        if ( ( this.Window.innerWidth < this.Image.width && this.Window.innerHeight < this.Image.height ) || this.GetPref("ClipMovement") == false ) {
+        if ( ( this.Window.innerWidth < this.Image.width && this.Window.innerHeight < this.Image.height ) || ImageTweak.getPref("ClipMovement") == false ) {
             this.Document.body.style.cursor = "move";
         } else if ( this.Window.innerWidth < this.Image.width ) {
             this.Document.body.style.cursor = "W-resize";
@@ -421,19 +397,6 @@ ImageTweak.prototype.ConvertToFree = function ConvertToFree() {
     this.ZoomType = "free";
 };
 
-ImageTweak.prototype.GetPref = function GetPref(id) {
-    var p;
-    switch ( this.Prefs.getPrefType( this.Preferences[ id ].pref ) ) {
-        case this.Prefs.PREF_BOOL:      p = this.Prefs.getBoolPref( this.Preferences[id].pref ); break;
-        case this.Prefs.PREF_STRING:    p = this.Prefs.getCharPref( this.Preferences[id].pref ); break;
-        case this.Prefs.PREF_INT:       p = this.Prefs.getIntPref( this.Preferences[id].pref ); break;
-    }
-    if ( this.Preferences[ id ].parse ) {
-        p = this.Preferences[ id ].parse(p);
-    }
-    return p;
-};
-
 ImageTweak.prototype.RotatedWidth = function RotatedWidth() {
     var RotationRadians = this.Rotation / 180 * Math.PI;
     return this.Image.naturalWidth * Math.abs( Math.cos( RotationRadians ) ) + this.Image.naturalHeight * Math.abs( Math.sin( RotationRadians ) );
@@ -453,14 +416,14 @@ ImageTweak.prototype.FillZoom = function FillZoom() {
 };
 
 ImageTweak.prototype.DefaultZoomType = function DefaultZoomType() {
-    this.PerformZoomTypeSwitch( this.GetPref("DefaultZoomType"), false );
+    this.PerformZoomTypeSwitch( ImageTweak.getPref("DefaultZoomType"), false );
 };
 
 ImageTweak.prototype.ZoomTypes = {
-    free:           { next:'fit',   condition:'this.GetPref("ZoomTypeFreeEnabled")' },
-    fit:            { next:'fill',  condition:'this.FitZoom() < 1 && this.GetPref("ZoomTypeFitEnabled")' },
-    fill:           { next:'pixel', condition:'this.FillZoom() < 1 && this.GetPref("ZoomTypeFillEnabled")' },
-    pixel:          { next:'free',  condition:'this.GetPref("ZoomTypeUnscaledEnabled") || this.FitZoom() >= 1' }
+    free:           { next:'fit',   condition:'ImageTweak.getPref("ZoomTypeFreeEnabled")' },
+    fit:            { next:'fill',  condition:'this.FitZoom() < 1 && ImageTweak.getPref("ZoomTypeFitEnabled")' },
+    fill:           { next:'pixel', condition:'this.FillZoom() < 1 && ImageTweak.getPref("ZoomTypeFillEnabled")' },
+    pixel:          { next:'free',  condition:'ImageTweak.getPref("ZoomTypeUnscaledEnabled") || this.FitZoom() >= 1' }
 };
 
 ImageTweak.prototype.PerformZoomTypeSwitch = function PerformZoomTypeSwitch( imgZoomType, SkipCondition ) {
@@ -480,10 +443,10 @@ ImageTweak.prototype.PerformZoomTypeSwitch = function PerformZoomTypeSwitch( img
 };
 
 ImageTweak.prototype.GetElementImageURL = function GetElementImageURL(elem) {
-    if ( elem.tagName == "IMG" && this.GetPref("ShortcutImg") )
+    if ( elem.tagName == "IMG" && ImageTweak.getPref("ShortcutImg") )
         return elem.src;
     var bgImgUrl = ImageTweak.getComputedURL( elem, "background-image" );
-    if ( bgImgUrl != "" && bgImgUrl != null && this.GetPref("ShortcutBg") ) 
+    if ( bgImgUrl != "" && bgImgUrl != null && ImageTweak.getPref("ShortcutBg") ) 
         return makeURLAbsolute( elem.baseURI, bgImgUrl );
     return "";
 };
@@ -617,7 +580,7 @@ ImageTweak.startEventHandler = function(e) {
 };
 
 ImageTweak.parseColorExtended = function(v) {
-	var match = /([0-9]*([.,][0-9]*)?)\s*%/.exec(v);
+	var match = /([0-9]*(?:[.,][0-9]*)?)\s*%/.exec(v);
 	if (match) {
 		var L = ImageTweak.clip( Math.round( parseFloat(match[1]) / 100 * 255 ), 0, 255 );
 		return "rgb("+L+","+L+","+L+")";
@@ -625,4 +588,44 @@ ImageTweak.parseColorExtended = function(v) {
 	return v;
 };
 
+ImageTweak.log = function(msg) {
+	ImageTweak.console.logStringMessage(msg);
+};
+
+ImageTweak.console = Components.classes["@mozilla.org/consoleservice;1"].getService(Components.interfaces.nsIConsoleService);
+
+ImageTweak.prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
+
+// this structure holds informations about the preferences used by ImageTweak
+// see ImageTweak.GetPref for further informations
+ImageTweak.preferences = {
+    AutomaticResizing:              { pref: "browser.enable_automatic_image_resizing"                                                                    },
+    ZoomTypeFitEnabled:             { pref: "extensions.imagetweak.zoomtype.full"                                                                        }, // originally called "ZoomTypeFullEnabled"
+    ZoomTypeFillEnabled:            { pref: "extensions.imagetweak.zoomtype.fill"                                                                        },
+    ZoomTypeFreeEnabled:            { pref: "extensions.imagetweak.zoomtype.free"                                                                        },
+    ZoomTypeUnscaledEnabled:        { pref: "extensions.imagetweak.zoomtype.unscaled"                                                                    },
+    DefaultZoomType:                { pref: "extensions.imagetweak.zoomtype.default"                                                                     },
+    ClipMovement:                   { pref: "extensions.imagetweak.clip_movement"                                                                        },
+    BackgroundColor:                { pref: "extensions.imagetweak.bgcolor",                        parse: ImageTweak.parseColorExtended                 },
+    BorderColor:                    { pref: "extensions.imagetweak.bordercolor",                    parse: ImageTweak.parseColorExtended                 },
+    ZoomFactor:                     { pref: "extensions.imagetweak.zoomexp2",                       parse: function(v) { return parseFloat(v)/100.0; }   },
+    ShortcutImg:                    { pref: "extensions.imagetweak.shortcut.img"                                                                         },
+    ShortcutBg:                     { pref: "extensions.imagetweak.shortcut.bg"                                                                          },
+    ZoomOnPointer:                  { pref: "extensions.imagetweak.zoomonpointer"                                                                        },
+    InvertMouseWheel:               { pref: "extensions.imagetweak.invertmousewheel"                                                                     },
+    InvertKeyboard:                 { pref: "extensions.imagetweak.invertkeyboard"                                                                       },
+    StartFromTopLeft:               { pref: "extensions.imagetweak.startfromtopleft"                                                                     },
+    Scrolling:                      { pref: "general.autoScroll"                                                                                         },
+    LegacyScrolling:                { pref: "extensions.imagetweak.legacyscrolling"                                                                      },
+};
+
+ImageTweak.getPref = function getPref(id) {
+    var p;
+    switch ( ImageTweak.prefs.getPrefType( ImageTweak.preferences[ id ].pref ) ) {
+        case ImageTweak.prefs.PREF_BOOL:      p = ImageTweak.prefs.getBoolPref( ImageTweak.preferences[id].pref ); break;
+        case ImageTweak.prefs.PREF_STRING:    p = ImageTweak.prefs.getCharPref( ImageTweak.preferences[id].pref ); break;
+        case ImageTweak.prefs.PREF_INT:       p = ImageTweak.prefs.getIntPref( ImageTweak.preferences[id].pref ); break;
+    }
+    return ImageTweak.preferences[ id ].parse ? ImageTweak.preferences[ id ].parse(p) : p;
+};
 

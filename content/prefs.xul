@@ -9,7 +9,7 @@
             return document.getElementById("imagetweak_"+id);
         }
     
-        function ImageTweakValidatePref() {
+        ImageTweak.ValidatePref = function() {
             if ($("zoomtype_default").value == "")
                 $("zoomtype_default").value = $("autoresize").value ? "fit" : "pixel";
             else
@@ -22,22 +22,22 @@
             while ($("zoomtype_default_radiogroup").selectedItem.disabled)
                 $("zoomtype_default_radiogroup").selectedIndex = ($("zoomtype_default_radiogroup").selectedIndex + 1) % 3;
             $("bgcolor_colorpicker").color = ImageTweak.parseColorExtended($("bgcolor_textbox").value);
-        }
+        };
 
-        function ImageTweakInitPrefPane() {
+        ImageTweak.InitPrefPane = function() {
             var i, prefs = document.getElementsByTagName("preference");
             for (i=0; i<prefs.length; i++) {
-                    prefs[i].onchange = ImageTweakValidatePref;
+                    prefs[i].onchange = ImageTweak.ValidatePref;
             }
-            ImageTweakValidatePref();
+            ImageTweak.ValidatePref();
             
             $("bgcolor_colorpicker").onchange = function() {
                 $("bgcolor_textbox").value = this.color;
                 $("preferences").fireChangedEvent($("bgcolor_textbox"));
             };
-        }
+        };
     ]]></script>
-    <prefpane label="&pref.prefpane.label;" image="chrome://imagetweak/skin/imagetweak.png" onpaneload="ImageTweakInitPrefPane()">
+    <prefpane label="&pref.prefpane.label;" image="chrome://imagetweak/skin/imagetweak.png" onpaneload="ImageTweak.InitPrefPane()">
         <keyset>
             <key keycode="VK_F1" oncommand="ImageTweak.browse('https://github.com/CAFxX/ImageTweak/wiki/ImageTweak-user-guide');" />
         </keyset>
