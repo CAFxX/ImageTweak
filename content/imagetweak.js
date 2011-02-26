@@ -155,6 +155,7 @@ ImageTweak.prototype.OnDragStart = function OnDragStart(event) {
     this.Dragging = true;
     event.dataTransfer.setData("text/uri-list", this.Image.URL);
     event.dataTransfer.setData("text/plain", this.Image.URL);
+    event.dataTransfer.effectAllowed = "none";
     this.Document.body.style.cursor = "move";
     this.ClientXDrag = this.ClientXPrev;
     this.ClientYDrag = this.ClientYPrev;
