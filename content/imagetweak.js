@@ -169,7 +169,7 @@ ImageTweak.prototype.OnDrag = function OnDrag(event) {
     this.PerformMove( this.ClientXDrag - this.ClientXPrev, this.ClientYDrag - this.ClientYPrev );
     this.ClientXPrev = this.ClientXDrag;
     this.ClientYPrev = this.ClientYDrag;
-	this.preventDefault();
+	event.preventDefault();
     this.Document.body.style.cursor = "move";
 };
 
@@ -184,7 +184,7 @@ ImageTweak.prototype.OnDragExitWindow = function OnDragExitWindow(event) {
 ImageTweak.prototype.OnDragOverWindow = function OnDragOverWindow(event) {
     this.ClientXDrag = event.clientX;
     this.ClientYDrag = event.clientY;
-	this.preventDefault();
+	event.preventDefault();
     this.Document.body.style.cursor = "move";
 };
 
