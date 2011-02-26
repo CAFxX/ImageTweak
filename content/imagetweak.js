@@ -118,16 +118,28 @@ ImageTweak.prototype.ScreenCoordinates = function ScreenCoordinates() {
 // It also updates the title displayed in the titlebar
 ImageTweak.prototype.Repaint = function Repaint() {
     var Coordinates = this.ScreenCoordinates();
-	var ShadowBlur = Math.sqrt( this.Window.innerWidth * this.Window.innerHeight ) / 50;
+	var CurCSS = "";
 	
-    var CurCSS = "position:absolute;" +
-            "border:"   + ( ImageTweak.getPref("BorderColor") != "" ? "1px solid " + ImageTweak.getPref("BorderColor") : "none" ) + ";" +
+	if (ImageTweak.getPref("ShadowColor") != "") {
+		var ShadowBlur = Math.sqrt( this.Window.innerWidth * this.Window.innerHeight ) * 0.025; // magic
+		CurCSS += "-moz-box-shadow: 0 0 " + Math.round(ShadowBlur) + "px 0 " + ImageTweak.getPref("ShadowColor") + ";";
+		CurCSS += "background-color: " + ImageTweak.getPref("ShadowColor") + ";";
+	}
+	
+	if (ImageTweak.getPref("BorderColor") != "") {
+        CurCSS += "border: 1px solid " + ImageTweak.getPref("BorderColor") + ";";
+	} else {
+        CurCSS += "border: none;";
+	}
+	
+    CurCSS += 
+			"position:absolute;" +
             "left:"     + Math.round(Coordinates.imgLeft)       + "px;" +
             "top:"      + Math.round(Coordinates.imgTop)        + "px;" +
             "width:"    + Math.round(Coordinates.imgWidth)      + "px;" +
             "height:"   + Math.round(Coordinates.imgHeight)     + "px;" +
-            "-moz-transform: rotate(" + this.Rotation + "deg);" +
-			"-moz-box-shadow: 0 0 " + Math.round(ShadowBlur) + "px 0 black;";
+            "-moz-transform: rotate(" + this.Rotation + "deg);";
+			
     if ( this.Image.style.cssText != CurCSS ) this.Image.style.cssText = CurCSS;
 
     var CurTitleZoom = ", " + Math.round( Coordinates.CurZoom * 100 ) + "%";
@@ -135,6 +147,7 @@ ImageTweak.prototype.Repaint = function Repaint() {
     var CurTitle = this.Title.substring( 0, this.Title.lastIndexOf( ")" ) ) + CurTitleZoom + CurTitleRotation + ")";
     if ( this.Document.title != CurTitle ) 
         this.Document.title = CurTitle;
+		
     this.Document.body.style.backgroundColor = ImageTweak.getPref("BackgroundColor");
 
     if ( this.Scrolling )
@@ -632,6 +645,7 @@ ImageTweak.preferences = {
     ClipMovement:                   { pref: "extensions.imagetweak.clip_movement"                                                                        },
     BackgroundColor:                { pref: "extensions.imagetweak.bgcolor",                        parse: ImageTweak.parseColorExtended                 },
     BorderColor:                    { pref: "extensions.imagetweak.bordercolor",                    parse: ImageTweak.parseColorExtended                 },
+    ShadowColor:                    { pref: "extensions.imagetweak.shadowcolor",                    parse: ImageTweak.parseColorExtended                 },
     ZoomFactor:                     { pref: "extensions.imagetweak.zoomexp2",                       parse: function(v) { return parseFloat(v)/100.0; }   },
     ShortcutImg:                    { pref: "extensions.imagetweak.shortcut.img"                                                                         },
     ShortcutBg:                     { pref: "extensions.imagetweak.shortcut.bg"                                                                          },
