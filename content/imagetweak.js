@@ -424,10 +424,30 @@ ImageTweak.prototype.DefaultZoomType = function DefaultZoomType() {
 };
 
 ImageTweak.prototype.ZoomTypes = {
-    free:           { next:'fit',   condition:'ImageTweak.getPref("ZoomTypeFreeEnabled")' },
-    fit:            { next:'fill',  condition:'this.FitZoom() < 1 && ImageTweak.getPref("ZoomTypeFitEnabled")' },
-    fill:           { next:'pixel', condition:'this.FillZoom() < 1 && ImageTweak.getPref("ZoomTypeFillEnabled")' },
-    pixel:          { next:'free',  condition:'ImageTweak.getPref("ZoomTypeUnscaledEnabled") || this.FitZoom() >= 1' }
+    free: { 
+		next:'fit',   
+		condition: function(_this) { 
+			return ImageTweak.getPref("ZoomTypeFreeEnabled") 
+		}
+	},
+    fit: { 
+		next:'fill',  
+		condition: function (_this) {
+			return _this.FitZoom() < 1 && ImageTweak.getPref("ZoomTypeFitEnabled");
+		}
+	},
+    fill: { 
+		next:'pixel', 
+		condition: function (_this) {
+			return _this.FillZoom() < 1 && ImageTweak.getPref("ZoomTypeFillEnabled");
+		}
+	},
+    pixel: { 
+		next:'free',
+		condition: function (_this) {
+			return _this.FitZoom() >= 1 || ImageTweak.getPref("ZoomTypeUnscaledEnabled");
+		}
+	}
 };
 
 ImageTweak.prototype.PerformZoomTypeSwitch = function PerformZoomTypeSwitch( imgZoomType, SkipCondition ) {
@@ -439,7 +459,7 @@ ImageTweak.prototype.PerformZoomTypeSwitch = function PerformZoomTypeSwitch( img
     } else {
         SkipCondition = false;
     }
-    while ( imgZoomType != this.ZoomType && !( eval( this.ZoomTypes[ imgZoomType ].condition ) || SkipCondition ) ) {
+    while ( imgZoomType != this.ZoomType && !( this.ZoomTypes[ imgZoomType ].condition(this) || SkipCondition ) ) {
         imgZoomType = this.ZoomTypes[ imgZoomType ].next;
     }
     this.ZoomType = imgZoomType;
