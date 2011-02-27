@@ -491,7 +491,8 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
         this.Document.addEventListener( 'click', function(e) { hImageTweak.RegularDocumentOnMouseClick(e); }, false );
         this.Document.addEventListener( 'dblclick', function(e) { hImageTweak.RegularDocumentOnMouseDoubleClick(e); }, false );
         // inject the navigator.imageViewer flag
-        this.InjectContentFlag();
+		if (ImageTweak.getPref("ContentDetectable"))
+			this.InjectContentFlag();
         this.Inited = true;
     } else if ( !this.Image.naturalWidth ) {
         // we are not ready yet... keep waiting...
@@ -639,6 +640,7 @@ ImageTweak.preferences = {
     StartFromTopLeft:               { pref: "extensions.imagetweak.startfromtopleft"                                                                     },
     Scrolling:                      { pref: "general.autoScroll"                                                                                         },
     LegacyScrolling:                { pref: "extensions.imagetweak.legacyscrolling"                                                                      },
+    ContentDetectable:              { pref: "extensions.imagetweak.contentdetectable"                                                                    }
 };
 
 ImageTweak.getPref = function getPref(id) {

@@ -18,5 +18,6 @@ pref("extensions.imagetweak.clip_movement", 3);
 pref("extensions.imagetweak.startfromtopleft", true);
 pref("extensions.imagetweak.legacyscrolling", false);
 pref("extensions.imagetweak.bordercolor", "");
+pref("extensions.imagetweak.contentdetectable", true);
 
 pref("extensions.{DB2EA31C-58F5-48b7-8D60-CB0739257904}.description", "chrome://imagetweak/locale/imagetweak.properties");

@@ -17,6 +17,7 @@
 <!ENTITY pref.invertmousewheel.label "Inverti la direzione di zoom da mouse">
 <!ENTITY pref.invertkeyboard.label "Inverti la navigazione da tastiera">
 <!ENTITY pref.startfromtopleft.label "Immagine in alto a destra">
+<!ENTITY pref.contentdetectable.label "Notifica i siti web">
 <!ENTITY pref.bgcolor.tooltip "Imposta il colore di sfondo utilizzato quando vengono visualizzate le immagini (colore CSS o percentuale, dove 0&#37; é nero e 100&#37; é bianco)">
 <!ENTITY pref.autoresize.tooltip "Se una immagine é più larga della finestra verrà inizialmente visualizzata ridimensionata">
 <!ENTITY pref.clip_movement.tooltip "Permette il movimento dell&apos;immagine solo all&apos;interno della finestra">
@@ -31,5 +32,6 @@
 <!ENTITY pref.invertmousewheel.tooltip "Inverte la direzione della rotella del mouse per lo zoom">
 <!ENTITY pref.invertkeyboard.tooltip "Inverte la direzione delle frecce di direzione per lo scorrimento">
 <!ENTITY pref.startfromtopleft.tooltip "Posiziona l&apos;immagine in alto a destra quando è più grande della finestra">
+<!ENTITY pref.contentdetectable.tooltip "Comunica ai siti web che il browser è dotato di un visualizzatore di immagini">
 <!ENTITY pref.pressf1forhelp.label "Premi F1 per visualizzare la guida in linea">
 <!ENTITY about.window.title "ImageTweak - Informazioni">

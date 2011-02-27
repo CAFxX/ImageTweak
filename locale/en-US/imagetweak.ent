@@ -17,6 +17,7 @@
 <!ENTITY pref.invertmousewheel.label "Invert the mousewheel zoom direction">
 <!ENTITY pref.invertkeyboard.label "Invert the keyboard navigation">
 <!ENTITY pref.startfromtopleft.label "Place image at top left">
+<!ENTITY pref.contentdetectable.label "Notify websites">
 <!ENTITY pref.bgcolor.tooltip "Set the background color used when displaying images (CSS color or percentage, 0&#37; being black and 100&#37; being white)">
 <!ENTITY pref.autoresize.tooltip "Automatically resize images bigger than the window to fit upon loading">
 <!ENTITY pref.clip_movement.tooltip "Allow the image to be moved only within the window">
@@ -31,5 +32,6 @@
 <!ENTITY pref.invertmousewheel.tooltip "Invert the mouse wheel scrolling direction for zooming">
 <!ENTITY pref.invertkeyboard.tooltip "Invert the arrow keys direction for scrolling">
 <!ENTITY pref.startfromtopleft.tooltip "Place the image at the top left when it is bigger than the window">
+<!ENTITY pref.contentdetectable.tooltip "Tell websites that this browser has a builtin image viewer">
 <!ENTITY pref.pressf1forhelp.label "Press F1 to display the online help">
 <!ENTITY about.window.title "ImageTweak - About">

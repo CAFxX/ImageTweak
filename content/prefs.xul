@@ -57,6 +57,7 @@
             <preference id="imagetweak_invertmousewheel" name="extensions.imagetweak.invertmousewheel" type="bool"/>
             <preference id="imagetweak_invertkeyboard" name="extensions.imagetweak.invertkeyboard" type="bool"/>
             <preference id="imagetweak_startfromtopleft" name="extensions.imagetweak.startfromtopleft" type="bool"/>
+            <preference id="imagetweak_contentdetectable" name="extensions.imagetweak.contentdetectable" type="bool"/>
         </preferences>
         <vbox>
             <groupbox>
@@ -100,6 +101,8 @@
                     <label value="&pref.shortcut.label;"/>
                     <checkbox preference="imagetweak_shortcut_img" label="&pref.shortcut.img.label;" tooltiptext="&pref.shortcut.img.tooltip;"/>
                     <checkbox preference="imagetweak_shortcut_bg" label="&pref.shortcut.bg.label;" tooltiptext="&pref.shortcut.bg.tooltip;"/>
+                    <separator />
+                    <checkbox preference="imagetweak_contentdetectable" label="&pref.contentdetectable.label;" tooltiptext="&pref.contentdetectable.tooltip;"/>
                 </vbox>
             </groupbox>
             <label value="&pref.pressf1forhelp.label;"/>
