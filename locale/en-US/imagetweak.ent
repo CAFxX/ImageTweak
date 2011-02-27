@@ -1,6 +1,7 @@
 <!ENTITY pref.window.title "ImageTweak - Options">
 <!ENTITY pref.prefpane.label "Image display options">
 <!ENTITY pref.bgcolor.label "Background color">
+<!ENTITY pref.bordercolor.label "Border color">
 <!ENTITY pref.autoresize.label "Automatically resize images on load">
 <!ENTITY pref.clip_movement.label "Clip image movement range">
 <!ENTITY pref.zoomexp.label "Zoom factor (&#37;)">
@@ -19,6 +20,7 @@
 <!ENTITY pref.startfromtopleft.label "Place image at top left">
 <!ENTITY pref.contentdetectable.label "Notify websites">
 <!ENTITY pref.bgcolor.tooltip "Set the background color used when displaying images (CSS color or percentage, 0&#37; being black and 100&#37; being white)">
+<!ENTITY pref.bordercolor.tooltip "Set the color of the border around images (CSS color or percentage, 0&#37; being black and 100&#37; being white). If empty disables the border.">
 <!ENTITY pref.autoresize.tooltip "Automatically resize images bigger than the window to fit upon loading">
 <!ENTITY pref.clip_movement.tooltip "Allow the image to be moved only within the window">
 <!ENTITY pref.zoomexp.tooltip "Zoom step factor (200&#37; means to double/halve at each step)">

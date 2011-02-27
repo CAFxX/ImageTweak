@@ -1,6 +1,7 @@
 <!ENTITY pref.window.title "ImageTweak - Opzioni">
 <!ENTITY pref.prefpane.label "Opzioni di visualizzazione delle immagini">
 <!ENTITY pref.bgcolor.label "Colore di sfondo">
+<!ENTITY pref.bordercolor.label "Colore del bordino">
 <!ENTITY pref.autoresize.label "Ridimensiona automaticamente le immagini">
 <!ENTITY pref.clip_movement.label "Limita il movimento delle immagini">
 <!ENTITY pref.zoomexp.label "Fattore di zoom (&#37;)">
@@ -19,6 +20,7 @@
 <!ENTITY pref.startfromtopleft.label "Immagine in alto a destra">
 <!ENTITY pref.contentdetectable.label "Notifica i siti web">
 <!ENTITY pref.bgcolor.tooltip "Imposta il colore di sfondo utilizzato quando vengono visualizzate le immagini (colore CSS o percentuale, dove 0&#37; é nero e 100&#37; é bianco)">
+<!ENTITY pref.bordercolor.tooltip "Imposta il colore del bordino intorno le immagini (colore CSS o percentuale, dove 0&#37; é nero e 100&#37; é bianco). Se lasciato vuoto non visualizza alcun bordino.">
 <!ENTITY pref.autoresize.tooltip "Se una immagine é più larga della finestra verrà inizialmente visualizzata ridimensionata">
 <!ENTITY pref.clip_movement.tooltip "Permette il movimento dell&apos;immagine solo all&apos;interno della finestra">
 <!ENTITY pref.zoomexp.tooltip "Fattore del passo di zoom (es. 200&#37; raddoppia/dimezza ad ogni passo)">

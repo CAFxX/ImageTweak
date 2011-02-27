@@ -22,6 +22,7 @@
             while ($("zoomtype_default_radiogroup").selectedItem.disabled)
                 $("zoomtype_default_radiogroup").selectedIndex = ($("zoomtype_default_radiogroup").selectedIndex + 1) % 3;
             $("bgcolor_colorpicker").color = ImageTweak.parseColorExtended($("bgcolor_textbox").value);
+            $("bordercolor_colorpicker").color = ImageTweak.parseColorExtended($("bordercolor_textbox").value);
         };
 
         ImageTweak.InitPrefPane = function() {
@@ -35,6 +36,11 @@
                 $("bgcolor_textbox").value = this.color;
                 $("preferences").fireChangedEvent($("bgcolor_textbox"));
             };
+
+            $("bordercolor_colorpicker").onchange = function() {
+                $("bordercolor_textbox").value = this.color;
+                $("preferences").fireChangedEvent($("bordercolor_textbox"));
+            };
         };
     ]]></script>
     <prefpane label="&pref.prefpane.label;" image="chrome://imagetweak/skin/imagetweak.png" onpaneload="ImageTweak.InitPrefPane()">
@@ -43,6 +49,7 @@
         </keyset>
         <preferences id="imagetweak_preferences">
             <preference id="imagetweak_bgcolor" name="extensions.imagetweak.bgcolor" type="string"/>
+            <preference id="imagetweak_bordercolor" name="extensions.imagetweak.bordercolor" type="string"/>
             <preference id="imagetweak_zoomexp" name="extensions.imagetweak.zoomexp2" type="string"/>
             <preference id="imagetweak_autoresize" name="browser.enable_automatic_image_resizing" type="bool"/>
             <preference id="imagetweak_clip_movement" name="extensions.imagetweak.clip_movement" type="int"/>
@@ -66,6 +73,11 @@
                         <label value="&pref.bgcolor.label;" flex="1" control="imagetweak_bgcolor_textbox" tooltiptext="&pref.bgcolor.tooltip;"/>
                         <colorpicker type="button" id="imagetweak_bgcolor_colorpicker"/>
                         <textbox preference="imagetweak_bgcolor" width="100px" id="imagetweak_bgcolor_textbox" tooltiptext="&pref.bgcolor.tooltip;"/>
+                    </hbox>
+                    <hbox align="center">
+                        <label value="&pref.bordercolor.label;" flex="1" control="imagetweak_bordercolor_textbox" tooltiptext="&pref.bordercolor.tooltip;"/>
+                        <colorpicker type="button" id="imagetweak_bordercolor_colorpicker"/>
+                        <textbox preference="imagetweak_bordercolor" width="100px" id="imagetweak_bordercolor_textbox" tooltiptext="&pref.bordercolor.tooltip;"/>
                     </hbox>
                     <hbox align="center">
                         <label value="&pref.zoomexp.label;" flex="1" control="imagetweak_zoomexp_textbox" tooltiptext="&pref.zoomexp.tooltip;"/>
