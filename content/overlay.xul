@@ -88,8 +88,8 @@ function _parseModifiers(aEvent)
                 <menuitem label="Rotate clockwise" oncommand="gContextMenu.target.ownerDocument.ImageTweak.PerformRotation( 90 );"/>
                 <menuitem label="Rotate counterclockwise" oncommand="gContextMenu.target.ownerDocument.ImageTweak.PerformRotation( -90 );"/>
                 <menuseparator/>
-                <menuitem label="Options..." oncommand=""/>
-                <menuitem label="User guide" oncommand=""/>
+                <menuitem label="Options..." oncommand="openDialog('chrome://imagetweak/content/prefs.xul', '', 'centerscreen,dialog=no,chrome,resizable,dependent,modal');"/>
+                <menuitem label="User guide" oncommand="ImageTweak.browse('https://github.com/CAFxX/ImageTweak/wiki/ImageTweak-user-guide');"/>
             </menupopup>
         </menu>
     </popup>
