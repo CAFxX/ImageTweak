@@ -2,10 +2,95 @@
 <?xml-stylesheet href="chrome://browser/skin/" type="text/css"?>
 
 <overlay id="imagetweakOverlay" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:nc="http://home.netscape.com/NC-rdf#" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	<script src="chrome://global/content/nsDragAndDrop.js" />
-	<script src="chrome://global/content/nsTransferable.js" />
-	<script type="application/x-javascript" src="chrome://imagetweak/content/imagetweak.js" /> 
-	<script type="application/x-javascript">
-		window.addEventListener( "load", ImageTweak.entryPoint, false );
-	</script>
+    <script src="chrome://global/content/nsDragAndDrop.js" />
+    <script src="chrome://global/content/nsTransferable.js" />
+    <script type="application/x-javascript" src="chrome://imagetweak/content/imagetweak.js" /> 
+    <script type="application/x-javascript"><![CDATA[
+        window.addEventListener( "load", ImageTweak.entryPoint, false );
+window.addEventListener( "load", function() {
+    var contextMenu = document.getElementById("contentAreaContextMenu");
+    if (contextMenu) {
+        contextMenu.addEventListener("popupshowing", function(event) {
+            var IT = document.popupNode.ownerDocument.ImageTweak;
+            //if (IT && !gContextMenu.onImage) {
+                //event.preventDefault();
+                //synthesizeMouse(IT.Image, 2, 2, { type: "contextmenu", button: 2 }, IT.Window);
+				//document.popupNode = IT.Image;
+				//gContextMenu.hidePopup();
+				//gContextMenu = new nsContextMenu(contextMenu, gBrowser);
+				//for (var i in gContextMenu) ImageTweak.log(i+": "+gContextMenu[i]);
+            //} else { 
+                document.getElementById("imagetweak_popup").hidden = !IT;
+            //}
+        }, false);
+    }
+}, false );
+        
+function synthesizeMouse(aTarget, aOffsetX, aOffsetY, aEvent, aWindow)
+{
+  if (!aWindow)
+    aWindow = window;
+
+  var utils = aWindow.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIDOMWindowUtils);
+  if (utils) {
+    var button = aEvent.button || 0;
+    var clickCount = aEvent.clickCount || 1;
+    var modifiers = _parseModifiers(aEvent);
+
+    var rect = aTarget.getBoundingClientRect();
+
+    var left = rect.left + aOffsetX;
+    var top = rect.top + aOffsetY;
+
+    if (aEvent.type) {
+      utils.sendMouseEvent(aEvent.type, left, top, button, clickCount, modifiers);
+    } else {
+      utils.sendMouseEvent("mousedown", left, top, button, clickCount, modifiers);
+      utils.sendMouseEvent("mouseup", left, top, button, clickCount, modifiers);
+    }
+  }
+}
+
+function _parseModifiers(aEvent)
+{
+  var hwindow = Components.classes["@mozilla.org/appshell/appShellService;1"]
+                          .getService(Components.interfaces.nsIAppShellService)
+                          .hiddenDOMWindow;
+
+  const masks = Components.interfaces.nsIDOMNSEvent;
+  var mval = 0;
+  if (aEvent.shiftKey)
+    mval |= masks.SHIFT_MASK;
+  if (aEvent.ctrlKey)
+    mval |= masks.CONTROL_MASK;
+  if (aEvent.altKey)
+    mval |= masks.ALT_MASK;
+  if (aEvent.metaKey)
+    mval |= masks.META_MASK;
+  if (aEvent.accelKey)
+    mval |= (hwindow.navigator.platform.indexOf("Mac") >= 0) ? masks.META_MASK : masks.CONTROL_MASK;
+
+  return mval;
+}
+
+        
+    ]]></script>
+    <popup id="contentAreaContextMenu">
+        <menuseparator/>
+        <menu id="imagetweak_popup" label="ImageTweak" insertafter="context-stop">
+            <menupopup>
+                <menuitem label="Fit image to screen" oncommand="gContextMenu.target.ownerDocument.ImageTweak.PerformZoomTypeSwitch('fit');"/>
+                <menuitem label="Fill screen" oncommand="gContextMenu.target.ownerDocument.ImageTweak.PerformZoomTypeSwitch('fill');"/>
+                <menuitem label="100%" oncommand="gContextMenu.target.ownerDocument.ImageTweak.PerformZoomTypeSwitch('pixel');"/>
+                <menuitem label="Zoom in" oncommand="gContextMenu.target.ownerDocument.ImageTweak.PerformZoom(1);"/>
+                <menuitem label="Zoom out" oncommand="gContextMenu.target.ownerDocument.ImageTweak.PerformZoom(-1);"/>
+                <menuseparator/>
+                <menuitem label="Rotate clockwise" oncommand="gContextMenu.target.ownerDocument.ImageTweak.PerformRotation( 90 );"/>
+                <menuitem label="Rotate counterclockwise" oncommand="gContextMenu.target.ownerDocument.ImageTweak.PerformRotation( -90 );"/>
+                <menuseparator/>
+                <menuitem label="Options..." oncommand=""/>
+                <menuitem label="User guide" oncommand=""/>
+            </menupopup>
+        </menu>
+    </popup>
 </overlay>
