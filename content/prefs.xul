@@ -23,6 +23,7 @@
                 $("zoomtype_default_radiogroup").selectedIndex = ($("zoomtype_default_radiogroup").selectedIndex + 1) % 3;
             $("bgcolor_colorpicker").color = ImageTweak.parseColorExtended($("bgcolor_textbox").value);
             $("bordercolor_colorpicker").color = ImageTweak.parseColorExtended($("bordercolor_textbox").value);
+			$("sandbox").reload();
         };
 
         ImageTweak.InitPrefPane = function() {
@@ -43,7 +44,7 @@
             };
         };
     ]]></script>
-    <prefpane label="&pref.prefpane.label;" image="chrome://imagetweak/skin/imagetweak.png" onpaneload="ImageTweak.InitPrefPane()">
+    <prefpane label="&pref.prefpane.label;" image="chrome://imagetweak/skin/imagetweak48.png" onpaneload="ImageTweak.InitPrefPane()">
         <keyset>
             <key keycode="VK_F1" oncommand="ImageTweak.browse('https://github.com/CAFxX/ImageTweak/wiki/ImageTweak-user-guide');" />
         </keyset>
@@ -68,56 +69,55 @@
         </preferences>
         <vbox>
             <groupbox>
-                <vbox>
-                    <hbox align="center">
-                        <label value="&pref.bgcolor.label;" flex="1" control="imagetweak_bgcolor_textbox" tooltiptext="&pref.bgcolor.tooltip;"/>
-                        <colorpicker type="button" id="imagetweak_bgcolor_colorpicker"/>
-                        <textbox preference="imagetweak_bgcolor" width="100px" id="imagetweak_bgcolor_textbox" tooltiptext="&pref.bgcolor.tooltip;"/>
-                    </hbox>
-                    <hbox align="center">
-                        <label value="&pref.bordercolor.label;" flex="1" control="imagetweak_bordercolor_textbox" tooltiptext="&pref.bordercolor.tooltip;"/>
-                        <colorpicker type="button" id="imagetweak_bordercolor_colorpicker"/>
-                        <textbox preference="imagetweak_bordercolor" width="100px" id="imagetweak_bordercolor_textbox" tooltiptext="&pref.bordercolor.tooltip;"/>
-                    </hbox>
-                    <hbox align="center">
-                        <label value="&pref.zoomexp.label;" flex="1" control="imagetweak_zoomexp_textbox" tooltiptext="&pref.zoomexp.tooltip;"/>
-                        <textbox preference="imagetweak_zoomexp" width="100px" id="imagetweak_zoomexp_textbox" tooltiptext="&pref.zoomexp.tooltip;" 
-                            onsynctopreference="return parseFloat($('zoomexp_textbox').value)" />
-                    </hbox>
-                    <checkbox preference="imagetweak_clip_movement" label="&pref.clip_movement.label;" tooltiptext="&pref.clip_movement.tooltip;" id="imagetweak_clip_movement_checkbox" 
-                        onsynctopreference="return $('clip_movement_checkbox').checked ? 3 : 0;"
-                        onsyncfrompreference="return $('clip_movement').value != 0;"/>
-                    <checkbox preference="imagetweak_startfromtopleft" label="&pref.startfromtopleft.label;" tooltiptext="&pref.startfromtopleft.tooltip;"/>
-                    <checkbox preference="imagetweak_zoomonpointer" label="&pref.zoomonpointer.label;" tooltiptext="&pref.zoomonpointer.tooltip;"/>
-                    <checkbox preference="imagetweak_invertmousewheel" label="&pref.invertmousewheel.label;" tooltiptext="&pref.invertmousewheel.tooltip;"/>
-                    <checkbox preference="imagetweak_invertkeyboard" label="&pref.invertkeyboard.label;" tooltiptext="&pref.invertkeyboard.tooltip;"/>
-                    <separator />
-                    <hbox>
-                        <vbox>
-                            <label value="&pref.zoomtype.label;"/>
-                            <checkbox preference="imagetweak_zoomtype_full" label="&pref.zoomtype.full.label;" tooltiptext="&pref.zoomtype.full.tooltip;"/>
-                            <checkbox preference="imagetweak_zoomtype_fill" label="&pref.zoomtype.fill.label;" tooltiptext="&pref.zoomtype.fill.tooltip;"/>
-                            <checkbox preference="imagetweak_zoomtype_unscaled" label="&pref.zoomtype.unscaled.label;" tooltiptext="&pref.zoomtype.unscaled.tooltip;"/>
-                            <checkbox preference="imagetweak_zoomtype_free" label="&pref.zoomtype.free.label;" tooltiptext="&pref.zoomtype.free.tooltip;"/>
-                        </vbox>
-                        <vbox>
-                            <label value="&pref.zoomtype.default.label;"/>
-                            <radiogroup preference="imagetweak_zoomtype_default" id="imagetweak_zoomtype_default_radiogroup">
-                                <radio label="&pref.zoomtype.full.label;" value="fit" id="imagetweak_zoomtype_default_full" />
-                                <radio label="&pref.zoomtype.fill.label;" value="fill" id="imagetweak_zoomtype_default_fill" />
-                                <radio label="&pref.zoomtype.unscaled.label;" value="pixel" id="imagetweak_zoomtype_default_unscaled" />
-                            </radiogroup>
-                        </vbox>
-                    </hbox>
-                    <separator />
-                    <label value="&pref.shortcut.label;"/>
-                    <checkbox preference="imagetweak_shortcut_img" label="&pref.shortcut.img.label;" tooltiptext="&pref.shortcut.img.tooltip;"/>
-                    <checkbox preference="imagetweak_shortcut_bg" label="&pref.shortcut.bg.label;" tooltiptext="&pref.shortcut.bg.tooltip;"/>
-                    <separator />
-                    <checkbox preference="imagetweak_contentdetectable" label="&pref.contentdetectable.label;" tooltiptext="&pref.contentdetectable.tooltip;"/>
-                </vbox>
+				<hbox>
+					<vbox>
+						<hbox align="center">
+							<label value="&pref.bgcolor.label;" flex="1" control="imagetweak_bgcolor_textbox" tooltiptext="&pref.bgcolor.tooltip;"/>
+							<colorpicker type="button" id="imagetweak_bgcolor_colorpicker"/>
+							<textbox preference="imagetweak_bgcolor" width="100px" id="imagetweak_bgcolor_textbox" tooltiptext="&pref.bgcolor.tooltip;"/>
+						</hbox>
+						<hbox align="center">
+							<label value="&pref.bordercolor.label;" flex="1" control="imagetweak_bordercolor_textbox" tooltiptext="&pref.bordercolor.tooltip;"/>
+							<colorpicker type="button" id="imagetweak_bordercolor_colorpicker"/>
+							<textbox preference="imagetweak_bordercolor" width="100px" id="imagetweak_bordercolor_textbox" tooltiptext="&pref.bordercolor.tooltip;"/>
+						</hbox>
+						<hbox align="center">
+							<label value="&pref.zoomexp.label;" flex="1" control="imagetweak_zoomexp_textbox" tooltiptext="&pref.zoomexp.tooltip;"/>
+							<textbox preference="imagetweak_zoomexp" width="100px" id="imagetweak_zoomexp_textbox" tooltiptext="&pref.zoomexp.tooltip;" 
+								onsynctopreference="return parseFloat($('zoomexp_textbox').value)" />
+						</hbox>
+						<separator />
+						<label value="&pref.zoomtype.label;"/>
+						<checkbox preference="imagetweak_zoomtype_full" label="&pref.zoomtype.full.label;" tooltiptext="&pref.zoomtype.full.tooltip;"/>
+						<checkbox preference="imagetweak_zoomtype_fill" label="&pref.zoomtype.fill.label;" tooltiptext="&pref.zoomtype.fill.tooltip;"/>
+						<checkbox preference="imagetweak_zoomtype_unscaled" label="&pref.zoomtype.unscaled.label;" tooltiptext="&pref.zoomtype.unscaled.tooltip;"/>
+						<checkbox preference="imagetweak_zoomtype_free" label="&pref.zoomtype.free.label;" tooltiptext="&pref.zoomtype.free.tooltip;"/>
+						<separator />
+						<label value="&pref.zoomtype.default.label;"/>
+						<radiogroup preference="imagetweak_zoomtype_default" id="imagetweak_zoomtype_default_radiogroup">
+							<radio label="&pref.zoomtype.full.label;" value="fit" id="imagetweak_zoomtype_default_full" />
+							<radio label="&pref.zoomtype.fill.label;" value="fill" id="imagetweak_zoomtype_default_fill" />
+							<radio label="&pref.zoomtype.unscaled.label;" value="pixel" id="imagetweak_zoomtype_default_unscaled" />
+						</radiogroup>
+					</vbox>
+					<vbox>
+						<checkbox preference="imagetweak_clip_movement" label="&pref.clip_movement.label;" tooltiptext="&pref.clip_movement.tooltip;" id="imagetweak_clip_movement_checkbox" 
+							onsynctopreference="return $('clip_movement_checkbox').checked ? 3 : 0;"
+							onsyncfrompreference="return $('clip_movement').value != 0;"/>
+						<checkbox preference="imagetweak_startfromtopleft" label="&pref.startfromtopleft.label;" tooltiptext="&pref.startfromtopleft.tooltip;"/>
+						<checkbox preference="imagetweak_zoomonpointer" label="&pref.zoomonpointer.label;" tooltiptext="&pref.zoomonpointer.tooltip;"/>
+						<checkbox preference="imagetweak_invertmousewheel" label="&pref.invertmousewheel.label;" tooltiptext="&pref.invertmousewheel.tooltip;"/>
+						<checkbox preference="imagetweak_invertkeyboard" label="&pref.invertkeyboard.label;" tooltiptext="&pref.invertkeyboard.tooltip;"/>
+						<separator />
+						<label value="&pref.shortcut.label;"/>
+						<checkbox preference="imagetweak_shortcut_img" label="&pref.shortcut.img.label;" tooltiptext="&pref.shortcut.img.tooltip;"/>
+						<checkbox preference="imagetweak_shortcut_bg" label="&pref.shortcut.bg.label;" tooltiptext="&pref.shortcut.bg.tooltip;"/>
+						<separator flex="1" />
+						<checkbox preference="imagetweak_contentdetectable" label="&pref.contentdetectable.label;" tooltiptext="&pref.contentdetectable.tooltip;"/>
+					</vbox>
+				</hbox>
             </groupbox>
-            <label value="&pref.pressf1forhelp.label;"/>
+			<label value="&pref.pressf1forhelp.label;"/>
         </vbox>
     </prefpane>
 </prefwindow>
