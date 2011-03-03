@@ -150,25 +150,25 @@ ImageTweak.prototype.OnResize = function OnResize(event) {
 
 ImageTweak.prototype.OnDragStart = function OnDragStart(event) {
     this.Dragging = true;
+    this.ClientXDrag = this.ClientXPrev;
+    this.ClientYDrag = this.ClientYPrev;
     event.dataTransfer.setData("text/uri-list", this.Image.URL);
     event.dataTransfer.setData("text/plain", this.Image.URL);
     event.dataTransfer.effectAllowed = "none";
-    this.Document.body.style.cursor = "move";
-    this.ClientXDrag = this.ClientXPrev;
-    this.ClientYDrag = this.ClientYPrev;
+	this.SetMouseCursor();
 };
 
 ImageTweak.prototype.OnDragEnd = function OnDragEnd(event) {
     this.Dragging = false;
-    this.Document.body.style.cursor = "auto";
+	this.SetMouseCursor();
 };
 
 ImageTweak.prototype.OnDrag = function OnDrag(event) {
     this.PerformMove( this.ClientXDrag - this.ClientXPrev, this.ClientYDrag - this.ClientYPrev );
     this.ClientXPrev = this.ClientXDrag;
     this.ClientYPrev = this.ClientYDrag;
+	this.SetMouseCursor();
 	event.preventDefault();
-    this.Document.body.style.cursor = "move";
 };
 
 ImageTweak.prototype.OnDragEnterWindow = function OnDragEnterWindow(event) {
@@ -182,8 +182,8 @@ ImageTweak.prototype.OnDragExitWindow = function OnDragExitWindow(event) {
 ImageTweak.prototype.OnDragOverWindow = function OnDragOverWindow(event) {
     this.ClientXDrag = event.clientX;
     this.ClientYDrag = event.clientY;
+	this.SetMouseCursor();
 	event.preventDefault();
-    this.Document.body.style.cursor = "move";
 };
 
 ImageTweak.prototype.OnMouseDown = function OnMouseDown(event) {
@@ -351,13 +351,6 @@ ImageTweak.prototype.PerformRotation = function PerformRotation( degrees ) {
 ImageTweak.prototype.StartScroll = function StartScroll(event) {
     if ( this.Window.innerWidth < this.Image.width || this.Window.innerHeight < this.Image.height || ImageTweak.getPref("ClipMovement") == false ) {
         this.Scrolling = true;
-        if ( ( this.Window.innerWidth < this.Image.width && this.Window.innerHeight < this.Image.height ) || ImageTweak.getPref("ClipMovement") == false ) {
-            this.Document.body.style.cursor = "move";
-        } else if ( this.Window.innerWidth < this.Image.width ) {
-            this.Document.body.style.cursor = "W-resize";
-        } else {
-            this.Document.body.style.cursor = "N-resize";
-        }
         if ( event ) {
             this.ClientXStart = event.clientX;
             this.ClientYStart = event.clientY;
@@ -370,16 +363,31 @@ ImageTweak.prototype.StartScroll = function StartScroll(event) {
     } else {
         this.StopScroll();
     }
+	this.SetMouseCursor();
 };
 
 ImageTweak.prototype.StopScroll = function StopScroll(event) {
     this.Scrolling = false;
-    this.Document.body.style.cursor = "auto";
+	this.SetMouseCursor();
     clearInterval( this.ScrollIntervalHandle );
     this.ScrollIntervalHandle = null;
     if ( event ) {
         event.preventDefault();
     }
+};
+
+ImageTweak.prototype.SetMouseCursor = function() {
+	if (this.Scrolling || this.Dragging) {
+        if ( ( this.Window.innerWidth < this.Image.width && this.Window.innerHeight < this.Image.height ) || ImageTweak.getPref("ClipMovement") == false ) {
+            this.Document.body.style.cursor = "move";
+        } else if ( this.Window.innerWidth < this.Image.width ) {
+            this.Document.body.style.cursor = "W-resize";
+        } else {
+            this.Document.body.style.cursor = "N-resize";
+        }
+	} else {
+		this.Document.body.style.cursor = "auto";
+	}
 };
 
 ImageTweak.prototype.PerformScroll = function PerformScroll(offset) {
