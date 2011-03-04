@@ -476,7 +476,7 @@ ImageTweak.prototype.PerformZoomTypeSwitch = function PerformZoomTypeSwitch( img
 ImageTweak.prototype.GetResamplingAlgorithm = function GetResamplingAlgorithm() {
 	const bilinear = "optimizeQuality";
 	const nearestNeighbor = "-moz-crisp-edges";
-    return bilinear;
+    return ImageTweak.getPref("ResamplingAlgorithm") ? bilinear : nearestNeighbor;
 };
 
 ImageTweak.prototype.GetElementImageURL = function GetElementImageURL(elem) {
@@ -635,10 +635,10 @@ ImageTweak.console = Components.classes["@mozilla.org/consoleservice;1"].getServ
 ImageTweak.prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
 
 // this structure holds informations about the preferences used by ImageTweak
-// see ImageTweak.GetPref for further informations
+// see ImageTweak.getPref for further informations
 ImageTweak.preferences = {
     AutomaticResizing:              { pref: "browser.enable_automatic_image_resizing"                                                                    },
-    ZoomTypeFitEnabled:             { pref: "extensions.imagetweak.zoomtype.full"                                                                        }, // originally called "ZoomTypeFullEnabled"
+    ZoomTypeFitEnabled:             { pref: "extensions.imagetweak.zoomtype.full"                                                                        },
     ZoomTypeFillEnabled:            { pref: "extensions.imagetweak.zoomtype.fill"                                                                        },
     ZoomTypeFreeEnabled:            { pref: "extensions.imagetweak.zoomtype.free"                                                                        },
     ZoomTypeUnscaledEnabled:        { pref: "extensions.imagetweak.zoomtype.unscaled"                                                                    },
@@ -655,7 +655,8 @@ ImageTweak.preferences = {
     StartFromTopLeft:               { pref: "extensions.imagetweak.startfromtopleft"                                                                     },
     Scrolling:                      { pref: "general.autoScroll"                                                                                         },
     LegacyScrolling:                { pref: "extensions.imagetweak.legacyscrolling"                                                                      },
-    ContentDetectable:              { pref: "extensions.imagetweak.contentdetectable"                                                                    }
+    ContentDetectable:              { pref: "extensions.imagetweak.contentdetectable"                                                                    },
+    ResamplingAlgorithm:            { pref: "extensions.imagetweak.resamplingalgorithm"                                                                  }
 };
 
 ImageTweak.getPref = function getPref(id) {
