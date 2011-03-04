@@ -120,6 +120,7 @@ ImageTweak.prototype.Repaint = function Repaint() {
     var Coordinates = this.ScreenCoordinates();
 
     var CurCSS = "position:absolute;" +
+			"image-rendering:" + this.GetResamplingAlgorithm() + ";" +
             "border:"   + ( ImageTweak.getPref("BorderColor") != "" ? "1px solid " + ImageTweak.getPref("BorderColor") : "none" ) + ";" +
             "left:"     + Math.round(Coordinates.imgLeft)       + "px;" +
             "top:"      + Math.round(Coordinates.imgTop)        + "px;" +
@@ -470,6 +471,12 @@ ImageTweak.prototype.PerformZoomTypeSwitch = function PerformZoomTypeSwitch( img
     }
     this.ZoomType = imgZoomType;
     this.Repaint();
+};
+
+ImageTweak.prototype.GetResamplingAlgorithm = function GetResamplingAlgorithm() {
+	const bilinear = "optimizeQuality";
+	const nearestNeighbor = "-moz-crisp-edges";
+    return bilinear;
 };
 
 ImageTweak.prototype.GetElementImageURL = function GetElementImageURL(elem) {
