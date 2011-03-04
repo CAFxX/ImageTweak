@@ -1,21 +1,21 @@
 ﻿/************************************************************************************************************************************************************
 
-	ImageTweak
-	2006-2011 CAFxX
-	http://cafxx.strayorange.com
-	
-	This program is free software: you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation, either version 3 of the License, or
-	(at your option) any later version.
+    ImageTweak
+    2006-2011 CAFxX
+    http://cafxx.strayorange.com
+    
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
 
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
-	You should have received a copy of the GNU General Public License
-	along with this program.  If not, see <http://www.gnu.org/licenses/>.
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ************************************************************************************************************************************************************/
 
@@ -48,7 +48,8 @@ function ImageTweak( hWindow ) {
         this.ScrollIntervalHandle = null; // Interval handle used for scrolling
         this.ScrollInterval = 25; //ms
         this.ImageMax = 32767; // maximum physical image size
-		this.ContinuousTone = null;
+        this.ContinuousTone = null;
+		this.InvertResamplingAlgorithm = false;
     }
 };
 
@@ -121,7 +122,7 @@ ImageTweak.prototype.Repaint = function Repaint() {
     var Coordinates = this.ScreenCoordinates();
 
     var CurCSS = "position:absolute;" +
-			"image-rendering:" + this.GetResamplingAlgorithm() + ";" +
+            "image-rendering:" + this.GetResamplingAlgorithm() + ";" +
             "border:"   + ( ImageTweak.getPref("BorderColor") != "" ? "1px solid " + ImageTweak.getPref("BorderColor") : "none" ) + ";" +
             "left:"     + Math.round(Coordinates.imgLeft)       + "px;" +
             "top:"      + Math.round(Coordinates.imgTop)        + "px;" +
@@ -157,20 +158,20 @@ ImageTweak.prototype.OnDragStart = function OnDragStart(event) {
     event.dataTransfer.setData("text/uri-list", this.Image.URL);
     event.dataTransfer.setData("text/plain", this.Image.URL);
     event.dataTransfer.effectAllowed = "none";
-	this.SetMouseCursor();
+    this.SetMouseCursor();
 };
 
 ImageTweak.prototype.OnDragEnd = function OnDragEnd(event) {
     this.Dragging = false;
-	this.SetMouseCursor();
+    this.SetMouseCursor();
 };
 
 ImageTweak.prototype.OnDrag = function OnDrag(event) {
     this.PerformMove( this.ClientXDrag - this.ClientXPrev, this.ClientYDrag - this.ClientYPrev );
     this.ClientXPrev = this.ClientXDrag;
     this.ClientYPrev = this.ClientYDrag;
-	this.SetMouseCursor();
-	event.preventDefault();
+    this.SetMouseCursor();
+    event.preventDefault();
 };
 
 ImageTweak.prototype.OnDragEnterWindow = function OnDragEnterWindow(event) {
@@ -184,8 +185,8 @@ ImageTweak.prototype.OnDragExitWindow = function OnDragExitWindow(event) {
 ImageTweak.prototype.OnDragOverWindow = function OnDragOverWindow(event) {
     this.ClientXDrag = event.clientX;
     this.ClientYDrag = event.clientY;
-	this.SetMouseCursor();
-	event.preventDefault();
+    this.SetMouseCursor();
+    event.preventDefault();
 };
 
 ImageTweak.prototype.OnMouseDown = function OnMouseDown(event) {
@@ -235,13 +236,12 @@ ImageTweak.prototype.OnKeyPress = function OnKeyPress(event) {
     }
     var MoveDelta = ( Math.min( this.Window.innerWidth, this.Window.innerHeight ) / 10 ) * ( ImageTweak.getPref("InvertKeyboard") ? -1 : 1 );
     var MovePageDelta = ( this.Window.innerHeight ) * ( ImageTweak.getPref("InvertKeyboard") ? -1 : 1 );
-    var EventIsHandled = true;
     if ( event.ctrlKey ) {
         switch (event.keyCode + event.charCode) {
             case 43: /* plus sign */                this.PerformZoom( 1 ); break;
             case 45: /* minus sign */               this.PerformZoom( -1 ); break;
             case 48: /* 0 */                        this.DefaultZoomType(); break;
-            default:                                EventIsHandled = false;
+            default:                                return;
         }
     } else {
         switch (event.keyCode + event.charCode) {
@@ -261,10 +261,11 @@ ImageTweak.prototype.OnKeyPress = function OnKeyPress(event) {
             case 52: /* 4 */                        this.PerformZoomTypeSwitch( "free" ); break;
             case 34: /* page down */                this.PerformMove( 0, -MovePageDelta ); break;
             case 33: /* page up */                  this.PerformMove( 0, MovePageDelta ); break;
-            default:                                EventIsHandled = false;
+            case 112: /* p */                       this.InvertResamplingAlgorithm = !this.InvertResamplingAlgorithm; this.Repaint(); break;
+            default:                                return;
         }
     }
-    if ( EventIsHandled == true ) event.preventDefault();
+    event.preventDefault();
 };
 
 ImageTweak.prototype.OnDoubleClick = function OnDoubleClick(event) {
@@ -369,12 +370,12 @@ ImageTweak.prototype.StartScroll = function StartScroll(event) {
     } else {
         this.StopScroll();
     }
-	this.SetMouseCursor();
+    this.SetMouseCursor();
 };
 
 ImageTweak.prototype.StopScroll = function StopScroll(event) {
     this.Scrolling = false;
-	this.SetMouseCursor();
+    this.SetMouseCursor();
     clearInterval( this.ScrollIntervalHandle );
     this.ScrollIntervalHandle = null;
     if ( event ) {
@@ -383,7 +384,7 @@ ImageTweak.prototype.StopScroll = function StopScroll(event) {
 };
 
 ImageTweak.prototype.SetMouseCursor = function() {
-	if (this.Scrolling || this.Dragging) {
+    if (this.Scrolling || this.Dragging) {
         if ( ( this.Window.innerWidth < this.Image.width && this.Window.innerHeight < this.Image.height ) || ImageTweak.getPref("ClipMovement") == false ) {
             this.Document.body.style.cursor = "move";
         } else if ( this.Window.innerWidth < this.Image.width ) {
@@ -391,9 +392,9 @@ ImageTweak.prototype.SetMouseCursor = function() {
         } else {
             this.Document.body.style.cursor = "N-resize";
         }
-	} else {
-		this.Document.body.style.cursor = "auto";
-	}
+    } else {
+        this.Document.body.style.cursor = "auto";
+    }
 };
 
 ImageTweak.prototype.PerformScroll = function PerformScroll(offset) {
@@ -437,29 +438,29 @@ ImageTweak.prototype.DefaultZoomType = function DefaultZoomType() {
 
 ImageTweak.prototype.ZoomTypes = {
     free: { 
-		next:'fit',   
-		condition: function(_this) { 
-			return ImageTweak.getPref("ZoomTypeFreeEnabled") 
-		}
-	},
+        next:'fit',   
+        condition: function(_this) { 
+            return ImageTweak.getPref("ZoomTypeFreeEnabled") 
+        }
+    },
     fit: { 
-		next:'fill',  
-		condition: function (_this) {
-			return _this.FitZoom() < 1 && ImageTweak.getPref("ZoomTypeFitEnabled");
-		}
-	},
+        next:'fill',  
+        condition: function (_this) {
+            return _this.FitZoom() < 1 && ImageTweak.getPref("ZoomTypeFitEnabled");
+        }
+    },
     fill: { 
-		next:'pixel', 
-		condition: function (_this) {
-			return _this.FillZoom() < 1 && ImageTweak.getPref("ZoomTypeFillEnabled");
-		}
-	},
+        next:'pixel', 
+        condition: function (_this) {
+            return _this.FillZoom() < 1 && ImageTweak.getPref("ZoomTypeFillEnabled");
+        }
+    },
     pixel: { 
-		next:'free',
-		condition: function (_this) {
-			return _this.FitZoom() >= 1 || ImageTweak.getPref("ZoomTypeUnscaledEnabled");
-		}
-	}
+        next:'free',
+        condition: function (_this) {
+            return _this.FitZoom() >= 1 || ImageTweak.getPref("ZoomTypeUnscaledEnabled");
+        }
+    }
 };
 
 ImageTweak.prototype.PerformZoomTypeSwitch = function PerformZoomTypeSwitch( imgZoomType, SkipCondition ) {
@@ -479,9 +480,14 @@ ImageTweak.prototype.PerformZoomTypeSwitch = function PerformZoomTypeSwitch( img
 };
 
 ImageTweak.prototype.GetResamplingAlgorithm = function GetResamplingAlgorithm() {
-	const bilinear = "optimizeQuality";
-	const nearestNeighbor = "-moz-crisp-edges";
-    return ImageTweak.getPref("ResamplingAlgorithm") ? bilinear : nearestNeighbor;
+    const bilinear = "optimizeQuality";
+    const nearestNeighbor = "-moz-crisp-edges";
+	var algorithm = nearestNeighbor;
+    if ( ImageTweak.getPref("ResamplingAlgorithm") && this.ContinuousTone !== false )
+        algorithm = bilinear;
+	if ( this.InvertResamplingAlgorithm )
+		algorithm = algorithm == bilinear ? nearestNeighbor : bilinear;
+	return algorithm;
 };
 
 ImageTweak.prototype.GetElementImageURL = function GetElementImageURL(elem) {
@@ -511,8 +517,8 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
         this.Document.addEventListener( 'click', function(e) { hImageTweak.RegularDocumentOnMouseClick(e); }, false );
         this.Document.addEventListener( 'dblclick', function(e) { hImageTweak.RegularDocumentOnMouseDoubleClick(e); }, false );
         // inject the navigator.imageViewer flag
-		if (ImageTweak.getPref("ContentDetectable"))
-			this.InjectContentFlag();
+        if (ImageTweak.getPref("ContentDetectable"))
+            this.InjectContentFlag();
         this.Inited = true;
     } else if ( !this.Image.naturalWidth ) {
         // we are not ready yet... keep waiting...
@@ -566,74 +572,74 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
 
 // shamelessly taken from mozilla/browser/base/content/nsContextMenu.js
 ImageTweak.getComputedURL = function(aElem, aProp) {
-	var url = aElem.ownerDocument.defaultView.getComputedStyle(aElem, "").getPropertyCSSValue(aProp)[0]; // FIXME: what's the [0] for?!?!
-	return url.primitiveType == CSSPrimitiveValue.CSS_URI ? url.getStringValue() : null;
+    var url = aElem.ownerDocument.defaultView.getComputedStyle(aElem, "").getPropertyCSSValue(aProp)[0]; // FIXME: what's the [0] for?!?!
+    return url.primitiveType == CSSPrimitiveValue.CSS_URI ? url.getStringValue() : null;
 };
 
 // clips value to min < value < max
 ImageTweak.clip = function(value, min, max) {
-	if ( typeof max == "undefined" ) {
-		max = Math.abs(min);
-		min = -min;
-	}
-	return Math.min( max, Math.max( value, min ) );
+    if ( typeof max == "undefined" ) {
+        max = Math.abs(min);
+        min = -min;
+    }
+    return Math.min( max, Math.max( value, min ) );
 };
 
 // opens a new tab and browse to the specified URL
 ImageTweak.browse = function(url) {
-	var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
-	var browser = wm.getMostRecentWindow("navigator:browser").getBrowser();
-	browser.selectedTab = browser.addTab(url);
+    var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
+    var browser = wm.getMostRecentWindow("navigator:browser").getBrowser();
+    browser.selectedTab = browser.addTab(url);
 };
 
 ImageTweak.enabled = function(doc) {
-	return doc ? ImageTweak.enabledForDocument(doc) : true;
+    return doc ? ImageTweak.enabledForDocument(doc) : true;
 };
-	
+    
 ImageTweak.enabledForDocument = function(doc) {
-	return typeof doc.ImageTweak.Image != "undefined";
+    return typeof doc.ImageTweak.Image != "undefined";
 };
 
 // ImageTweak.entryPoint is the global entry point for imagetweak
 // This function is called from overlay.xul
 ImageTweak.entryPoint = function() {
-	gBrowser.addEventListener("load", ImageTweak.startEventHandler, true);
-	gBrowser.addEventListener("focus", ImageTweak.startEventHandler, true);
-	gBrowser.addEventListener("DOMContentLoaded", ImageTweak.startEventHandler, true);
-	gBrowser.addEventListener("DOMFrameContentLoaded", ImageTweak.startEventHandler, true);
-	gBrowser.tabContainer.addEventListener("TabOpen", ImageTweak.startEventHandler, true);
+    gBrowser.addEventListener("load", ImageTweak.startEventHandler, true);
+    gBrowser.addEventListener("focus", ImageTweak.startEventHandler, true);
+    gBrowser.addEventListener("DOMContentLoaded", ImageTweak.startEventHandler, true);
+    gBrowser.addEventListener("DOMFrameContentLoaded", ImageTweak.startEventHandler, true);
+    gBrowser.tabContainer.addEventListener("TabOpen", ImageTweak.startEventHandler, true);
 };
 
 // startEventHandler handles all the pageload, tabopen, tabfocus, etc. events registered in entryPoint
 ImageTweak.startEventHandler = function(e) {
-	var hWindow;
-	// find the handle to the window where the event occurred
-	if ( e.originalTarget && e.originalTarget.defaultView )
-		hWindow = e.originalTarget.defaultView;
-	else if ( e.originalTarget && e.originalTarget.contentWindow )
-		hWindow = e.originalTarget.contentWindow;
-	else if ( e.target && e.target.linkedBrowser && e.target.linkedBrowser.contentWindow )
-		hWindow = e.target.linkedBrowser.contentWindow;
-	// if we found it, start ImageTweak
-	if ( hWindow && hWindow.document ) {
-		if ( !hWindow.document.ImageTweak ) {
-			hWindow.document.ImageTweak = new ImageTweak( hWindow );
-		}
-		hWindow.document.ImageTweak.PluginEventListeners();
-	}
+    var hWindow;
+    // find the handle to the window where the event occurred
+    if ( e.originalTarget && e.originalTarget.defaultView )
+        hWindow = e.originalTarget.defaultView;
+    else if ( e.originalTarget && e.originalTarget.contentWindow )
+        hWindow = e.originalTarget.contentWindow;
+    else if ( e.target && e.target.linkedBrowser && e.target.linkedBrowser.contentWindow )
+        hWindow = e.target.linkedBrowser.contentWindow;
+    // if we found it, start ImageTweak
+    if ( hWindow && hWindow.document ) {
+        if ( !hWindow.document.ImageTweak ) {
+            hWindow.document.ImageTweak = new ImageTweak( hWindow );
+        }
+        hWindow.document.ImageTweak.PluginEventListeners();
+    }
 };
 
 ImageTweak.parseColorExtended = function(v) {
-	var match = /([0-9]*(?:[.,][0-9]*)?)\s*%/.exec(v);
-	if (match) {
-		var L = ImageTweak.clip( Math.round( parseFloat(match[1]) / 100 * 255 ), 0, 255 );
-		return "rgb("+L+","+L+","+L+")";
-	} 
-	return v;
+    var match = /([0-9]*(?:[.,][0-9]*)?)\s*%/.exec(v);
+    if (match) {
+        var L = ImageTweak.clip( Math.round( parseFloat(match[1]) / 100 * 255 ), 0, 255 );
+        return "rgb("+L+","+L+","+L+")";
+    } 
+    return v;
 };
 
 ImageTweak.log = function(msg) {
-	ImageTweak.console.logStringMessage(msg);
+    ImageTweak.console.logStringMessage(msg);
 };
 
 ImageTweak.console = Components.classes["@mozilla.org/consoleservice;1"].getService(Components.interfaces.nsIConsoleService);
@@ -676,28 +682,29 @@ ImageTweak.getPref = function getPref(id) {
 };
 
 ImageTweak.isContinuousToneImage = function isContinuousToneImage(img) {
-	var gCanvas = document.createElement("canvas");
-	var w = aImg.naturalWidth;
-	var h = aImg.naturalHeight;
-	gCanvas.style.width = w + "px";
-	gCanvas.style.height = h + "px";
-	gCanvas.width = w;
-	gCanvas.height = h;
-	gCtx = gCanvas.getContext("2d");
-	gCtx.clearRect(0, 0, w, h);
-	gCtx.drawImage(aImg, 0, 0);
-	
-	var colors = [];
-	for (var i=0; i < w*h && colors.length < 256; i++) {
-		var offset = i * 4;
-		var r = imageData.data[offset + 0];
-		var g = imageData.data[offset + 1];
-		var b = imageData.data[offset + 2];
-		var color = ( r * 256 + g ) * 256 + b;
-		if (colors.indexOf(color) == -1)
-			colors.push(color);
-	}
-	
-	return colors.length < 256;
+    const colorsThreshold = 32;
+    var gCanvas = document.createElement("canvas");
+    var w = aImg.naturalWidth;
+    var h = aImg.naturalHeight;
+    gCanvas.style.width = w + "px";
+    gCanvas.style.height = h + "px";
+    gCanvas.width = w;
+    gCanvas.height = h;
+    gCtx = gCanvas.getContext("2d");
+    gCtx.clearRect(0, 0, w, h);
+    gCtx.drawImage(aImg, 0, 0);
+    
+    var colors = [];
+    for (var i=0; i < w*h && colors.length < colorsThreshold; i++) {
+        var offset = i * 4;
+        var r = imageData.data[offset + 0];
+        var g = imageData.data[offset + 1];
+        var b = imageData.data[offset + 2];
+        var color = ( r * 256 + g ) * 256 + b;
+        if (colors.indexOf(color) == -1)
+            colors.push(color);
+    }
+    
+    return colors.length < colorsThreshold;
 };
 
