@@ -48,6 +48,7 @@ function ImageTweak( hWindow ) {
         this.ScrollIntervalHandle = null; // Interval handle used for scrolling
         this.ScrollInterval = 25; //ms
         this.ImageMax = 32767; // maximum physical image size
+		this.ContinuousTone = null;
     }
 };
 
@@ -316,6 +317,10 @@ ImageTweak.prototype.OnUnload = function OnUnload(event) {
     this.Browser.setAttribute("autoscroll", this.BrowserAutoscroll);
 };
 
+ImageTweak.prototype.ImageOnLoad = function ImageOnLoad(event) {
+    this.ContinuousTone = ImageTweak.isContinuousToneImage(this.Image);
+};
+
 /* Internal functions **************************************************************************************************************************************/
 
 ImageTweak.prototype.PerformMove = function PerformMove(dx, dy) {
@@ -538,6 +543,7 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
         this.ZoomMax = Math.min( this.ImageMax / this.Image.naturalWidth, this.ImageMax / this.Image.naturalHeight );
         this.DefaultZoomType();
         // plugin our (supa-dupa!) event listeners
+        this.Image.addEventListener( 'load', function(e) { hImageTweak.ImageOnLoad(e); }, false );
         this.Document.addEventListener( 'DOMMouseScroll', function(e) { hImageTweak.OnMouseWheel(e); }, false );
         this.Document.addEventListener( 'mousemove', function(e) { hImageTweak.OnMouseMove(e); }, false );
         this.Document.addEventListener( 'mouseup', function(e) { hImageTweak.OnMouseUp(e); }, true );
@@ -667,5 +673,31 @@ ImageTweak.getPref = function getPref(id) {
         case ImageTweak.prefs.PREF_INT:       p = ImageTweak.prefs.getIntPref( ImageTweak.preferences[id].pref ); break;
     }
     return ImageTweak.preferences[ id ].parse ? ImageTweak.preferences[ id ].parse(p) : p;
+};
+
+ImageTweak.isContinuousToneImage = function isContinuousToneImage(img) {
+	var gCanvas = document.createElement("canvas");
+	var w = aImg.naturalWidth;
+	var h = aImg.naturalHeight;
+	gCanvas.style.width = w + "px";
+	gCanvas.style.height = h + "px";
+	gCanvas.width = w;
+	gCanvas.height = h;
+	gCtx = gCanvas.getContext("2d");
+	gCtx.clearRect(0, 0, w, h);
+	gCtx.drawImage(aImg, 0, 0);
+	
+	var colors = [];
+	for (var i=0; i < w*h && colors.length < 256; i++) {
+		var offset = i * 4;
+		var r = imageData.data[offset + 0];
+		var g = imageData.data[offset + 1];
+		var b = imageData.data[offset + 2];
+		var color = ( r * 256 + g ) * 256 + b;
+		if (colors.indexOf(color) == -1)
+			colors.push(color);
+	}
+	
+	return colors.length < 256;
 };
 
