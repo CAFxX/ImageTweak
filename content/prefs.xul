@@ -23,7 +23,6 @@
                 $("zoomtype_default_radiogroup").selectedIndex = ($("zoomtype_default_radiogroup").selectedIndex + 1) % 3;
             $("bgcolor_colorpicker").color = ImageTweak.parseColorExtended($("bgcolor_textbox").value);
             $("bordercolor_colorpicker").color = ImageTweak.parseColorExtended($("bordercolor_textbox").value);
-			$("sandbox").reload();
         };
 
         ImageTweak.InitPrefPane = function() {
@@ -66,6 +65,7 @@
             <preference id="imagetweak_invertkeyboard" name="extensions.imagetweak.invertkeyboard" type="bool"/>
             <preference id="imagetweak_startfromtopleft" name="extensions.imagetweak.startfromtopleft" type="bool"/>
             <preference id="imagetweak_contentdetectable" name="extensions.imagetweak.contentdetectable" type="bool"/>
+            <preference id="imagetweak_legacyscrolling" name="extensions.imagetweak.legacyscrolling" type="bool"/>
         </preferences>
         <vbox>
             <groupbox>
@@ -108,6 +108,12 @@
 						<checkbox preference="imagetweak_zoomonpointer" label="&pref.zoomonpointer.label;" tooltiptext="&pref.zoomonpointer.tooltip;"/>
 						<checkbox preference="imagetweak_invertmousewheel" label="&pref.invertmousewheel.label;" tooltiptext="&pref.invertmousewheel.tooltip;"/>
 						<checkbox preference="imagetweak_invertkeyboard" label="&pref.invertkeyboard.label;" tooltiptext="&pref.invertkeyboard.tooltip;"/>
+						<separator />
+						<label value="Mouse wheel"/>
+						<radiogroup preference="imagetweak_legacyscrolling">
+							<radio label="wheel to scroll, ctrl+wheel to zoom" value="false" />
+							<radio label="ctrl+wheel to scroll, wheel to zoom" value="true" />
+						</radiogroup>
 						<separator />
 						<label value="&pref.shortcut.label;"/>
 						<checkbox preference="imagetweak_shortcut_img" label="&pref.shortcut.img.label;" tooltiptext="&pref.shortcut.img.tooltip;"/>
