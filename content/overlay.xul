@@ -12,16 +12,16 @@ window.addEventListener( "load", function() {
     if (contextMenu) {
         contextMenu.addEventListener("popupshowing", function(event) {
             var IT = document.popupNode.ownerDocument.ImageTweak;
-            //if (IT && !gContextMenu.onImage) {
-                //event.preventDefault();
-                //synthesizeMouse(IT.Image, 2, 2, { type: "contextmenu", button: 2 }, IT.Window);
-				//document.popupNode = IT.Image;
-				//gContextMenu.hidePopup();
-				//gContextMenu = new nsContextMenu(contextMenu, gBrowser);
-				//for (var i in gContextMenu) ImageTweak.log(i+": "+gContextMenu[i]);
-            //} else { 
+            if (IT && !gContextMenu.onImage) {
+                event.preventDefault();
+				document.popupNode = IT.Image;
+				// FIXME!!!
+				setTimeout(function() {
+					synthesizeMouse(IT.Image, 1, 1, { type: "contextmenu", button: 2 }, IT.Window);
+				}, 1);
+            } else { 
                 document.getElementById("imagetweak_popup").hidden = !IT;
-            //}
+            }
         }, false);
     }
 }, false );
