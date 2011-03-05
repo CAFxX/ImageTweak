@@ -49,7 +49,7 @@ function ImageTweak( hWindow ) {
         this.ScrollInterval = 25; //ms
         this.ImageMax = 32767; // maximum physical image size
         this.ContinuousTone = null;
-		this.InvertResamplingAlgorithm = false;
+        this.InvertResamplingAlgorithm = false;
     }
 };
 
@@ -482,12 +482,12 @@ ImageTweak.prototype.PerformZoomTypeSwitch = function PerformZoomTypeSwitch( img
 ImageTweak.prototype.GetResamplingAlgorithm = function GetResamplingAlgorithm() {
     const bilinear = "optimizeQuality";
     const nearestNeighbor = "-moz-crisp-edges";
-	var algorithm = nearestNeighbor;
+    var algorithm = nearestNeighbor;
     if ( ImageTweak.getPref("ResamplingAlgorithm") && this.ContinuousTone !== false )
         algorithm = bilinear;
-	if ( this.InvertResamplingAlgorithm )
-		algorithm = algorithm == bilinear ? nearestNeighbor : bilinear;
-	return algorithm;
+    if ( this.InvertResamplingAlgorithm )
+        algorithm = algorithm == bilinear ? nearestNeighbor : bilinear;
+    return algorithm;
 };
 
 ImageTweak.prototype.GetElementImageURL = function GetElementImageURL(elem) {
@@ -681,18 +681,17 @@ ImageTweak.getPref = function getPref(id) {
     return ImageTweak.preferences[ id ].parse ? ImageTweak.preferences[ id ].parse(p) : p;
 };
 
-ImageTweak.isContinuousToneImage = function isContinuousToneImage(img) {
+ImageTweak.isContinuousToneImage = function isContinuousToneImage(img) { return true;
     const colorsThreshold = 32;
-    var gCanvas = document.createElement("canvas");
-    var w = aImg.naturalWidth;
-    var h = aImg.naturalHeight;
-    gCanvas.style.width = w + "px";
-    gCanvas.style.height = h + "px";
+    var gCanvas = img.ownerDocument.createElement("canvas");
+    var w = img.naturalWidth;
+    var h = img.naturalHeight;
     gCanvas.width = w;
     gCanvas.height = h;
-    gCtx = gCanvas.getContext("2d");
+    var gCtx = gCanvas.getContext("2d");
     gCtx.clearRect(0, 0, w, h);
-    gCtx.drawImage(aImg, 0, 0);
+    gCtx.drawImage(img, 0, 0);
+    var imageData = gCtx.getImageData(0, 0, gCanvas.width, gCanvas.height);
     
     var colors = [];
     for (var i=0; i < w*h && colors.length < colorsThreshold; i++) {
@@ -707,4 +706,3 @@ ImageTweak.isContinuousToneImage = function isContinuousToneImage(img) {
     
     return colors.length < colorsThreshold;
 };
-
