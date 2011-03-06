@@ -104,12 +104,12 @@
 						<separator />
 						<checkbox preference="imagetweak_contextmenu" label="Show context menu" tooltiptext="Enable the ImageTweak context menu"
 							onsynctopreference="return this.checked ? 1 : 0;"
-							onsyncfrompreference="return this.value != 0;"/>
+							onsyncfrompreference="return $('contextmenu').value != 0;"/>
 					</vbox>
 					<vbox>
 						<checkbox preference="imagetweak_clip_movement" label="&pref.clip_movement.label;" tooltiptext="&pref.clip_movement.tooltip;"
 							onsynctopreference="return this.checked ? 3 : 0;"
-							onsyncfrompreference="return this.value != 0;"/>
+							onsyncfrompreference="return $('clip_movement').value != 0;"/>
 						<checkbox preference="imagetweak_startfromtopleft" label="&pref.startfromtopleft.label;" tooltiptext="&pref.startfromtopleft.tooltip;"/>
 						<checkbox preference="imagetweak_zoomonpointer" label="&pref.zoomonpointer.label;" tooltiptext="&pref.zoomonpointer.tooltip;"/>
 						<checkbox preference="imagetweak_invertmousewheel" label="&pref.invertmousewheel.label;" tooltiptext="&pref.invertmousewheel.tooltip;"/>
