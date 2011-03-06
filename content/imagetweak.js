@@ -669,21 +669,17 @@ ImageTweak.preferences = {
     ContextMenu:		            { pref: "extensions.imagetweak.contextmenu"                                                                  	     }
 };
 
-ImageTweak.getPref = function getPref(id) { 
-    var p;
-    switch ( ImageTweak.prefs.getPrefType( ImageTweak.preferences[ id ].pref ) ) {
-        case ImageTweak.prefs.PREF_BOOL:      p = ImageTweak.prefs.getBoolPref( ImageTweak.preferences[id].pref ); break;
-        case ImageTweak.prefs.PREF_STRING:    p = ImageTweak.prefs.getCharPref( ImageTweak.preferences[id].pref ); break;
-        case ImageTweak.prefs.PREF_INT:       p = ImageTweak.prefs.getIntPref( ImageTweak.preferences[id].pref ); break;
-    }
-    return ImageTweak.preferences[ id ].parse ? ImageTweak.preferences[ id ].parse(p) : p;
-};
-
 ImageTweak.pref = {};
 for (var pref in ImageTweak.preferences) {
-	let __pref__ = pref;
+	let id = pref;
 	ImageTweak.pref.__defineGetter__(pref, function() { 
-		return ImageTweak.getPref(__pref__); 
+		var p;
+		switch ( ImageTweak.prefs.getPrefType( ImageTweak.preferences[ id ].pref ) ) {
+			case ImageTweak.prefs.PREF_BOOL:      p = ImageTweak.prefs.getBoolPref( ImageTweak.preferences[id].pref ); break;
+			case ImageTweak.prefs.PREF_STRING:    p = ImageTweak.prefs.getCharPref( ImageTweak.preferences[id].pref ); break;
+			case ImageTweak.prefs.PREF_INT:       p = ImageTweak.prefs.getIntPref( ImageTweak.preferences[id].pref ); break;
+		}
+		return ImageTweak.preferences[ id ].parse ? ImageTweak.preferences[ id ].parse(p) : p;
 	});
 }
 
