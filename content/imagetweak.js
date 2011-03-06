@@ -310,6 +310,10 @@ ImageTweak.prototype.OnUnload = function OnUnload(event) {
     this.Browser.setAttribute("autoscroll", this.BrowserAutoscroll);
 };
 
+ImageTweak.prototype.OnSelection = function OnSelection(event) {
+    this.ClearSelection();
+};
+
 ImageTweak.prototype.ImageOnLoad = function ImageOnLoad(event) {
     this.ContinuousTone = ImageTweak.isContinuousToneImage(this.Image);
 };
@@ -496,6 +500,10 @@ ImageTweak.prototype.GetElementImageURL = function GetElementImageURL(elem) {
     return "";
 };
 
+ImageTweak.prototype.ClearSelection = function ClearSelection() {
+	this.Window.getSelection().removeAllRanges();
+};
+
 ImageTweak.prototype.InjectContentFlag = function InjectContentFlag() {
     // http://stackoverflow.com/questions/5089941/allow-content-documents-to-detect-my-firefox-addon
     var s = new Components.utils.Sandbox(this.Window);
@@ -561,6 +569,8 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
         this.Window.addEventListener( 'dragenter', function(e) { hImageTweak.OnDragEnterWindow(e); }, false );
         this.Window.addEventListener( 'dragleave', function(e) { hImageTweak.OnDragExitWindow(e); }, false );
         this.Window.addEventListener( 'dragover', function(e) { hImageTweak.OnDragOverWindow(e); }, false ); // WTF!!!!
+        this.Window.addEventListener( 'keyup', function(e) { hImageTweak.OnSelection(e); }, false ); 
+        this.Window.addEventListener( 'mouseup', function(e) { hImageTweak.OnSelection(e); }, false ); 
         // go! go! go!
         this.Inited = true;
         this.Repaint();
