@@ -681,24 +681,21 @@ ImageTweak.getPref = function getPref(id) {
     return ImageTweak.preferences[ id ].parse ? ImageTweak.preferences[ id ].parse(p) : p;
 };
 
-ImageTweak.isContinuousToneImage = function isContinuousToneImage(img) { return true;
+ImageTweak.isContinuousToneImage = function isContinuousToneImage(img) { 
     const colorsThreshold = 32;
     var gCanvas = img.ownerDocument.createElement("canvas");
-    var w = img.naturalWidth;
-    var h = img.naturalHeight;
-    gCanvas.width = w;
-    gCanvas.height = h;
+    gCanvas.width = img.naturalWidth;
+    gCanvas.height = img.naturalHeight;
     var gCtx = gCanvas.getContext("2d");
-    gCtx.clearRect(0, 0, w, h);
+    gCtx.clearRect(0, 0, img.naturalWidth, img.naturalHeight);
     gCtx.drawImage(img, 0, 0);
     var imageData = gCtx.getImageData(0, 0, gCanvas.width, gCanvas.height);
     
     var colors = [];
-    for (var i=0; i < w*h && colors.length < colorsThreshold; i++) {
-        var offset = i * 4;
-        var r = imageData.data[offset + 0];
-        var g = imageData.data[offset + 1];
-        var b = imageData.data[offset + 2];
+    for (var i=0; i < w*h*4 && colors.length < colorsThreshold; i+=4) {
+        var r = imageData.data[i + 0];
+        var g = imageData.data[i + 1];
+        var b = imageData.data[i + 2];
         var color = ( r * 256 + g ) * 256 + b;
         if (colors.indexOf(color) == -1)
             colors.push(color);
