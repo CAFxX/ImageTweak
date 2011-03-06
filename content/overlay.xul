@@ -13,16 +13,15 @@
 			if (contextMenu) {
 				contextMenu.addEventListener("popupshowing", function(event) {
 					var IT = ImageTweak.enabled(document.popupNode.ownerDocument);
-					if (IT && !gContextMenu.onImage) {
+					if (IT && !gContextMenu.onImage && ImageTweak.pref.ContextMenu) {
 						event.preventDefault();
-						// FIXME!!!
 						setTimeout(function() {
 							document.popupNode = IT.Image;
 							synthesizeMouse(IT.Image, 0, 0, { type: "contextmenu", button: 2 }, IT.Window);
-							document.getElementById("contentAreaContextMenu").moveTo(event.clientX, event.clientY);
+							document.getElementById("contentAreaContextMenu").moveTo(event.clientX, event.clientY); // FIXME
 						}, 1);
 					} else { 
-						document.getElementById("imagetweak_popup").hidden = !IT;
+						document.getElementById("imagetweak_popup").hidden = !(IT && ImageTweak.pref.ContextMenu);
 					}
 				}, false);
 			}
@@ -77,8 +76,7 @@
         
     ]]></script>
     <popup id="contentAreaContextMenu">
-        <menuseparator/>
-        <menu id="imagetweak_popup" label="ImageTweak" insertafter="context-stop">
+        <menu id="imagetweak_popup" label="ImageTweak" insertbefore="context-back">
             <menupopup>
                 <menuitem label="Fit image to screen" oncommand="gContextMenu.target.ownerDocument.ImageTweak.PerformZoomTypeSwitch('fit');"/>
                 <menuitem label="Fill screen" oncommand="gContextMenu.target.ownerDocument.ImageTweak.PerformZoomTypeSwitch('fill');"/>
@@ -93,5 +91,6 @@
                 <menuitem label="User guide" oncommand="ImageTweak.browse('https://github.com/CAFxX/ImageTweak/wiki/ImageTweak-user-guide');"/>
             </menupopup>
         </menu>
+        <menuseparator insertbefore="context-back"/>
     </popup>
 </overlay>

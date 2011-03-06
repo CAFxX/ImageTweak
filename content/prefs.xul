@@ -66,6 +66,7 @@
             <preference id="imagetweak_startfromtopleft" name="extensions.imagetweak.startfromtopleft" type="bool"/>
             <preference id="imagetweak_contentdetectable" name="extensions.imagetweak.contentdetectable" type="bool"/>
             <preference id="imagetweak_legacyscrolling" name="extensions.imagetweak.legacyscrolling" type="bool"/>
+            <preference id="imagetweak_contextmenu" name="extensions.imagetweak.contextmenu" type="int"/>
         </preferences>
         <vbox>
             <groupbox>
@@ -84,7 +85,7 @@
 						<hbox align="center">
 							<label value="&pref.zoomexp.label;" flex="1" control="imagetweak_zoomexp_textbox" tooltiptext="&pref.zoomexp.tooltip;"/>
 							<textbox preference="imagetweak_zoomexp" width="100px" id="imagetweak_zoomexp_textbox" tooltiptext="&pref.zoomexp.tooltip;" 
-								onsynctopreference="return parseFloat($('zoomexp_textbox').value)" />
+								onsynctopreference="return parseFloat(this.value)" />
 						</hbox>
 						<separator />
 						<label value="&pref.zoomtype.label;"/>
@@ -99,11 +100,15 @@
 							<radio label="&pref.zoomtype.fill.label;" value="fill" id="imagetweak_zoomtype_default_fill" />
 							<radio label="&pref.zoomtype.unscaled.label;" value="pixel" id="imagetweak_zoomtype_default_unscaled" />
 						</radiogroup>
+						<separator />
+						<checkbox preference="imagetweak_contextmenu" label="Show context menu" tooltiptext="Enable the ImageTweak context menu"
+							onsynctopreference="return this.checked ? 1 : 0;"
+							onsyncfrompreference="return this.value != 0;"/>
 					</vbox>
 					<vbox>
-						<checkbox preference="imagetweak_clip_movement" label="&pref.clip_movement.label;" tooltiptext="&pref.clip_movement.tooltip;" id="imagetweak_clip_movement_checkbox" 
-							onsynctopreference="return $('clip_movement_checkbox').checked ? 3 : 0;"
-							onsyncfrompreference="return $('clip_movement').value != 0;"/>
+						<checkbox preference="imagetweak_clip_movement" label="&pref.clip_movement.label;" tooltiptext="&pref.clip_movement.tooltip;"
+							onsynctopreference="return this.checked ? 3 : 0;"
+							onsyncfrompreference="return this.value != 0;"/>
 						<checkbox preference="imagetweak_startfromtopleft" label="&pref.startfromtopleft.label;" tooltiptext="&pref.startfromtopleft.tooltip;"/>
 						<checkbox preference="imagetweak_zoomonpointer" label="&pref.zoomonpointer.label;" tooltiptext="&pref.zoomonpointer.tooltip;"/>
 						<checkbox preference="imagetweak_invertmousewheel" label="&pref.invertmousewheel.label;" tooltiptext="&pref.invertmousewheel.tooltip;"/>

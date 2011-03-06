@@ -261,7 +261,7 @@ ImageTweak.prototype.OnKeyPress = function OnKeyPress(event) {
             case 52: /* 4 */                        this.PerformZoomTypeSwitch( "free" ); break;
             case 34: /* page down */                this.PerformMove( 0, -MovePageDelta ); break;
             case 33: /* page up */                  this.PerformMove( 0, MovePageDelta ); break;
-            case 112: /* p */                       this.InvertResamplingAlgorithm = !this.InvertResamplingAlgorithm; this.Repaint(); break;
+            case 112: /* p */                       this.SwitchResamplingAlgorithm(); break;
             default:                                return;
         }
     }
@@ -490,6 +490,11 @@ ImageTweak.prototype.GetResamplingAlgorithm = function GetResamplingAlgorithm() 
     return algorithm;
 };
 
+ImageTweak.prototype.SwitchResamplingAlgorithm = function SwitchResamplingAlgorithm() {
+	this.InvertResamplingAlgorithm = !this.InvertResamplingAlgorithm;
+	this.Repaint();
+};
+
 ImageTweak.prototype.GetElementImageURL = function GetElementImageURL(elem) {
     if ( elem.tagName == "IMG" && ImageTweak.pref.ShortcutImg )
         return elem.src;
@@ -668,7 +673,8 @@ ImageTweak.preferences = {
     Scrolling:                      { pref: "general.autoScroll"                                                                                         },
     LegacyScrolling:                { pref: "extensions.imagetweak.legacyscrolling"                                                                      },
     ContentDetectable:              { pref: "extensions.imagetweak.contentdetectable"                                                                    },
-    ResamplingAlgorithm:            { pref: "extensions.imagetweak.resamplingalgorithm"                                                                  }
+    ResamplingAlgorithm:            { pref: "extensions.imagetweak.resamplingalgorithm"                                                                  },
+    ContextMenu:		            { pref: "extensions.imagetweak.contextmenu"                                                                  	     }
 };
 
 ImageTweak.getPref = function getPref(id) { 
