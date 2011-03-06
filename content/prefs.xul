@@ -23,6 +23,7 @@
                 $("zoomtype_default_radiogroup").selectedIndex = ($("zoomtype_default_radiogroup").selectedIndex + 1) % 3;
             $("bgcolor_colorpicker").color = ImageTweak.parseColorExtended($("bgcolor_textbox").value);
             $("bordercolor_colorpicker").color = ImageTweak.parseColorExtended($("bordercolor_textbox").value);
+			ImageTweak.RepaintAll();
         };
 
         ImageTweak.InitPrefPane = function() {
@@ -48,25 +49,25 @@
             <key keycode="VK_F1" oncommand="ImageTweak.browse('https://github.com/CAFxX/ImageTweak/wiki/ImageTweak-user-guide');" />
         </keyset>
         <preferences id="imagetweak_preferences">
-            <preference id="imagetweak_bgcolor" name="extensions.imagetweak.bgcolor" type="string"/>
-            <preference id="imagetweak_bordercolor" name="extensions.imagetweak.bordercolor" type="string"/>
-            <preference id="imagetweak_zoomexp" name="extensions.imagetweak.zoomexp2" type="string"/>
-            <preference id="imagetweak_autoresize" name="browser.enable_automatic_image_resizing" type="bool"/>
-            <preference id="imagetweak_clip_movement" name="extensions.imagetweak.clip_movement" type="int"/>
-            <preference id="imagetweak_zoomtype_free" name="extensions.imagetweak.zoomtype.free" type="bool"/>
-            <preference id="imagetweak_zoomtype_full" name="extensions.imagetweak.zoomtype.full" type="bool"/>
-            <preference id="imagetweak_zoomtype_fill" name="extensions.imagetweak.zoomtype.fill" type="bool"/>
-            <preference id="imagetweak_zoomtype_unscaled" name="extensions.imagetweak.zoomtype.unscaled" type="bool"/>
-            <preference id="imagetweak_zoomtype_default" name="extensions.imagetweak.zoomtype.default" type="string"/>
-            <preference id="imagetweak_shortcut_img" name="extensions.imagetweak.shortcut.img" type="bool"/>
-            <preference id="imagetweak_shortcut_bg" name="extensions.imagetweak.shortcut.bg" type="bool"/>
-            <preference id="imagetweak_zoomonpointer" name="extensions.imagetweak.zoomonpointer" type="bool"/>
-            <preference id="imagetweak_invertmousewheel" name="extensions.imagetweak.invertmousewheel" type="bool"/>
-            <preference id="imagetweak_invertkeyboard" name="extensions.imagetweak.invertkeyboard" type="bool"/>
-            <preference id="imagetweak_startfromtopleft" name="extensions.imagetweak.startfromtopleft" type="bool"/>
-            <preference id="imagetweak_contentdetectable" name="extensions.imagetweak.contentdetectable" type="bool"/>
-            <preference id="imagetweak_legacyscrolling" name="extensions.imagetweak.legacyscrolling" type="bool"/>
-            <preference id="imagetweak_contextmenu" name="extensions.imagetweak.contextmenu" type="int"/>
+            <preference instantApply="true" id="imagetweak_bgcolor" name="extensions.imagetweak.bgcolor" type="string"/>
+            <preference instantApply="true" id="imagetweak_bordercolor" name="extensions.imagetweak.bordercolor" type="string"/>
+            <preference instantApply="true" id="imagetweak_zoomexp" name="extensions.imagetweak.zoomexp2" type="string"/>
+            <preference instantApply="true" id="imagetweak_autoresize" name="browser.enable_automatic_image_resizing" type="bool"/>
+            <preference instantApply="true" id="imagetweak_clip_movement" name="extensions.imagetweak.clip_movement" type="int"/>
+            <preference instantApply="true" id="imagetweak_zoomtype_free" name="extensions.imagetweak.zoomtype.free" type="bool"/>
+            <preference instantApply="true" id="imagetweak_zoomtype_full" name="extensions.imagetweak.zoomtype.full" type="bool"/>
+            <preference instantApply="true" id="imagetweak_zoomtype_fill" name="extensions.imagetweak.zoomtype.fill" type="bool"/>
+            <preference instantApply="true" id="imagetweak_zoomtype_unscaled" name="extensions.imagetweak.zoomtype.unscaled" type="bool"/>
+            <preference instantApply="true" id="imagetweak_zoomtype_default" name="extensions.imagetweak.zoomtype.default" type="string"/>
+            <preference instantApply="true" id="imagetweak_shortcut_img" name="extensions.imagetweak.shortcut.img" type="bool"/>
+            <preference instantApply="true" id="imagetweak_shortcut_bg" name="extensions.imagetweak.shortcut.bg" type="bool"/>
+            <preference instantApply="true" id="imagetweak_zoomonpointer" name="extensions.imagetweak.zoomonpointer" type="bool"/>
+            <preference instantApply="true" id="imagetweak_invertmousewheel" name="extensions.imagetweak.invertmousewheel" type="bool"/>
+            <preference instantApply="true" id="imagetweak_invertkeyboard" name="extensions.imagetweak.invertkeyboard" type="bool"/>
+            <preference instantApply="true" id="imagetweak_startfromtopleft" name="extensions.imagetweak.startfromtopleft" type="bool"/>
+            <preference instantApply="true" id="imagetweak_contentdetectable" name="extensions.imagetweak.contentdetectable" type="bool"/>
+            <preference instantApply="true" id="imagetweak_legacyscrolling" name="extensions.imagetweak.legacyscrolling" type="bool"/>
+            <preference instantApply="true" id="imagetweak_contextmenu" name="extensions.imagetweak.contextmenu" type="int"/>
         </preferences>
         <vbox>
             <groupbox>

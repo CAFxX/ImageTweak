@@ -726,3 +726,21 @@ ImageTweak.Targets = {
     OpenInNewTabFocus:      function(url) { gBrowser.selectedTab = gBrowser.addTab( url ); return true; },
     OpenInNewWindow:        function(url) { window.open( url ); return true; },
 };
+
+ImageTweak.RepaintAll = function RepaintAll(url) {
+  var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
+  var browserEnumerator = wm.getEnumerator("navigator:browser");
+
+  while (browserEnumerator.hasMoreElements()) {
+    var browserWin = browserEnumerator.getNext();
+    var tabbrowser = browserWin.gBrowser;
+
+    var numTabs = tabbrowser.browsers.length;
+    for (var index = 0; index < numTabs; index++) {
+      var currentBrowser = tabbrowser.getBrowserAtIndex(index);
+	  var IT = ImageTweak.enabled(currentBrowser.contentWindow.document);
+      if (IT) 
+		IT.Repaint();
+    }
+  }
+};
