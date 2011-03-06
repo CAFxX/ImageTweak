@@ -689,25 +689,38 @@ for (var pref in ImageTweak.preferences) {
 
 ImageTweak.isContinuousToneImage = function isContinuousToneImage(img) { 
     const colorsThreshold = 32;
-    var gCanvas = img.ownerDocument.createElement("canvas");
-    gCanvas.width = img.naturalWidth;
-    gCanvas.height = img.naturalHeight;
-    var gCtx = gCanvas.getContext("2d");
-    gCtx.clearRect(0, 0, img.naturalWidth, img.naturalHeight);
-    gCtx.drawImage(img, 0, 0);
-    var imageData = gCtx.getImageData(0, 0, gCanvas.width, gCanvas.height);
-    
+	var { , , data } = ImageTweak.getImageCanvas(img);
+	
     var colors = [];
     for (var i=0; i < w*h*4 && colors.length < colorsThreshold; i+=4) {
-        var r = imageData.data[i + 0];
-        var g = imageData.data[i + 1];
-        var b = imageData.data[i + 2];
-        var color = ( r * 256 + g ) * 256 + b;
+        var color = ( data.data[i] * 256 + data.data[i+1] ) * 256 + data.data[i+2];
         if (colors.indexOf(color) == -1)
             colors.push(color);
     }
     
     return colors.length < colorsThreshold;
+};
+
+ImageTweak.getImageCanvas = function getImageCanvas(img) {
+	var { canvas, ctx } = ImageTweak.getCanvas(img.ownerDocument, img.naturalWidth, img.naturalHeight);
+    ctx.drawImage(img, 0, 0);
+	return {
+		canvas: canvas,
+		ctx: ctx,
+		data: ctx.getImageData(0, 0, img.naturalWidth, img.naturalHeight)
+	};
+};
+
+ImageTweak.getCanvas = function getCanvas(doc, w, h) {
+    var canvas = doc.createElement("canvas");
+    canvas.width = w;
+    canvas.height = h;
+    var ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, w, h);
+	return {
+		canvas: canvas,
+		ctx: ctx
+	};
 };
 
 ImageTweak.Targets = {
