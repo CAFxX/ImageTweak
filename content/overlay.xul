@@ -7,72 +7,73 @@
     <script type="application/x-javascript" src="chrome://imagetweak/content/imagetweak.js" /> 
     <script type="application/x-javascript"><![CDATA[
         window.addEventListener( "load", ImageTweak.entryPoint, false );
-window.addEventListener( "load", function() {
-    var contextMenu = document.getElementById("contentAreaContextMenu");
-    if (contextMenu) {
-        contextMenu.addEventListener("popupshowing", function(event) {
-            var IT = document.popupNode.ownerDocument.ImageTweak;
-            if (IT && !gContextMenu.onImage) {
-                event.preventDefault();
-				document.popupNode = IT.Image;
-				// FIXME!!!
-				setTimeout(function() {
-					synthesizeMouse(IT.Image, 1, 1, { type: "contextmenu", button: 2 }, IT.Window);
-				}, 1);
-            } else { 
-                document.getElementById("imagetweak_popup").hidden = !IT;
-            }
-        }, false);
-    }
-}, false );
-        
-function synthesizeMouse(aTarget, aOffsetX, aOffsetY, aEvent, aWindow)
-{
-  if (!aWindow)
-    aWindow = window;
+		
+		window.addEventListener( "load", function() {
+			var contextMenu = document.getElementById("contentAreaContextMenu");
+			if (contextMenu) {
+				contextMenu.addEventListener("popupshowing", function(event) {
+					var IT = ImageTweak.enabled(document.popupNode.ownerDocument);
+					if (IT && !gContextMenu.onImage) {
+						event.preventDefault();
+						// FIXME!!!
+						setTimeout(function() {
+							document.popupNode = IT.Image;
+							synthesizeMouse(IT.Image, 0, 0, { type: "contextmenu", button: 2 }, IT.Window);
+							document.getElementById("contentAreaContextMenu").moveTo(event.clientX, event.clientY);
+						}, 1);
+					} else { 
+						document.getElementById("imagetweak_popup").hidden = !IT;
+					}
+				}, false);
+			}
+		}, false );
+				
+		function synthesizeMouse(aTarget, aOffsetX, aOffsetY, aEvent, aWindow)
+		{
+		  if (!aWindow)
+			aWindow = window;
 
-  var utils = aWindow.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIDOMWindowUtils);
-  if (utils) {
-    var button = aEvent.button || 0;
-    var clickCount = aEvent.clickCount || 1;
-    var modifiers = _parseModifiers(aEvent);
+		  var utils = aWindow.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIDOMWindowUtils);
+		  if (utils) {
+			var button = aEvent.button || 0;
+			var clickCount = aEvent.clickCount || 1;
+			var modifiers = _parseModifiers(aEvent);
 
-    var rect = aTarget.getBoundingClientRect();
+			var rect = aTarget.getBoundingClientRect();
 
-    var left = rect.left + aOffsetX;
-    var top = rect.top + aOffsetY;
+			var left = rect.left + aOffsetX;
+			var top = rect.top + aOffsetY;
 
-    if (aEvent.type) {
-      utils.sendMouseEvent(aEvent.type, left, top, button, clickCount, modifiers);
-    } else {
-      utils.sendMouseEvent("mousedown", left, top, button, clickCount, modifiers);
-      utils.sendMouseEvent("mouseup", left, top, button, clickCount, modifiers);
-    }
-  }
-}
+			if (aEvent.type) {
+			  utils.sendMouseEvent(aEvent.type, left, top, button, clickCount, modifiers);
+			} else {
+			  utils.sendMouseEvent("mousedown", left, top, button, clickCount, modifiers);
+			  utils.sendMouseEvent("mouseup", left, top, button, clickCount, modifiers);
+			}
+		  }
+		}
 
-function _parseModifiers(aEvent)
-{
-  var hwindow = Components.classes["@mozilla.org/appshell/appShellService;1"]
-                          .getService(Components.interfaces.nsIAppShellService)
-                          .hiddenDOMWindow;
+		function _parseModifiers(aEvent)
+		{
+		  var hwindow = Components.classes["@mozilla.org/appshell/appShellService;1"]
+								  .getService(Components.interfaces.nsIAppShellService)
+								  .hiddenDOMWindow;
 
-  const masks = Components.interfaces.nsIDOMNSEvent;
-  var mval = 0;
-  if (aEvent.shiftKey)
-    mval |= masks.SHIFT_MASK;
-  if (aEvent.ctrlKey)
-    mval |= masks.CONTROL_MASK;
-  if (aEvent.altKey)
-    mval |= masks.ALT_MASK;
-  if (aEvent.metaKey)
-    mval |= masks.META_MASK;
-  if (aEvent.accelKey)
-    mval |= (hwindow.navigator.platform.indexOf("Mac") >= 0) ? masks.META_MASK : masks.CONTROL_MASK;
+		  const masks = Components.interfaces.nsIDOMNSEvent;
+		  var mval = 0;
+		  if (aEvent.shiftKey)
+			mval |= masks.SHIFT_MASK;
+		  if (aEvent.ctrlKey)
+			mval |= masks.CONTROL_MASK;
+		  if (aEvent.altKey)
+			mval |= masks.ALT_MASK;
+		  if (aEvent.metaKey)
+			mval |= masks.META_MASK;
+		  if (aEvent.accelKey)
+			mval |= (hwindow.navigator.platform.indexOf("Mac") >= 0) ? masks.META_MASK : masks.CONTROL_MASK;
 
-  return mval;
-}
-
+		  return mval;
+		}
         
     ]]></script>
     <popup id="contentAreaContextMenu">

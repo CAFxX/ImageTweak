@@ -216,12 +216,12 @@ ImageTweak.prototype.OnMouseWheel = function OnMouseWheel(event) {
     } else if ( event.ctrlKey && event.altKey ) {
         this.PerformRotation( event.detail > 0 ? 90 : -90 );
         event.preventDefault();
-    } else if ( ( ImageTweak.getPref( "LegacyScrolling" ) && !event.ctrlKey ) || ( !ImageTweak.getPref( "LegacyScrolling" ) && event.ctrlKey ) ) {
-        var ZoomDelta = ( event.detail > 0 ? 1 : -1 ) * ( ImageTweak.getPref( "InvertMouseWheel" ) ? 1 : -1 );
+    } else if ( ( ImageTweak.pref.LegacyScrolling && !event.ctrlKey ) || ( !ImageTweak.pref.LegacyScrolling && event.ctrlKey ) ) {
+        var ZoomDelta = ( event.detail > 0 ? 1 : -1 ) * ( ImageTweak.pref.InvertMouseWheel ? 1 : -1 );
         this.PerformZoom( ZoomDelta, this.ClientXPrev, this.ClientYPrev ); // workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=352179 - darn you, mozilla!
         event.preventDefault();
-    } else if ( ( ImageTweak.getPref( "LegacyScrolling" ) && event.ctrlKey ) || ( !ImageTweak.getPref( "LegacyScrolling" ) && !event.ctrlKey ) ) {
-        var MoveDelta = ( event.detail > 0 ? 1 : -1 ) * ( ImageTweak.getPref( "InvertMouseWheel" ) ? 1 : -1 ) * Math.min( this.Window.innerWidth, this.Window.innerHeight ) / 10;
+    } else if ( ( ImageTweak.pref.LegacyScrolling && event.ctrlKey ) || ( !ImageTweak.pref.LegacyScrolling && !event.ctrlKey ) ) {
+        var MoveDelta = ( event.detail > 0 ? 1 : -1 ) * ( ImageTweak.pref.InvertMouseWheel ? 1 : -1 ) * Math.min( this.Window.innerWidth, this.Window.innerHeight ) / 10;
         if (event.axis == event.HORIZONTAL_AXIS)
             this.PerformMove( MoveDelta, 0 );
         else 
@@ -597,7 +597,7 @@ ImageTweak.enabled = function(doc) {
 };
     
 ImageTweak.enabledForDocument = function(doc) {
-    return typeof doc.ImageTweak.Image != "undefined";
+    return typeof doc.ImageTweak.Image != "undefined" ? doc.ImageTweak : false;
 };
 
 // ImageTweak.entryPoint is the global entry point for imagetweak
@@ -671,7 +671,7 @@ ImageTweak.preferences = {
     ResamplingAlgorithm:            { pref: "extensions.imagetweak.resamplingalgorithm"                                                                  }
 };
 
-ImageTweak.getPref = function getPref(id) {
+ImageTweak.getPref = function getPref(id) { 
     var p;
     switch ( ImageTweak.prefs.getPrefType( ImageTweak.preferences[ id ].pref ) ) {
         case ImageTweak.prefs.PREF_BOOL:      p = ImageTweak.prefs.getBoolPref( ImageTweak.preferences[id].pref ); break;
@@ -682,8 +682,12 @@ ImageTweak.getPref = function getPref(id) {
 };
 
 ImageTweak.pref = {};
-for (var pref in ImageTweak.preferences)
-	ImageTweak.pref.__defineGetter__(pref, function() { return ImageTweak.getPref(pref); });
+for (var pref in ImageTweak.preferences) {
+	let __pref__ = pref;
+	ImageTweak.pref.__defineGetter__(pref, function() { 
+		return ImageTweak.getPref(__pref__); 
+	});
+}
 
 ImageTweak.isContinuousToneImage = function isContinuousToneImage(img) { 
     const colorsThreshold = 32;
