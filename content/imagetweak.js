@@ -71,7 +71,7 @@ ImageTweak.prototype.ScreenCoordinates = function ScreenCoordinates() {
 
     switch (this.ZoomType) {
         case "free":
-            switch ( ImageTweak.getPref("ClipMovement") ) {
+            switch ( ImageTweak.pref.ClipMovement ) {
                 case false:
                 case 0:
                 default:
@@ -99,7 +99,7 @@ ImageTweak.prototype.ScreenCoordinates = function ScreenCoordinates() {
             break;
         case "fill":
         case "pixel":
-            if ( ImageTweak.getPref("StartFromTopLeft") ) {
+            if ( ImageTweak.pref.StartFromTopLeft ) {
                 Coordinates.CurX = this.Window.innerWidth < boundingWidth ? -( this.Window.innerWidth - boundingWidth ) / 2 : 0;
                 Coordinates.CurY = this.Window.innerHeight < boundingHeight ? -( this.Window.innerHeight - boundingHeight ) / 2 : 0;
                 break;
@@ -123,7 +123,7 @@ ImageTweak.prototype.Repaint = function Repaint() {
 
     var CurCSS = "position:absolute;" +
             "image-rendering:" + this.GetResamplingAlgorithm() + ";" +
-            "border:"   + ( ImageTweak.getPref("BorderColor") != "" ? "1px solid " + ImageTweak.getPref("BorderColor") : "none" ) + ";" +
+            "border:"   + ( ImageTweak.pref.BorderColor != "" ? "1px solid " + ImageTweak.pref.BorderColor : "none" ) + ";" +
             "left:"     + Math.round(Coordinates.imgLeft)       + "px;" +
             "top:"      + Math.round(Coordinates.imgTop)        + "px;" +
             "width:"    + Math.round(Coordinates.imgWidth)      + "px;" +
@@ -136,7 +136,7 @@ ImageTweak.prototype.Repaint = function Repaint() {
     var CurTitle = this.Title.substring( 0, this.Title.lastIndexOf( ")" ) ) + CurTitleZoom + CurTitleRotation + ")";
     if ( this.Document.title != CurTitle ) 
         this.Document.title = CurTitle;
-    this.Document.body.style.backgroundColor = ImageTweak.getPref("BackgroundColor");
+    this.Document.body.style.backgroundColor = ImageTweak.pref.BackgroundColor;
 
     if ( this.Scrolling )
         this.StartScroll();
@@ -190,7 +190,7 @@ ImageTweak.prototype.OnDragOverWindow = function OnDragOverWindow(event) {
 };
 
 ImageTweak.prototype.OnMouseDown = function OnMouseDown(event) {
-    if ( event.button == 1 && event.ctrlKey == false && ImageTweak.getPref("Scrolling") ) {
+    if ( event.button == 1 && event.ctrlKey == false && ImageTweak.pref.Scrolling ) {
         if ( this.Scrolling ) {
             this.StopScroll(event);
         } else {
@@ -234,8 +234,8 @@ ImageTweak.prototype.OnKeyPress = function OnKeyPress(event) {
     if ( event.altKey || event.metaKey ) {
         return true;
     }
-    var MoveDelta = ( Math.min( this.Window.innerWidth, this.Window.innerHeight ) / 10 ) * ( ImageTweak.getPref("InvertKeyboard") ? -1 : 1 );
-    var MovePageDelta = ( this.Window.innerHeight ) * ( ImageTweak.getPref("InvertKeyboard") ? -1 : 1 );
+    var MoveDelta = ( Math.min( this.Window.innerWidth, this.Window.innerHeight ) / 10 ) * ( ImageTweak.pref.InvertKeyboard ? -1 : 1 );
+    var MovePageDelta = ( this.Window.innerHeight ) * ( ImageTweak.pref.InvertKeyboard ? -1 : 1 );
     if ( event.ctrlKey ) {
         switch (event.keyCode + event.charCode) {
             case 43: /* plus sign */                this.PerformZoom( 1 ); break;
@@ -333,12 +333,12 @@ ImageTweak.prototype.PerformMove = function PerformMove(dx, dy) {
 
 ImageTweak.prototype.PerformZoom = function PerformZoom(delta, px, py) {
     this.ConvertToFree();
-    var imgZoomFactor = ImageTweak.getPref("ZoomFactor");
+    var imgZoomFactor = ImageTweak.pref.ZoomFactor;
     var imgZoomNew = Math.pow(imgZoomFactor, Math.round(delta + Math.log(this.Zoom) / Math.log(imgZoomFactor)));
     if ( imgZoomNew <= this.ZoomMax ) {
         var imgZoomRatio = imgZoomNew / this.Zoom;
         var imgZoomDirRatio = imgZoomRatio * ( delta < 0 ? -1 : 1 );
-        if ( typeof px != "undefined" && ImageTweak.getPref("ZoomOnPointer") && imgZoomNew >= this.FitZoom() ) {
+        if ( typeof px != "undefined" && ImageTweak.pref.ZoomOnPointer && imgZoomNew >= this.FitZoom() ) {
             this.CenterX = px - this.Window.innerWidth / 2 + (this.CenterX + this.Window.innerWidth / 2 - px) * imgZoomRatio;
             this.CenterY = py - this.Window.innerHeight / 2 + (this.CenterY + this.Window.innerHeight / 2 - py) * imgZoomRatio;
         } else {
@@ -356,7 +356,7 @@ ImageTweak.prototype.PerformRotation = function PerformRotation( degrees ) {
 };
 
 ImageTweak.prototype.StartScroll = function StartScroll(event) {
-    if ( this.Window.innerWidth < this.Image.width || this.Window.innerHeight < this.Image.height || ImageTweak.getPref("ClipMovement") == false ) {
+    if ( this.Window.innerWidth < this.Image.width || this.Window.innerHeight < this.Image.height || ImageTweak.pref.ClipMovement == false ) {
         this.Scrolling = true;
         if ( event ) {
             this.ClientXStart = event.clientX;
@@ -385,7 +385,7 @@ ImageTweak.prototype.StopScroll = function StopScroll(event) {
 
 ImageTweak.prototype.SetMouseCursor = function() {
     if (this.Scrolling || this.Dragging) {
-        if ( ( this.Window.innerWidth < this.Image.width && this.Window.innerHeight < this.Image.height ) || ImageTweak.getPref("ClipMovement") == false ) {
+        if ( ( this.Window.innerWidth < this.Image.width && this.Window.innerHeight < this.Image.height ) || ImageTweak.pref.ClipMovement == false ) {
             this.Document.body.style.cursor = "move";
         } else if ( this.Window.innerWidth < this.Image.width ) {
             this.Document.body.style.cursor = "W-resize";
@@ -433,32 +433,32 @@ ImageTweak.prototype.FillZoom = function FillZoom() {
 };
 
 ImageTweak.prototype.DefaultZoomType = function DefaultZoomType() {
-    this.PerformZoomTypeSwitch( ImageTweak.getPref("DefaultZoomType"), false );
+    this.PerformZoomTypeSwitch( ImageTweak.pref.DefaultZoomType, false );
 };
 
 ImageTweak.prototype.ZoomTypes = {
     free: { 
         next:'fit',   
         condition: function(_this) { 
-            return ImageTweak.getPref("ZoomTypeFreeEnabled") 
+            return ImageTweak.pref.ZoomTypeFreeEnabled; 
         }
     },
     fit: { 
         next:'fill',  
         condition: function (_this) {
-            return _this.FitZoom() < 1 && ImageTweak.getPref("ZoomTypeFitEnabled");
+            return _this.FitZoom() < 1 && ImageTweak.pref.ZoomTypeFitEnabled;
         }
     },
     fill: { 
         next:'pixel', 
         condition: function (_this) {
-            return _this.FillZoom() < 1 && ImageTweak.getPref("ZoomTypeFillEnabled");
+            return _this.FillZoom() < 1 && ImageTweak.pref.ZoomTypeFillEnabled;
         }
     },
     pixel: { 
         next:'free',
         condition: function (_this) {
-            return _this.FitZoom() >= 1 || ImageTweak.getPref("ZoomTypeUnscaledEnabled");
+            return _this.FitZoom() >= 1 || ImageTweak.pref.ZoomTypeUnscaledEnabled;
         }
     }
 };
@@ -483,7 +483,7 @@ ImageTweak.prototype.GetResamplingAlgorithm = function GetResamplingAlgorithm() 
     const bilinear = "optimizeQuality";
     const nearestNeighbor = "-moz-crisp-edges";
     var algorithm = nearestNeighbor;
-    if ( ImageTweak.getPref("ResamplingAlgorithm") && this.ContinuousTone !== false )
+    if ( ImageTweak.pref.ResamplingAlgorithm && this.ContinuousTone !== false )
         algorithm = bilinear;
     if ( this.InvertResamplingAlgorithm )
         algorithm = algorithm == bilinear ? nearestNeighbor : bilinear;
@@ -491,10 +491,10 @@ ImageTweak.prototype.GetResamplingAlgorithm = function GetResamplingAlgorithm() 
 };
 
 ImageTweak.prototype.GetElementImageURL = function GetElementImageURL(elem) {
-    if ( elem.tagName == "IMG" && ImageTweak.getPref("ShortcutImg") )
+    if ( elem.tagName == "IMG" && ImageTweak.pref.ShortcutImg )
         return elem.src;
     var bgImgUrl = ImageTweak.getComputedURL( elem, "background-image" );
-    if ( bgImgUrl != "" && bgImgUrl != null && ImageTweak.getPref("ShortcutBg") ) 
+    if ( bgImgUrl != "" && bgImgUrl != null && ImageTweak.pref.ShortcutBg ) 
         return makeURLAbsolute( elem.baseURI, bgImgUrl );
     return "";
 };
@@ -517,7 +517,7 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
         this.Document.addEventListener( 'click', function(e) { hImageTweak.RegularDocumentOnMouseClick(e); }, false );
         this.Document.addEventListener( 'dblclick', function(e) { hImageTweak.RegularDocumentOnMouseDoubleClick(e); }, false );
         // inject the navigator.imageViewer flag
-        if (ImageTweak.getPref("ContentDetectable"))
+        if (ImageTweak.pref.ContentDetectable)
             this.InjectContentFlag();
         this.Inited = true;
     } else if ( !this.Image.naturalWidth ) {
@@ -680,6 +680,10 @@ ImageTweak.getPref = function getPref(id) {
     }
     return ImageTweak.preferences[ id ].parse ? ImageTweak.preferences[ id ].parse(p) : p;
 };
+
+ImageTweak.pref = {};
+for (var pref in ImageTweak.preferences)
+	ImageTweak.pref.__defineGetter__(pref, function() { return ImageTweak.getPref(pref); });
 
 ImageTweak.isContinuousToneImage = function isContinuousToneImage(img) { 
     const colorsThreshold = 32;
