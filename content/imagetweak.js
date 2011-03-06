@@ -275,24 +275,16 @@ ImageTweak.prototype.OnDoubleClick = function OnDoubleClick(event) {
     }
 };
 
-ImageTweak.prototype.Targets = {
-    DoNotOpen:              function(url) { return false; },
-    OpenInCurrentTab:       function(url) { content.document.location.assign( url ); return true; },
-    OpenInNewTab:           function(url) { gBrowser.addTab( url ); return true; },
-    OpenInNewTabFocus:      function(url) { gBrowser.selectedTab = gBrowser.addTab( url ); return true; },
-    OpenInNewWindow:        function(url) { window.open( url ); return true; },
-};
-
 ImageTweak.prototype.RegularDocumentOnMouseClick = function RegularDocumentOnMouseClick(event) {
-    var Target = this.Targets.DoNotOpen;
+    var Target = ImageTweak.Targets.DoNotOpen;
     var URL = "";
     if ( event.button == 2 ) {
         if ( event.ctrlKey && event.altKey && event.shiftKey ) {
-            Target = this.Targets.OpenInNewWindow;
+            Target = ImageTweak.Targets.OpenInNewWindow;
         } else if ( event.ctrlKey && event.altKey ) {
-            Target = this.Targets.OpenInNewTab;
+            Target = ImageTweak.Targets.OpenInNewTab;
         } else if ( event.ctrlKey ) {
-            Target = this.Targets.OpenInCurrentTab;
+            Target = ImageTweak.Targets.OpenInCurrentTab;
         }
         URL = this.GetElementImageURL( event.target );
     }
@@ -302,10 +294,10 @@ ImageTweak.prototype.RegularDocumentOnMouseClick = function RegularDocumentOnMou
 };
 
 ImageTweak.prototype.RegularDocumentOnMouseDoubleClick = function RegularDocumentOnMouseDoubleClick(event) {
-    var Target = this.Targets.DoNotOpen;
+    var Target = ImageTweak.Targets.DoNotOpen;
     var URL = "";
     if ( event.button == 2 ) {
-        Target = this.Targets.OpenInCurrentTab;
+        Target = ImageTweak.Targets.OpenInCurrentTab;
         URL = this.GetElementImageURL( event.target );
     }
     if ( URL != "" && Target( URL ) ) {
@@ -716,4 +708,12 @@ ImageTweak.isContinuousToneImage = function isContinuousToneImage(img) {
     }
     
     return colors.length < colorsThreshold;
+};
+
+ImageTweak.Targets = {
+    DoNotOpen:              function(url) { return false; },
+    OpenInCurrentTab:       function(url) { content.document.location.assign( url ); return true; },
+    OpenInNewTab:           function(url) { gBrowser.addTab( url ); return true; },
+    OpenInNewTabFocus:      function(url) { gBrowser.selectedTab = gBrowser.addTab( url ); return true; },
+    OpenInNewWindow:        function(url) { window.open( url ); return true; },
 };
