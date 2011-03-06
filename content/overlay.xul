@@ -18,7 +18,7 @@
 						setTimeout(function() {
 							document.popupNode = IT.Image;
 							synthesizeMouse(IT.Image, 0, 0, { type: "contextmenu", button: 2 }, IT.Window);
-							document.getElementById("contentAreaContextMenu").moveTo(event.clientX, event.clientY); // FIXME
+							document.getElementById("contentAreaContextMenu").moveTo(event.screenX, event.screenY);
 						}, 1);
 					} else { 
 						document.getElementById("imagetweak_popup").hidden = !(IT && ImageTweak.pref.ContextMenu);
