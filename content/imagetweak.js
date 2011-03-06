@@ -685,7 +685,7 @@ for (var pref in ImageTweak.preferences) {
 
 ImageTweak.isContinuousToneImage = function isContinuousToneImage(img) { 
     const colorsThreshold = 32;
-	var { , , data } = ImageTweak.getImageCanvas(img);
+	var { canvas, ctx, data } = ImageTweak.getImageCanvas(img);
 	
     var colors = [];
     for (var i=0; i < w*h*4 && colors.length < colorsThreshold; i+=4) {
