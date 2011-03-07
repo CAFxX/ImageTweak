@@ -68,6 +68,7 @@
             <preference instantApply="true" id="imagetweak_contentdetectable" name="extensions.imagetweak.contentdetectable" type="bool"/>
             <preference instantApply="true" id="imagetweak_legacyscrolling" name="extensions.imagetweak.legacyscrolling" type="bool"/>
             <preference instantApply="true" id="imagetweak_contextmenu" name="extensions.imagetweak.contextmenu" type="int"/>
+            <preference instantApply="true" id="imagetweak_resamplingalgorithm" name="extensions.imagetweak.resamplingalgorithm" type="int"/>
         </preferences>
         <vbox>
             <groupbox>
@@ -88,6 +89,11 @@
 							<textbox preference="imagetweak_zoomexp" width="100px" id="imagetweak_zoomexp_textbox" tooltiptext="&pref.zoomexp.tooltip;" 
 								onsynctopreference="return parseFloat(this.value)" />
 						</hbox>
+						<label value="Resampling algorithm"/>
+						<radiogroup preference="imagetweak_resamplingalgorithm">
+							<radio label="Nearest neighbor" value="0"/>
+							<radio label="Bilinear" value="1"/>
+						</radiogroup>
 						<separator />
 						<label value="&pref.zoomtype.label;"/>
 						<checkbox preference="imagetweak_zoomtype_full" label="&pref.zoomtype.full.label;" tooltiptext="&pref.zoomtype.full.tooltip;"/>
