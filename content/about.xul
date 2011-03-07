@@ -2,14 +2,14 @@
 <!DOCTYPE window SYSTEM "chrome://imagetweak/locale/imagetweak.ent">
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 
-<window class="dialog" title="&about.window.title;" orient="vertical" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<window class="dialog" title="&about.window.title;" orient="vertical" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" width="500">
 	<script type="application/x-javascript" src="chrome://imagetweak/content/imagetweak.js" /> 
 	<script type="application/x-javascript">
 		window.onload = function() {
 			document.getElementById("imagetweak_about_title").innerHTML += " " + 
 				Components.classes["@mozilla.org/extensions/manager;1"]
 					.getService(Components.interfaces.nsIExtensionManager)
-					.getItemForID("{DB2EA31C-58F5-48b7-8D60-CB0739257904}").version;
+					.getItemForID(ImageTweak.UUID).version;
 			sizeToContent();
 		};
 	</script>
@@ -22,6 +22,9 @@
             }
             .link:hover {
                 text-decoration: underline ;
+            }
+            span {
+                display:inline-block;
             }
         </html:style>
         <image src="chrome://imagetweak/skin/imagetweak48.png" width="48" height="48"/>
@@ -39,39 +42,41 @@
         <hbox>
             <vbox align="start">
                 <text style="font-weight: bold;" value="Translators"/>
-                <text value="Tuxman (de)"/>
-                <text value="CAFxX (en-US)"/>
-                <text value="papoo (fr)"/>
-                <text value="CAFxX (it-IT)"/>
-                <text value="drry (ja-JP)"/>
-                <text value="markh (nl)"/>
-                <text value="Wacław Jacek (pl-PL)"/>
-                <text value="humbertosartini (pt-BR)"/>
-                <text value="egaz (ru-RU)"/>
-                <text value="Holco (sk-SK)"/>
-                <text value="WangKing (zh-CN)"/>
-                <text value="toomore (zh-TW)"/>
-                <text value="MiK546 (fi-FI)"/>
-                <text value="chuzo (es-ES)"/>
-                <text value="Sappa (uk-UA)"/>
-                <text value="lord1980 (ar)"/>
-                <text value="kkmic (ro-RO)"/>
-                <text value="erkanyv (tr-TR)"/>
-                <text value="DakSrbija (sr)"/>
-                <text value="Lakrits (sv-SE)"/>
+                <html:div>
+                    <html:span>Tuxman (de)</html:span>
+                    <html:span>CAFxX (en-US)</html:span>
+                    <html:span>papoo (fr)</html:span>
+                    <html:span>CAFxX (it-IT)</html:span>
+                    <html:span>drry (ja-JP)</html:span>
+                    <html:span>markh (nl)</html:span>
+                    <html:span>Wacław Jacek (pl-PL)</html:span>
+                    <html:span>humbertosartini (pt-BR)</html:span>
+                    <html:span>egaz (ru-RU)</html:span>
+                    <html:span>Holco (sk-SK)</html:span>
+                    <html:span>WangKing (zh-CN)</html:span>
+                    <html:span>toomore (zh-TW)</html:span>
+                    <html:span>MiK546 (fi-FI)</html:span>
+                    <html:span>chuzo (es-ES)</html:span>
+                    <html:span>Sappa (uk-UA)</html:span>
+                    <html:span>lord1980 (ar)</html:span>
+                    <html:span>kkmic (ro-RO)</html:span>
+                    <html:span>erkanyv (tr-TR)</html:span>
+                    <html:span>DakSrbija (sr)</html:span>
+                    <html:span>Lakrits (sv-SE)</html:span>
+                </html:div>
             </vbox>
             <vbox align="end">
                 <text style="font-weight: bold;" value="Thanks"/>
-                <text value="damien18"/>
-                <text value="DeathWolf"/>
-                <text value="Friar Tuck"/>
-                <text value="makondo"/>
-                <text value="max1million"/>
-                <text value="Tuxman"/>
-                <text value="wossName"/>
-                <text value=""/>
-                <text value="babelzilla.org"/>
-                <text value="mozillazine.org"/>
+                <html:div>
+                    <html:span>damien18</html:span>
+                    <html:span>DeathWolf</html:span>
+                    <html:span>Friar Tuck</html:span>
+                    <html:span>makondo</html:span>
+                    <html:span>max1million</html:span>
+                    <html:span>Tuxman</html:span>
+                    <html:span>wossName</html:span>
+                    <html:span>and everyone at babelzilla.org and mozillazine.org</html:span>
+                </html:div>
             </vbox>
         </hbox>
     </vbox>

@@ -773,3 +773,5 @@ ImageTweak.RepaintAll = function RepaintAll(url) {
         }
     }
 };
+
+ImageTweak.UUID = "{DB2EA31C-58F5-48b7-8D60-CB0739257904}";
