@@ -121,10 +121,10 @@
 						<checkbox preference="imagetweak_invertmousewheel" label="&pref.invertmousewheel.label;" tooltiptext="&pref.invertmousewheel.tooltip;"/>
 						<checkbox preference="imagetweak_invertkeyboard" label="&pref.invertkeyboard.label;" tooltiptext="&pref.invertkeyboard.tooltip;"/>
 						<separator />
-						<label value="Mouse wheel"/>
+						<label value="&pref.mousewheel.label;"/>
 						<radiogroup preference="imagetweak_legacyscrolling">
-							<radio label="wheel to scroll, ctrl+wheel to zoom" value="false" />
-							<radio label="ctrl+wheel to scroll, wheel to zoom" value="true" />
+							<radio label="&pref.mousewheel.new.label;" tooltip="&pref.mousewheel.new.tooltip;" value="false" />
+							<radio label="&pref.mousewheel.legacy.label;" tooltip="&pref.mousewheel.legacy.tooltip;" value="true" />
 						</radiogroup>
 						<separator />
 						<label value="&pref.shortcut.label;"/>
