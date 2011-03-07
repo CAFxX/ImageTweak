@@ -108,7 +108,7 @@
 							<radio label="&pref.zoomtype.unscaled.label;" value="pixel" id="imagetweak_zoomtype_default_unscaled" />
 						</radiogroup>
 						<separator />
-						<checkbox preference="imagetweak_contextmenu" label="Show context menu" tooltiptext="Enable the ImageTweak context menu"
+						<checkbox preference="imagetweak_contextmenu" label="&pref.contextmenu.label;" tooltiptext="&pref.contextmenu.tooltip;"
 							onsynctopreference="return this.checked ? 1 : 0;"
 							onsyncfrompreference="return $('contextmenu').value != 0;"/>
 					</vbox>
