@@ -485,6 +485,8 @@ ImageTweak.prototype.GetResamplingAlgorithm = function GetResamplingAlgorithm() 
         algorithm = bilinear;
     if ( this.InvertResamplingAlgorithm )
         algorithm = algorithm == bilinear ? nearestNeighbor : bilinear;
+    if ( this.Zoom < 2 )
+        algorithm = bilinear;
     return algorithm;
 };
 
