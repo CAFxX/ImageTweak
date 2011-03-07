@@ -40,10 +40,17 @@
 
 <!ENTITY pref.mousewheel.label "Mouse wheel">
 <!ENTITY pref.mousewheel.new.label "wheel to scroll, ctrl+wheel to zoom">
-<!ENTITY pref.mousewheel.legacy.label "ctrl+wheel to scroll, wheel to zoom">
 <!ENTITY pref.mousewheel.new.tooltip "Default Firefox behaviour of the mouse wheel">
+<!ENTITY pref.mousewheel.legacy.label "ctrl+wheel to scroll, wheel to zoom">
 <!ENTITY pref.mousewheel.legacy.tooltip "Alternate mouse wheel behaviour, used in ImageTweak prior to version 0.17">
 
 <!ENTITY pref.contextmenu.label "Enable context menu">
 <!ENTITY pref.contextmenu.tooltip "Enable the ImageTweak context menu that allows executing common operations on images">
+
+<!ENTITY pref.resamplingalgorithm.label "Image resampling algorithm">
+<!ENTITY pref.resamplingalgorithm.nearestneighbor.label "Nearest neighbor">
+<!ENTITY pref.resamplingalgorithm.nearestneighbor.tooltip "Fast, low quality">
+<!ENTITY pref.resamplingalgorithm.bilinear.label "Bilinear">
+<!ENTITY pref.resamplingalgorithm.bilinear.tooltip "Slighlty slower than nearest neighbor, good quality">
+
 

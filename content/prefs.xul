@@ -89,10 +89,10 @@
 							<textbox preference="imagetweak_zoomexp" width="100px" id="imagetweak_zoomexp_textbox" tooltiptext="&pref.zoomexp.tooltip;" 
 								onsynctopreference="return parseFloat(this.value)" />
 						</hbox>
-						<label value="Resampling algorithm"/>
+						<label value="&pref.resamplingalgorithm.label;"/>
 						<radiogroup preference="imagetweak_resamplingalgorithm">
-							<radio label="Nearest neighbor" value="0"/>
-							<radio label="Bilinear" value="1"/>
+							<radio label="&pref.resamplingalgorithm.nearestneighbor.label;" tooltip="&pref.resamplingalgorithm.nearestneighbor.tooltip;" value="0"/>
+							<radio label="&pref.resamplingalgorithm.bilinear.label;" tooltip="&pref.resamplingalgorithm.bilinear.tooltip;" value="1"/>
 						</radiogroup>
 						<separator />
 						<label value="&pref.zoomtype.label;"/>
