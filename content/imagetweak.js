@@ -693,7 +693,7 @@ ImageTweak.preferences = {
     LegacyScrolling:                { pref: "extensions.imagetweak.legacyscrolling"                                                                      },
     ContentDetectable:              { pref: "extensions.imagetweak.contentdetectable"                                                                    },
     ResamplingAlgorithm:            { pref: "extensions.imagetweak.resamplingalgorithm"                                                                  },
-    ContextMenu:                    { pref: "extensions.imagetweak.contextmenu"                                                                           }
+    ContextMenu:                    { pref: "extensions.imagetweak.contextmenu"                                                                          }
 };
 
 ImageTweak.pref = {};
@@ -755,19 +755,19 @@ ImageTweak.Targets = {
 };
 
 ImageTweak.RepaintAll = function RepaintAll(url) {
-  var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
-  var browserEnumerator = wm.getEnumerator("navigator:browser");
+    var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
+    var browserEnumerator = wm.getEnumerator("navigator:browser");
 
-  while (browserEnumerator.hasMoreElements()) {
-    var browserWin = browserEnumerator.getNext();
-    var tabbrowser = browserWin.gBrowser;
+    while (browserEnumerator.hasMoreElements()) {
+        var browserWin = browserEnumerator.getNext();
+        var tabbrowser = browserWin.gBrowser;
 
-    var numTabs = tabbrowser.browsers.length;
-    for (var index = 0; index < numTabs; index++) {
-      var currentBrowser = tabbrowser.getBrowserAtIndex(index);
-      var IT = ImageTweak.enabled(currentBrowser.contentWindow.document);
-      if (IT) 
-        IT.Repaint();
+        var numTabs = tabbrowser.browsers.length;
+        for (var index = 0; index < numTabs; index++) {
+            var currentBrowser = tabbrowser.getBrowserAtIndex(index);
+            var IT = ImageTweak.enabled(currentBrowser.contentWindow.document);
+            if (IT) 
+                IT.Repaint();
+        }
     }
-  }
 };
