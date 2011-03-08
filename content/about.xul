@@ -27,6 +27,9 @@
                 display:inline-block;
                 margin-right:4px;
             }
+            .inline {
+                display:inline;
+            }
         </html:style>
         <image src="chrome://imagetweak/skin/imagetweak48.png" width="48" height="48"/>
         <html:div id="imagetweak_about_title" style="font-weight: bold; font-size: large;">
@@ -83,9 +86,9 @@
         <separator class="thin"/>
         <vbox>
             <html:div style="max-width:350px">
-                ImageTweak contains icons from the <a href="http://somerandomdude.com/projects/bitcons/">Bitcons</a> 
-                icon set by <a href="http://somerandomdude.com/">P. J. Onori</a> licensed under the 
-                <a href="http://creativecommons.org/licenses/by-sa/3.0/us/">Creative Commons Attribution-Share Alike 3.0 license</a>.
+                ImageTweak contains icons from the <text class="link inline" onclick="ImageTweak.browse('http://somerandomdude.com/projects/bitcons/')" value="Bitcons"/>
+                icon set by <text class="link inline" onclick="ImageTweak.browse('http://somerandomdude.com/')" value="P. J. Onori"/> licensed under the 
+                <text class="link inline" onclick="ImageTweak.browse('http://creativecommons.org/licenses/by-sa/3.0/us/')" value="CC BY-SA 3.0"/> license.
             </html:div>
         </vbox>       
     </vbox>
