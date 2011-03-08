@@ -24,7 +24,7 @@
 function ImageTweak( hWindow ) {
     this.Window = hWindow; // reference to the current window
     this.Document = this.Window.document; // reference to the current document
-	this.Listeners = [];
+    this.Listeners = [];
     if ( this.Document instanceof ImageDocument ) {
         this.Browser = gBrowser.getBrowserForDocument( this.Document );
         this.BrowserAutoscroll = false;
@@ -309,7 +309,7 @@ ImageTweak.prototype.RegularDocumentOnMouseDoubleClick = function RegularDocumen
 
 ImageTweak.prototype.OnUnload = function OnUnload(event) {
     this.Browser.setAttribute("autoscroll", this.BrowserAutoscroll);
-	this.Cleanup();
+    this.Cleanup();
 };
 
 ImageTweak.prototype.OnSelection = function OnSelection(event) {
@@ -489,8 +489,8 @@ ImageTweak.prototype.GetResamplingAlgorithm = function GetResamplingAlgorithm() 
 };
 
 ImageTweak.prototype.SwitchResamplingAlgorithm = function SwitchResamplingAlgorithm() {
-	this.InvertResamplingAlgorithm = !this.InvertResamplingAlgorithm;
-	this.Repaint();
+    this.InvertResamplingAlgorithm = !this.InvertResamplingAlgorithm;
+    this.Repaint();
 };
 
 ImageTweak.prototype.GetElementImageURL = function GetElementImageURL(elem) {
@@ -503,7 +503,7 @@ ImageTweak.prototype.GetElementImageURL = function GetElementImageURL(elem) {
 };
 
 ImageTweak.prototype.ClearSelection = function ClearSelection() {
-	this.Window.getSelection().removeAllRanges();
+    this.Window.getSelection().removeAllRanges();
 };
 
 ImageTweak.prototype.InjectContentFlag = function InjectContentFlag() {
@@ -517,18 +517,18 @@ ImageTweak.prototype.InjectContentFlag = function InjectContentFlag() {
 };
 
 ImageTweak.prototype.Cleanup = function Cleanup() {
-	if (this.Document && this.Document.ImageTweak)
-		this.Document.ImageTweak = null;
-	var listener;
-	while (listener = this.Listeners.pop())
-		listener.target.removeEventListener(listener.eventName, listener.listener, listener.bubbling);
-	for (var i in this)
-		this[i] = null;
+    if (this.Document && this.Document.ImageTweak)
+        this.Document.ImageTweak = null;
+    var listener;
+    while (listener = this.Listeners.pop())
+        listener.target.removeEventListener(listener.eventName, listener.listener, listener.bubbling);
+    for (var i in this)
+        this[i] = null;
 };
 
 ImageTweak.prototype.addEventListener = function addEventListener(target, eventName, listener, bubbling) {
-	target.addEventListener(eventName, listener, bubbling);
-	this.Listeners.push({target: target, eventName: eventName, listener: listener, bubbling: bubbling});
+    target.addEventListener(eventName, listener, bubbling);
+    this.Listeners.push({target: target, eventName: eventName, listener: listener, bubbling: bubbling});
 };
 
 ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
@@ -693,27 +693,27 @@ ImageTweak.preferences = {
     LegacyScrolling:                { pref: "extensions.imagetweak.legacyscrolling"                                                                      },
     ContentDetectable:              { pref: "extensions.imagetweak.contentdetectable"                                                                    },
     ResamplingAlgorithm:            { pref: "extensions.imagetweak.resamplingalgorithm"                                                                  },
-    ContextMenu:		            { pref: "extensions.imagetweak.contextmenu"                                                                  	     }
+    ContextMenu:                    { pref: "extensions.imagetweak.contextmenu"                                                                           }
 };
 
 ImageTweak.pref = {};
 for (var pref in ImageTweak.preferences) {
-	let id = pref;
-	ImageTweak.pref.__defineGetter__(pref, function() { 
-		var p;
-		switch ( ImageTweak.prefs.getPrefType( ImageTweak.preferences[ id ].pref ) ) {
-			case ImageTweak.prefs.PREF_BOOL:      p = ImageTweak.prefs.getBoolPref( ImageTweak.preferences[id].pref ); break;
-			case ImageTweak.prefs.PREF_STRING:    p = ImageTweak.prefs.getCharPref( ImageTweak.preferences[id].pref ); break;
-			case ImageTweak.prefs.PREF_INT:       p = ImageTweak.prefs.getIntPref( ImageTweak.preferences[id].pref ); break;
-		}
-		return ImageTweak.preferences[ id ].parse ? ImageTweak.preferences[ id ].parse(p) : p;
-	});
+    let id = pref;
+    ImageTweak.pref.__defineGetter__(pref, function() { 
+        var p;
+        switch ( ImageTweak.prefs.getPrefType( ImageTweak.preferences[ id ].pref ) ) {
+            case ImageTweak.prefs.PREF_BOOL:      p = ImageTweak.prefs.getBoolPref( ImageTweak.preferences[id].pref ); break;
+            case ImageTweak.prefs.PREF_STRING:    p = ImageTweak.prefs.getCharPref( ImageTweak.preferences[id].pref ); break;
+            case ImageTweak.prefs.PREF_INT:       p = ImageTweak.prefs.getIntPref( ImageTweak.preferences[id].pref ); break;
+        }
+        return ImageTweak.preferences[ id ].parse ? ImageTweak.preferences[ id ].parse(p) : p;
+    });
 }
 
 ImageTweak.isContinuousToneImage = function isContinuousToneImage(img) { 
     const colorsThreshold = 32;
-	var { canvas, ctx, data } = ImageTweak.getImageCanvas(img);
-	
+    var { canvas, ctx, data } = ImageTweak.getImageCanvas(img);
+    
     var colors = [];
     for (var i=0; i < w*h*4 && colors.length < colorsThreshold; i+=4) {
         var color = ( data.data[i] * 256 + data.data[i+1] ) * 256 + data.data[i+2];
@@ -725,13 +725,13 @@ ImageTweak.isContinuousToneImage = function isContinuousToneImage(img) {
 };
 
 ImageTweak.getImageCanvas = function getImageCanvas(img) {
-	var { canvas, ctx } = ImageTweak.getCanvas(img.ownerDocument, img.naturalWidth, img.naturalHeight);
+    var { canvas, ctx } = ImageTweak.getCanvas(img.ownerDocument, img.naturalWidth, img.naturalHeight);
     ctx.drawImage(img, 0, 0);
-	return {
-		canvas: canvas,
-		ctx: ctx,
-		data: ctx.getImageData(0, 0, img.naturalWidth, img.naturalHeight)
-	};
+    return {
+        canvas: canvas,
+        ctx: ctx,
+        data: ctx.getImageData(0, 0, img.naturalWidth, img.naturalHeight)
+    };
 };
 
 ImageTweak.getCanvas = function getCanvas(doc, w, h) {
@@ -740,10 +740,10 @@ ImageTweak.getCanvas = function getCanvas(doc, w, h) {
     canvas.height = h;
     var ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, w, h);
-	return {
-		canvas: canvas,
-		ctx: ctx
-	};
+    return {
+        canvas: canvas,
+        ctx: ctx
+    };
 };
 
 ImageTweak.Targets = {
@@ -765,9 +765,9 @@ ImageTweak.RepaintAll = function RepaintAll(url) {
     var numTabs = tabbrowser.browsers.length;
     for (var index = 0; index < numTabs; index++) {
       var currentBrowser = tabbrowser.getBrowserAtIndex(index);
-	  var IT = ImageTweak.enabled(currentBrowser.contentWindow.document);
+      var IT = ImageTweak.enabled(currentBrowser.contentWindow.document);
       if (IT) 
-		IT.Repaint();
+        IT.Repaint();
     }
   }
 };
