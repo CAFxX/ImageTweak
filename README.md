@@ -50,6 +50,10 @@ can query navigator.imageViewer:
 		// no advanced image viewer available
 	}
 	
+This behaviour is on by default but can be disabled by unticking the "Notify websites"
+checkbox in the preference window or by setting the extensions.imagetweak.contentdetectable 
+preference to false.
+
 Please note that the flag does not contain any information about the name or version
 of the extension that is providing the image viewer.
 
