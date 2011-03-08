@@ -30,6 +30,7 @@ Other extensions that wish to play nice with ImageTweak can use the following fu
 		* isImageTweakEnabled() returns true if ImageTweak is enabled.
 		* isImageTweakEnabled(document) returns true if the content document 
 		  is being displayed using ImageTweak
+        This works only if run from a browser.xul overlay.
 	*/
 	function isImageTweakEnabled(doc) {
 		try {
