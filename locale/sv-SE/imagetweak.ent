@@ -1,6 +1,7 @@
 <!ENTITY pref.window.title "Inställningar för ImageTweak">
 <!ENTITY pref.prefpane.label "Bildvisning">
 <!ENTITY pref.bgcolor.label "Bakgrundsfärg">
+<!ENTITY pref.bordercolor.label "Border color">
 <!ENTITY pref.autoresize.label "Ändra storlek automatiskt när bild laddas">
 <!ENTITY pref.clip_movement.label "Begränsa bildens rörelseyta">
 <!ENTITY pref.zoomexp.label "Zoomningsfaktor (&#37;)">
@@ -17,7 +18,9 @@
 <!ENTITY pref.invertmousewheel.label "Invertera zoomning med mushjulet">
 <!ENTITY pref.invertkeyboard.label "Invertera tangentbordsnavigeringen">
 <!ENTITY pref.startfromtopleft.label "Placera bilden uppe till vänster">
+<!ENTITY pref.contentdetectable.label "Notify websites">
 <!ENTITY pref.bgcolor.tooltip "Ange bakgrundsfärgen som används när bilder visas">
+<!ENTITY pref.bordercolor.tooltip "Set the color of the border around images (CSS color or percentage, 0&#37; being black and 100&#37; being white). If empty disables the border.">
 <!ENTITY pref.autoresize.tooltip "Ändra automatiskt storlek på bilder större än fönstret när de laddas">
 <!ENTITY pref.clip_movement.tooltip "Tillåt endast att bilden flyttas inom fönstret">
 <!ENTITY pref.zoomexp.tooltip "Stegvis zoomningsfaktor (200&#37; innebär att storleken dubblas/halveras med varje steg)">
@@ -31,5 +34,18 @@
 <!ENTITY pref.invertmousewheel.tooltip "Invertera mushjulets zoomningsriktning (in/ut)">
 <!ENTITY pref.invertkeyboard.tooltip "Invertera piltangenternas flyttriktning vid bildrullning">
 <!ENTITY pref.startfromtopleft.tooltip "Placera bilden längst upp till vänster när den är större än fönstret">
+<!ENTITY pref.contentdetectable.tooltip "Tell websites that this browser has a builtin image viewer">
 <!ENTITY pref.pressf1forhelp.label "Tryck på F1 för att visa ImageTweaks hjälpwebbsida (på engelska)">
 <!ENTITY about.window.title "Om ImageTweak">
+<!ENTITY pref.mousewheel.label "Mouse wheel">
+<!ENTITY pref.mousewheel.new.label "wheel to scroll, ctrl+wheel to zoom">
+<!ENTITY pref.mousewheel.new.tooltip "Default Firefox behaviour of the mouse wheel">
+<!ENTITY pref.mousewheel.legacy.label "ctrl+wheel to scroll, wheel to zoom">
+<!ENTITY pref.mousewheel.legacy.tooltip "Alternate mouse wheel behaviour, used in ImageTweak prior to version 0.17">
+<!ENTITY pref.contextmenu.label "Enable context menu">
+<!ENTITY pref.contextmenu.tooltip "Enable the ImageTweak context menu that allows executing common operations on images">
+<!ENTITY pref.resamplingalgorithm.label "Image resampling algorithm">
+<!ENTITY pref.resamplingalgorithm.nearestneighbor.label "Nearest neighbor">
+<!ENTITY pref.resamplingalgorithm.nearestneighbor.tooltip "Fast, low quality">
+<!ENTITY pref.resamplingalgorithm.bilinear.label "Bilinear">
+<!ENTITY pref.resamplingalgorithm.bilinear.tooltip "Slighlty slower than nearest neighbor, good quality">

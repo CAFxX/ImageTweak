@@ -22,7 +22,7 @@
 <!ENTITY pref.bgcolor.tooltip "Imposta il colore di sfondo utilizzato quando vengono visualizzate le immagini (colore CSS o percentuale, dove 0&#37; é nero e 100&#37; é bianco)">
 <!ENTITY pref.bordercolor.tooltip "Imposta il colore del bordino intorno le immagini (colore CSS o percentuale, dove 0&#37; é nero e 100&#37; é bianco). Se lasciato vuoto non visualizza alcun bordino.">
 <!ENTITY pref.autoresize.tooltip "Se una immagine é più larga della finestra verrà inizialmente visualizzata ridimensionata">
-<!ENTITY pref.clip_movement.tooltip "Permette il movimento dell&apos;immagine solo all&apos;interno della finestra">
+<!ENTITY pref.clip_movement.tooltip "Permette il movimento dell'immagine solo all'interno della finestra">
 <!ENTITY pref.zoomexp.tooltip "Fattore del passo di zoom (es. 200&#37; raddoppia/dimezza ad ogni passo)">
 <!ENTITY pref.zoomonpointer.tooltip "Zooma verso il puntatore quando si utilizza la rotella del mouse">
 <!ENTITY pref.zoomtype.full.tooltip "Attiva il ridimensionamento alla finestra">
@@ -33,7 +33,19 @@
 <!ENTITY pref.shortcut.bg.tooltip "Attiva la scorciatoia per gli sfondi utilizzati nelle pagine web">
 <!ENTITY pref.invertmousewheel.tooltip "Inverte la direzione della rotella del mouse per lo zoom">
 <!ENTITY pref.invertkeyboard.tooltip "Inverte la direzione delle frecce di direzione per lo scorrimento">
-<!ENTITY pref.startfromtopleft.tooltip "Posiziona l&apos;immagine in alto a destra quando è più grande della finestra">
+<!ENTITY pref.startfromtopleft.tooltip "Posiziona l'immagine in alto a destra quando è più grande della finestra">
 <!ENTITY pref.contentdetectable.tooltip "Comunica ai siti web che il browser è dotato di un visualizzatore di immagini">
 <!ENTITY pref.pressf1forhelp.label "Premi F1 per visualizzare la guida in linea">
 <!ENTITY about.window.title "ImageTweak - Informazioni">
+<!ENTITY pref.mousewheel.label "Rotella del mouse">
+<!ENTITY pref.mousewheel.new.label "rotella per scrollare, ctrl+rotella per zoomare">
+<!ENTITY pref.mousewheel.new.tooltip "Comportamento standard di Firefox">
+<!ENTITY pref.mousewheel.legacy.label "ctrl+rotella per scrollare, rotella per zoomare">
+<!ENTITY pref.mousewheel.legacy.tooltip "Comportamento alternativo della rotella, default nelle versioni di ImageTweak precedenti alla 0.17">
+<!ENTITY pref.contextmenu.label "Attiva il menu contestuale">
+<!ENTITY pref.contextmenu.tooltip "Attiva il menu contestuale di ImageTweak per eseguire operazioni frequenti sulle immagini">
+<!ENTITY pref.resamplingalgorithm.label "Algoritmo di ridimensionamento delle immagini">
+<!ENTITY pref.resamplingalgorithm.nearestneighbor.label "Nearest neighbor">
+<!ENTITY pref.resamplingalgorithm.nearestneighbor.tooltip "Veloce, bassa qualità">
+<!ENTITY pref.resamplingalgorithm.bilinear.label "Bilineare">
+<!ENTITY pref.resamplingalgorithm.bilinear.tooltip "Leggermente più lento di nearest neighbor, buona qualità">
