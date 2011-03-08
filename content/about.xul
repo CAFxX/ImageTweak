@@ -80,5 +80,13 @@
                 <html:span>mozillazine.org</html:span>
             </html:div>
         </vbox>
+        <separator class="thin"/>
+        <vbox>
+            <html:div style="max-width:350px">
+                ImageTweak contains icons from the <a href="http://somerandomdude.com/projects/bitcons/">Bitcons</a> 
+                icon set by <a href="http://somerandomdude.com/">P. J. Onori</a> licensed under the 
+                <a href="http://creativecommons.org/licenses/by-sa/3.0/us/">Creative Commons Attribution-Share Alike 3.0 license</a>.
+            </html:div>
+        </vbox>       
     </vbox>
 </window>
