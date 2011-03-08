@@ -308,6 +308,7 @@ ImageTweak.prototype.RegularDocumentOnMouseDoubleClick = function RegularDocumen
 
 ImageTweak.prototype.OnUnload = function OnUnload(event) {
     this.Browser.setAttribute("autoscroll", this.BrowserAutoscroll);
+	this.Cleanup();
 };
 
 ImageTweak.prototype.OnSelection = function OnSelection(event) {
@@ -512,6 +513,14 @@ ImageTweak.prototype.InjectContentFlag = function InjectContentFlag() {
         "window.wrappedJSObject.navigator.__defineGetter__('imageViewer', function(){ return true; });", 
         s
     );
+};
+
+ImageTweak.prototype.Cleanup = function Cleanup() {
+	if (this.Document && this.Document.ImageTweak)
+		this.Document.ImageTweak = null;
+	// TODO: Remove event listeners
+	for (var i in this)
+		this[i] = null;
 };
 
 ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
