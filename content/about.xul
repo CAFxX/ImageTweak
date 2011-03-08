@@ -2,7 +2,7 @@
 <!DOCTYPE window SYSTEM "chrome://imagetweak/locale/imagetweak.ent">
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 
-<window class="dialog" title="&about.window.title;" orient="vertical" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" width="500">
+<window class="dialog" title="&about.window.title;" orient="vertical" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	<script type="application/x-javascript" src="chrome://imagetweak/content/imagetweak.js" /> 
 	<script type="application/x-javascript">
 		window.onload = function() {
@@ -25,6 +25,7 @@
             }
             span {
                 display:inline-block;
+                margin-right:4px;
             }
         </html:style>
         <image src="chrome://imagetweak/skin/imagetweak48.png" width="48" height="48"/>
@@ -39,45 +40,45 @@
         <text class="link" onclick="ImageTweak.browse('http://cafxx.strayorange.com/ImageTweak')" value="ImageTweak homepage"/>
         <text class="link" onclick="ImageTweak.browse('https://github.com/CAFxX/ImageTweak')" value="ImageTweak GitHub repository"/>
         <separator class="thin"/>
-        <hbox>
-            <vbox align="start">
-                <text style="font-weight: bold;" value="Translators"/>
-                <html:div>
-                    <html:span>Tuxman (de)</html:span>
-                    <html:span>CAFxX (en-US)</html:span>
-                    <html:span>papoo (fr)</html:span>
-                    <html:span>CAFxX (it-IT)</html:span>
-                    <html:span>drry (ja-JP)</html:span>
-                    <html:span>markh (nl)</html:span>
-                    <html:span>Wacław Jacek (pl-PL)</html:span>
-                    <html:span>humbertosartini (pt-BR)</html:span>
-                    <html:span>egaz (ru-RU)</html:span>
-                    <html:span>Holco (sk-SK)</html:span>
-                    <html:span>WangKing (zh-CN)</html:span>
-                    <html:span>toomore (zh-TW)</html:span>
-                    <html:span>MiK546 (fi-FI)</html:span>
-                    <html:span>chuzo (es-ES)</html:span>
-                    <html:span>Sappa (uk-UA)</html:span>
-                    <html:span>lord1980 (ar)</html:span>
-                    <html:span>kkmic (ro-RO)</html:span>
-                    <html:span>erkanyv (tr-TR)</html:span>
-                    <html:span>DakSrbija (sr)</html:span>
-                    <html:span>Lakrits (sv-SE)</html:span>
-                </html:div>
-            </vbox>
-            <vbox align="end">
-                <text style="font-weight: bold;" value="Thanks"/>
-                <html:div>
-                    <html:span>damien18</html:span>
-                    <html:span>DeathWolf</html:span>
-                    <html:span>Friar Tuck</html:span>
-                    <html:span>makondo</html:span>
-                    <html:span>max1million</html:span>
-                    <html:span>Tuxman</html:span>
-                    <html:span>wossName</html:span>
-                    <html:span>and everyone at babelzilla.org and mozillazine.org</html:span>
-                </html:div>
-            </vbox>
-        </hbox>
+        <vbox>
+            <text style="font-weight: bold;" value="Translators"/>
+            <html:div style="max-width:350px">
+                <html:span>Tuxman (de)</html:span>
+                <html:span>CAFxX (en-US)</html:span>
+                <html:span>papoo (fr)</html:span>
+                <html:span>CAFxX (it-IT)</html:span>
+                <html:span>drry (ja-JP)</html:span>
+                <html:span>markh (nl)</html:span>
+                <html:span>Wacław Jacek (pl-PL)</html:span>
+                <html:span>humbertosartini (pt-BR)</html:span>
+                <html:span>egaz (ru-RU)</html:span>
+                <html:span>Holco (sk-SK)</html:span>
+                <html:span>WangKing (zh-CN)</html:span>
+                <html:span>toomore (zh-TW)</html:span>
+                <html:span>MiK546 (fi-FI)</html:span>
+                <html:span>chuzo (es-ES)</html:span>
+                <html:span>Sappa (uk-UA)</html:span>
+                <html:span>lord1980 (ar)</html:span>
+                <html:span>kkmic (ro-RO)</html:span>
+                <html:span>erkanyv (tr-TR)</html:span>
+                <html:span>DakSrbija (sr)</html:span>
+                <html:span>Lakrits (sv-SE)</html:span>
+            </html:div>
+        </vbox>
+        <separator class="thin"/>
+        <vbox>
+            <text style="font-weight: bold;" value="Thanks"/>
+            <html:div style="max-width:350px">
+                <html:span>damien18</html:span>
+                <html:span>DeathWolf</html:span>
+                <html:span>Friar Tuck</html:span>
+                <html:span>makondo</html:span>
+                <html:span>max1million</html:span>
+                <html:span>Tuxman</html:span>
+                <html:span>wossName</html:span>
+                <html:span>babelzilla.org</html:span>
+                <html:span>mozillazine.org</html:span>
+            </html:div>
+        </vbox>
     </vbox>
 </window>
