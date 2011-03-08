@@ -501,6 +501,7 @@ ImageTweak.prototype.PerformZoomTypeSwitch = function PerformZoomTypeSwitch( img
 };
 
 ImageTweak.prototype.IsImageDocument = function IsImageDocument() {	return this.Document instanceof ImageDocument;
+	return this.Document instanceof ImageDocument;
 };
 
 ImageTweak.prototype.IsVideoDocument = function IsVideoDocument() {
@@ -614,7 +615,7 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
         this.addEventListener( this.Window, 'unload', function(e) { hImageTweak.OnUnload(e); }, false );
         this.addEventListener( this.Window, 'resize', function(e) { hImageTweak.OnResize(e); }, false );
         this.addEventListener( this.Window, 'keypress', function(e) { hImageTweak.OnKeyPress(e); }, false );
-		if ( this.IsImageDocument() ) {
+		//if ( this.IsImageDocument() ) {
 	        this.addEventListener( this.Document, 'DOMMouseScroll', function(e) { hImageTweak.OnMouseWheel(e); }, false );
     	    this.addEventListener( this.Document, 'mousemove', function(e) { hImageTweak.OnMouseMove(e); }, false );
         	this.addEventListener( this.Document, 'mouseup', function(e) { hImageTweak.OnMouseUp(e); }, true );
@@ -627,7 +628,7 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
 	        this.addEventListener( this.Window, 'dragover', function(e) { hImageTweak.OnDragOverWindow(e); }, false ); // WTF!!!!
     	    this.addEventListener( this.Window, 'keyup', function(e) { hImageTweak.OnSelection(e); }, false ); 
         	this.addEventListener( this.Window, 'mouseup', function(e) { hImageTweak.OnSelection(e); }, false ); 
-		}
+		//}
         // go! go! go!
         this.Inited = true;
         this.Repaint();
