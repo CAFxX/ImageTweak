@@ -24,6 +24,7 @@
 function ImageTweak( hWindow ) {
     this.Window = hWindow; // reference to the current window
     this.Document = this.Window.document; // reference to the current document
+	this.Listeners = [];
     if ( this.Document instanceof ImageDocument ) {
         this.Browser = gBrowser.getBrowserForDocument( this.Document );
         this.BrowserAutoscroll = false;
@@ -518,9 +519,16 @@ ImageTweak.prototype.InjectContentFlag = function InjectContentFlag() {
 ImageTweak.prototype.Cleanup = function Cleanup() {
 	if (this.Document && this.Document.ImageTweak)
 		this.Document.ImageTweak = null;
-	// TODO: Remove event listeners
+	var listener;
+	while (listener = this.Listeners.pop())
+		listener.target.removeEventListener(listener.eventName, listener.listener, listener.bubbling);
 	for (var i in this)
 		this[i] = null;
+};
+
+ImageTweak.prototype.addEventListener = function addEventListener(target, eventName, listener, bubbling) {
+	target.addEventListener(eventName, listener, bubbling);
+	this.Listeners.push({target: target, eventName: eventName, listener: listener, bubbling: bubbling});
 };
 
 ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
@@ -563,23 +571,23 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
         this.ZoomMax = Math.min( this.ImageMax / this.Image.naturalWidth, this.ImageMax / this.Image.naturalHeight );
         this.DefaultZoomType();
         // plugin our (supa-dupa!) event listeners
-        this.Image.addEventListener( 'load', function(e) { hImageTweak.ImageOnLoad(e); }, false );
-        this.Document.addEventListener( 'DOMMouseScroll', function(e) { hImageTweak.OnMouseWheel(e); }, false );
-        this.Document.addEventListener( 'mousemove', function(e) { hImageTweak.OnMouseMove(e); }, false );
-        this.Document.addEventListener( 'mouseup', function(e) { hImageTweak.OnMouseUp(e); }, true );
-        this.Document.addEventListener( 'mousedown', function(e) { hImageTweak.OnMouseDown(e); }, true );
-        this.Document.addEventListener( 'dblclick', function(e) { hImageTweak.OnDoubleClick(e); }, false );
-        this.Window.addEventListener( 'unload', function(e) { hImageTweak.OnUnload(e); }, false );
-        this.Window.addEventListener( 'resize', function(e) { hImageTweak.OnResize(e); }, false );
-        this.Window.addEventListener( 'keypress', function(e) { hImageTweak.OnKeyPress(e); }, false );
-        this.Window.addEventListener( 'drag', function(e) { hImageTweak.OnDrag(e); }, false );
-        this.Window.addEventListener( 'dragstart', function(e) { hImageTweak.OnDragStart(e); }, false );
-        this.Window.addEventListener( 'dragend', function(e) { hImageTweak.OnDragEnd(e); }, false );
-        this.Window.addEventListener( 'dragenter', function(e) { hImageTweak.OnDragEnterWindow(e); }, false );
-        this.Window.addEventListener( 'dragleave', function(e) { hImageTweak.OnDragExitWindow(e); }, false );
-        this.Window.addEventListener( 'dragover', function(e) { hImageTweak.OnDragOverWindow(e); }, false ); // WTF!!!!
-        this.Window.addEventListener( 'keyup', function(e) { hImageTweak.OnSelection(e); }, false ); 
-        this.Window.addEventListener( 'mouseup', function(e) { hImageTweak.OnSelection(e); }, false ); 
+        this.addEventListener( this.Image, 'load', function(e) { hImageTweak.ImageOnLoad(e); }, false );
+        this.addEventListener( this.Document, 'DOMMouseScroll', function(e) { hImageTweak.OnMouseWheel(e); }, false );
+        this.addEventListener( this.Document, 'mousemove', function(e) { hImageTweak.OnMouseMove(e); }, false );
+        this.addEventListener( this.Document, 'mouseup', function(e) { hImageTweak.OnMouseUp(e); }, true );
+        this.addEventListener( this.Document, 'mousedown', function(e) { hImageTweak.OnMouseDown(e); }, true );
+        this.addEventListener( this.Document, 'dblclick', function(e) { hImageTweak.OnDoubleClick(e); }, false );
+        this.addEventListener( this.Window, 'unload', function(e) { hImageTweak.OnUnload(e); }, false );
+        this.addEventListener( this.Window, 'resize', function(e) { hImageTweak.OnResize(e); }, false );
+        this.addEventListener( this.Window, 'keypress', function(e) { hImageTweak.OnKeyPress(e); }, false );
+        this.addEventListener( this.Window, 'drag', function(e) { hImageTweak.OnDrag(e); }, false );
+        this.addEventListener( this.Window, 'dragstart', function(e) { hImageTweak.OnDragStart(e); }, false );
+        this.addEventListener( this.Window, 'dragend', function(e) { hImageTweak.OnDragEnd(e); }, false );
+        this.addEventListener( this.Window, 'dragenter', function(e) { hImageTweak.OnDragEnterWindow(e); }, false );
+        this.addEventListener( this.Window, 'dragleave', function(e) { hImageTweak.OnDragExitWindow(e); }, false );
+        this.addEventListener( this.Window, 'dragover', function(e) { hImageTweak.OnDragOverWindow(e); }, false ); // WTF!!!!
+        this.addEventListener( this.Window, 'keyup', function(e) { hImageTweak.OnSelection(e); }, false ); 
+        this.addEventListener( this.Window, 'mouseup', function(e) { hImageTweak.OnSelection(e); }, false ); 
         // go! go! go!
         this.Inited = true;
         this.Repaint();
