@@ -51,6 +51,7 @@ function ImageTweak( hWindow ) {
         this.ImageMax = 32767; // maximum physical image size
         this.ContinuousTone = null;
         this.InvertResamplingAlgorithm = false;
+        this.EmptyDragImage = null;
     }
 };
 
@@ -158,7 +159,7 @@ ImageTweak.prototype.OnDragStart = function OnDragStart(event) {
     this.ClientYDrag = this.ClientYPrev;
     event.dataTransfer.setData("text/uri-list", this.Image.URL);
     event.dataTransfer.setData("text/plain", this.Image.URL);
-    event.dataTransfer.effectAllowed = "none";
+    event.dataTransfer.setDragImage(this.EmptyDragImage, 0, 0);
     this.SetMouseCursor();
 };
 
@@ -172,22 +173,21 @@ ImageTweak.prototype.OnDrag = function OnDrag(event) {
     this.ClientXPrev = this.ClientXDrag;
     this.ClientYPrev = this.ClientYDrag;
     this.SetMouseCursor();
-    event.preventDefault();
 };
 
 ImageTweak.prototype.OnDragEnterWindow = function OnDragEnterWindow(event) {
-    event.dataTransfer.effectAllowed = "none";
+    this.SetDragBehavior(event, false);
 };
 
 ImageTweak.prototype.OnDragExitWindow = function OnDragExitWindow(event) {
-    event.dataTransfer.effectAllowed = "all";
+    this.SetDragBehavior(event, true);
 };
 
 ImageTweak.prototype.OnDragOverWindow = function OnDragOverWindow(event) {
     this.ClientXDrag = event.clientX;
     this.ClientYDrag = event.clientY;
+    this.SetDragBehavior(event, false);
     this.SetMouseCursor();
-    event.preventDefault();
 };
 
 ImageTweak.prototype.OnMouseDown = function OnMouseDown(event) {
@@ -381,7 +381,7 @@ ImageTweak.prototype.StopScroll = function StopScroll(event) {
     }
 };
 
-ImageTweak.prototype.SetMouseCursor = function() {
+ImageTweak.prototype.SetMouseCursor = function SetMouseCursor() {
     if (this.Scrolling || this.Dragging) {
         if ( ( this.Window.innerWidth < this.Image.width && this.Window.innerHeight < this.Image.height ) || ImageTweak.pref.ClipMovement == false ) {
             this.Document.body.style.cursor = "move";
@@ -393,6 +393,10 @@ ImageTweak.prototype.SetMouseCursor = function() {
     } else {
         this.Document.body.style.cursor = "auto";
     }
+};
+
+ImageTweak.prototype.SetDragBehavior = function SetDragBehavior(event, showImage) {
+    event.dataTransfer.effectAllowed = showImage ? "all" : "none";
 };
 
 ImageTweak.prototype.PerformScroll = function PerformScroll(offset) {
@@ -590,6 +594,9 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
         this.addEventListener( this.Window, 'dragover', function(e) { hImageTweak.OnDragOverWindow(e); }, false ); // WTF!!!!
         this.addEventListener( this.Window, 'keyup', function(e) { hImageTweak.OnSelection(e); }, false ); 
         this.addEventListener( this.Window, 'mouseup', function(e) { hImageTweak.OnSelection(e); }, false ); 
+        // create an empty canvas to be used as drag image
+        var empty = ImageTweak.getCanvas( this.Document, 16, 16 );
+        this.EmptyDragImage = empty.canvas;
         // go! go! go!
         this.Inited = true;
         this.Repaint();
@@ -737,7 +744,7 @@ ImageTweak.getImageCanvas = function getImageCanvas(img) {
 };
 
 ImageTweak.getCanvas = function getCanvas(doc, w, h) {
-    var canvas = doc.createElement("canvas");
+    var canvas = doc.createElementNS("http://www.w3.org/1999/xhtml","html:canvas");
     canvas.width = w;
     canvas.height = h;
     var ctx = canvas.getContext("2d");
