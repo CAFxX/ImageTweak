@@ -781,4 +781,23 @@ ImageTweak.RepaintAll = function RepaintAll(url) {
     }
 };
 
+// adapted from http://dbaron.org/log/20100309-faster-timeouts
+(function() {
+    var timeouts = [];
+    const messageName = "ImageTweakDelayedExecution";
+
+    ImageTweak.DelayedExecute = function DelayedExecute(fn) {
+        timeouts.push(fn);
+        window.postMessage(messageName, "*");
+    };
+
+    window.addEventListener("message", function handleMessage(event) {
+        if (event.data == messageName) {
+            event.stopPropagation();
+            while (timeouts.length > 0)
+                timeouts.shift()();
+        }
+    }, true);
+})();
+
 ImageTweak.UUID = "{DB2EA31C-58F5-48b7-8D60-CB0739257904}";

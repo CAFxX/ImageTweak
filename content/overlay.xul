@@ -15,9 +15,9 @@
 					var IT = ImageTweak.enabled(document.popupNode.ownerDocument);
 					if (IT && !gContextMenu.onImage && ImageTweak.pref.ContextMenu) {
 						event.preventDefault();
-						setTimeout(function() {
+						ImageTweak.DelayedExecute(function() {
 							ImageTweak.showContextMenuForElement(IT.Image, event.screenX, event.screenY);
-						}, 1);
+						});
 					} else {
 						var menuitems = document.querySelectorAll('menuitem[id^="context-imagetweak-"], menuseparator[id^="context-imagetweak-"]');
 						for (var i=0; i<menuitems.length; i++)
