@@ -789,7 +789,7 @@ ImageTweak.RepaintAll = function RepaintAll(url) {
         window.postMessage(messageName, "*");
     };
 
-    window.addEventListener("message", function handleMessage(event) {
+    window.addEventListener("message", function (event) {
         if (event.data == messageName) {
             event.stopPropagation();
             while (timeouts.length > 0)
