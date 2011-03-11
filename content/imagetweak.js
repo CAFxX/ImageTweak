@@ -47,7 +47,7 @@ function ImageTweak( hWindow ) {
         this.Inited = false; // initialization flag
         this.TimeoutHandle = null; // Timeout handle used during image loading
         this.ScrollIntervalHandle = null; // Interval handle used for scrolling
-        this.ScrollInterval = 25; //ms
+        this.ScrollInterval = 15; //ms (something more than 60fps)
         this.ImageMax = 32767; // maximum physical image size
         this.ContinuousTone = null;
         this.InvertResamplingAlgorithm = false;
