@@ -1,7 +1,7 @@
 <!ENTITY pref.window.title "ImageTweak - Opţiuni">
 <!ENTITY pref.prefpane.label "Opţiuni afişare imagine">
 <!ENTITY pref.bgcolor.label "Culoare fundal">
-<!ENTITY pref.bordercolor.label "Border color">
+<!ENTITY pref.bordercolor.label "Culoare margine">
 <!ENTITY pref.autoresize.label "Redimensionare imagini la încărcare">
 <!ENTITY pref.clip_movement.label "Limitează mişcarea imaginii">
 <!ENTITY pref.zoomexp.label "Factor zoom (&#37;)">
@@ -18,9 +18,9 @@
 <!ENTITY pref.invertmousewheel.label "Inversează direcţia de zoom a rotiţei">
 <!ENTITY pref.invertkeyboard.label "Inversează navigaţia din tastatura">
 <!ENTITY pref.startfromtopleft.label "Plasează imaginea în stânga-sus">
-<!ENTITY pref.contentdetectable.label "Notify websites">
+<!ENTITY pref.contentdetectable.label "Notifica site-urile">
 <!ENTITY pref.bgcolor.tooltip "Culoarea de fundal folosită la afişarea imaginilor">
-<!ENTITY pref.bordercolor.tooltip "Set the color of the border around images (CSS color or percentage, 0&#37; being black and 100&#37; being white). If empty disables the border.">
+<!ENTITY pref.bordercolor.tooltip "Seteaza culoarea marginilor imaginilor (culoare CSS sau procent, 0&#37; insemnand negru iar 100&#37; insemnand alb). Daca este gol, dezactiveaza marginea.">
 <!ENTITY pref.autoresize.tooltip "Redimensionează automat imaginile mai mari decat fereastra pentru a se incadra in fereastră la incarcare">
 <!ENTITY pref.clip_movement.tooltip "Permite deplasarea imaginii doar în fereastră">
 <!ENTITY pref.zoomexp.tooltip "Factor de mărire/micşorare (200&#37; inseamnă dublare/injumatatire la fiecare acţiune)">
@@ -34,13 +34,13 @@
 <!ENTITY pref.invertmousewheel.tooltip "Inversează direcţia de zoom a rotitei mouse-ului">
 <!ENTITY pref.invertkeyboard.tooltip "Inversează directia de deplasare a imaginii la folosirea tastelor săgeti">
 <!ENTITY pref.startfromtopleft.tooltip "Plasează imaginea în coltul din stanga-sus dacă este mai mare decât fereastra">
-<!ENTITY pref.contentdetectable.tooltip "Tell websites that this browser has a builtin image viewer">
+<!ENTITY pref.contentdetectable.tooltip "Anunta site-urile web vizitate ca acest browser are un manager de imagini integrat">
 <!ENTITY pref.pressf1forhelp.label "Apasa F1 pentru a vizualiza documentaţia online">
 <!ENTITY about.window.title "ImageTweak - Despre">
-<!ENTITY pref.mousewheel.label "Mouse wheel">
-<!ENTITY pref.mousewheel.new.label "wheel to scroll, ctrl+wheel to zoom">
-<!ENTITY pref.mousewheel.new.tooltip "Default Firefox behaviour of the mouse wheel">
-<!ENTITY pref.mousewheel.legacy.label "ctrl+wheel to scroll, wheel to zoom">
+<!ENTITY pref.mousewheel.label "Rotita mouse">
+<!ENTITY pref.mousewheel.new.label "roteste pentru a derula, click+rotire pentru a mari/micsora">
+<!ENTITY pref.mousewheel.new.tooltip "Comportamentul prestabilit al browserului pentru rotita de la mouse">
+<!ENTITY pref.mousewheel.legacy.label "ctrl+rotire pentru a derula, rotire pentru  a mari">
 <!ENTITY pref.mousewheel.legacy.tooltip "Alternate mouse wheel behaviour, used in ImageTweak prior to version 0.17">
 <!ENTITY pref.contextmenu.label "Enable context menu">
 <!ENTITY pref.contextmenu.tooltip "Enable the ImageTweak context menu that allows executing common operations on images">
