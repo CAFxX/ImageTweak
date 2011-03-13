@@ -21,5 +21,6 @@ pref("extensions.imagetweak.bordercolor", "");
 pref("extensions.imagetweak.contentdetectable", true);
 pref("extensions.imagetweak.resamplingalgorithm", 1);
 pref("extensions.imagetweak.contextmenu", 1);
+pref("extensions.imagetweak.loggingenabled", false);
 
 pref("extensions.{DB2EA31C-58F5-48b7-8D60-CB0739257904}.description", "chrome://imagetweak/locale/imagetweak.properties");

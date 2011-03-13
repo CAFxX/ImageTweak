@@ -685,7 +685,8 @@ ImageTweak.parseColorExtended = function(v) {
 };
 
 ImageTweak.log = function(msg) {
-    ImageTweak.console.logStringMessage(msg);
+    if (ImageTweak.pref.LoggingEnabled)
+        ImageTweak.console.logStringMessage(msg);
 };
 
 ImageTweak.console = Cc["@mozilla.org/consoleservice;1"].getService(Ci.nsIConsoleService);
@@ -714,7 +715,8 @@ ImageTweak.preferences = {
     LegacyScrolling:                { pref: "extensions.imagetweak.legacyscrolling"                                                                      },
     ContentDetectable:              { pref: "extensions.imagetweak.contentdetectable"                                                                    },
     ResamplingAlgorithm:            { pref: "extensions.imagetweak.resamplingalgorithm"                                                                  },
-    ContextMenu:                    { pref: "extensions.imagetweak.contextmenu"                                                                          }
+    ContextMenu:                    { pref: "extensions.imagetweak.contextmenu"                                                                          },
+    LoggingEnabled:                 { pref: "extensions.imagetweak.loggingenabled"                                                                       }
 };
 
 // create getters in pref for all items in preferences
