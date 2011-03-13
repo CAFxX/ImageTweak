@@ -21,7 +21,8 @@
 
 const Cc = Components.classes, Ci = Components.interfaces, Cu = Components.utils;
 
-// creates the ImageTweak object for the specified window
+/*  creates the ImageTweak object for the specified window
+    this is used also for non-ImageDocuments because we need to register the listeners */
 function ImageTweak( hWindow ) {
     this.Window = hWindow; // reference to the current window
     this.Document = this.Window.document; // reference to the current document
@@ -323,6 +324,7 @@ ImageTweak.prototype.ImageOnLoad = function ImageOnLoad(event) {
 
 /* Internal functions **************************************************************************************************************************************/
 
+// move the image of the specified offset
 ImageTweak.prototype.PerformMove = function PerformMove(dx, dy) {
     this.ConvertToFree();
     this.CenterX += dx;
@@ -330,6 +332,7 @@ ImageTweak.prototype.PerformMove = function PerformMove(dx, dy) {
     this.Repaint();
 };
 
+// zooms the image, optionally around a pivot point (px, py)
 ImageTweak.prototype.PerformZoom = function PerformZoom(delta, px, py) {
     this.ConvertToFree();
     var imgZoomFactor = ImageTweak.pref.ZoomFactor;
@@ -349,6 +352,7 @@ ImageTweak.prototype.PerformZoom = function PerformZoom(delta, px, py) {
     }
 };
 
+// rotate the image
 ImageTweak.prototype.PerformRotation = function PerformRotation( degrees ) {
     this.Rotation += degrees;
     this.Repaint();
@@ -382,6 +386,7 @@ ImageTweak.prototype.StopScroll = function StopScroll(event) {
     }
 };
 
+// set the mouse coursor shape as appropriate for the current context/action
 ImageTweak.prototype.SetMouseCursor = function SetMouseCursor() {
     if (this.Scrolling || this.Dragging) {
         if ( ( this.Window.innerWidth < this.Image.width && this.Window.innerHeight < this.Image.height ) || ImageTweak.pref.ClipMovement == false ) {
@@ -407,6 +412,7 @@ ImageTweak.prototype.PerformScroll = function PerformScroll(offset) {
     }
 };
 
+// take the current zoom level and tranform it into free zoom
 ImageTweak.prototype.ConvertToFree = function ConvertToFree() {
     if ( this.ZoomType == "free" )
         return;
@@ -417,11 +423,13 @@ ImageTweak.prototype.ConvertToFree = function ConvertToFree() {
     this.ZoomType = "free";
 };
 
+// return the width of the bounding box for the (optionally) rotated image
 ImageTweak.prototype.RotatedWidth = function RotatedWidth() {
     var RotationRadians = this.Rotation / 180 * Math.PI;
     return this.Image.naturalWidth * Math.abs( Math.cos( RotationRadians ) ) + this.Image.naturalHeight * Math.abs( Math.sin( RotationRadians ) );
 };
 
+// return the height of the bounding box for the (optionally) rotated image
 ImageTweak.prototype.RotatedHeight = function RotatedHeight() {
     var RotationRadians = this.Rotation / 180 * Math.PI;
     return this.Image.naturalWidth * Math.abs( Math.sin( RotationRadians ) ) + this.Image.naturalHeight * Math.abs( Math.cos( RotationRadians ) );
@@ -513,23 +521,29 @@ ImageTweak.prototype.ClearSelection = function ClearSelection() {
     this.Window.getSelection().removeAllRanges();
 };
 
+// inject the imageViewer flag in the navigator object
+// http://stackoverflow.com/questions/5089941/allow-content-documents-to-detect-my-firefox-addon
 ImageTweak.prototype.InjectContentFlag = function InjectContentFlag() {
-    // http://stackoverflow.com/questions/5089941/allow-content-documents-to-detect-my-firefox-addon
     var s = new Cu.Sandbox(this.Window);
     s.window = this.Window;
     Cu.evalInSandbox("window.wrappedJSObject.navigator.__defineGetter__('imageViewer', function(){ return true; });", s);
 };
 
+// destroy the current ImageTweak instance: after this function is called, no other functions may be called
 ImageTweak.prototype.Cleanup = function Cleanup() {
+    // null the DOM reference to this IT instance
     if (this.Document && this.Document.ImageTweak)
-        this.Document.ImageTweak = null;
+        this.Document.ImageTweak = null; 
+    // unregister all event listeners
     var listener;
     while (listener = this.Listeners.pop())
         listener.target.removeEventListener(listener.eventName, listener.listener, listener.bubbling);
+    // null all class members
     for (var i in this)
         this[i] = null;
 };
 
+// register an event listener to be automatically unregistered during cleanup
 ImageTweak.prototype.addEventListener = function addEventListener(target, eventName, listener, bubbling) {
     target.addEventListener(eventName, listener, bubbling);
     this.Listeners.push({target: target, eventName: eventName, listener: listener, bubbling: bubbling});
@@ -623,10 +637,12 @@ ImageTweak.browse = function(url) {
     browser.selectedTab = browser.addTab(url);
 };
 
+// see README.md for a description of this function
 ImageTweak.enabled = function(doc) {
     return doc ? ImageTweak.enabledForDocument(doc) : true;
 };
     
+// see README.md for a description of this function
 ImageTweak.enabledForDocument = function(doc) {
     return typeof doc.ImageTweak.Image != "undefined" ? doc.ImageTweak : false;
 };
@@ -660,6 +676,7 @@ ImageTweak.startEventHandler = function(e) {
     }
 };
 
+// parse a CSS color, also allowing a percentage to be used (interpreted as a grayscale value)
 ImageTweak.parseColorExtended = function(v) {
     var match = /([0-9]*(?:[.,][0-9]*)?)\s*%/.exec(v);
     if (match) {
@@ -678,7 +695,6 @@ ImageTweak.console = Cc["@mozilla.org/consoleservice;1"].getService(Ci.nsIConsol
 ImageTweak.prefs = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefBranch);
 
 // this structure holds informations about the preferences used by ImageTweak
-// see ImageTweak.getPref for further informations
 ImageTweak.preferences = {
     AutomaticResizing:              { pref: "browser.enable_automatic_image_resizing"                                                                    },
     ZoomTypeFitEnabled:             { pref: "extensions.imagetweak.zoomtype.full"                                                                        },
@@ -703,6 +719,7 @@ ImageTweak.preferences = {
     ContextMenu:                    { pref: "extensions.imagetweak.contextmenu"                                                                          }
 };
 
+// create getters in pref for all items in preferences
 ImageTweak.pref = {};
 for (var pref in ImageTweak.preferences) {
     let id = pref;
@@ -717,6 +734,8 @@ for (var pref in ImageTweak.preferences) {
     });
 }
 
+// detect if the current image is "continuous tone" or not
+// for now this means having more than 32 different colors or not
 ImageTweak.isContinuousToneImage = function isContinuousToneImage(img) { 
     const colorsThreshold = 32;
     var { canvas, ctx, data } = ImageTweak.getImageCanvas(img);
@@ -731,6 +750,7 @@ ImageTweak.isContinuousToneImage = function isContinuousToneImage(img) {
     return colors.length < colorsThreshold;
 };
 
+// get a canvas filled with the contents of the image img
 ImageTweak.getImageCanvas = function getImageCanvas(img) {
     var { canvas, ctx } = ImageTweak.getCanvas(img.ownerDocument, img.naturalWidth, img.naturalHeight);
     ctx.drawImage(img, 0, 0);
@@ -741,6 +761,7 @@ ImageTweak.getImageCanvas = function getImageCanvas(img) {
     };
 };
 
+// get an empty canvas of size (w, h)
 ImageTweak.getCanvas = function getCanvas(doc, w, h) {
     var canvas = doc.createElementNS("http://www.w3.org/1999/xhtml","html:canvas");
     canvas.width = w;
@@ -761,6 +782,9 @@ ImageTweak.Targets = {
     OpenInNewWindow:        function(url) { window.open( url ); return true; },
 };
 
+// broadcast a call to repaint to all open tabs
+// this is used to instantly propagate changes to the pref window
+// FIXME: use preflisteners?
 ImageTweak.RepaintAll = function RepaintAll(url) {
     var wm = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator);
     var browserEnumerator = wm.getEnumerator("navigator:browser");
@@ -779,6 +803,7 @@ ImageTweak.RepaintAll = function RepaintAll(url) {
     }
 };
 
+// DelayedExecute(fn) is equivalent to setTimeout(fn, 0), only faster
 // adapted from http://dbaron.org/log/20100309-faster-timeouts
 (function() {
     var timeouts = [];
@@ -798,4 +823,5 @@ ImageTweak.RepaintAll = function RepaintAll(url) {
     }, true);
 })();
 
+// the UUID of this extension
 ImageTweak.UUID = "{DB2EA31C-58F5-48b7-8D60-CB0739257904}";
