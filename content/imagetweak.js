@@ -49,8 +49,6 @@ function ImageTweak( hWindow ) {
         this.Inited = false; // initialization flag
         this.TimeoutHandle = null; // Timeout handle used during image loading
         this.ScrollIntervalHandle = null; // Interval handle used for scrolling
-        this.ScrollInterval = 15; //ms (something more than 60fps)
-        this.ImageMax = 32767; // maximum physical image size
         this.ContinuousTone = null;
         this.InvertResamplingAlgorithm = false;
         this.EmptyDragImage = null;
@@ -68,10 +66,10 @@ ImageTweak.prototype.ScreenCoordinates = function ScreenCoordinates() {
         case "pixel":   Coordinates.CurZoom = 1; break;
     }
 
-    var boundingWidth       = ImageTweak.clip( this.RotatedWidth() * Coordinates.CurZoom,             1, this.ImageMax );
-    var boundingHeight      = ImageTweak.clip( this.RotatedHeight() * Coordinates.CurZoom,            1, this.ImageMax );
-    Coordinates.imgWidth    = ImageTweak.clip( this.Image.naturalWidth * Coordinates.CurZoom,         1, this.ImageMax );
-    Coordinates.imgHeight   = ImageTweak.clip( this.Image.naturalHeight * Coordinates.CurZoom,        1, this.ImageMax );
+    var boundingWidth       = ImageTweak.clip( this.RotatedWidth() * Coordinates.CurZoom,             1, ImageTweak.ImageMax );
+    var boundingHeight      = ImageTweak.clip( this.RotatedHeight() * Coordinates.CurZoom,            1, ImageTweak.ImageMax );
+    Coordinates.imgWidth    = ImageTweak.clip( this.Image.naturalWidth * Coordinates.CurZoom,         1, ImageTweak.ImageMax );
+    Coordinates.imgHeight   = ImageTweak.clip( this.Image.naturalHeight * Coordinates.CurZoom,        1, ImageTweak.ImageMax );
 
     switch (this.ZoomType) {
         case "free":
@@ -368,7 +366,7 @@ ImageTweak.prototype.StartScroll = function StartScroll(event) {
         }
         if ( !this.ScrollIntervalHandle ) {
             var hImageTweak = this;
-            this.ScrollIntervalHandle = setInterval( function (offset) { hImageTweak.PerformScroll(offset); }, this.ScrollInterval );
+            this.ScrollIntervalHandle = setInterval( function (offset) { hImageTweak.PerformScroll(offset); }, ImageTweak.ScrollInterval );
         }
     } else {
         this.StopScroll();
@@ -407,7 +405,7 @@ ImageTweak.prototype.SetDragBehavior = function SetDragBehavior(event, showImage
 
 ImageTweak.prototype.PerformScroll = function PerformScroll(offset) {
     if ( this.Scrolling && this.ClientXStart != null ) {
-        var ScaleFactor = ( this.ScrollInterval + offset ) / this.ScrollInterval * 0.1;
+        var ScaleFactor = ( ImageTweak.ScrollInterval + offset ) / ImageTweak.ScrollInterval * 0.1;
         this.PerformMove( ( this.ClientXStart - this.ClientXPrev ) * ScaleFactor, ( this.ClientYStart - this.ClientYPrev ) * ScaleFactor );
     }
 };
@@ -586,7 +584,7 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
         this.Document.body.style.padding = "0";
         // initialize our structure
         this.Title = this.Document.title; // this has to go after disabling automatic_image_resizing
-        this.ZoomMax = Math.min( this.ImageMax / this.Image.naturalWidth, this.ImageMax / this.Image.naturalHeight );
+        this.ZoomMax = Math.min( ImageTweak.ImageMax / this.Image.naturalWidth, ImageTweak.ImageMax / this.Image.naturalHeight );
         this.DefaultZoomType();
         // plugin our (supa-dupa!) event listeners
         this.addEventListener( this.Image, 'load', function(e) { hImageTweak.ImageOnLoad(e); }, false );
@@ -825,3 +823,9 @@ ImageTweak.RepaintAll = function RepaintAll(url) {
 
 // the UUID of this extension
 ImageTweak.UUID = "{DB2EA31C-58F5-48b7-8D60-CB0739257904}";
+
+// ms between calls to the scroll event handler - somewhat higher than 60fps
+ImageTweak.ScrollInterval = 15; 
+
+// maximum image size in pixel supported by gecko
+ImageTweak.ImageMax = 32767;
