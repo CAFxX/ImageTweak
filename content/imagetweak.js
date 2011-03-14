@@ -720,19 +720,21 @@ ImageTweak.preferences = {
 };
 
 // create getters in pref for all items in preferences
-ImageTweak.pref = {};
-for (var pref in ImageTweak.preferences) {
-    let id = pref;
-    ImageTweak.pref.__defineGetter__(pref, function() { 
-        var p;
-        switch ( ImageTweak.prefs.getPrefType( ImageTweak.preferences[ id ].pref ) ) {
-            case ImageTweak.prefs.PREF_BOOL:      p = ImageTweak.prefs.getBoolPref( ImageTweak.preferences[id].pref ); break;
-            case ImageTweak.prefs.PREF_STRING:    p = ImageTweak.prefs.getCharPref( ImageTweak.preferences[id].pref ); break;
-            case ImageTweak.prefs.PREF_INT:       p = ImageTweak.prefs.getIntPref( ImageTweak.preferences[id].pref ); break;
-        }
-        return ImageTweak.preferences[ id ].parse ? ImageTweak.preferences[ id ].parse(p) : p;
-    });
-}
+(function() {
+    ImageTweak.pref = {};
+    for (var pref in ImageTweak.preferences) {
+        let id = pref;
+        ImageTweak.pref.__defineGetter__(pref, function() { 
+            var p;
+            switch ( ImageTweak.prefs.getPrefType( ImageTweak.preferences[ id ].pref ) ) {
+                case ImageTweak.prefs.PREF_BOOL:      p = ImageTweak.prefs.getBoolPref( ImageTweak.preferences[id].pref ); break;
+                case ImageTweak.prefs.PREF_STRING:    p = ImageTweak.prefs.getCharPref( ImageTweak.preferences[id].pref ); break;
+                case ImageTweak.prefs.PREF_INT:       p = ImageTweak.prefs.getIntPref( ImageTweak.preferences[id].pref ); break;
+            }
+            return ImageTweak.preferences[ id ].parse ? ImageTweak.preferences[ id ].parse(p) : p;
+        });
+    }
+})();
 
 // detect if the current image is "continuous tone" or not
 // for now this means having more than 32 different colors or not
