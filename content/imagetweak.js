@@ -553,6 +553,8 @@ ImageTweak.prototype.addEventListener = function addEventListener(target, eventN
 ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
     var hImageTweak = this;
     if ( this.Inited ) {
+        // go fullscreen if needed
+        window.fullScreen = ImageTweak.pref.AutomaticFullScreen && this.Document instanceof ImageDocument;
     } else if ( ( this.Document instanceof ImageDocument ) === false ) {
         // not a standalone image! so, what? let's plug in our supa-dupa source image click handler
         this.Document.addEventListener( 'click', function(e) { hImageTweak.RegularDocumentOnMouseClick(e); }, false );
@@ -719,7 +721,8 @@ ImageTweak.preferences = {
     ContentDetectable:              { pref: "extensions.imagetweak.contentdetectable"                                                                    },
     ResamplingAlgorithm:            { pref: "extensions.imagetweak.resamplingalgorithm"                                                                  },
     ContextMenu:                    { pref: "extensions.imagetweak.contextmenu"                                                                          },
-    LoggingEnabled:                 { pref: "extensions.imagetweak.loggingenabled"                                                                       }
+    LoggingEnabled:                 { pref: "extensions.imagetweak.loggingenabled"                                                                       },
+    AutomaticFullScreen:            { pref: "extensions.imagetweak.automaticfullscreen"                                                                  }
 };
 
 // create getters in pref for all items in preferences
