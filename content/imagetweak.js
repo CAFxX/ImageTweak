@@ -208,6 +208,7 @@ ImageTweak.prototype.OnMouseUp = function OnMouseUp(event) {
 ImageTweak.prototype.OnMouseMove = function OnMouseMove(event) {
     this.ClientXPrev = event.clientX;
     this.ClientYPrev = event.clientY;
+    this.SetMouseCursor();
 };
 
 ImageTweak.prototype.OnMouseWheel = function OnMouseWheel(event) {
