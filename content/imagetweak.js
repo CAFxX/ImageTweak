@@ -608,7 +608,7 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
         this.addEventListener( this.Window, 'keyup', function(e) { hImageTweak.OnSelection(e); }, false ); 
         this.addEventListener( this.Window, 'mouseup', function(e) { hImageTweak.OnSelection(e); }, false ); 
         // create an empty canvas to be used as drag image
-        var empty = ImageTweak.getCanvas( this.Document, 16, 16 );
+        var empty = ImageTweak.getCanvas( this.Document, 1, 1 );
         this.EmptyDragImage = empty.canvas;
         // go! go! go!
         this.Inited = true;
