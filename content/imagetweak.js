@@ -19,7 +19,6 @@
 
 ************************************************************************************************************************************************************/
 
-const Cc = Components.classes, Ci = Components.interfaces, Cu = Components.utils;
 
 /*  creates the ImageTweak object for the specified window
     this is used also for non-ImageDocuments because we need to register the listeners */
@@ -522,9 +521,12 @@ ImageTweak.prototype.ClearSelection = function ClearSelection() {
 // inject the imageViewer flag in the navigator object
 // http://stackoverflow.com/questions/5089941/allow-content-documents-to-detect-my-firefox-addon
 ImageTweak.prototype.InjectContentFlag = function InjectContentFlag() {
-    var s = new Cu.Sandbox(this.Window);
+    var s = new Components.utils.Sandbox(this.Window);
     s.window = this.Window;
-    Cu.evalInSandbox("window.wrappedJSObject.navigator.__defineGetter__('imageViewer', function(){ return true; });", s);
+    Components.utils.evalInSandbox(
+        "window.wrappedJSObject.navigator.__defineGetter__('imageViewer', function(){ return true; });", 
+        s
+    );
 };
 
 // destroy the current ImageTweak instance: after this function is called, no other functions may be called
@@ -630,7 +632,7 @@ ImageTweak.clip = function(value, min, max) {
 
 // opens a new tab and browse to the specified URL
 ImageTweak.browse = function(url) {
-    var wm = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator);
+    var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
     var browser = wm.getMostRecentWindow("navigator:browser").getBrowser();
     browser.selectedTab = browser.addTab(url);
 };
@@ -689,9 +691,9 @@ ImageTweak.log = function(msg) {
         ImageTweak.console.logStringMessage(msg);
 };
 
-ImageTweak.console = Cc["@mozilla.org/consoleservice;1"].getService(Ci.nsIConsoleService);
+ImageTweak.console = Components.classes["@mozilla.org/consoleservice;1"].getService(Components.interfaces.nsIConsoleService);
 
-ImageTweak.prefs = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefBranch);
+ImageTweak.prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
 
 // this structure holds informations about the preferences used by ImageTweak
 ImageTweak.preferences = {
@@ -788,7 +790,7 @@ ImageTweak.Targets = {
 // this is used to instantly propagate changes to the pref window
 // FIXME: use preflisteners?
 ImageTweak.RepaintAll = function RepaintAll(url) {
-    var wm = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator);
+    var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
     var browserEnumerator = wm.getEnumerator("navigator:browser");
 
     while (browserEnumerator.hasMoreElements()) {
