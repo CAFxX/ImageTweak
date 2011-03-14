@@ -49,3 +49,12 @@
 <!ENTITY pref.resamplingalgorithm.nearestneighbor.tooltip "Быстрое быстродействие, плохое качество">
 <!ENTITY pref.resamplingalgorithm.bilinear.label "Билинейный">
 <!ENTITY pref.resamplingalgorithm.bilinear.tooltip "Менее быстрое быстродействие, хNearest neighborорошее качество">
+<!ENTITY contextmenu.fit.label "Подогнать изображение по высоте">
+<!ENTITY contextmenu.fill.label "Подогнать изображение по ширине">
+<!ENTITY contextmenu.unscaled.label "Оригинальный масштаб">
+<!ENTITY contextmenu.zoomin.label "Увеличить">
+<!ENTITY contextmenu.zoomout.label "Уменьшить">
+<!ENTITY contextmenu.rotateclock.label "Повернуть по часовой стрелке">
+<!ENTITY contextmenu.rotatecounter.label "Повернуть против часовой стрелки">
+<!ENTITY contextmenu.options.label "Настройки ImageTweak">
+<!ENTITY contextmenu.userguide.label "Руководство по использованию ImageTweak">

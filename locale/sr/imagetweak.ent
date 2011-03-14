@@ -49,3 +49,12 @@
 <!ENTITY pref.resamplingalgorithm.nearestneighbor.tooltip "брзо, низак квалитет">
 <!ENTITY pref.resamplingalgorithm.bilinear.label "билинеарно">
 <!ENTITY pref.resamplingalgorithm.bilinear.tooltip "Незнатно спорије од најближег суседног, добар квалитет">
+<!ENTITY contextmenu.fit.label "Уклопи слику у екран">
+<!ENTITY contextmenu.fill.label "Попуни екран">
+<!ENTITY contextmenu.unscaled.label "100&#37;">
+<!ENTITY contextmenu.zoomin.label "Увећај">
+<!ENTITY contextmenu.zoomout.label "Умањи">
+<!ENTITY contextmenu.rotateclock.label "Закрени удесно">
+<!ENTITY contextmenu.rotatecounter.label "Закрени улево">
+<!ENTITY contextmenu.options.label "ImageTweak - опције…">
+<!ENTITY contextmenu.userguide.label "ImageTweak - упутство">

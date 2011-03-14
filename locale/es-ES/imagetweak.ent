@@ -49,3 +49,12 @@
 <!ENTITY pref.resamplingalgorithm.nearestneighbor.tooltip "Rápido, baja calidad">
 <!ENTITY pref.resamplingalgorithm.bilinear.label "Bilinear">
 <!ENTITY pref.resamplingalgorithm.bilinear.tooltip "Ligeramente más lento que el vecino más cercano, buena calidad">
+<!ENTITY contextmenu.fit.label "Ajustar imagen a la pantalla">
+<!ENTITY contextmenu.fill.label "Llenar pantalla">
+<!ENTITY contextmenu.unscaled.label "100&#37;">
+<!ENTITY contextmenu.zoomin.label "Acercar">
+<!ENTITY contextmenu.zoomout.label "Alejar">
+<!ENTITY contextmenu.rotateclock.label "Rotar a la derecha">
+<!ENTITY contextmenu.rotatecounter.label "Rotar a la izquierda">
+<!ENTITY contextmenu.options.label "Opciones de ImageTweak">
+<!ENTITY contextmenu.userguide.label "Guía de usuario de ImageTweak">

@@ -1,7 +1,7 @@
 <!ENTITY pref.window.title "ImageTweak - Opzioni">
 <!ENTITY pref.prefpane.label "Opzioni di visualizzazione delle immagini">
 <!ENTITY pref.bgcolor.label "Colore di sfondo">
-<!ENTITY pref.bordercolor.label "Colore del bordino">
+<!ENTITY pref.bordercolor.label "Colore del bordo">
 <!ENTITY pref.autoresize.label "Ridimensiona automaticamente le immagini">
 <!ENTITY pref.clip_movement.label "Limita il movimento delle immagini">
 <!ENTITY pref.zoomexp.label "Fattore di zoom (&#37;)">
@@ -49,3 +49,12 @@
 <!ENTITY pref.resamplingalgorithm.nearestneighbor.tooltip "Veloce, bassa qualità">
 <!ENTITY pref.resamplingalgorithm.bilinear.label "Bilineare">
 <!ENTITY pref.resamplingalgorithm.bilinear.tooltip "Leggermente più lento di nearest neighbor, buona qualità">
+<!ENTITY contextmenu.fit.label "Adatta immagine allo schermo">
+<!ENTITY contextmenu.fill.label "Riempi schermo">
+<!ENTITY contextmenu.unscaled.label "100&#37;">
+<!ENTITY contextmenu.zoomin.label "Ingrandisci">
+<!ENTITY contextmenu.zoomout.label "Rimpicciolisci">
+<!ENTITY contextmenu.rotateclock.label "Ruota in senso orario">
+<!ENTITY contextmenu.rotatecounter.label "Ruota in senso antiorario">
+<!ENTITY contextmenu.options.label "Opzioni di ImageTweak…">
+<!ENTITY contextmenu.userguide.label "Guida utente di ImageTweak">

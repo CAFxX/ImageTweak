@@ -23,7 +23,7 @@
 <!ENTITY pref.bordercolor.tooltip "Ange färgen på kantlinjen runt bilder (CSS-färg eller procenttal där 0 &#37; betyder svart och 100 &#37; betyder vit). Om inget anges inaktiveras kantlinjen.">
 <!ENTITY pref.autoresize.tooltip "Ändra automatiskt storlek på bilder större än fönstret när de laddas">
 <!ENTITY pref.clip_movement.tooltip "Tillåt endast att bilden flyttas inom fönstret">
-<!ENTITY pref.zoomexp.tooltip "Stegvis zoomningsfaktor (200&#37; innebär att storleken dubblas/halveras med varje steg)">
+<!ENTITY pref.zoomexp.tooltip "Stegvis zoomningsfaktor (200 &#37; innebär att storleken dubblas/halveras med varje steg)">
 <!ENTITY pref.zoomonpointer.tooltip "Zooma mot den punkt där muspekaren pekar, när mushjulet används">
 <!ENTITY pref.zoomtype.full.tooltip "Aktivera Anpassa till fönster-vyn vid dubbelklick">
 <!ENTITY pref.zoomtype.fill.tooltip "Aktivera Fyll fönster-vyn vid dubbelklick">
@@ -49,3 +49,12 @@
 <!ENTITY pref.resamplingalgorithm.nearestneighbor.tooltip "Snabb, låg kvalitet">
 <!ENTITY pref.resamplingalgorithm.bilinear.label "Bilinjär">
 <!ENTITY pref.resamplingalgorithm.bilinear.tooltip "Något långsammare än &quot;Närmsta granne&quot;, bra kvalitet">
+<!ENTITY contextmenu.fit.label "Anpassa bilden till skärmen">
+<!ENTITY contextmenu.fill.label "Fyll skärmen">
+<!ENTITY contextmenu.unscaled.label "100 &#37;">
+<!ENTITY contextmenu.zoomin.label "Zooma in">
+<!ENTITY contextmenu.zoomout.label "Zooma ut">
+<!ENTITY contextmenu.rotateclock.label "Rotera medurs">
+<!ENTITY contextmenu.rotatecounter.label "Rotera moturs">
+<!ENTITY contextmenu.options.label "Inställningar för ImageTweak…">
+<!ENTITY contextmenu.userguide.label "Användarguide för ImageTweak">

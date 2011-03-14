@@ -49,3 +49,12 @@
 <!ENTITY pref.resamplingalgorithm.nearestneighbor.tooltip "Szybki, niska jakość">
 <!ENTITY pref.resamplingalgorithm.bilinear.label "Filtrowanie dwuliniowe">
 <!ENTITY pref.resamplingalgorithm.bilinear.tooltip "Wolniejsze niż najbliższy sąsiad, dobra jakość">
+<!ENTITY contextmenu.fit.label "Dopasuj rozmiar do ekranu">
+<!ENTITY contextmenu.fill.label "Wypełnij ekran">
+<!ENTITY contextmenu.unscaled.label "100&#37;">
+<!ENTITY contextmenu.zoomin.label "Przybliż">
+<!ENTITY contextmenu.zoomout.label "Oddal">
+<!ENTITY contextmenu.rotateclock.label "Obróć o 90 stopni w prawo">
+<!ENTITY contextmenu.rotatecounter.label "Obróć o 90 stopni w lewo">
+<!ENTITY contextmenu.options.label "Opcje ImageTweaka...">
+<!ENTITY contextmenu.userguide.label "Podręcznik użytkownika ImageTweaka">
