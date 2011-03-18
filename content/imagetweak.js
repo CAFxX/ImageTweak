@@ -536,12 +536,17 @@ ImageTweak.prototype.ClearSelection = function ClearSelection() {
 // inject the imageViewer flag in the navigator object
 // http://stackoverflow.com/questions/5089941/allow-content-documents-to-detect-my-firefox-addon
 ImageTweak.prototype.InjectContentFlag = function InjectContentFlag() {
-    var s = new Components.utils.Sandbox(this.Window);
-    s.window = this.Window;
-    Components.utils.evalInSandbox(
-        "window.wrappedJSObject.navigator.__defineGetter__('imageViewer', function(){ return true; });", 
-        s
-    );
+    try {
+        var s = new Components.utils.Sandbox(this.Window);
+        s.window = this.Window;
+        Components.utils.evalInSandbox(
+            "try { window.wrappedJSObject.navigator.__defineGetter__('imageViewer', function(){ return true; }); } catch(e) {}", 
+            s
+        );
+        return true;
+    } catch (e) {
+        return false;
+    }
 };
 
 // destroy the current ImageTweak instance: after this function is called, no other functions may be called
