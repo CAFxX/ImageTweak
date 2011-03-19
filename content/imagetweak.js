@@ -19,7 +19,6 @@
 
 ************************************************************************************************************************************************************/
 
-
 /*  creates the ImageTweak object for the specified window
     this is used also for non-ImageDocuments because we need to register the listeners */
 function ImageTweak( hWindow ) {
@@ -48,7 +47,8 @@ function ImageTweak( hWindow ) {
         this.Inited = false; // initialization flag
         this.TimeoutHandle = null; // Timeout handle used during image loading
         this.ScrollIntervalHandle = null; // Interval handle used for scrolling
-        this.ContinuousTone = null; 
+        this.ContinuousTone = null; // is the image continuous tone?
+        this.Transparent = null;  // is the image transparent?
         this.InvertResamplingAlgorithm = false; // override the normal resampling algorithm
         this.EmptyDragImage = null; // used to prevent the drag image from appearing in fx4
     }
@@ -130,7 +130,7 @@ ImageTweak.prototype.Repaint = function Repaint() {
                     "height:"   + Math.round(Coordinates.imgHeight)     + "px;" +
                     "-moz-transform: rotate(" + this.Rotation + "deg);";
 	
-	if (ImageTweak.pref.ShadowColor != "") {
+	if (ImageTweak.pref.ShadowColor != "" && !this.Transparent) {
 		var ShadowBlur = Math.sqrt( this.Window.innerWidth * this.Window.innerHeight ) * 0.025; // magic
 		CurCSS += "-moz-box-shadow: 0 0 " + Math.round(ShadowBlur) + "px 0 " + ImageTweak.pref.ShadowColor + ";";
 		CurCSS += "background-color: " + ImageTweak.pref.ShadowColor + ";";
@@ -332,6 +332,8 @@ ImageTweak.prototype.OnSelection = function OnSelection(event) {
 
 ImageTweak.prototype.ImageOnLoad = function ImageOnLoad(event) {
     this.ContinuousTone = ImageTweak.isContinuousToneImage(this.Image);
+    this.Transparent = ImageTweak.isTransparentImage(this.Image);
+    this.Repaint();
 };
 
 /* Internal functions **************************************************************************************************************************************/
@@ -774,6 +776,18 @@ ImageTweak.isContinuousToneImage = function isContinuousToneImage(img) {
     
     return colors.length < colorsThreshold;
 };
+
+// detect if the current image has any transparent pixel
+ImageTweak.isTransparentImage = function isTransparentImage(img) { 
+    var { canvas, ctx, data } = ImageTweak.getImageCanvas(img);
+    
+    for (var i=3; i < w*h*4; i+=4)
+        if (data.data[i] != 255)
+            return true;
+    
+    return false;
+};
+
 
 // get a canvas filled with the contents of the image img
 ImageTweak.getImageCanvas = function getImageCanvas(img) {
