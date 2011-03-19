@@ -810,22 +810,14 @@ ImageTweak.Targets = {
 // broadcast a call to repaint to all open tabs
 // this is used to instantly propagate changes to the pref window
 // FIXME: use preflisteners?
-ImageTweak.RepaintAll = function RepaintAll(url) {
-    var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
-    var browserEnumerator = wm.getEnumerator("navigator:browser");
-
-    while (browserEnumerator.hasMoreElements()) {
-        var browserWin = browserEnumerator.getNext();
-        var tabbrowser = browserWin.gBrowser;
-
-        var numTabs = tabbrowser.browsers.length;
-        for (var index = 0; index < numTabs; index++) {
-            var currentBrowser = tabbrowser.getBrowserAtIndex(index);
-            var IT = ImageTweak.enabled(currentBrowser.contentWindow.document);
+ImageTweak.RepaintAll = function RepaintAll(url) {   
+    Application.windows.forEach(function(Window) {
+        Window.tabs.forEach(function(Tab) {
+            var IT = ImageTweak.enabled(Tab.document);
             if (IT) 
                 IT.Repaint();
-        }
-    }
+        });
+    });
 };
 
 // DelayedExecute(fn) is equivalent to setTimeout(fn, 0), only faster
