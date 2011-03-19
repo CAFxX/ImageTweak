@@ -715,49 +715,41 @@ ImageTweak.log = function(msg) {
 
 ImageTweak.console = Components.classes["@mozilla.org/consoleservice;1"].getService(Components.interfaces.nsIConsoleService);
 
-ImageTweak.prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
-
-// this structure holds informations about the preferences used by ImageTweak
-ImageTweak.preferences = {
-    AutomaticResizing:              { pref: "browser.enable_automatic_image_resizing"                                                                    },
-    ZoomTypeFitEnabled:             { pref: "extensions.imagetweak.zoomtype.full"                                                                        },
-    ZoomTypeFillEnabled:            { pref: "extensions.imagetweak.zoomtype.fill"                                                                        },
-    ZoomTypeFreeEnabled:            { pref: "extensions.imagetweak.zoomtype.free"                                                                        },
-    ZoomTypeUnscaledEnabled:        { pref: "extensions.imagetweak.zoomtype.unscaled"                                                                    },
-    DefaultZoomType:                { pref: "extensions.imagetweak.zoomtype.default"                                                                     },
-    ClipMovement:                   { pref: "extensions.imagetweak.clip_movement"                                                                        },
-    BackgroundColor:                { pref: "extensions.imagetweak.bgcolor",                        parse: ImageTweak.parseColorExtended                 },
-    BorderColor:                    { pref: "extensions.imagetweak.bordercolor",                    parse: ImageTweak.parseColorExtended                 },
-    ShadowColor:                    { pref: "extensions.imagetweak.shadowcolor",                    parse: ImageTweak.parseColorExtended                 },
-    ZoomFactor:                     { pref: "extensions.imagetweak.zoomexp2",                       parse: function(v) { return parseFloat(v)/100.0; }   },
-    ShortcutImg:                    { pref: "extensions.imagetweak.shortcut.img"                                                                         },
-    ShortcutBg:                     { pref: "extensions.imagetweak.shortcut.bg"                                                                          },
-    ZoomOnPointer:                  { pref: "extensions.imagetweak.zoomonpointer"                                                                        },
-    InvertMouseWheel:               { pref: "extensions.imagetweak.invertmousewheel"                                                                     },
-    InvertKeyboard:                 { pref: "extensions.imagetweak.invertkeyboard"                                                                       },
-    StartFromTopLeft:               { pref: "extensions.imagetweak.startfromtopleft"                                                                     },
-    Scrolling:                      { pref: "general.autoScroll"                                                                                         },
-    LegacyScrolling:                { pref: "extensions.imagetweak.legacyscrolling"                                                                      },
-    ContentDetectable:              { pref: "extensions.imagetweak.contentdetectable"                                                                    },
-    ResamplingAlgorithm:            { pref: "extensions.imagetweak.resamplingalgorithm"                                                                  },
-    ContextMenu:                    { pref: "extensions.imagetweak.contextmenu"                                                                          },
-    LoggingEnabled:                 { pref: "extensions.imagetweak.loggingenabled"                                                                       },
-    AutomaticFullScreen:            { pref: "extensions.imagetweak.automaticfullscreen"                                                                  }
-};
-
 // create getters in pref for all items in preferences
 (function() {
+    var preferences = {
+        AutomaticResizing:              { pref: "browser.enable_automatic_image_resizing"                                                                    },
+        ZoomTypeFitEnabled:             { pref: "extensions.imagetweak.zoomtype.full"                                                                        },
+        ZoomTypeFillEnabled:            { pref: "extensions.imagetweak.zoomtype.fill"                                                                        },
+        ZoomTypeFreeEnabled:            { pref: "extensions.imagetweak.zoomtype.free"                                                                        },
+        ZoomTypeUnscaledEnabled:        { pref: "extensions.imagetweak.zoomtype.unscaled"                                                                    },
+        DefaultZoomType:                { pref: "extensions.imagetweak.zoomtype.default"                                                                     },
+        ClipMovement:                   { pref: "extensions.imagetweak.clip_movement"                                                                        },
+        BackgroundColor:                { pref: "extensions.imagetweak.bgcolor",                        parse: ImageTweak.parseColorExtended                 },
+        BorderColor:                    { pref: "extensions.imagetweak.bordercolor",                    parse: ImageTweak.parseColorExtended                 },
+        ShadowColor:                    { pref: "extensions.imagetweak.shadowcolor",                    parse: ImageTweak.parseColorExtended                 },
+        ZoomFactor:                     { pref: "extensions.imagetweak.zoomexp2",                       parse: function(v) { return parseFloat(v)/100.0; }   },
+        ShortcutImg:                    { pref: "extensions.imagetweak.shortcut.img"                                                                         },
+        ShortcutBg:                     { pref: "extensions.imagetweak.shortcut.bg"                                                                          },
+        ZoomOnPointer:                  { pref: "extensions.imagetweak.zoomonpointer"                                                                        },
+        InvertMouseWheel:               { pref: "extensions.imagetweak.invertmousewheel"                                                                     },
+        InvertKeyboard:                 { pref: "extensions.imagetweak.invertkeyboard"                                                                       },
+        StartFromTopLeft:               { pref: "extensions.imagetweak.startfromtopleft"                                                                     },
+        Scrolling:                      { pref: "general.autoScroll"                                                                                         },
+        LegacyScrolling:                { pref: "extensions.imagetweak.legacyscrolling"                                                                      },
+        ContentDetectable:              { pref: "extensions.imagetweak.contentdetectable"                                                                    },
+        ResamplingAlgorithm:            { pref: "extensions.imagetweak.resamplingalgorithm"                                                                  },
+        ContextMenu:                    { pref: "extensions.imagetweak.contextmenu"                                                                          },
+        LoggingEnabled:                 { pref: "extensions.imagetweak.loggingenabled"                                                                       },
+        AutomaticFullScreen:            { pref: "extensions.imagetweak.automaticfullscreen"                                                                  }
+    };
+
     ImageTweak.pref = {};
-    for (var pref in ImageTweak.preferences) {
+    for (var pref in preferences) {
         let id = pref;
         ImageTweak.pref.__defineGetter__(pref, function() { 
-            var p;
-            switch ( ImageTweak.prefs.getPrefType( ImageTweak.preferences[ id ].pref ) ) {
-                case ImageTweak.prefs.PREF_BOOL:      p = ImageTweak.prefs.getBoolPref( ImageTweak.preferences[id].pref ); break;
-                case ImageTweak.prefs.PREF_STRING:    p = ImageTweak.prefs.getCharPref( ImageTweak.preferences[id].pref ); break;
-                case ImageTweak.prefs.PREF_INT:       p = ImageTweak.prefs.getIntPref( ImageTweak.preferences[id].pref ); break;
-            }
-            return ImageTweak.preferences[ id ].parse ? ImageTweak.preferences[ id ].parse(p) : p;
+            var p = Application.prefs.getValue( preferences[ id ].pref, null );
+            return preferences[ id ].parse ? preferences[ id ].parse(p) : p;
         });
     }
 })();
