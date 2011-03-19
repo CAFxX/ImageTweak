@@ -715,13 +715,10 @@ ImageTweak.parseColorExtended = function(v) {
 };
 
 // console logging function
-(function() {
-    var console = Components.classes["@mozilla.org/consoleservice;1"].getService(Components.interfaces.nsIConsoleService);
-    ImageTweak.log = function(msg) {
-        if (ImageTweak.pref.LoggingEnabled)
-            console.logStringMessage(msg);
-    };
-})();
+ImageTweak.log = function(msg) {
+    if (ImageTweak.pref.LoggingEnabled)
+        Application.console.log(msg);
+};
 
 // create getters in pref for all items in preferences
 (function() {
