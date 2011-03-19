@@ -6,11 +6,9 @@
 	<script type="application/x-javascript" src="chrome://imagetweak/content/imagetweak.js" /> 
 	<script type="application/x-javascript">
 		window.onload = function() {
-			document.getElementById("imagetweak_about_title").innerHTML += " " + 
-				Components.classes["@mozilla.org/extensions/manager;1"]
-					.getService(Components.interfaces.nsIExtensionManager)
-					.getItemForID(ImageTweak.UUID).version;
-			sizeToContent();
+			document.getElementById("imagetweak_about_title").innerHTML += 
+                    Cc["@mozilla.org/extensions/manager;1"].getService(Ci.nsIExtensionManager).getItemForID(ImageTweak.UUID).version;
+            sizeToContent();
 		};
 	</script>
     <vbox align="start">
@@ -30,10 +28,16 @@
             .inline {
                 display:inline;
             }
+            .title {
+                font-weight:bold;
+            }
+            div {
+                max-width:350px;
+            }
         </html:style>
         <image src="chrome://imagetweak/skin/imagetweak48.png" width="48" height="48"/>
-        <html:div id="imagetweak_about_title" style="font-weight: bold; font-size: large;">
-            ImageTweak
+        <html:div id="imagetweak_about_title" style="font-size:large;" class="title">
+            ImageTweak 
         </html:div>
         <text value="2006-2011 Carlo Alberto Ferraris (CAFxX)"/>
         <separator class="thin"/>
@@ -44,8 +48,8 @@
         <text class="link" onclick="ImageTweak.browse('https://github.com/CAFxX/ImageTweak')" value="ImageTweak GitHub repository"/>
         <separator class="thin"/>
         <vbox>
-            <text style="font-weight: bold;" value="Translators"/>
-            <html:div style="max-width:350px">
+            <text class="title" value="Translators"/>
+            <html:div>
                 <html:span>Tuxman (de)</html:span>
                 <html:span>CAFxX (en-US)</html:span>
                 <html:span>papoo (fr)</html:span>
@@ -70,7 +74,7 @@
         </vbox>
         <separator class="thin"/>
         <vbox>
-            <text style="font-weight: bold;" value="Thanks"/>
+            <text class="title" value="Thanks"/>
             <html:div style="max-width:350px">
                 <html:span>damien18</html:span>
                 <html:span>DeathWolf</html:span>
@@ -85,10 +89,11 @@
         </vbox>
         <separator class="thin"/>
         <vbox>
-            <html:div style="max-width:350px">
-                ImageTweak contains icons from the <text class="link inline" onclick="ImageTweak.browse('http://somerandomdude.com/projects/bitcons/')" value="Bitcons"/>
-                icon set by <text class="link inline" onclick="ImageTweak.browse('http://somerandomdude.com/')" value="P. J. Onori"/> licensed under the 
-                <text class="link inline" onclick="ImageTweak.browse('http://creativecommons.org/licenses/by-sa/3.0/us/')" value="CC BY-SA 3.0"/> license.
+            <html:div>
+                ImageTweak is licensed under the terms of the <text class="link" onclick="ImageTweak.browse('http://www.gnu.org/licenses/gpl-3.0.html')" value="GPLv3"/>. The source code is available on <text class="link" onclick="ImageTweak.browse('https://github.com/CAFxX/ImageTweak')" value="GitHub"/>.
+            </html:div>
+            <html:div>
+                ImageTweak contains icons from the <text class="link inline" onclick="ImageTweak.browse('http://somerandomdude.com/projects/bitcons/')" value="Bitcons"/> icon set by <text class="link inline" onclick="ImageTweak.browse('http://somerandomdude.com/')" value="P. J. Onori"/> licensed under the <text class="link inline" onclick="ImageTweak.browse('http://creativecommons.org/licenses/by-sa/3.0/us/')" value="CC BY-SA 3.0"/> license.
             </html:div>
         </vbox>       
     </vbox>
