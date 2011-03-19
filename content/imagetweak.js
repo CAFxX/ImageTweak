@@ -48,9 +48,9 @@ function ImageTweak( hWindow ) {
         this.Inited = false; // initialization flag
         this.TimeoutHandle = null; // Timeout handle used during image loading
         this.ScrollIntervalHandle = null; // Interval handle used for scrolling
-        this.ContinuousTone = null;
-        this.InvertResamplingAlgorithm = false;
-        this.EmptyDragImage = null;
+        this.ContinuousTone = null; 
+        this.InvertResamplingAlgorithm = false; // override the normal resampling algorithm
+        this.EmptyDragImage = null; // used to prevent the drag image from appearing in fx4
     }
 };
 
@@ -447,14 +447,17 @@ ImageTweak.prototype.RotatedHeight = function RotatedHeight() {
     return this.Image.naturalWidth * Math.abs( Math.sin( RotationRadians ) ) + this.Image.naturalHeight * Math.abs( Math.cos( RotationRadians ) );
 };
 
+// return the normalized zoom ratio for fit
 ImageTweak.prototype.FitZoom = function FitZoom() {
     return Math.min( this.Window.innerWidth / this.RotatedWidth(), this.Window.innerHeight / this.RotatedHeight() );
 };
 
+// return the normalized zoom ratio for fill
 ImageTweak.prototype.FillZoom = function FillZoom() {
     return Math.max( this.Window.innerWidth / this.RotatedWidth(), this.Window.innerHeight / this.RotatedHeight() );
 };
 
+// reset the view to the default zoom ratio
 ImageTweak.prototype.DefaultZoomType = function DefaultZoomType() {
     this.PerformZoomTypeSwitch( ImageTweak.pref.DefaultZoomType, false );
 };
@@ -515,11 +518,13 @@ ImageTweak.prototype.GetResamplingAlgorithm = function GetResamplingAlgorithm() 
     return algorithm;
 };
 
+// override the default resampling algorithm
 ImageTweak.prototype.SwitchResamplingAlgorithm = function SwitchResamplingAlgorithm() {
     this.InvertResamplingAlgorithm = !this.InvertResamplingAlgorithm;
     this.Repaint();
 };
 
+// get the image URL of the element (either image or background)
 ImageTweak.prototype.GetElementImageURL = function GetElementImageURL(elem) {
     if ( elem.tagName == "IMG" && ImageTweak.pref.ShortcutImg )
         return elem.src;
@@ -529,6 +534,7 @@ ImageTweak.prototype.GetElementImageURL = function GetElementImageURL(elem) {
     return "";
 };
 
+// remove any current selection 
 ImageTweak.prototype.ClearSelection = function ClearSelection() {
     this.Window.getSelection().removeAllRanges();
 };
@@ -708,12 +714,14 @@ ImageTweak.parseColorExtended = function(v) {
     return v;
 };
 
-ImageTweak.log = function(msg) {
-    if (ImageTweak.pref.LoggingEnabled)
-        ImageTweak.console.logStringMessage(msg);
-};
-
-ImageTweak.console = Components.classes["@mozilla.org/consoleservice;1"].getService(Components.interfaces.nsIConsoleService);
+// console logging function
+(function() {
+    var console = Components.classes["@mozilla.org/consoleservice;1"].getService(Components.interfaces.nsIConsoleService);
+    ImageTweak.log = function(msg) {
+        if (ImageTweak.pref.LoggingEnabled)
+            console.logStringMessage(msg);
+    };
+})();
 
 // create getters in pref for all items in preferences
 (function() {
