@@ -786,13 +786,16 @@ ImageTweak.isContinuousToneImage = function isContinuousToneImage(img) {
 
 // detect if the current image has any transparent pixel
 ImageTweak.isTransparentImage = function isTransparentImage(img) { 
-    var { canvas, ctx, data } = ImageTweak.getImageCanvas(img);
-    
-    for (var i=3; i < w*h*4; i+=4)
-        if (data.data[i] != 255)
-            return true;
-    
-    return false;
+    switch (img.ownerDocument.contentType) {
+        case "image/gif":
+        case "image/png":
+            var { canvas, ctx, data } = ImageTweak.getImageCanvas(img);
+            for (var i=3; i < w*h*4; i+=4)
+                if (data.data[i] != 255)
+                    return true;
+        default:
+            return false;
+    }
 };
 
 
