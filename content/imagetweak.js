@@ -19,6 +19,13 @@
 
 ************************************************************************************************************************************************************/
 
+if (Cc != Components.classes)
+    var Cc = Components.classes;
+if (Ci != Components.interfaces)
+    var Ci = Components.interfaces;
+if (Cu != Components.utils)
+    var Cu = Components.utils;
+
 /*  creates the ImageTweak object for the specified window
     this is used also for non-ImageDocuments because we need to register the listeners */
 function ImageTweak( hWindow ) {
@@ -545,9 +552,9 @@ ImageTweak.prototype.ClearSelection = function ClearSelection() {
 // http://stackoverflow.com/questions/5089941/allow-content-documents-to-detect-my-firefox-addon
 ImageTweak.prototype.InjectContentFlag = function InjectContentFlag() {
     try {
-        var s = new Components.utils.Sandbox(this.Window);
+        var s = new Cu.Sandbox(this.Window);
         s.window = this.Window;
-        Components.utils.evalInSandbox(
+        Cu.evalInSandbox(
             "try { window.wrappedJSObject.navigator.__defineGetter__('imageViewer', function(){ return true; }); } catch(e) {}", 
             s
         );
@@ -662,7 +669,7 @@ ImageTweak.clip = function(value, min, max) {
 
 // opens a new tab and browse to the specified URL
 ImageTweak.browse = function(url) {
-    var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
+    var wm = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator);
     var browser = wm.getMostRecentWindow("navigator:browser").getBrowser();
     browser.selectedTab = browser.addTab(url);
 };
