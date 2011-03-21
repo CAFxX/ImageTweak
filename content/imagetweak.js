@@ -391,7 +391,7 @@ ImageTweak.prototype.StartScroll = function StartScroll(event) {
         }
         if ( !this.ScrollIntervalHandle ) {
             var hImageTweak = this;
-            this.ScrollIntervalHandle = setInterval( function (offset) { hImageTweak.PerformScroll(offset); }, ImageTweak.ScrollInterval );
+            this.ScrollIntervalHandle = setInterval( function(offset) hImageTweak.PerformScroll(offset), ImageTweak.ScrollInterval );
         }
     } else {
         this.StopScroll();
@@ -546,7 +546,7 @@ ImageTweak.prototype.InjectContentFlag = function InjectContentFlag() {
         var s = new Cu.Sandbox(this.Window);
         s.window = this.Window;
         Cu.evalInSandbox(
-            "try { window.wrappedJSObject.navigator.__defineGetter__('imageViewer', function(){ return true; }); } catch(e) {}", 
+            "try { window.wrappedJSObject.navigator.__defineGetter__('imageViewer', function() true); } catch(e) {}", 
             s
         );
         return true;
@@ -582,8 +582,8 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
         window.fullScreen = ImageTweak.pref.AutomaticFullScreen && this.Document instanceof ImageDocument;
     } else if ( ( this.Document instanceof ImageDocument ) === false ) {
         // not a standalone image! so, what? let's plug in our supa-dupa source image click handler
-        this.Document.addEventListener( 'click', function(e) { hImageTweak.RegularDocumentOnMouseClick(e); }, false );
-        this.Document.addEventListener( 'dblclick', function(e) { hImageTweak.RegularDocumentOnMouseDoubleClick(e); }, false );
+        this.Document.addEventListener( 'click', function(e) hImageTweak.RegularDocumentOnMouseClick(e), false );
+        this.Document.addEventListener( 'dblclick', function(e) hImageTweak.RegularDocumentOnMouseDoubleClick(e), false );
         // inject the navigator.imageViewer flag
         if (ImageTweak.pref.ContentDetectable)
             this.InjectContentFlag();
@@ -617,23 +617,23 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
         this.ZoomMax = Math.min( ImageTweak.ImageMax / this.Image.naturalWidth, ImageTweak.ImageMax / this.Image.naturalHeight );
         this.DefaultZoomType();
         // plugin our (supa-dupa!) event listeners
-        this.addEventListener( this.Document, 'DOMMouseScroll', function(e) { hImageTweak.OnMouseWheel(e); }, false );
-        this.addEventListener( this.Document, 'mousemove', function(e) { hImageTweak.OnMouseMove(e); }, false );
-        this.addEventListener( this.Document, 'mouseup', function(e) { hImageTweak.OnMouseUp(e); }, true );
-        this.addEventListener( this.Document, 'mousedown', function(e) { hImageTweak.OnMouseDown(e); }, true );
-        this.addEventListener( this.Document, 'dblclick', function(e) { hImageTweak.OnDoubleClick(e); }, false );
-        this.addEventListener( this.Window, 'load', function(e) { hImageTweak.OnLoad(e); }, false );
-        this.addEventListener( this.Window, 'unload', function(e) { hImageTweak.OnUnload(e); }, false );
-        this.addEventListener( this.Window, 'resize', function(e) { hImageTweak.OnResize(e); }, false );
-        this.addEventListener( this.Window, 'keypress', function(e) { hImageTweak.OnKeyPress(e); }, false );
-        this.addEventListener( this.Window, 'drag', function(e) { hImageTweak.OnDrag(e); }, false );
-        this.addEventListener( this.Window, 'dragstart', function(e) { hImageTweak.OnDragStart(e); }, false );
-        this.addEventListener( this.Window, 'dragend', function(e) { hImageTweak.OnDragEnd(e); }, false );
-        this.addEventListener( this.Window, 'dragenter', function(e) { hImageTweak.OnDragEnterWindow(e); }, false );
-        this.addEventListener( this.Window, 'dragleave', function(e) { hImageTweak.OnDragExitWindow(e); }, false );
-        this.addEventListener( this.Window, 'dragover', function(e) { hImageTweak.OnDragOverWindow(e); }, false ); // WTF!!!!
-        this.addEventListener( this.Window, 'keyup', function(e) { hImageTweak.OnSelection(e); }, false ); 
-        this.addEventListener( this.Window, 'mouseup', function(e) { hImageTweak.OnSelection(e); }, false ); 
+        this.addEventListener( this.Document, 'DOMMouseScroll', function(e) hImageTweak.OnMouseWheel(e), false );
+        this.addEventListener( this.Document, 'mousemove', function(e) hImageTweak.OnMouseMove(e), false );
+        this.addEventListener( this.Document, 'mouseup', function(e) hImageTweak.OnMouseUp(e), true );
+        this.addEventListener( this.Document, 'mousedown', function(e) hImageTweak.OnMouseDown(e), true );
+        this.addEventListener( this.Document, 'dblclick', function(e) hImageTweak.OnDoubleClick(e), false );
+        this.addEventListener( this.Window, 'load', function(e) hImageTweak.OnLoad(e), false );
+        this.addEventListener( this.Window, 'unload', function(e) hImageTweak.OnUnload(e), false );
+        this.addEventListener( this.Window, 'resize', function(e) hImageTweak.OnResize(e), false );
+        this.addEventListener( this.Window, 'keypress', function(e) hImageTweak.OnKeyPress(e), false );
+        this.addEventListener( this.Window, 'drag', function(e) hImageTweak.OnDrag(e), false );
+        this.addEventListener( this.Window, 'dragstart', function(e) hImageTweak.OnDragStart(e), false );
+        this.addEventListener( this.Window, 'dragend', function(e) hImageTweak.OnDragEnd(e), false );
+        this.addEventListener( this.Window, 'dragenter', function(e) hImageTweak.OnDragEnterWindow(e), false );
+        this.addEventListener( this.Window, 'dragleave', function(e) hImageTweak.OnDragExitWindow(e), false );
+        this.addEventListener( this.Window, 'dragover', function(e) hImageTweak.OnDragOverWindow(e), false ); // WTF!!!!
+        this.addEventListener( this.Window, 'keyup', function(e) hImageTweak.OnSelection(e), false ); 
+        this.addEventListener( this.Window, 'mouseup', function(e) hImageTweak.OnSelection(e), false ); 
         // create an empty canvas to be used as drag image
         var empty = ImageTweak.getCanvas( this.Document, 1, 1 );
         this.EmptyDragImage = empty.canvas;
