@@ -555,9 +555,9 @@ ImageTweak.prototype.InjectContentFlag = function InjectContentFlag() {
 
 // destroy the current ImageTweak instance: after this function is called, no other functions may be called
 ImageTweak.prototype.Cleanup = function Cleanup() {
-    // null the DOM reference to this IT instance
+    // delete the DOM reference to this IT instance
     if (this.Document && this.Document.ImageTweak)
-        this.Document.ImageTweak = null; 
+        delete this.Document.ImageTweak; 
     // unregister all event listeners
     var listener;
     while (listener = this.Listeners.pop())
