@@ -267,7 +267,7 @@ ImageTweak.prototype.OnKeyPress = function OnKeyPress(event) {
         }
     } else {
         switch (event.keyCode + event.charCode) {
-            case 32: /* space */                    this.PerformZoomTypeSwitch( ); break;
+            case 32: /* space */                    this.PerformZoomTypeSwitch(); break;
             case 37: /* left arrow */               this.PerformMove( MoveDelta, 0 ); break;
             case 38: /* up arrow */                 this.PerformMove( 0, MoveDelta ); break;
             case 39: /* right arrow */              this.PerformMove( -MoveDelta, 0 ); break;
@@ -277,10 +277,10 @@ ImageTweak.prototype.OnKeyPress = function OnKeyPress(event) {
             case 60: /* < */                        this.PerformRotation( -90 ); break;
             case 62: /* > */                        this.PerformRotation( 90 ); break;
             case 48: /* 0 */                        this.DefaultZoomType(); break;
-            case 49: /* 1 */                        this.PerformZoomTypeSwitch( "fit" ); break;
-            case 50: /* 2 */                        this.PerformZoomTypeSwitch( "fill" ); break;
-            case 51: /* 3 */                        this.PerformZoomTypeSwitch( "pixel" ); break;
-            case 52: /* 4 */                        this.PerformZoomTypeSwitch( "free" ); break;
+            case 49: /* 1 */                        this.PerformZoomTypeSwitch( "fit", true ); break;
+            case 50: /* 2 */                        this.PerformZoomTypeSwitch( "fill", true ); break;
+            case 51: /* 3 */                        this.PerformZoomTypeSwitch( "pixel", true ); break;
+            case 52: /* 4 */                        this.PerformZoomTypeSwitch( "free", true ); break;
             case 34: /* page down */                this.PerformMove( 0, -MovePageDelta ); break;
             case 33: /* page up */                  this.PerformMove( 0, MovePageDelta ); break;
             case 112: /* p */                       this.SwitchResamplingAlgorithm(); break;
@@ -473,45 +473,34 @@ ImageTweak.prototype.DefaultZoomType = function DefaultZoomType() {
     this.PerformZoomTypeSwitch( ImageTweak.pref.DefaultZoomType, false );
 };
 
-ImageTweak.prototype.ZoomTypes = {
+ImageTweak.ZoomTypes = {
     free: { 
         next:'fit',   
-        condition: function(_this) { 
-            return ImageTweak.pref.ZoomTypeFreeEnabled; 
-        }
+        condition: function(_this) ImageTweak.pref.ZoomTypeFreeEnabled
     },
     fit: { 
         next:'fill',  
-        condition: function (_this) {
-            return _this.FitZoom() < 1 && ImageTweak.pref.ZoomTypeFitEnabled;
-        }
+        condition: function(_this) _this.FitZoom() < 1 && ImageTweak.pref.ZoomTypeFitEnabled
     },
     fill: { 
         next:'pixel', 
-        condition: function (_this) {
-            return _this.FillZoom() < 1 && ImageTweak.pref.ZoomTypeFillEnabled;
-        }
+        condition: function(_this) _this.FillZoom() < 1 && ImageTweak.pref.ZoomTypeFillEnabled
     },
     pixel: { 
         next:'free',
-        condition: function (_this) {
-            return _this.FitZoom() >= 1 || ImageTweak.pref.ZoomTypeUnscaledEnabled;
-        }
+        condition: function(_this) _this.FitZoom() >= 1 || ImageTweak.pref.ZoomTypeUnscaledEnabled
     }
 };
 
 ImageTweak.prototype.PerformZoomTypeSwitch = function PerformZoomTypeSwitch( imgZoomType, SkipCondition ) {
-    if ( typeof imgZoomType == "undefined" ) {
-        imgZoomType = this.ZoomTypes[ this.ZoomType ].next;
+    if ( typeof imgZoomType == "undefined" ) 
+        imgZoomType = ImageTweak.ZoomTypes[ this.ZoomType ].next;
+    if ( typeof SkipCondition == "undefined" )
         SkipCondition = false;
-    } else if ( typeof SkipCondition == "undefined" ) {
-        SkipCondition = true;
-    } else {
-        SkipCondition = false;
-    }
-    while ( imgZoomType != this.ZoomType && !( this.ZoomTypes[ imgZoomType ].condition(this) || SkipCondition ) ) {
-        imgZoomType = this.ZoomTypes[ imgZoomType ].next;
-    }
+    ImageTweak.log(imgZoomType + " " + SkipCondition);
+    while ( imgZoomType != this.ZoomType && !( ImageTweak.ZoomTypes[ imgZoomType ].condition(this) || SkipCondition ) )
+        imgZoomType = ImageTweak.ZoomTypes[ imgZoomType ].next;
+    ImageTweak.log(imgZoomType);
     this.ZoomType = imgZoomType;
     this.Repaint();
 };
