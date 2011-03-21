@@ -337,9 +337,11 @@ ImageTweak.prototype.OnSelection = function OnSelection(event) {
     this.ClearSelection();
 };
 
-ImageTweak.prototype.ImageOnLoad = function ImageOnLoad(event) {
-    this.ContinuousTone = ImageTweak.isContinuousToneImage(this.Image);
-    this.Transparent = ImageTweak.isTransparentImage(this.Image);
+ImageTweak.prototype.OnLoad = function OnLoad(event) {
+    if (this.ContinuousTone == null)
+        this.ContinuousTone = ImageTweak.isContinuousToneImage(this.Image);
+    if (this.Transparent == null)
+        this.Transparent = ImageTweak.isTransparentImage(this.Image);
     this.Repaint();
 };
 
@@ -626,12 +628,12 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
         this.ZoomMax = Math.min( ImageTweak.ImageMax / this.Image.naturalWidth, ImageTweak.ImageMax / this.Image.naturalHeight );
         this.DefaultZoomType();
         // plugin our (supa-dupa!) event listeners
-        this.addEventListener( this.Image, 'load', function(e) { hImageTweak.ImageOnLoad(e); }, false );
         this.addEventListener( this.Document, 'DOMMouseScroll', function(e) { hImageTweak.OnMouseWheel(e); }, false );
         this.addEventListener( this.Document, 'mousemove', function(e) { hImageTweak.OnMouseMove(e); }, false );
         this.addEventListener( this.Document, 'mouseup', function(e) { hImageTweak.OnMouseUp(e); }, true );
         this.addEventListener( this.Document, 'mousedown', function(e) { hImageTweak.OnMouseDown(e); }, true );
         this.addEventListener( this.Document, 'dblclick', function(e) { hImageTweak.OnDoubleClick(e); }, false );
+        this.addEventListener( this.Window, 'load', function(e) { hImageTweak.OnLoad(e); }, false );
         this.addEventListener( this.Window, 'unload', function(e) { hImageTweak.OnUnload(e); }, false );
         this.addEventListener( this.Window, 'resize', function(e) { hImageTweak.OnResize(e); }, false );
         this.addEventListener( this.Window, 'keypress', function(e) { hImageTweak.OnKeyPress(e); }, false );
@@ -770,18 +772,18 @@ ImageTweak.log = function(msg) {
 
 // detect if the current image is "continuous tone" or not
 // for now this means having more than 32 different colors or not
-ImageTweak.isContinuousToneImage = function isContinuousToneImage(img) { 
+ImageTweak.isContinuousToneImage = function isContinuousToneImage(img) {
     const colorsThreshold = 32;
     var { canvas, ctx, data } = ImageTweak.getImageCanvas(img);
     
     var colors = [];
-    for (var i=0; i < w*h*4 && colors.length < colorsThreshold; i+=4) {
+    for (var i=0; i < data.data.length && colors.length < colorsThreshold; i+=4) {
         var color = ( data.data[i] * 256 + data.data[i+1] ) * 256 + data.data[i+2];
         if (colors.indexOf(color) == -1)
             colors.push(color);
     }
     
-    return colors.length < colorsThreshold;
+    return colors.length > colorsThreshold;
 };
 
 // detect if the current image has any transparent pixel
@@ -790,7 +792,7 @@ ImageTweak.isTransparentImage = function isTransparentImage(img) {
         case "image/gif":
         case "image/png":
             var { canvas, ctx, data } = ImageTweak.getImageCanvas(img);
-            for (var i=3; i < w*h*4; i+=4)
+            for (var i=3; i < data.data.length; i+=4)
                 if (data.data[i] != 255)
                     return true;
         default:
