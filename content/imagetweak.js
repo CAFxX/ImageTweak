@@ -562,9 +562,9 @@ ImageTweak.prototype.Cleanup = function Cleanup() {
     var listener;
     while (listener = this.Listeners.pop())
         listener.target.removeEventListener(listener.eventName, listener.listener, listener.bubbling);
-    // null all class members
+    // delete all class members
     for (var i in this)
-        this[i] = null;
+        delete this[i];
 };
 
 // register an event listener to be automatically unregistered during cleanup
@@ -580,8 +580,9 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
         window.fullScreen = ImageTweak.pref.AutomaticFullScreen && this.Document instanceof ImageDocument;
     } else if ( ( this.Document instanceof ImageDocument ) === false ) {
         // not a standalone image! so, what? let's plug in our supa-dupa source image click handler
-        this.Document.addEventListener( 'click', function(e) hImageTweak.RegularDocumentOnMouseClick(e), false );
-        this.Document.addEventListener( 'dblclick', function(e) hImageTweak.RegularDocumentOnMouseDoubleClick(e), false );
+        this.addEventListener( this.Document, 'click', function(e) hImageTweak.RegularDocumentOnMouseClick(e), false );
+        this.addEventListener( this.Document, 'dblclick', function(e) hImageTweak.RegularDocumentOnMouseDoubleClick(e), false );
+        this.addEventListener( this.Window, 'unload', function(e) hImageTweak.OnUnload(e), false );
         // inject the navigator.imageViewer flag
         if (ImageTweak.pref.ContentDetectable)
             this.InjectContentFlag();
