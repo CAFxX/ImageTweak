@@ -257,6 +257,7 @@ ImageTweak.prototype.OnKeyPress = function OnKeyPress(event) {
             case 43: /* plus sign */                this.PerformZoom( 1 ); break;
             case 45: /* minus sign */               this.PerformZoom( -1 ); break;
             case 48: /* 0 */                        this.DefaultZoomType(); break;
+            case 97: /* a */                        break; // prevent the select all command
             default:                                return;
         }
     } else {
@@ -611,6 +612,7 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
         this.Document.body.style.height = "100%";
         this.Document.body.style.margin = "0";
         this.Document.body.style.padding = "0";
+        this.Document.body.style.MozUserSelect = "-moz-none";
         // initialize our structure
         this.Title = this.Document.title; // this has to go after disabling automatic_image_resizing
         this.ZoomMax = Math.min( ImageTweak.ImageMax / this.Image.naturalWidth, ImageTweak.ImageMax / this.Image.naturalHeight );
