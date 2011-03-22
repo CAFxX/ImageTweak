@@ -862,5 +862,6 @@ ImageTweak.UUID = "{DB2EA31C-58F5-48b7-8D60-CB0739257904}";
 // ms between calls to the scroll event handler - somewhat higher than 60fps
 ImageTweak.ScrollInterval = 15; 
 
-// maximum image size in pixel supported by gecko
-ImageTweak.ImageMax = 32767;
+// maximum image size in pixel supported by gecko: it's actually higher than 
+// this, but strange things start to happen somewhere past this mark
+ImageTweak.ImageMax = 65535; 
