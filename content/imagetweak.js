@@ -183,7 +183,10 @@ ImageTweak.prototype.OnDragEnd = function OnDragEnd(event) {
 };
 
 ImageTweak.prototype.OnDrag = function OnDrag(event) {
-    this.PerformMove( this.ClientXDrag - this.ClientXPrev, this.ClientYDrag - this.ClientYPrev );
+    if (event.ctrlKey)
+        this.PerformRotation( this.ClientXDrag - this.ClientXPrev );
+    else
+        this.PerformMove( this.ClientXDrag - this.ClientXPrev, this.ClientYDrag - this.ClientYPrev );
     this.ClientXPrev = this.ClientXDrag;
     this.ClientYPrev = this.ClientYDrag;
     this.SetMouseCursor();
@@ -221,6 +224,9 @@ ImageTweak.prototype.OnMouseUp = function OnMouseUp(event) {
 };
 
 ImageTweak.prototype.OnMouseMove = function OnMouseMove(event) {
+    if ( event.ctrlKey && event.altKey && !this.Scrolling && !this.Dragging ) {
+        this.PerformRotation( ( event.clientX - this.ClientXPrev ) / this.Window.innerWidth * 360 );
+    }
     this.ClientXPrev = event.clientX;
     this.ClientYPrev = event.clientY;
     this.SetMouseCursor();
