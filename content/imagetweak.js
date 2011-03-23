@@ -330,7 +330,8 @@ ImageTweak.prototype.RegularDocumentOnMouseDoubleClick = function RegularDocumen
 };
 
 ImageTweak.prototype.OnUnload = function OnUnload(event) {
-    this.Browser.setAttribute("autoscroll", this.BrowserAutoscroll);
+    if (this.Browser)
+        this.Browser.setAttribute("autoscroll", this.BrowserAutoscroll);
     this.Cleanup();
 };
 
