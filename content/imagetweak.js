@@ -183,10 +183,7 @@ ImageTweak.prototype.OnDragEnd = function OnDragEnd(event) {
 };
 
 ImageTweak.prototype.OnDrag = function OnDrag(event) {
-    if (event.ctrlKey)
-        this.PerformRotation( this.ClientXDrag - this.ClientXPrev );
-    else
-        this.PerformMove( this.ClientXDrag - this.ClientXPrev, this.ClientYDrag - this.ClientYPrev );
+    this.PerformMove( this.ClientXDrag - this.ClientXPrev, this.ClientYDrag - this.ClientYPrev );
     this.ClientXPrev = this.ClientXDrag;
     this.ClientYPrev = this.ClientYDrag;
     this.SetMouseCursor();
