@@ -777,7 +777,7 @@ ImageTweak.isContinuousToneImage = function isContinuousToneImage(img) {
             colors.push(color);
     }
     
-    return colors.length > colorsThreshold;
+    return colors.length >= colorsThreshold;
 };
 
 // detect if the current image has any transparent pixel
