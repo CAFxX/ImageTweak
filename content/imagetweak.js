@@ -65,7 +65,7 @@ function ImageTweak( hWindow ) {
 ImageTweak.prototype.ScreenCoordinates = function ScreenCoordinates() {
     var Coordinates = { CurZoom: null, CurX: null, CurY: null, imgWidth: null, imgHeight: null, imgLeft: null, imgTop: null };
 
-    Coordinates.CurZoom     = ImageTweak.ZoomTypes[this.ZoomType].zoom(this);
+    Coordinates.CurZoom     = ImageTweak.ZoomTypes[this.ZoomType].zoom.call(this);
     var boundingWidth       = ImageTweak.clip( this.RotatedWidth() * Coordinates.CurZoom,             1, ImageTweak.ImageMax );
     var boundingHeight      = ImageTweak.clip( this.RotatedHeight() * Coordinates.CurZoom,            1, ImageTweak.ImageMax );
     Coordinates.imgWidth    = ImageTweak.clip( this.Image.naturalWidth * Coordinates.CurZoom,         1, ImageTweak.ImageMax );
@@ -472,26 +472,28 @@ ImageTweak.prototype.DefaultZoomType = function DefaultZoomType() {
     this.PerformZoomTypeSwitch( ImageTweak.pref.DefaultZoomType, false );
 };
 
+// preset zoom levels
+// the functions herein must be called via call(this)!
 ImageTweak.ZoomTypes = {
     free: { 
         next:'fit',   
-        condition: function(_this) ImageTweak.pref.ZoomTypeFreeEnabled,
-        zoom: function(_this) _this.Zoom
+        condition: function() ImageTweak.pref.ZoomTypeFreeEnabled,
+        zoom: function() this.Zoom
     },
     fit: { 
         next:'fill',  
-        condition: function(_this) _this.FitZoom() < 1 && ImageTweak.pref.ZoomTypeFitEnabled,
-        zoom: function(_this) _this.FitZoom()
+        condition: function() this.FitZoom() < 1 && ImageTweak.pref.ZoomTypeFitEnabled,
+        zoom: function() this.FitZoom()
     },
     fill: { 
         next:'pixel', 
-        condition: function(_this) _this.FillZoom() < 1 && ImageTweak.pref.ZoomTypeFillEnabled,
-        zoom: function(_this) _this.FillZoom()
+        condition: function() this.FillZoom() < 1 && ImageTweak.pref.ZoomTypeFillEnabled,
+        zoom: function() this.FillZoom()
     },
     pixel: { 
         next:'free',
-        condition: function(_this) _this.FitZoom() >= 1 || ImageTweak.pref.ZoomTypeUnscaledEnabled,
-        zoom: function(_this) 1
+        condition: function() this.FitZoom() >= 1 || ImageTweak.pref.ZoomTypeUnscaledEnabled,
+        zoom: function() 1
     }
 };
 
@@ -501,7 +503,7 @@ ImageTweak.prototype.PerformZoomTypeSwitch = function PerformZoomTypeSwitch( img
     if ( typeof SkipCondition == "undefined" )
         SkipCondition = false;
     ImageTweak.log(imgZoomType + " " + SkipCondition);
-    while ( imgZoomType != this.ZoomType && !( ImageTweak.ZoomTypes[ imgZoomType ].condition(this) || SkipCondition ) )
+    while ( imgZoomType != this.ZoomType && !( ImageTweak.ZoomTypes[ imgZoomType ].condition.call(this) || SkipCondition ) )
         imgZoomType = ImageTweak.ZoomTypes[ imgZoomType ].next;
     ImageTweak.log(imgZoomType);
     this.ZoomType = imgZoomType;
