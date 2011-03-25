@@ -703,7 +703,7 @@ ImageTweak.enabled = function(doc) {
     
 // see README.md for a description of this function
 ImageTweak.enabledForDocument = function(doc) {
-    return typeof doc.ImageTweak.Image != "undefined" ? doc.ImageTweak : false;
+    return doc.ImageTweak && doc.ImageTweak.Image ? doc.ImageTweak : false;
 };
 
 // ImageTweak.entryPoint is the global entry point for imagetweak
