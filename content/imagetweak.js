@@ -222,14 +222,26 @@ ImageTweak.prototype.OnMouseUp = function OnMouseUp(event) {
 
 ImageTweak.prototype.OnMouseMove = function OnMouseMove(event) {
     if ( event.ctrlKey && event.altKey && !this.Scrolling && !this.Dragging ) {
+        if ( this.ClientXPivot == null && ImageTweak.pref.ZoomOnPointer ) {
+            this.ClientXPivot = event.clientX;
+            this.ClientYPivot = event.clientY;
+        } else if ( this.ClientXPivot == null && !ImageTweak.pref.ZoomOnPointer ) {
+            this.ClientXPivot = this.Window.innerWidth / 2;
+            this.ClientYPivot = this.Window.innerHeight / 2;
+        }
         if ( event.shiftKey ) {
             this.PerformFreeZoomRotation( 
                 - ( event.clientY - this.ClientYPrev ) / this.Window.innerHeight * 10,
-                ( event.clientX - this.ClientXPrev ) / this.Window.innerWidth * 360
+                ( event.clientX - this.ClientXPrev ) / this.Window.innerWidth * 360,
+                this.ClientXPivot,
+                this.ClientYPivot
             );
         } else {
             this.PerformRotation( ( event.clientX - this.ClientXPrev ) / this.Window.innerWidth * 360 );
         }
+    } else {
+        this.ClientXPivot = null;
+        this.ClientYPivot = null;
     }
     this.ClientXPrev = event.clientX;
     this.ClientYPrev = event.clientY;
@@ -386,10 +398,10 @@ ImageTweak.prototype.PerformRotation = function PerformRotation( degrees ) {
     this.Repaint();
 };
 
-ImageTweak.prototype.PerformFreeZoomRotation = function PerformFreeZoomRotation( zoom, degrees ) {
+ImageTweak.prototype.PerformFreeZoomRotation = function PerformFreeZoomRotation( zoom, degrees, px, py ) {
     this.ConvertToFree();
     this.Rotation += degrees;
-    this.PerformZoom( zoom, this.Window.innerWidth / 2, this.Window.innerHeight / 2 );
+    this.PerformZoom( zoom, px, py );
 };
 
 ImageTweak.prototype.StartScroll = function StartScroll(event) {
