@@ -222,7 +222,14 @@ ImageTweak.prototype.OnMouseUp = function OnMouseUp(event) {
 
 ImageTweak.prototype.OnMouseMove = function OnMouseMove(event) {
     if ( event.ctrlKey && event.altKey && !this.Scrolling && !this.Dragging ) {
-        this.PerformRotation( ( event.clientX - this.ClientXPrev ) / this.Window.innerWidth * 360 );
+        if ( event.shiftKey ) {
+            this.PerformFreeZoomRotation( 
+                - ( event.clientY - this.ClientYPrev ) / this.Window.innerHeight * 10,
+                ( event.clientX - this.ClientXPrev ) / this.Window.innerWidth * 360
+            );
+        } else {
+            this.PerformRotation( ( event.clientX - this.ClientXPrev ) / this.Window.innerWidth * 360 );
+        }
     }
     this.ClientXPrev = event.clientX;
     this.ClientYPrev = event.clientY;
@@ -356,9 +363,8 @@ ImageTweak.prototype.PerformMove = function PerformMove(dx, dy) {
 
 // zooms the image, optionally around a pivot point (px, py)
 ImageTweak.prototype.PerformZoom = function PerformZoom(delta, px, py) {
-    this.ConvertToFree();
     var imgZoomFactor = ImageTweak.pref.ZoomFactor;
-    var imgZoomNew = Math.pow(imgZoomFactor, Math.round(delta + Math.log(this.Zoom) / Math.log(imgZoomFactor)));
+    var imgZoomNew = Math.pow(imgZoomFactor, (delta + Math.log(this.Zoom) / Math.log(imgZoomFactor)));
     if ( imgZoomNew <= this.ZoomMax ) {
         var imgZoomRatio = imgZoomNew / this.Zoom;
         var imgZoomDirRatio = imgZoomRatio * ( delta < 0 ? -1 : 1 );
@@ -378,6 +384,12 @@ ImageTweak.prototype.PerformZoom = function PerformZoom(delta, px, py) {
 ImageTweak.prototype.PerformRotation = function PerformRotation( degrees ) {
     this.Rotation += degrees;
     this.Repaint();
+};
+
+ImageTweak.prototype.PerformFreeZoomRotation = function PerformFreeZoomRotation( zoom, degrees ) {
+    this.ConvertToFree();
+    this.Rotation += degrees;
+    this.PerformZoom( zoom, this.Window.innerWidth / 2, this.Window.innerHeight / 2 );
 };
 
 ImageTweak.prototype.StartScroll = function StartScroll(event) {
