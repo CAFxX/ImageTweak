@@ -19,7 +19,7 @@
 <!ENTITY pref.invertkeyboard.label "Toetsenbordnavigatie omdraaien">
 <!ENTITY pref.startfromtopleft.label "Afbeelding linksboven plaatsen">
 <!ENTITY pref.contentdetectable.label "Websites berichten">
-<!ENTITY pref.bgcolor.tooltip "Te gebruiken achtergrondkleur instellen bij weergave afbeeldingen">
+<!ENTITY pref.bgcolor.tooltip "Te gebruiken achtergrondkleur instellen bij weergave afbeeldingen (CSS-kleur of percentage, 0&#37; is zwart en 100&#37; is wit)">
 <!ENTITY pref.bordercolor.tooltip "Stel de kleur van de rand rond berichten in (CSS-kleur of percentage, 0&#37; is zwart en 100&#37; is wit). Geen rand indien leeg.">
 <!ENTITY pref.autoresize.tooltip "Afbeeldingen bij laden automatisch in venster laten passen indien ze groter zijn">
 <!ENTITY pref.clip_movement.tooltip "De afbeelding uitsluitend laten verplaatsen binnen het venster">
@@ -34,7 +34,7 @@
 <!ENTITY pref.invertmousewheel.tooltip "Scrollrichting van het muiswiel omdraaien voor zoomen">
 <!ENTITY pref.invertkeyboard.tooltip "Pijltoetsrichting omdraaien voor scrollen">
 <!ENTITY pref.startfromtopleft.tooltip "Afbeelding linksboven plaatsen wanneer deze groter is dan het venster">
-<!ENTITY pref.contentdetectable.tooltip "Vertel websites dat deze browser een ingebouwde afbeeldingslezer heeft">
+<!ENTITY pref.contentdetectable.tooltip "Websites vertellen dat deze browser een ingebouwde afbeeldingslezer heeft">
 <!ENTITY pref.pressf1forhelp.label "Druk F1 om de online help weer te geven">
 <!ENTITY about.window.title "Over ImageTweak">
 <!ENTITY pref.mousewheel.label "Muiswiel">
@@ -49,12 +49,12 @@
 <!ENTITY pref.resamplingalgorithm.nearestneighbor.tooltip "Snel, lage kwaliteit">
 <!ENTITY pref.resamplingalgorithm.bilinear.label "Bilineair">
 <!ENTITY pref.resamplingalgorithm.bilinear.tooltip "Iets langzamer dan naaste buur, goede kwaliteit">
-<!ENTITY contextmenu.fit.label "Fit image to screen">
-<!ENTITY contextmenu.fill.label "Fill screen">
+<!ENTITY contextmenu.fit.label "Afbeelding aan scherm aanpassen">
+<!ENTITY contextmenu.fill.label "Scherm vullen">
 <!ENTITY contextmenu.unscaled.label "100&#37;">
-<!ENTITY contextmenu.zoomin.label "Zoom in">
-<!ENTITY contextmenu.zoomout.label "Zoom out">
-<!ENTITY contextmenu.rotateclock.label "Rotate clockwise">
-<!ENTITY contextmenu.rotatecounter.label "Rotate counterclockwise">
-<!ENTITY contextmenu.options.label "ImageTweak options...">
-<!ENTITY contextmenu.userguide.label "ImageTweak user guide">
+<!ENTITY contextmenu.zoomin.label "Inzoomen">
+<!ENTITY contextmenu.zoomout.label "Uitzoomen">
+<!ENTITY contextmenu.rotateclock.label "Met de klok mee roteren">
+<!ENTITY contextmenu.rotatecounter.label "Tegen de klok in roteren">
+<!ENTITY contextmenu.options.label "ImageTweak-opties…">
+<!ENTITY contextmenu.userguide.label "ImageTweak-gebruikersgids">

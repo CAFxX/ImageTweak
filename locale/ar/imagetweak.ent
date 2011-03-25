@@ -49,12 +49,12 @@
 <!ENTITY pref.resamplingalgorithm.nearestneighbor.tooltip "Fast, low quality">
 <!ENTITY pref.resamplingalgorithm.bilinear.label "Bilinear">
 <!ENTITY pref.resamplingalgorithm.bilinear.tooltip "Slighlty slower than nearest neighbor, good quality">
-<!ENTITY contextmenu.fit.label "Fit image to screen">
-<!ENTITY contextmenu.fill.label "Fill screen">
+<!ENTITY contextmenu.fit.label "ملائمة مع الشاشة">
+<!ENTITY contextmenu.fill.label "ملئ الشاشة">
 <!ENTITY contextmenu.unscaled.label "100&#37;">
-<!ENTITY contextmenu.zoomin.label "Zoom in">
-<!ENTITY contextmenu.zoomout.label "Zoom out">
-<!ENTITY contextmenu.rotateclock.label "Rotate clockwise">
-<!ENTITY contextmenu.rotatecounter.label "Rotate counterclockwise">
-<!ENTITY contextmenu.options.label "ImageTweak options...">
-<!ENTITY contextmenu.userguide.label "ImageTweak user guide">
+<!ENTITY contextmenu.zoomin.label "تكبير">
+<!ENTITY contextmenu.zoomout.label "تصغير">
+<!ENTITY contextmenu.rotateclock.label "تدوير بإتجاه عقارب الساعة">
+<!ENTITY contextmenu.rotatecounter.label "تدوير عكس عقارب  الساعة">
+<!ENTITY contextmenu.options.label "خيارات">
+<!ENTITY contextmenu.userguide.label "دليل المستخدم">

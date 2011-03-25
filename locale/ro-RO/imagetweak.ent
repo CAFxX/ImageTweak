@@ -1,9 +1,9 @@
-<!ENTITY pref.window.title "ImageTweak - Opţiuni">
-<!ENTITY pref.prefpane.label "Opţiuni afişare imagine">
+<!ENTITY pref.window.title "Opțiuni ImageTweak">
+<!ENTITY pref.prefpane.label "Opțiuni afișare imagine">
 <!ENTITY pref.bgcolor.label "Culoare fundal">
 <!ENTITY pref.bordercolor.label "Culoare margine">
 <!ENTITY pref.autoresize.label "Redimensionare imagini la încărcare">
-<!ENTITY pref.clip_movement.label "Limitează mişcarea imaginii">
+<!ENTITY pref.clip_movement.label "Limitează mișcarea imaginii">
 <!ENTITY pref.zoomexp.label "Factor zoom (&#37;)">
 <!ENTITY pref.zoomonpointer.label "Zoom la cursor">
 <!ENTITY pref.zoomtype.label "Tipuri zoom active">
@@ -15,46 +15,46 @@
 <!ENTITY pref.shortcut.label "Scurtături active (Ctrl + Click dreapta)">
 <!ENTITY pref.shortcut.img.label "Imagini (IMG)">
 <!ENTITY pref.shortcut.bg.label "Fundaluri">
-<!ENTITY pref.invertmousewheel.label "Inversează direcţia de zoom a rotiţei">
-<!ENTITY pref.invertkeyboard.label "Inversează navigaţia din tastatura">
+<!ENTITY pref.invertmousewheel.label "Inversează direcția de zoom a rotitei">
+<!ENTITY pref.invertkeyboard.label "Inversează navigația din tastatura">
 <!ENTITY pref.startfromtopleft.label "Plasează imaginea în stânga-sus">
 <!ENTITY pref.contentdetectable.label "Notifica site-urile">
-<!ENTITY pref.bgcolor.tooltip "Culoarea de fundal folosită la afişarea imaginilor">
-<!ENTITY pref.bordercolor.tooltip "Seteaza culoarea marginilor imaginilor (culoare CSS sau procent, 0&#37; insemnand negru iar 100&#37; insemnand alb). Daca este gol, dezactiveaza marginea.">
-<!ENTITY pref.autoresize.tooltip "Redimensionează automat imaginile mai mari decat fereastra pentru a se incadra in fereastră la incarcare">
+<!ENTITY pref.bgcolor.tooltip "Culoarea de fundal folosită la afișarea imaginilor (culoare CSS sau procent, 0&#37; însemnând negru iar 100&#37; însemnând alb).">
+<!ENTITY pref.bordercolor.tooltip "Setează culoarea marginilor imaginilor (culoare CSS sau procent, 0&#37; însemnând negru iar 100&#37; însemnând alb). Dacă este gol, dezactivează marginea.">
+<!ENTITY pref.autoresize.tooltip "Redimensionează automat imaginile mai mari decât fereastra pentru a se încadra în fereastră la încărcare">
 <!ENTITY pref.clip_movement.tooltip "Permite deplasarea imaginii doar în fereastră">
-<!ENTITY pref.zoomexp.tooltip "Factor de mărire/micşorare (200&#37; inseamnă dublare/injumatatire la fiecare acţiune)">
-<!ENTITY pref.zoomonpointer.tooltip "Zoom către cursorul de la mouse când se foloseşte rotiţa">
+<!ENTITY pref.zoomexp.tooltip "Factor de mărire/micșorare (200&#37; înseamna dublare/înjumătățire la fiecare acțiune)">
+<!ENTITY pref.zoomonpointer.tooltip "Zoom către cursorul de la mouse când se folosește rotița">
 <!ENTITY pref.zoomtype.full.tooltip "Activează modul încadrare în fereastră la dublu-click">
 <!ENTITY pref.zoomtype.fill.tooltip "Activează modul umplere fereastră la dublu click">
-<!ENTITY pref.zoomtype.free.tooltip "Activează modul permisiv (se poate face zoom şi tragere cu mouse-ul) la dublu click">
+<!ENTITY pref.zoomtype.free.tooltip "Activează modul permisiv (se poate face zoom și tragere cu mouse-ul) la dublu click">
 <!ENTITY pref.zoomtype.unscaled.tooltip "Activează modul 1:1 (original) la dublu click">
 <!ENTITY pref.shortcut.img.tooltip "Activează scurtăturile pentru imaginile folosite în paginile Web">
 <!ENTITY pref.shortcut.bg.tooltip "Activează scurtăturile pentru fundalurile folosite în paginile Web">
-<!ENTITY pref.invertmousewheel.tooltip "Inversează direcţia de zoom a rotitei mouse-ului">
-<!ENTITY pref.invertkeyboard.tooltip "Inversează directia de deplasare a imaginii la folosirea tastelor săgeti">
-<!ENTITY pref.startfromtopleft.tooltip "Plasează imaginea în coltul din stanga-sus dacă este mai mare decât fereastra">
-<!ENTITY pref.contentdetectable.tooltip "Anunta site-urile web vizitate ca acest browser are un manager de imagini integrat">
-<!ENTITY pref.pressf1forhelp.label "Apasa F1 pentru a vizualiza documentaţia online">
-<!ENTITY about.window.title "ImageTweak - Despre">
-<!ENTITY pref.mousewheel.label "Rotita mouse">
-<!ENTITY pref.mousewheel.new.label "roteste pentru a derula, click+rotire pentru a mari/micsora">
+<!ENTITY pref.invertmousewheel.tooltip "Inversează direcția de zoom a rotitei mouse-ului">
+<!ENTITY pref.invertkeyboard.tooltip "Inversează direcția de deplasare a imaginii la folosirea tastelor săgeți">
+<!ENTITY pref.startfromtopleft.tooltip "Plasează imaginea în coltul din stânga-sus dacă este mai mare decât fereastra">
+<!ENTITY pref.contentdetectable.tooltip "Anunța site-urile web vizitate ca acest browser dispune de un manager de imagini integrat">
+<!ENTITY pref.pressf1forhelp.label "Apasă F1 pentru a vizualiza documentația online">
+<!ENTITY about.window.title "Despre ImageTweak">
+<!ENTITY pref.mousewheel.label "Rotiță mouse">
+<!ENTITY pref.mousewheel.new.label "rotește pentru a derula, click+rotire pentru a mări/micșora">
 <!ENTITY pref.mousewheel.new.tooltip "Comportamentul prestabilit al browserului pentru rotita de la mouse">
-<!ENTITY pref.mousewheel.legacy.label "ctrl+rotire pentru a derula, rotire pentru  a mari">
-<!ENTITY pref.mousewheel.legacy.tooltip "Alternate mouse wheel behaviour, used in ImageTweak prior to version 0.17">
-<!ENTITY pref.contextmenu.label "Enable context menu">
-<!ENTITY pref.contextmenu.tooltip "Enable the ImageTweak context menu that allows executing common operations on images">
-<!ENTITY pref.resamplingalgorithm.label "Image resampling algorithm">
-<!ENTITY pref.resamplingalgorithm.nearestneighbor.label "Nearest neighbor">
-<!ENTITY pref.resamplingalgorithm.nearestneighbor.tooltip "Fast, low quality">
+<!ENTITY pref.mousewheel.legacy.label "ctrl+rotire pentru a derula, rotire pentru  a mări">
+<!ENTITY pref.mousewheel.legacy.tooltip "Funcționalitate alternativă pentru rotița de la mouse, folosită în ImageTweak pana la versiunea 0.17">
+<!ENTITY pref.contextmenu.label "Activează meniul contextual">
+<!ENTITY pref.contextmenu.tooltip "Activează meniul contextual al ImageTweak care permite executarea operațiilor pe imagini">
+<!ENTITY pref.resamplingalgorithm.label "Algoritm de redimensionare imagine">
+<!ENTITY pref.resamplingalgorithm.nearestneighbor.label "Cel mai apropiat vecin">
+<!ENTITY pref.resamplingalgorithm.nearestneighbor.tooltip "Rapid, calitate scăzuta">
 <!ENTITY pref.resamplingalgorithm.bilinear.label "Bilinear">
-<!ENTITY pref.resamplingalgorithm.bilinear.tooltip "Slighlty slower than nearest neighbor, good quality">
-<!ENTITY contextmenu.fit.label "Fit image to screen">
-<!ENTITY contextmenu.fill.label "Fill screen">
+<!ENTITY pref.resamplingalgorithm.bilinear.tooltip "Puțin mai încet decât &quot;cel mai apropiat vecin&quot;, calitate bună">
+<!ENTITY contextmenu.fit.label "Încadrează imaginea în ecran">
+<!ENTITY contextmenu.fill.label "Umple tot ecranul">
 <!ENTITY contextmenu.unscaled.label "100&#37;">
-<!ENTITY contextmenu.zoomin.label "Zoom in">
-<!ENTITY contextmenu.zoomout.label "Zoom out">
-<!ENTITY contextmenu.rotateclock.label "Rotate clockwise">
-<!ENTITY contextmenu.rotatecounter.label "Rotate counterclockwise">
-<!ENTITY contextmenu.options.label "ImageTweak options...">
-<!ENTITY contextmenu.userguide.label "ImageTweak user guide">
+<!ENTITY contextmenu.zoomin.label "Mărește">
+<!ENTITY contextmenu.zoomout.label "Micșorează">
+<!ENTITY contextmenu.rotateclock.label "Rotește către dreapta">
+<!ENTITY contextmenu.rotatecounter.label "Rotește către stânga">
+<!ENTITY contextmenu.options.label "Opțiuni ImageTweak">
+<!ENTITY contextmenu.userguide.label "Ghidul utilizatorului ImageTweak">
