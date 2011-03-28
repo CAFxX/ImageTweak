@@ -889,9 +889,15 @@ ImageTweak.RepaintAll = function RepaintAll(url) {
 // the UUID of this extension
 ImageTweak.UUID = "{DB2EA31C-58F5-48b7-8D60-CB0739257904}";
 
+// the currently installed version (comes from the install manifest)
+Application.getExtensions(function(extensions) ImageTweak.Version = extensions.get(ImageTweak.UUID).version);
+
 // ms between calls to the scroll event handler - somewhat higher than 60fps
 ImageTweak.ScrollInterval = 15; 
 
 // maximum image size in pixel supported by gecko: it's actually higher than 
 // this, but strange things start to happen somewhere past this mark
 ImageTweak.ImageMax = 65535; 
+
+// add the global ImageTweak object to the ImageTweak prototype
+ImageTweak.prototype.Global = ImageTweak;

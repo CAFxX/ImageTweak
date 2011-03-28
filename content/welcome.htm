@@ -1,4 +1,5 @@
-﻿<html>
+﻿<!DOCTYPE html>
+<html>
     <head>
         <title>ImageTweak</title>
         <style type="text/css">
@@ -6,15 +7,28 @@
                 padding:0;
                 margin:0;
                 height:100%;
-                background:-moz-repeating-linear-gradient(-45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.1) 3px, rgba(0,0,0,0.1) 3px, rgba(0,0,0,0.1) 6px), -moz-linear-gradient(90deg, #000, #222);
+                background:
+                    -moz-repeating-linear-gradient(-45deg, 
+                        rgba(255,255,255,0.1), 
+                        rgba(255,255,255,0.1) 3px, 
+                        rgba(0,0,0,0.1) 3px, 
+                        rgba(0,0,0,0.1) 6px
+                    ), 
+                    -moz-linear-gradient(90deg, 
+                        #000, 
+                        #222
+                    ),
+                    #222;
             }
             h1, h2, h3 {
                 margin:0;
             }
-            a, a:link, a:active, a:visited, a:hover {
+            a, a:link, a:active, a:visited, a:hover, a:-moz-focusring {
                 color:#FFF;
                 text-decoration:none;
                 text-shadow:#EEF 0 0 30px, #EEF 0 0 90px;
+                outline: 0;
+                cursor:pointer;
             }
             a:hover {
                 text-shadow:#EEF 0 0 30px, #EEF 0 0 90px, #EEF 0 0 2px;
@@ -66,6 +80,11 @@
                 width:320px;
                 height:220px;
             }
+            iframe[mouseover="true"] {
+                -moz-transition-property: box-shadow;
+                -moz-transition-duration: 0.5s;
+                box-shadow:#F80 25px 25px 100px, #08F -25px -25px 100px;
+            }
             span {
                 width:14px;
                 margin:-1px 0;
@@ -76,21 +95,36 @@
                 line-height:17px;
             }
         </style>
+        <script type="text/javascript">
+            window.addEventListener("load", function() {
+                var viewer = document.getElementById("viewer");
+                
+                viewer.__defineSetter__("mouseover", function(mouseover) viewer.setAttribute("mouseover", mouseover));
+                viewer.addEventListener("mouseover", function() viewer.mouseover = true, false);
+                viewer.addEventListener("mouseout", function() viewer.mouseover = false, false);
+                
+                window.addEventListener("focus", function() viewer.contentWindow.focus(), true);
+                viewer.contentWindow.focus();
+                
+                document.getElementById("title").innerHTML += " " + document.ImageTweak.Global.Version;
+                document.title += " " + document.ImageTweak.Global.Version;
+            }, false);
+        </script>
     </head>
     <body>
         <div id="frame">
-            <iframe src="file:///D:\Progetti\ImageTweak\skin\imagetweak48.png"></iframe>
-            <h1>ImageTweak 0.22</h1>
-            <img id="icon" src="file:///D:\Progetti\ImageTweak\skin\imagetweak48.png" alt="">
+            <iframe id="viewer" src="chrome://imagetweak/skin/imagetweak48.png"></iframe>
+            <h1 id="title">ImageTweak</h1>
+            <img id="icon" src="chrome://imagetweak/skin/imagetweak48.png" alt="">
             <p>Thank you for installing ImageTweak.</p>
-            <p>The box on the right is a demonstration of the ImageTweak viewer. Put the mouse pointer over it and zoom the image by using ctrl+mousewheel, ctrl+<span>-</span>/<span>+</span>. Rotate the image by using ctrl+alt+mousewheel or ctrl+<span>&lt;</span>/<span>&gt;</span>. Press <span>1</span> to have the image fitted to the box, <span>2</span> to have it fill the box.</p>
-            <p>To learn more about what you can do with ImageTweak, read the <a href="https://github.com/CAFxX/ImageTweak/wiki/ImageTweak-user-guide">user guide</a>. To customize your settings, edit your <a href="#">ImageTweak preferences</a>.</p>
+            <p>The box on the right is a demonstration of the ImageTweak viewer. Put the mouse pointer over it and zoom the image by using ctrl+mousewheel, ctrl+<span>-</span>/<span>+</span>. Rotate the image by using ctrl+alt+mousewheel or <span>&lt;</span>/<span>&gt;</span>. Press <span>1</span> to have the image fitted to the box, <span>2</span> to have it fill the box.</p>
+            <p>To learn more about what you can do with ImageTweak, read the <a href="https://github.com/CAFxX/ImageTweak/wiki/ImageTweak-user-guide">user guide</a>. To customize your settings, edit your <a onclick="openDialog('chrome://imagetweak/content/prefs.xul', '', 'centerscreen,dialog=no,chrome,resizable,dependent,modal');">ImageTweak preferences</a>.</p>
             <div id="help">
                 <h2>You can help!</h2>
                 <div>
                     <h3>Report bugs</h3><a href="https://github.com/CAFxX/ImageTweak/issues">Tell us if you experience bugs</a> or if you have ideas for new features.
                 </div><div>
-                    <h3>Translate</h3>Feels like we're talking different languages? <a href="http://www.babelzilla.org/index.php?option=com_wts&Itemid=264">Help translating ImageTweak in your language!</a>
+                    <h3>Translate</h3>Feels like we're talking different languages? <a href="http://www.babelzilla.org/index.php?option=com_wts&amp;Itemid=264">Help translating ImageTweak in your language!</a>
                 </div><div>
                     <h3>Develop</h3>Feel like writing some code? <a href="https://github.com/CAFxX/ImageTweak">Send patches and pull requests on GitHub</a>.
                 </div><div>
