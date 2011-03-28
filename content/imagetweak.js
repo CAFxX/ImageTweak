@@ -707,16 +707,6 @@ ImageTweak.enabledForDocument = function(doc) {
     return doc.ImageTweak && doc.ImageTweak.Image ? doc.ImageTweak : false;
 };
 
-// ImageTweak.entryPoint is the global entry point for imagetweak
-// This function is called from overlay.xul
-ImageTweak.entryPoint = function() {
-    gBrowser.addEventListener("load", ImageTweak.startEventHandler, true);
-    gBrowser.addEventListener("focus", ImageTweak.startEventHandler, true);
-    gBrowser.addEventListener("DOMContentLoaded", ImageTweak.startEventHandler, true);
-    gBrowser.addEventListener("DOMFrameContentLoaded", ImageTweak.startEventHandler, true);
-    gBrowser.tabContainer.addEventListener("TabOpen", ImageTweak.startEventHandler, true);
-};
-
 // startEventHandler handles all the pageload, tabopen, tabfocus, etc. events registered in entryPoint
 ImageTweak.startEventHandler = function(e) {
     var hWindow;
@@ -778,15 +768,19 @@ ImageTweak.log = function(msg) {
         ResamplingAlgorithm:            { pref: "extensions.imagetweak.resamplingalgorithm"                                                                  },
         ContextMenu:                    { pref: "extensions.imagetweak.contextmenu"                                                                          },
         LoggingEnabled:                 { pref: "extensions.imagetweak.loggingenabled"                                                                       },
-        AutomaticFullScreen:            { pref: "extensions.imagetweak.automaticfullscreen"                                                                  }
+        AutomaticFullScreen:            { pref: "extensions.imagetweak.automaticfullscreen"                                                                  },
+        Version:                        { pref: "extensions.imagetweak.version"                                                                              }
     };
 
     ImageTweak.pref = {};
     for (var pref in preferences) {
         let id = pref;
         ImageTweak.pref.__defineGetter__(pref, function() { 
-            var p = Application.prefs.getValue( preferences[ id ].pref, null );
-            return preferences[ id ].parse ? preferences[ id ].parse(p) : p;
+            var p = Application.prefs.getValue( preferences[id].pref, null );
+            return preferences[id].parse ? preferences[id].parse(p) : p;
+        });
+        ImageTweak.pref.__defineSetter__(pref, function(v) {
+            Application.prefs.setValue( preferences[id].pref, v );
         });
     }
 })();
@@ -890,9 +884,32 @@ ImageTweak.RepaintAll = function RepaintAll(url) {
 // the UUID of this extension
 ImageTweak.UUID = "{DB2EA31C-58F5-48b7-8D60-CB0739257904}";
 
+// the currently installed version (comes from the install manifest)
+Application.getExtensions(function(extensions) {
+    ImageTweak.Version = extensions.get(ImageTweak.UUID).version;
+    
+    if (ImageTweak.Version != ImageTweak.pref.Version) {
+        gBrowser.selectedTab = gBrowser.addTab("chrome://imagetweak/content/welcome.htm");
+        ImageTweak.pref.Version = ImageTweak.Version;
+    }
+});
+
 // ms between calls to the scroll event handler - somewhat higher than 60fps
 ImageTweak.ScrollInterval = 15; 
 
 // maximum image size in pixel supported by gecko: it's actually higher than 
 // this, but strange things start to happen somewhere past this mark
 ImageTweak.ImageMax = 65535; 
+
+// ImageTweak.entryPoint is the global entry point for imagetweak
+// This function is called from overlay.xul
+ImageTweak.entryPoint = function() {
+    gBrowser.addEventListener("load", ImageTweak.startEventHandler, true);
+    gBrowser.addEventListener("focus", ImageTweak.startEventHandler, true);
+    gBrowser.addEventListener("DOMContentLoaded", ImageTweak.startEventHandler, true);
+    gBrowser.addEventListener("DOMFrameContentLoaded", ImageTweak.startEventHandler, true);
+    gBrowser.tabContainer.addEventListener("TabOpen", ImageTweak.startEventHandler, true);
+};
+
+// add the global ImageTweak object to the ImageTweak prototype
+ImageTweak.prototype.Global = ImageTweak;

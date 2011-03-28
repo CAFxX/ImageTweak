@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>ImageTweak</title>
+        <style type="text/css">
+            body {
+                font-family:Trebuchet MS, Trebuchet, Lucida Sans Unicode, Lucida Grande, Lucida Sans, Arial, sans-serif;
+                padding:0;
+                margin:0;
+                height:100%;
+                background:
+                    -moz-repeating-linear-gradient(-45deg, 
+                        rgba(255,255,255,0.1), 
+                        rgba(255,255,255,0.1) 3px, 
+                        rgba(0,0,0,0.1) 3px, 
+                        rgba(0,0,0,0.1) 6px
+                    ), 
+                    -moz-linear-gradient(90deg, 
+                        #000, 
+                        #222
+                    ),
+                    #222;
+            }
+            h1, h2, h3 {
+                margin:0;
+            }
+            a, a:link, a:active, a:visited, a:hover, a:-moz-focusring {
+                color:#FFF;
+                text-decoration:none;
+                outline: 0;
+                cursor:pointer;
+                -moz-transition-property: text-shadow;
+                -moz-transition-duration: 0.25s;
+                text-shadow:#EEF 0 0 30px, #EEF 0 0 90px;
+            }
+            a:hover {
+                -moz-transition-property: text-shadow;
+                -moz-transition-duration: 0.25s;
+                text-shadow:#EEF 0 0 30px, #EEF 0 0 90px, #EEF 0 0 2px;
+            }
+            #frame {
+                position:absolute;
+                left:0;
+                top:0;
+                right:0;
+                bottom:0;
+                width:890px;
+                height:400px;
+                padding:30px;
+                margin:auto;
+                border:2px solid rgba(255,255,255,0.25);
+                color:#CCC;
+                background:
+                    -moz-linear-gradient(-75deg, 
+                        rgba(255, 128, 0, 0.6), 
+                        transparent 50%, 
+                        rgba(0, 128, 255, 0.3) 100%
+                    ), 
+                    -moz-linear-gradient(90deg, 
+                        #222, 
+                        #333
+                    );
+                border-radius:8px;
+                box-shadow:#060606 0 0 50px;
+                -moz-transform:rotate(-2deg);
+            }
+            #icon {
+                position:absolute;
+                top:26px;
+                left:-26px;
+            }
+            #help {
+                position:absolute;
+                bottom:30px;
+                margin-left:-30px;
+            }
+            #help div {
+                display:inline-block;
+                width:200px;
+                vertical-align:top;
+                margin-left:30px;
+                word-wrap:break-word;
+            }
+            #help h2 {
+                margin-left:30px;
+            }
+            #help h3 {
+                margin:8px 0 4px;
+            }
+            iframe {
+                border:1px solid #666;
+                float:right;
+                margin:0 0 30px 30px;
+                width:320px;
+                height:220px;
+                -moz-transition-property: box-shadow;
+                -moz-transition-duration: 0.25s;
+                box-shadow:none;
+            }
+            iframe[mouseover="true"] {
+                -moz-transition-property: box-shadow;
+                -moz-transition-duration: 0.5s;
+                box-shadow:#F80 25px 25px 100px, #08F -25px -25px 100px;
+            }
+            span {
+                width:14px;
+                margin:-1px 0;
+                text-align:center;
+                border:1px solid #CCC;
+                border-radius:2px;
+                display:inline-block;
+                line-height:17px;
+            }
+        </style>
+        <script type="text/javascript">
+            window.addEventListener("load", function() {
+                var viewer = document.getElementById("viewer");
+                
+                viewer.__defineSetter__("mouseover", function(mouseover) viewer.setAttribute("mouseover", mouseover));
+                viewer.addEventListener("mouseover", function() viewer.mouseover = true, false);
+                viewer.addEventListener("mouseout", function() viewer.mouseover = false, false);
+                
+                window.addEventListener("focus", function() viewer.contentWindow.focus(), true);
+                viewer.contentWindow.focus();
+                
+                document.getElementById("title").innerHTML += " " + document.ImageTweak.Global.Version;
+                document.title += " " + document.ImageTweak.Global.Version;
+            }, false);
+        </script>
+    </head>
+    <body>
+        <div id="frame">
+            <iframe id="viewer" src="chrome://imagetweak/skin/imagetweak48.png"></iframe>
+            <h1 id="title">ImageTweak</h1>
+            <img id="icon" src="chrome://imagetweak/skin/imagetweak48.png" alt="">
+            <p>To start the image viewer right click on an image and select "View image".</p>
+            <p>The box on the right is a demonstration of the ImageTweak viewer. Place the mouse pointer over it and zoom the image by using ctrl+mousewheel or ctrl+<span>-</span>/<span>+</span>. Rotate the image by using ctrl+alt+mousewheel or <span>&lt;</span>/<span>&gt;</span>. Press <span>1</span> to have the image fitted to the box, <span>2</span> to have it fill the box.</p>
+            <p>To learn more about what you can do with ImageTweak, read the <a href="https://github.com/CAFxX/ImageTweak/wiki/ImageTweak-user-guide">user guide</a>. To customize your settings, edit your <a onclick="openDialog('chrome://imagetweak/content/prefs.xul', '', 'centerscreen,dialog=no,chrome,resizable,dependent,modal');">ImageTweak preferences</a>.</p>
+            <div id="help">
+                <h2>You can help!</h2>
+                <div>
+                    <h3>Report bugs</h3><a href="https://github.com/CAFxX/ImageTweak/issues">Tell us if you experience bugs</a> or if you have ideas for new features.
+                </div><div>
+                    <h3>Translate</h3>Feels like we're talking different languages? <a href="http://www.babelzilla.org/index.php?option=com_wts&amp;Itemid=264">Help translating ImageTweak in your language!</a>
+                </div><div>
+                    <h3>Develop</h3>Feel like writing some code? <a href="https://github.com/CAFxX/ImageTweak">Send patches and pull requests on GitHub</a>.
+                </div><div>
+                    <h3>Donate</h3><a href="https://addons.mozilla.org/en-US/firefox/addon/imagetweak/">Donate on mozilla.org</a> or send bitcoins to 12&#8203;65&#8203;ci&#8203;Mo&#8203;Fw&#8203;nX&#8203;4y&#8203;4g&#8203;Gx&#8203;XN&#8203;Gk&#8203;iD&#8203;7Q&#8203;u2&#8203;4o&#8203;YS&#8203;qw.
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
