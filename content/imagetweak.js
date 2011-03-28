@@ -884,15 +884,21 @@ ImageTweak.RepaintAll = function RepaintAll(url) {
 // the UUID of this extension
 ImageTweak.UUID = "{DB2EA31C-58F5-48b7-8D60-CB0739257904}";
 
-// the currently installed version (comes from the install manifest)
-Application.getExtensions(function(extensions) {
-    ImageTweak.Version = extensions.get(ImageTweak.UUID).version;
-    
-    if (ImageTweak.Version != ImageTweak.pref.Version) {
-        gBrowser.selectedTab = gBrowser.addTab("chrome://imagetweak/content/welcome.htm");
-        ImageTweak.pref.Version = ImageTweak.Version;
-    }
-});
+// get the currently installed version number (from the install manifest) and,
+// if we just got installed or updated, show the first run page
+(function() {
+    var CheckVersion = function(extensions) {
+        ImageTweak.Version = extensions.get(ImageTweak.UUID).version;
+        if (ImageTweak.Version != ImageTweak.pref.Version) {
+            gBrowser.selectedTab = gBrowser.addTab("chrome://imagetweak/content/welcome.htm");
+            ImageTweak.pref.Version = ImageTweak.Version;
+        }
+    };
+    if (Application.getExtensions)
+        Application.getExtensions(CheckVersion);
+    else if (Application.extensions)
+        CheckVersion(Application.extensions);
+})();
 
 // ms between calls to the scroll event handler - somewhat higher than 60fps
 ImageTweak.ScrollInterval = 15; 
