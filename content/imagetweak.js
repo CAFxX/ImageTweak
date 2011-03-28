@@ -375,6 +375,7 @@ ImageTweak.prototype.PerformMove = function PerformMove(dx, dy) {
 
 // zooms the image, optionally around a pivot point (px, py)
 ImageTweak.prototype.PerformZoom = function PerformZoom(delta, px, py) {
+    this.ConvertToFree();
     var imgZoomFactor = ImageTweak.pref.ZoomFactor;
     var imgZoomNew = Math.pow(imgZoomFactor, (delta + Math.log(this.Zoom) / Math.log(imgZoomFactor)));
     if ( imgZoomNew <= this.ZoomMax ) {
