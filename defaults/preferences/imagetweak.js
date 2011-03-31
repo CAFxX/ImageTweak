@@ -1,7 +1,7 @@
-/*
-	Default preferences for ImageTweak
-*/
+/////// Description l10n ///////
+pref("extensions.{DB2EA31C-58F5-48b7-8D60-CB0739257904}.description", "chrome://imagetweak/locale/imagetweak.properties");
 
+/////// Default preferences for ImageTweak ///////
 pref("extensions.imagetweak.bgcolor", "20%");
 pref("extensions.imagetweak.zoomexp2", "200");
 pref("extensions.imagetweak.zoomtype.full", true);
@@ -26,4 +26,5 @@ pref("extensions.imagetweak.automaticfullscreen", false);
 pref("extensions.imagetweak.shadowcolor", "");
 pref("extensions.imagetweak.version", "");
 
-pref("extensions.{DB2EA31C-58F5-48b7-8D60-CB0739257904}.description", "chrome://imagetweak/locale/imagetweak.properties");
+/////// Interoperatibility kludges ///////
+pref("extensions.quickdrag.disallowImageDocumentSave", true); // disable quickdrag in nsImageDocument
