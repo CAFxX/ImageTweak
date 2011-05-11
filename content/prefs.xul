@@ -23,12 +23,15 @@
                 $("zoomtype_default_radiogroup").selectedIndex = ($("zoomtype_default_radiogroup").selectedIndex + 1) % 3;
             $("bgcolor_colorpicker").color = ImageTweak.parseColorExtended($("bgcolor_textbox").value);
             $("bordercolor_colorpicker").color = ImageTweak.parseColorExtended($("bordercolor_textbox").value);
+            $('colormanagement_mode_checkbox').disabled = !$("colormanagement_profile").value;
 			ImageTweak.RepaintAll();
         };
 
         ImageTweak.InitPrefPane = function() {
-            var i, prefs = document.getElementsByTagName("preference");
-            for (i=0; i<prefs.length; i++) {
+            ImageTweak.PopulateProfiles();
+        
+            var prefs = document.getElementsByTagName("preference");
+            for (var i=0; i<prefs.length; i++) {
                     prefs[i].onchange = ImageTweak.ValidatePref;
             }
             ImageTweak.ValidatePref();
@@ -42,6 +45,63 @@
                 $("bordercolor_textbox").value = this.color;
                 $("preferences").fireChangedEvent($("bordercolor_textbox"));
             };
+        };
+        
+        ImageTweak.RemoveProfiles = function() {
+            var dd = $("color_profile_dropdown");
+            
+            for (var i=0; i<dd.itemCount; i++) {
+                let item = dd.getItemAtIndex(i);
+                if (item.isDynamic) {
+                    dd.removeItemAt(i);
+                    i--;
+                }
+            }
+        };
+        
+        ImageTweak.PopulateProfiles = function() {
+            var dd = $("color_profile_dropdown");
+            var pref = $("colormanagement_profile").value;
+            
+            ImageTweak.RemoveProfiles();
+            var WINDIR = Components.classes["@mozilla.org/process/environment;1"].getService(Components.interfaces.nsIEnvironment).get("WINDIR");
+            var file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
+            file.initWithPath(WINDIR+'\\System32\\spool\\drivers\\color');
+            var children = file.directoryEntries;
+            var listed = false;
+            while (children.hasMoreElements()) {
+                var child = children.getNext().QueryInterface(Components.interfaces.nsILocalFile);
+                if (child.isDirectory() || !/\.ic[cm]$/i.test(child.leafName))
+                    continue;
+                var item = dd.appendItem(child.leafName, child.path);
+                item.isDynamic = true;
+                if (child.path == pref) {
+                    listed = true;
+                    dd.selectedItem = item;
+                }
+            }
+            
+            if (pref == "") {
+                dd.selectedIndex = 0; // No profile
+            } else if (!listed) {
+                file.initWithPath(pref);
+                var item = dd.appendItem(file.leafName, file.path);
+                item.isDynamic = true;
+                dd.selectedItem = item;
+            }
+        };
+        
+        ImageTweak.ShowProfileFilepicker = function() {
+            const nsIFilePicker = Components.interfaces.nsIFilePicker;
+            var filePicker = Components.classes["@mozilla.org/filepicker;1"].createInstance(nsIFilePicker);
+            filePicker.init(window, "Select the color profile to use", nsIFilePicker.modeOpen);
+            filePicker.appendFilter("Color profiles (.icm, .icc)", "*.icm; *.icc");
+            var rv = filePicker.show();
+            if (rv == nsIFilePicker.returnOK || rv == nsIFilePicker.returnReplace) {
+                var dd = $("color_profile_dropdown");
+                $("colormanagement_profile").value = filePicker.file.path;
+                ImageTweak.PopulateProfiles();
+            }            
         };
     ]]></script>
     <prefpane label="&pref.prefpane.label;" image="chrome://imagetweak/skin/imagetweak48.png" onpaneload="ImageTweak.InitPrefPane()">
@@ -69,7 +129,12 @@
             <preference instantApply="true" id="imagetweak_legacyscrolling" name="extensions.imagetweak.legacyscrolling" type="bool"/>
             <preference instantApply="true" id="imagetweak_contextmenu" name="extensions.imagetweak.contextmenu" type="int"/>
             <preference instantApply="true" id="imagetweak_resamplingalgorithm" name="extensions.imagetweak.resamplingalgorithm" type="int"/>
+            <preference instantApply="true" id="imagetweak_colormanagement_mode" name="gfx.color_management.mode" type="int"/>
+            <preference instantApply="true" id="imagetweak_colormanagement_profile" name="gfx.color_management.display_profile" type="string"/>
         </preferences>
+        <commandset>
+            <command id="cmd_showprofilefilepicker" oncommand="ImageTweak.ShowProfileFilepicker();"/>
+        </commandset>
         <vbox>
             <hbox>
                 <groupbox>
@@ -113,6 +178,19 @@
                             </radiogroup>
                         </vbox>
                     </hbox>
+                    <separator flex="1"/>
+                    <label value="Color management"/>
+                    <menulist preference="imagetweak_colormanagement_profile" id="imagetweak_color_profile_dropdown"
+                        onsyncfrompreference="">
+                        <menupopup id="imagetweak_color_profile_popup">
+                            <menuitem label="No profile" value="" />
+                            <menuitem label="Load from file..." command="cmd_showprofilefilepicker" />
+                            <menuseparator/>
+                        </menupopup>
+                    </menulist>
+                    <checkbox preference="imagetweak_colormanagement_mode" id="imagetweak_colormanagement_mode_checkbox" label="Assume sRGB for untagged elements" tooltiptext="Apply color management to all elements by assuming that elements lacking an explicit profile are in the sRGB color space." 
+                        onsynctopreference="return this.checked ? 1 : 2;"
+                        onsyncfrompreference="return $('colormanagement_mode').value == 1;" />
                     <separator flex="1"/>
                     <checkbox preference="imagetweak_contentdetectable" label="&pref.contentdetectable.label;" tooltiptext="&pref.contentdetectable.tooltip;"/>
                 </groupbox>
