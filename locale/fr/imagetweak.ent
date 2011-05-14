@@ -20,6 +20,7 @@
 <!ENTITY pref.startfromtopleft.label "Mettre l'image dans le coin supérieur gauche">
 <!ENTITY pref.contentdetectable.label "Notifier les sites Web">
 <!ENTITY pref.bgcolor.tooltip "Réglez la couleur d'arrière-plan utilisée lors de l'affichage d'images">
+<!ENTITY pref.bordercolor.tooltip "Set the color of the border around images (CSS color or percentage, 0&#37; being black and 100&#37; being white). If empty disables the border.">
 <!ENTITY pref.autoresize.tooltip "Redimensionner Automatiquement les images trop grandes pour les adapter à la fenêtre lors du chargement">
 <!ENTITY pref.clip_movement.tooltip "Permettre le déplacement de l'image seulement dans la fenêtre">
 <!ENTITY pref.zoomexp.tooltip "Facteur du pas de zoom (200&#37; signifie le double / réduire de moitié à chaque pas)">
@@ -33,7 +34,27 @@
 <!ENTITY pref.invertmousewheel.tooltip "Inverser la direction de la molette de la souris pour le défilement du zoom">
 <!ENTITY pref.invertkeyboard.tooltip "Inverser les touches de direction pour le défilement">
 <!ENTITY pref.startfromtopleft.tooltip "Mettre l'image dans le coin supérieur gauche lorsque elle est plus grande que la page">
+<!ENTITY pref.contentdetectable.tooltip "Tell websites that this browser has a builtin image viewer">
+<!ENTITY pref.pressf1forhelp.label "Press F1 to display the online help">
 <!ENTITY about.window.title "À propos d'ImageTweak">
 <!ENTITY pref.mousewheel.label "Molette de la souris">
+<!ENTITY pref.mousewheel.new.label "wheel to scroll, ctrl+wheel to zoom">
+<!ENTITY pref.mousewheel.new.tooltip "Default Firefox behaviour of the mouse wheel">
+<!ENTITY pref.mousewheel.legacy.label "ctrl+wheel to scroll, wheel to zoom">
+<!ENTITY pref.mousewheel.legacy.tooltip "Alternate mouse wheel behaviour, used in ImageTweak prior to version 0.17">
+<!ENTITY pref.contextmenu.label "Enable context menu">
+<!ENTITY pref.contextmenu.tooltip "Enable the ImageTweak context menu that allows executing common operations on images">
+<!ENTITY pref.resamplingalgorithm.label "Image resampling algorithm">
+<!ENTITY pref.resamplingalgorithm.nearestneighbor.label "Nearest neighbor">
+<!ENTITY pref.resamplingalgorithm.nearestneighbor.tooltip "Fast, low quality">
+<!ENTITY pref.resamplingalgorithm.bilinear.label "Bilinear">
+<!ENTITY pref.resamplingalgorithm.bilinear.tooltip "Slighlty slower than nearest neighbor, good quality">
+<!ENTITY contextmenu.fit.label "Fit image to screen">
+<!ENTITY contextmenu.fill.label "Fill screen">
+<!ENTITY contextmenu.unscaled.label "100&#37;">
 <!ENTITY contextmenu.zoomin.label "Zoomer">
 <!ENTITY contextmenu.zoomout.label "Dézoomer">
+<!ENTITY contextmenu.rotateclock.label "Rotate clockwise">
+<!ENTITY contextmenu.rotatecounter.label "Rotate counterclockwise">
+<!ENTITY contextmenu.options.label "ImageTweak options...">
+<!ENTITY contextmenu.userguide.label "ImageTweak user guide">

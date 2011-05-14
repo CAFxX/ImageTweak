@@ -1,14 +1,60 @@
 <!ENTITY pref.window.title "Параметри ImageTweak">
 <!ENTITY pref.prefpane.label "Параметри відображення зображення">
 <!ENTITY pref.bgcolor.label "Колір фону:">
+<!ENTITY pref.bordercolor.label "Border color">
 <!ENTITY pref.autoresize.label "Автоматично змінювати розмір зображення при завантажені">
+<!ENTITY pref.clip_movement.label "Clip image movement range">
 <!ENTITY pref.zoomexp.label "Масштаб (&#37;)">
+<!ENTITY pref.zoomonpointer.label "Zoom on mouse pointer">
+<!ENTITY pref.zoomtype.label "Enabled zoom types">
 <!ENTITY pref.zoomtype.default.label "Типовий тип масштабування">
 <!ENTITY pref.zoomtype.full.label "Вписати у вікно">
 <!ENTITY pref.zoomtype.fill.label "Заповнити вікно">
 <!ENTITY pref.zoomtype.free.label "Довільний режим">
 <!ENTITY pref.zoomtype.unscaled.label "1:1">
+<!ENTITY pref.shortcut.label "Enabled shortcuts (ctrl+rightclick)">
 <!ENTITY pref.shortcut.img.label "Зображення (IMG)">
 <!ENTITY pref.shortcut.bg.label "Фон">
+<!ENTITY pref.invertmousewheel.label "Invert the mousewheel zoom direction">
+<!ENTITY pref.invertkeyboard.label "Invert the keyboard navigation">
+<!ENTITY pref.startfromtopleft.label "Place image at top left">
+<!ENTITY pref.contentdetectable.label "Notify websites">
+<!ENTITY pref.bgcolor.tooltip "Set the background color used when displaying images (CSS color or percentage, 0&#37; being black and 100&#37; being white)">
+<!ENTITY pref.bordercolor.tooltip "Set the color of the border around images (CSS color or percentage, 0&#37; being black and 100&#37; being white). If empty disables the border.">
+<!ENTITY pref.autoresize.tooltip "Automatically resize images bigger than the window to fit upon loading">
+<!ENTITY pref.clip_movement.tooltip "Allow the image to be moved only within the window">
+<!ENTITY pref.zoomexp.tooltip "Zoom step factor (200&#37; means to double/halve at each step)">
+<!ENTITY pref.zoomonpointer.tooltip "Zoom towards the mouse pointer when using the scrollwheel">
+<!ENTITY pref.zoomtype.full.tooltip "Enable the fit-to-window view when double-clicking">
+<!ENTITY pref.zoomtype.fill.tooltip "Enable the fill window view when double-clicking">
+<!ENTITY pref.zoomtype.free.tooltip "Enable the free view (zoomable and draggable) when double-clicking">
+<!ENTITY pref.zoomtype.unscaled.tooltip "Enable the unscaled view when double-clicking">
+<!ENTITY pref.shortcut.img.tooltip "Enable the shortcut for images used in web pages">
+<!ENTITY pref.shortcut.bg.tooltip "Enable the shortcut for backgrounds used in web pages">
+<!ENTITY pref.invertmousewheel.tooltip "Invert the mouse wheel scrolling direction for zooming">
+<!ENTITY pref.invertkeyboard.tooltip "Invert the arrow keys direction for scrolling">
+<!ENTITY pref.startfromtopleft.tooltip "Place the image at the top left when it is bigger than the window">
+<!ENTITY pref.contentdetectable.tooltip "Tell websites that this browser has a builtin image viewer">
 <!ENTITY pref.pressf1forhelp.label "Натисніть F1 для відображення онлайнової довідки.">
 <!ENTITY about.window.title "Про ImageTweak">
+<!ENTITY pref.mousewheel.label "Mouse wheel">
+<!ENTITY pref.mousewheel.new.label "wheel to scroll, ctrl+wheel to zoom">
+<!ENTITY pref.mousewheel.new.tooltip "Default Firefox behaviour of the mouse wheel">
+<!ENTITY pref.mousewheel.legacy.label "ctrl+wheel to scroll, wheel to zoom">
+<!ENTITY pref.mousewheel.legacy.tooltip "Alternate mouse wheel behaviour, used in ImageTweak prior to version 0.17">
+<!ENTITY pref.contextmenu.label "Enable context menu">
+<!ENTITY pref.contextmenu.tooltip "Enable the ImageTweak context menu that allows executing common operations on images">
+<!ENTITY pref.resamplingalgorithm.label "Image resampling algorithm">
+<!ENTITY pref.resamplingalgorithm.nearestneighbor.label "Nearest neighbor">
+<!ENTITY pref.resamplingalgorithm.nearestneighbor.tooltip "Fast, low quality">
+<!ENTITY pref.resamplingalgorithm.bilinear.label "Bilinear">
+<!ENTITY pref.resamplingalgorithm.bilinear.tooltip "Slighlty slower than nearest neighbor, good quality">
+<!ENTITY contextmenu.fit.label "Fit image to screen">
+<!ENTITY contextmenu.fill.label "Fill screen">
+<!ENTITY contextmenu.unscaled.label "100&#37;">
+<!ENTITY contextmenu.zoomin.label "Zoom in">
+<!ENTITY contextmenu.zoomout.label "Zoom out">
+<!ENTITY contextmenu.rotateclock.label "Rotate clockwise">
+<!ENTITY contextmenu.rotatecounter.label "Rotate counterclockwise">
+<!ENTITY contextmenu.options.label "ImageTweak параметри…">
+<!ENTITY contextmenu.userguide.label "ImageTweak user guide">

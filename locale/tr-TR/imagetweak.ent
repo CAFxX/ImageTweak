@@ -1,6 +1,7 @@
 <!ENTITY pref.window.title "ImageTweak - Seçenekleri">
 <!ENTITY pref.prefpane.label "Resim gösterme seçenekleri">
 <!ENTITY pref.bgcolor.label "Arkaplan rengi">
+<!ENTITY pref.bordercolor.label "Border color">
 <!ENTITY pref.autoresize.label "Başlangıçta resimleri otomatik boyutlandır">
 <!ENTITY pref.clip_movement.label "Resmin hareket alanını sabitle">
 <!ENTITY pref.zoomexp.label "Yakınlaştırma ölçeği (&#37;)">
@@ -17,7 +18,9 @@
 <!ENTITY pref.invertmousewheel.label "Fare tekerleğinde yakınlaştırma yönünü ters çevir">
 <!ENTITY pref.invertkeyboard.label "Klavye gezintisinde yönü ters çevir">
 <!ENTITY pref.startfromtopleft.label "Resmi üst sola yerleştir">
+<!ENTITY pref.contentdetectable.label "Notify websites">
 <!ENTITY pref.bgcolor.tooltip "Resimler gösterilirken arkaplan rengini belirtir.">
+<!ENTITY pref.bordercolor.tooltip "Set the color of the border around images (CSS color or percentage, 0&#37; being black and 100&#37; being white). If empty disables the border.">
 <!ENTITY pref.autoresize.tooltip "Pencereden daha büyük resimleri otomatik boyutlandırır.">
 <!ENTITY pref.clip_movement.tooltip "Resmin sadece pencere içindeyken sabitlenmesini sağlar.">
 <!ENTITY pref.zoomexp.tooltip "Yakınlaştırma adımının ölçeği (&#37;200, her adımda iki katına/yarı yarıya yakınlaştırmayı ifade eder).">
@@ -34,4 +37,24 @@
 <!ENTITY pref.contentdetectable.tooltip "Tell websites that this browser has a builtin image viewer">
 <!ENTITY pref.pressf1forhelp.label "Çevrimiçi yardım için (F1)">
 <!ENTITY about.window.title "ImageTweak - Hakkında">
-
+<!ENTITY pref.mousewheel.label "Mouse wheel">
+<!ENTITY pref.mousewheel.new.label "wheel to scroll, ctrl+wheel to zoom">
+<!ENTITY pref.mousewheel.new.tooltip "Default Firefox behaviour of the mouse wheel">
+<!ENTITY pref.mousewheel.legacy.label "ctrl+wheel to scroll, wheel to zoom">
+<!ENTITY pref.mousewheel.legacy.tooltip "Alternate mouse wheel behaviour, used in ImageTweak prior to version 0.17">
+<!ENTITY pref.contextmenu.label "Enable context menu">
+<!ENTITY pref.contextmenu.tooltip "Enable the ImageTweak context menu that allows executing common operations on images">
+<!ENTITY pref.resamplingalgorithm.label "Image resampling algorithm">
+<!ENTITY pref.resamplingalgorithm.nearestneighbor.label "Nearest neighbor">
+<!ENTITY pref.resamplingalgorithm.nearestneighbor.tooltip "Fast, low quality">
+<!ENTITY pref.resamplingalgorithm.bilinear.label "Bilinear">
+<!ENTITY pref.resamplingalgorithm.bilinear.tooltip "Slighlty slower than nearest neighbor, good quality">
+<!ENTITY contextmenu.fit.label "Fit image to screen">
+<!ENTITY contextmenu.fill.label "Fill screen">
+<!ENTITY contextmenu.unscaled.label "100&#37;">
+<!ENTITY contextmenu.zoomin.label "Zoom in">
+<!ENTITY contextmenu.zoomout.label "Zoom out">
+<!ENTITY contextmenu.rotateclock.label "Rotate clockwise">
+<!ENTITY contextmenu.rotatecounter.label "Rotate counterclockwise">
+<!ENTITY contextmenu.options.label "ImageTweak options...">
+<!ENTITY contextmenu.userguide.label "ImageTweak user guide">

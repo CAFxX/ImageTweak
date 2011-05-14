@@ -1,6 +1,7 @@
 <!ENTITY pref.window.title "ImageTweak - オプション">
 <!ENTITY pref.prefpane.label "画像表示オプション">
 <!ENTITY pref.bgcolor.label "背景色">
+<!ENTITY pref.bordercolor.label "Border color">
 <!ENTITY pref.autoresize.label "読み込み時に画像を自動リサイズする">
 <!ENTITY pref.clip_movement.label "画像の移動範囲を制限する">
 <!ENTITY pref.zoomexp.label "拡大係数 (&#37;)">
@@ -17,7 +18,9 @@
 <!ENTITY pref.invertmousewheel.label "マウスホイールの拡大方向を反転する">
 <!ENTITY pref.invertkeyboard.label "キーボードナビゲーションを反転する">
 <!ENTITY pref.startfromtopleft.label "画像を左上に配置する">
+<!ENTITY pref.contentdetectable.label "Notify websites">
 <!ENTITY pref.bgcolor.tooltip "画像を表示する時に利用する背景色を設定します">
+<!ENTITY pref.bordercolor.tooltip "Set the color of the border around images (CSS color or percentage, 0&#37; being black and 100&#37; being white). If empty disables the border.">
 <!ENTITY pref.autoresize.tooltip "読み込みの際にウィンドウよりも大きな画像が収まるよう自動リサイズします">
 <!ENTITY pref.clip_movement.tooltip "画像をウィンドウ内部でのみ動かすようにします">
 <!ENTITY pref.zoomexp.tooltip "拡大段階係数 (200&#37; は段階ごとに二倍・半分にすることを意味します)">
@@ -31,5 +34,27 @@
 <!ENTITY pref.invertmousewheel.tooltip "拡大に関するマウスホイールのスクロール方向を反転します">
 <!ENTITY pref.invertkeyboard.tooltip "スクロールに関する矢印キーの方向を反転します">
 <!ENTITY pref.startfromtopleft.tooltip "ウィンドウより大きな画像を左上に配置します">
+<!ENTITY pref.contentdetectable.tooltip "Tell websites that this browser has a builtin image viewer">
 <!ENTITY pref.pressf1forhelp.label "F1 を押してオンラインヘルプを表示">
 <!ENTITY about.window.title "ImageTweak について">
+<!ENTITY pref.mousewheel.label "Mouse wheel">
+<!ENTITY pref.mousewheel.new.label "wheel to scroll, ctrl+wheel to zoom">
+<!ENTITY pref.mousewheel.new.tooltip "Default Firefox behaviour of the mouse wheel">
+<!ENTITY pref.mousewheel.legacy.label "ctrl+wheel to scroll, wheel to zoom">
+<!ENTITY pref.mousewheel.legacy.tooltip "Alternate mouse wheel behaviour, used in ImageTweak prior to version 0.17">
+<!ENTITY pref.contextmenu.label "Enable context menu">
+<!ENTITY pref.contextmenu.tooltip "Enable the ImageTweak context menu that allows executing common operations on images">
+<!ENTITY pref.resamplingalgorithm.label "Image resampling algorithm">
+<!ENTITY pref.resamplingalgorithm.nearestneighbor.label "Nearest neighbor">
+<!ENTITY pref.resamplingalgorithm.nearestneighbor.tooltip "Fast, low quality">
+<!ENTITY pref.resamplingalgorithm.bilinear.label "Bilinear">
+<!ENTITY pref.resamplingalgorithm.bilinear.tooltip "Slighlty slower than nearest neighbor, good quality">
+<!ENTITY contextmenu.fit.label "Fit image to screen">
+<!ENTITY contextmenu.fill.label "Fill screen">
+<!ENTITY contextmenu.unscaled.label "100&#37;">
+<!ENTITY contextmenu.zoomin.label "Zoom in">
+<!ENTITY contextmenu.zoomout.label "Zoom out">
+<!ENTITY contextmenu.rotateclock.label "Rotate clockwise">
+<!ENTITY contextmenu.rotatecounter.label "Rotate counterclockwise">
+<!ENTITY contextmenu.options.label "ImageTweak options...">
+<!ENTITY contextmenu.userguide.label "ImageTweak user guide">
