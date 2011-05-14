@@ -179,16 +179,16 @@
                         </vbox>
                     </hbox>
                     <separator flex="1"/>
-                    <label value="Color management"/>
+                    <label value="&pref.colormanagement.label;"/>
                     <menulist preference="imagetweak_colormanagement_profile" id="imagetweak_color_profile_dropdown"
                         onsyncfrompreference="">
                         <menupopup id="imagetweak_color_profile_popup">
-                            <menuitem label="No profile" value="" />
-                            <menuitem label="Load from file..." command="cmd_showprofilefilepicker" />
+                            <menuitem label="&pref.colormanagement.noprofile.label;" value="" />
+                            <menuitem label="&pref.colormanagement.loadfile.label;" command="cmd_showprofilefilepicker" />
                             <menuseparator/>
                         </menupopup>
                     </menulist>
-                    <checkbox preference="imagetweak_colormanagement_mode" id="imagetweak_colormanagement_mode_checkbox" label="Assume sRGB for untagged elements" tooltiptext="Apply color management to all elements by assuming that elements lacking an explicit profile are in the sRGB color space." 
+                    <checkbox preference="imagetweak_colormanagement_mode" id="imagetweak_colormanagement_mode_checkbox" label="&pref.colormanagement.assumesrgb.label;" tooltiptext="&pref.colormanagement.assumesrgb.tooltip;" 
                         onsynctopreference="return this.checked ? 1 : 2;"
                         onsyncfrompreference="return $('colormanagement_mode').value == 1;" />
                     <separator flex="1"/>

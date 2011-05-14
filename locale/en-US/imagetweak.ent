@@ -58,3 +58,9 @@
 <!ENTITY contextmenu.rotatecounter.label "Rotate counterclockwise">
 <!ENTITY contextmenu.options.label "ImageTweak options...">
 <!ENTITY contextmenu.userguide.label "ImageTweak user guide">
+
+<!ENTITY pref.colormanagement.label "Color management">
+<!ENTITY pref.colormanagement.noprofile.label "Disabled">
+<!ENTITY pref.colormanagement.loadfile.label "Load monitor profile from file...">
+<!ENTITY pref.colormanagement.assumesrgb.label "Assume sRGB for untagged elements">
+<!ENTITY pref.colormanagement.assumesrgb.tooltip "Apply color management to all elements by assuming that elements lacking an explicit profile are in the sRGB color space.">
