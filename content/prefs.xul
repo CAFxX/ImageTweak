@@ -65,19 +65,21 @@
             
             ImageTweak.RemoveProfiles();
             var WINDIR = Components.classes["@mozilla.org/process/environment;1"].getService(Components.interfaces.nsIEnvironment).get("WINDIR");
-            var file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
-            file.initWithPath(WINDIR+'\\System32\\spool\\drivers\\color');
-            var children = file.directoryEntries;
-            var listed = false;
-            while (children.hasMoreElements()) {
-                var child = children.getNext().QueryInterface(Components.interfaces.nsILocalFile);
-                if (child.isDirectory() || !/\.ic[cm]$/i.test(child.leafName))
-                    continue;
-                var item = dd.appendItem(child.leafName, child.path);
-                item.isDynamic = true;
-                if (child.path == pref) {
-                    listed = true;
-                    dd.selectedItem = item;
+            if (WINDIR) {
+                var file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
+                file.initWithPath(WINDIR+'\\System32\\spool\\drivers\\color');
+                var children = file.directoryEntries;
+                var listed = false;
+                while (children.hasMoreElements()) {
+                    var child = children.getNext().QueryInterface(Components.interfaces.nsILocalFile);
+                    if (child.isDirectory() || !/\.ic[cm]$/i.test(child.leafName))
+                        continue;
+                    var item = dd.appendItem(child.leafName, child.path);
+                    item.isDynamic = true;
+                    if (child.path == pref) {
+                        listed = true;
+                        dd.selectedItem = item;
+                    }
                 }
             }
             
