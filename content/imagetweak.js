@@ -609,7 +609,8 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
     var hImageTweak = this;
     if ( this.Inited ) {
         // go fullscreen if needed
-        window.fullScreen = ImageTweak.pref.AutomaticFullScreen && this.Document instanceof ImageDocument;
+        if (ImageTweak.pref.AutomaticFullScreen)
+            window.fullScreen = this.Document instanceof ImageDocument;
     } else if ( ( this.Document instanceof ImageDocument ) === false ) {
         // not a standalone image! so, what? let's plug in our supa-dupa source image click handler
         this.addEventListener( this.Document, 'click', function(e) hImageTweak.RegularDocumentOnMouseClick(e), false );
