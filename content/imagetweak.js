@@ -638,6 +638,8 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
         this.Browser = gBrowser.getBrowserForDocument( this.Window.top.document );
         this.BrowserAutoscroll = this.Browser.getAttribute("autoscroll");
         this.Browser.setAttribute("autoscroll", "false");
+        // disable known incompatible extensions on this document
+        this.Document.body.setAttribute("disableGrabAndDrag", "true");
         // document styles
         this.Document.body.style.overflow = "hidden";
         this.Document.body.style.width = "100%";
