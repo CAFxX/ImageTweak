@@ -10,7 +10,7 @@
 		<em:homepageURL>http://cafxx.strayorange.com/ImageTweak</em:homepageURL>
 		<em:aboutURL>chrome://imagetweak/content/about.xul</em:aboutURL>
 		<em:optionsURL>chrome://imagetweak/content/prefs.xul</em:optionsURL>
-		<em:iconURL>chrome://imagetweak/skin/imagetweak32.png</em:iconURL>
+		<em:iconURL>chrome://imagetweak/skin/imagetweak48.png</em:iconURL>
 		<em:targetApplication>
 			<Description>
 				<!-- Firefox/Iceweasel -->
