@@ -1,4 +1,5 @@
-# ImageTweak ![ImageTweak icon](https://github.com/CAFxX/ImageTweak/raw/master/skin/imagetweak128.png)
+![ImageTweak icon](https://github.com/CAFxX/ImageTweak/raw/master/skin/imagetweak128.png)
+# ImageTweak 
 Mozilla Firefox add-on for improving the image viewing UX 
 
 [Homepage](http://cafxx.strayorange.com/ImageTweak) - 
