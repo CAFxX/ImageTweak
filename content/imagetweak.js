@@ -641,9 +641,7 @@ ImageTweak.prototype.addEventListener = function addEventListener(target, eventN
 ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
     var hImageTweak = this;
     if ( this.Inited ) {
-        // go fullscreen if needed
-        if (ImageTweak.pref.AutomaticFullScreen)
-            window.fullScreen = this.Document instanceof ImageDocument; // FIXME
+        // nothing to do here
 	} else if ( !this.IsImageTweakDocument() ) { 
         // not a standalone image! so, what? let's plug in our supa-dupa source image click handler
         this.addEventListener( this.Document, 'click', function(e) hImageTweak.RegularDocumentOnMouseClick(e), false );
@@ -807,7 +805,6 @@ ImageTweak.log = function(msg) {
         ResamplingAlgorithm:            { pref: "extensions.imagetweak.resamplingalgorithm"                                                                  },
         ContextMenu:                    { pref: "extensions.imagetweak.contextmenu"                                                                          },
         LoggingEnabled:                 { pref: "extensions.imagetweak.loggingenabled"                                                                       },
-        AutomaticFullScreen:            { pref: "extensions.imagetweak.automaticfullscreen"                                                                  },
         Version:                        { pref: "extensions.imagetweak.version"                                                                              }
     };
 

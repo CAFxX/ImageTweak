@@ -22,7 +22,6 @@ pref("extensions.imagetweak.contentdetectable", true);
 pref("extensions.imagetweak.resamplingalgorithm", 1);
 pref("extensions.imagetweak.contextmenu", 1);
 pref("extensions.imagetweak.loggingenabled", false);
-pref("extensions.imagetweak.automaticfullscreen", false);
 pref("extensions.imagetweak.shadowcolor", "");
 pref("extensions.imagetweak.version", "");
 
