@@ -32,10 +32,10 @@ function ImageTweak( hWindow ) {
     this.Window = hWindow; // reference to the current window
     this.Document = this.Window.document; // reference to the current document
     this.Listeners = [];
-    if ( this.Document instanceof ImageDocument ) {
+	if ( this.IsImageTweakDocument() ) {
         this.Browser = gBrowser.getBrowserForDocument( this.Document );
         this.BrowserAutoscroll = false;
-        this.Image = this.Document.images[0]; // in a nsImageDocument there's just one image
+		this.Image = this.Document.querySelector("img, video");
         this.Zoom = 1; // start zoom = 1 (will be overriden later)
         this.ZoomMax = null; // max zoom to be used (to keep the image smaller than ImageMax pixel)
         this.CenterX = 0; // coordinates of the center of the image on the screen
@@ -66,10 +66,10 @@ ImageTweak.prototype.ScreenCoordinates = function ScreenCoordinates() {
     var Coordinates = { CurZoom: null, CurX: null, CurY: null, imgWidth: null, imgHeight: null, imgLeft: null, imgTop: null };
 
     Coordinates.CurZoom     = ImageTweak.ZoomTypes[this.ZoomType].zoom.call(this);
-    var boundingWidth       = ImageTweak.clip( this.RotatedWidth() * Coordinates.CurZoom,             1, ImageTweak.ImageMax );
-    var boundingHeight      = ImageTweak.clip( this.RotatedHeight() * Coordinates.CurZoom,            1, ImageTweak.ImageMax );
-    Coordinates.imgWidth    = ImageTweak.clip( this.Image.naturalWidth * Coordinates.CurZoom,         1, ImageTweak.ImageMax );
-    Coordinates.imgHeight   = ImageTweak.clip( this.Image.naturalHeight * Coordinates.CurZoom,        1, ImageTweak.ImageMax );
+    var boundingWidth       = ImageTweak.clip( this.RotatedWidth() * Coordinates.CurZoom,  1, ImageTweak.ImageMax );
+    var boundingHeight      = ImageTweak.clip( this.RotatedHeight() * Coordinates.CurZoom, 1, ImageTweak.ImageMax );
+    Coordinates.imgWidth    = ImageTweak.clip( this.NaturalWidth() * Coordinates.CurZoom,  1, ImageTweak.ImageMax );
+    Coordinates.imgHeight   = ImageTweak.clip( this.NaturalHeight() * Coordinates.CurZoom, 1, ImageTweak.ImageMax );
 
     switch (this.ZoomType) {
         case "free":
@@ -146,9 +146,15 @@ ImageTweak.prototype.Repaint = function Repaint() {
     if ( this.Image.style.cssText != CurCSS ) 
         this.Image.style.cssText = CurCSS;
 
-    var CurTitleZoom = ", " + Math.round( Coordinates.CurZoom * 100 ) + "%";
-    var CurTitleRotation = ( this.Rotation % 360 != 0 ? ", " + ( ( ( this.Rotation % 360 ) + 360 ) % 360 ) + "°" : "" );
-    var CurTitle = this.Title.substring( 0, this.Title.lastIndexOf( ")" ) ) + CurTitleZoom + CurTitleRotation + ")";
+	var CurTitleZoom = Math.round( Coordinates.CurZoom * 100 ) + "%";
+	var CurTitleRotation = ( this.Rotation % 360 != 0 ? ", " + ( ( ( this.Rotation % 360 ) + 360 ) % 360 ) + "°" : "" );
+	var CurTitle;
+	if ( this.IsImageDocument() ) 
+		CurTitle = this.Title.substring( 0, this.Title.lastIndexOf( ")" ) ) + ", " + CurTitleZoom + CurTitleRotation + ")";
+	else if ( this.IsVideoDocument() && ( CurTitleZoom != "100%" || CurTitleRotation != "" ) )
+		CurTitle = this.Title + " (" + CurTitleZoom + CurTitleRotation + ")";
+	else
+		CurTitle = this.Title;
     if ( this.Document.title != CurTitle ) 
         this.Document.title = CurTitle;
 
@@ -277,6 +283,7 @@ ImageTweak.prototype.OnKeyPress = function OnKeyPress(event) {
     if ( event.ctrlKey ) {
         switch (event.keyCode + event.charCode) {
             case 43: /* plus sign */                this.PerformZoom( 1 ); break;
+			case 61: /* equal sign */               this.PerformZoom( 1 ); break;
             case 45: /* minus sign */               this.PerformZoom( -1 ); break;
             case 48: /* 0 */                        this.DefaultZoomType(); break;
             case 97: /* a */                        break; // prevent the select all command
@@ -356,10 +363,12 @@ ImageTweak.prototype.OnSelection = function OnSelection(event) {
 };
 
 ImageTweak.prototype.OnLoad = function OnLoad(event) {
-    if (this.ContinuousTone == null)
-        this.ContinuousTone = ImageTweak.isContinuousToneImage(this.Image);
-    if (this.Transparent == null)
-        this.Transparent = ImageTweak.isTransparentImage(this.Image);
+    if (this.IsImageDocument()) {
+        if (this.ContinuousTone == null)
+            this.ContinuousTone = ImageTweak.isContinuousToneImage(this.Image);
+        if (this.Transparent == null)
+            this.Transparent = ImageTweak.isTransparentImage(this.Image);
+    }
     this.Repaint();
 };
 
@@ -375,9 +384,11 @@ ImageTweak.prototype.PerformMove = function PerformMove(dx, dy) {
 
 // zooms the image, optionally around a pivot point (px, py)
 ImageTweak.prototype.PerformZoom = function PerformZoom(delta, px, py) {
+    ImageTweak.log("PerformZoom: "+delta+" "+px+" "+py);
     this.ConvertToFree();
     var imgZoomFactor = ImageTweak.pref.ZoomFactor;
     var imgZoomNew = Math.pow(imgZoomFactor, (delta + Math.log(this.Zoom) / Math.log(imgZoomFactor)));
+    ImageTweak.log(this.Zoom+" "+imgZoomNew+" "+this.ZoomMax);
     if ( imgZoomNew <= this.ZoomMax ) {
         var imgZoomRatio = imgZoomNew / this.Zoom;
         var imgZoomDirRatio = imgZoomRatio * ( delta < 0 ? -1 : 1 );
@@ -473,13 +484,27 @@ ImageTweak.prototype.ConvertToFree = function ConvertToFree() {
 // return the width of the bounding box for the (optionally) rotated image
 ImageTweak.prototype.RotatedWidth = function RotatedWidth() {
     var RotationRadians = this.Rotation / 180 * Math.PI;
-    return this.Image.naturalWidth * Math.abs( Math.cos( RotationRadians ) ) + this.Image.naturalHeight * Math.abs( Math.sin( RotationRadians ) );
+    return this.NaturalWidth() * Math.abs( Math.cos( RotationRadians ) ) + this.NaturalHeight() * Math.abs( Math.sin( RotationRadians ) );
 };
 
 // return the height of the bounding box for the (optionally) rotated image
 ImageTweak.prototype.RotatedHeight = function RotatedHeight() {
     var RotationRadians = this.Rotation / 180 * Math.PI;
-    return this.Image.naturalWidth * Math.abs( Math.sin( RotationRadians ) ) + this.Image.naturalHeight * Math.abs( Math.cos( RotationRadians ) );
+    return this.NaturalWidth() * Math.abs( Math.sin( RotationRadians ) ) + this.NaturalHeight() * Math.abs( Math.cos( RotationRadians ) );
+};
+
+ImageTweak.prototype.NaturalWidth = function NaturalWidth() {
+	if ( this.IsImageDocument() )
+		return this.Image.naturalWidth;
+	else if ( this.IsVideoDocument() )
+		return this.Image.videoWidth;
+};
+
+ImageTweak.prototype.NaturalHeight = function NaturalHeight() {
+	if ( this.IsImageDocument() )
+		return this.Image.naturalHeight;
+	else if ( this.IsVideoDocument() )
+		return this.Image.videoHeight;
 };
 
 // return the normalized zoom ratio for fit
@@ -533,6 +558,18 @@ ImageTweak.prototype.PerformZoomTypeSwitch = function PerformZoomTypeSwitch( img
     ImageTweak.log(imgZoomType);
     this.ZoomType = imgZoomType;
     this.Repaint();
+};
+
+ImageTweak.prototype.IsImageDocument = function IsImageDocument() {	return this.Document instanceof ImageDocument;
+	return this.Document instanceof ImageDocument;
+};
+
+ImageTweak.prototype.IsVideoDocument = function IsVideoDocument() {
+	return this.Document instanceof HTMLDocument && this.Document.body.children.length == 1 && this.Document.body.children[0] instanceof HTMLVideoElement;
+};
+
+ImageTweak.prototype.IsImageTweakDocument = function IsImageTweakDocument() {
+	return this.IsImageDocument() || this.IsVideoDocument();
 };
 
 ImageTweak.prototype.GetResamplingAlgorithm = function GetResamplingAlgorithm() {
@@ -611,7 +648,7 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
         // go fullscreen if needed
         if (ImageTweak.pref.AutomaticFullScreen)
             window.fullScreen = this.Document instanceof ImageDocument; // FIXME
-    } else if ( ( this.Document instanceof ImageDocument ) === false ) {
+	} else if ( !this.IsImageTweakDocument() ) { 
         // not a standalone image! so, what? let's plug in our supa-dupa source image click handler
         this.addEventListener( this.Document, 'click', function(e) hImageTweak.RegularDocumentOnMouseClick(e), false );
         this.addEventListener( this.Document, 'dblclick', function(e) hImageTweak.RegularDocumentOnMouseDoubleClick(e), false );
@@ -620,7 +657,7 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
         if (ImageTweak.pref.ContentDetectable)
             this.InjectContentFlag();
         this.Inited = true;
-    } else if ( !this.Image.naturalWidth ) {
+    } else if ( !this.NaturalWidth() ) {
         // we are not ready yet... keep waiting...
         if ( this.TimeoutHandle != null )
             clearTimeout( this.TimeoutHandle );
@@ -628,12 +665,14 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
             hImageTweak.PluginEventListeners(); 
         }, 50 );
     } else {
-        // disable all automatic_image_resizing-related behaviours
-        this.Document.restoreImage();
-        this.Image.removeEventListener( 'click', this.Document, false );
-        this.Image.removeEventListener( 'resize', this.Document, false );
-        this.Image.removeEventListener( 'keypress', this.Document, false );
-        this.Image.style.cursor = "auto";
+		if ( this.IsImageDocument() ) {
+	        // disable all automatic_image_resizing-related behaviours
+			this.Document.restoreImage();
+			this.Image.removeEventListener( 'click', this.Document, false );
+			this.Image.removeEventListener( 'resize', this.Document, false );
+			this.Image.removeEventListener( 'keypress', this.Document, false );
+			this.Image.style.cursor = "auto";
+		}
         // disable autoscrolling for this window
         this.Browser = gBrowser.getBrowserForDocument( this.Window.top.document );
         this.BrowserAutoscroll = this.Browser.getAttribute("autoscroll");
@@ -649,7 +688,7 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
         this.Document.body.style.MozUserSelect = "-moz-none";
         // initialize our structure
         this.Title = this.Document.title; // this has to go after disabling automatic_image_resizing
-        this.ZoomMax = Math.min( ImageTweak.ImageMax / this.Image.naturalWidth, ImageTweak.ImageMax / this.Image.naturalHeight );
+		this.ZoomMax = Math.min( ImageTweak.ImageMax / this.NaturalWidth(), ImageTweak.ImageMax / this.NaturalHeight() );
         this.DefaultZoomType();
         // plugin our (supa-dupa!) event listeners
         this.addEventListener( this.Document, 'DOMMouseScroll', function(e) hImageTweak.OnMouseWheel(e), false );
@@ -672,6 +711,7 @@ ImageTweak.prototype.PluginEventListeners = function PluginEventListeners() {
         // create an empty canvas to be used as drag image
         var empty = ImageTweak.getCanvas( this.Document, 1, 1 );
         this.EmptyDragImage = empty.canvas;
+
         // go! go! go!
         this.Inited = true;
         this.Repaint();
@@ -909,6 +949,11 @@ ImageTweak.ScrollInterval = 15;
 // maximum image size in pixel supported by gecko: it's actually higher than 
 // this, but strange things start to happen somewhere past this mark
 ImageTweak.ImageMax = 65535; 
+
+ImageTweak.log = function log(msg) {
+    var consoleService = Components.classes["@mozilla.org/consoleservice;1"].getService(Components.interfaces.nsIConsoleService);
+    consoleService.logStringMessage(msg);
+};
 
 // ImageTweak.entryPoint is the global entry point for imagetweak
 // This function is called from overlay.xul

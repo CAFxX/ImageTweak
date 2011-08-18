@@ -14,7 +14,7 @@
 			if (contextMenu) {
 				contextMenu.addEventListener("popupshowing", function(event) {
 					var IT = ImageTweak.enabled(document.popupNode.ownerDocument);
-					if (IT && !gContextMenu.onImage && ImageTweak.pref.ContextMenu) {
+					if (IT && !(gContextMenu.onImage || gContextMenu.onVideo) && ImageTweak.pref.ContextMenu) {
 						event.preventDefault();
 						ImageTweak.DelayedExecute(function() {
 							ImageTweak.showContextMenuForElement(IT.Image, event.screenX, event.screenY);
