@@ -5,7 +5,7 @@
 		<em:name>ImageTweak</em:name>
 		<em:type>2</em:type>
 		<em:version>0.23</em:version>
-		<em:description>Enhances your image viewing experience</em:description>
+		<em:description>Zoom and rotate images and videos</em:description>
 		<em:creator>CAFxX</em:creator>
 		<em:homepageURL>http://cafxx.strayorange.com/ImageTweak</em:homepageURL>
 		<em:aboutURL>chrome://imagetweak/content/about.xul</em:aboutURL>
