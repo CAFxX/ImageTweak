@@ -550,10 +550,8 @@ ImageTweak.prototype.PerformZoomTypeSwitch = function PerformZoomTypeSwitch( img
         imgZoomType = ImageTweak.ZoomTypes[ this.ZoomType ].next;
     if ( typeof SkipCondition == "undefined" )
         SkipCondition = false;
-    ImageTweak.log(imgZoomType + " " + SkipCondition);
     while ( imgZoomType != this.ZoomType && !( ImageTweak.ZoomTypes[ imgZoomType ].condition.call(this) || SkipCondition ) )
         imgZoomType = ImageTweak.ZoomTypes[ imgZoomType ].next;
-    ImageTweak.log(imgZoomType);
     this.ZoomType = imgZoomType;
     this.Repaint();
 };
@@ -951,7 +949,8 @@ ImageTweak.ImageMax = 65535;
 // ImageTweak.entryPoint is the global entry point for imagetweak
 // This function is called from overlay.xul
 ImageTweak.entryPoint = function() {
-    ImageTweak.log = Components.classes["@mozilla.org/consoleservice;1"].getService(Components.interfaces.nsIConsoleService).logStringMessage;
+    var ConsoleService = Cc["@mozilla.org/consoleservice;1"].getService(Ci.nsIConsoleService);
+    ImageTweak.log = function(msg) ConsoleService.logStringMessage(msg);
     gBrowser.addEventListener("load", ImageTweak.startEventHandler, true);
     gBrowser.addEventListener("focus", ImageTweak.startEventHandler, true);
     gBrowser.addEventListener("DOMContentLoaded", ImageTweak.startEventHandler, true);
