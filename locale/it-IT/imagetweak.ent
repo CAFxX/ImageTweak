@@ -58,9 +58,3 @@
 <!ENTITY contextmenu.rotatecounter.label "Ruota in senso antiorario">
 <!ENTITY contextmenu.options.label "Opzioni di ImageTweak…">
 <!ENTITY contextmenu.userguide.label "Guida utente di ImageTweak">
-
-<!ENTITY pref.colormanagement.label "Gestione dei colori">
-<!ENTITY pref.colormanagement.noprofile.label "Disattivata">
-<!ENTITY pref.colormanagement.loadfile.label "Carica profilo monitor da file...">
-<!ENTITY pref.colormanagement.assumesrgb.label "Interpreta come sRGB gli elementi senza profilo">
-<!ENTITY pref.colormanagement.assumesrgb.tooltip "Applica la gestione dei colori a tutti gli elementi, assumendo che quelli senza un profilo esplicito siano nello spazio colore sRGB.">
