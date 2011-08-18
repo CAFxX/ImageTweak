@@ -384,11 +384,9 @@ ImageTweak.prototype.PerformMove = function PerformMove(dx, dy) {
 
 // zooms the image, optionally around a pivot point (px, py)
 ImageTweak.prototype.PerformZoom = function PerformZoom(delta, px, py) {
-    ImageTweak.log("PerformZoom: "+delta+" "+px+" "+py);
     this.ConvertToFree();
     var imgZoomFactor = ImageTweak.pref.ZoomFactor;
     var imgZoomNew = Math.pow(imgZoomFactor, (delta + Math.log(this.Zoom) / Math.log(imgZoomFactor)));
-    ImageTweak.log(this.Zoom+" "+imgZoomNew+" "+this.ZoomMax);
     if ( imgZoomNew <= this.ZoomMax ) {
         var imgZoomRatio = imgZoomNew / this.Zoom;
         var imgZoomDirRatio = imgZoomRatio * ( delta < 0 ? -1 : 1 );
@@ -950,14 +948,10 @@ ImageTweak.ScrollInterval = 15;
 // this, but strange things start to happen somewhere past this mark
 ImageTweak.ImageMax = 65535; 
 
-ImageTweak.log = function log(msg) {
-    var consoleService = Components.classes["@mozilla.org/consoleservice;1"].getService(Components.interfaces.nsIConsoleService);
-    consoleService.logStringMessage(msg);
-};
-
 // ImageTweak.entryPoint is the global entry point for imagetweak
 // This function is called from overlay.xul
 ImageTweak.entryPoint = function() {
+    ImageTweak.log = Components.classes["@mozilla.org/consoleservice;1"].getService(Components.interfaces.nsIConsoleService).logStringMessage;
     gBrowser.addEventListener("load", ImageTweak.startEventHandler, true);
     gBrowser.addEventListener("focus", ImageTweak.startEventHandler, true);
     gBrowser.addEventListener("DOMContentLoaded", ImageTweak.startEventHandler, true);
