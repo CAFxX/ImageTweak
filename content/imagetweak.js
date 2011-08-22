@@ -31,7 +31,7 @@ if (Cu != Components.utils)
 function ImageTweak( hWindow ) {
     this.Window = hWindow; // reference to the current window
     this.Document = this.Window.document; // reference to the current document
-    this.Listeners = [];
+    this.Listeners = []; // references to the listeners (so that we can unplug them)
 	if ( this.IsImageTweakDocument() ) {
         this.Browser = gBrowser.getBrowserForDocument( this.Document );
         this.BrowserAutoscroll = false;
@@ -57,6 +57,7 @@ function ImageTweak( hWindow ) {
         this.ContinuousTone = null; // is the image continuous tone?
         this.Transparent = null;  // is the image transparent?
         this.InvertResamplingAlgorithm = false; // override the normal resampling algorithm
+        this.IgnoreCustomBackground = false; // temporarily override the custom background
         this.EmptyDragImage = null; // used to prevent the drag image from appearing in fx4
     }
 };
@@ -131,7 +132,7 @@ ImageTweak.prototype.Repaint = function Repaint() {
                     "height:"   + Math.round(Coordinates.imgHeight)     + "px;" +
                     "-moz-transform: rotate(" + this.Rotation + "deg);";
 	
-	if (ImageTweak.pref.ShadowColor != "" && !this.Transparent) {
+	if (ImageTweak.pref.ShadowColor != "" && !this.Transparent && !this.IgnoreCustomBackground) {
 		var ShadowBlur = Math.sqrt( this.Window.innerWidth * this.Window.innerHeight ) * 0.025; // magic
 		CurCSS += "-moz-box-shadow: 0 0 " + Math.round(ShadowBlur) + "px 0 " + ImageTweak.pref.ShadowColor + ";";
 		CurCSS += "background-color: " + ImageTweak.pref.ShadowColor + ";";
@@ -158,7 +159,10 @@ ImageTweak.prototype.Repaint = function Repaint() {
     if ( this.Document.title != CurTitle ) 
         this.Document.title = CurTitle;
 
-    this.Document.body.style.backgroundColor = ImageTweak.pref.BackgroundColor;
+    if ( !this.IgnoreCustomBackground )
+        this.Document.body.style.backgroundColor = ImageTweak.pref.BackgroundColor;
+    else
+        this.Document.body.style.backgroundColor = "";
 
     if ( this.Scrolling )
         this.StartScroll();
@@ -307,6 +311,7 @@ ImageTweak.prototype.OnKeyPress = function OnKeyPress(event) {
             case 52: /* 4 */                        this.PerformZoomTypeSwitch( "free", true ); break;
             case 34: /* page down */                this.PerformMove( 0, -MovePageDelta ); break;
             case 33: /* page up */                  this.PerformMove( 0, MovePageDelta ); break;
+            case 98: /* b */                        this.SwitchBackground(); break;
             case 112: /* p */                       this.SwitchResamplingAlgorithm(); break;
             default:                                return;
         }
@@ -561,6 +566,7 @@ ImageTweak.prototype.IsImageDocument = function IsImageDocument() {	return this.
 };
 
 ImageTweak.prototype.IsVideoDocument = function IsVideoDocument() {
+    // FIXME instanceof VideoDocument?
 	return this.Document instanceof HTMLDocument && this.Document.body.children.length == 1 && this.Document.body.children[0] instanceof HTMLVideoElement;
 };
 
@@ -584,6 +590,12 @@ ImageTweak.prototype.GetResamplingAlgorithm = function GetResamplingAlgorithm() 
 // override the default resampling algorithm
 ImageTweak.prototype.SwitchResamplingAlgorithm = function SwitchResamplingAlgorithm() {
     this.InvertResamplingAlgorithm = !this.InvertResamplingAlgorithm;
+    this.Repaint();
+};
+
+// override the custom background
+ImageTweak.prototype.SwitchBackground = function SwitchBackground() {
+    this.IgnoreCustomBackground = !this.IgnoreCustomBackground;
     this.Repaint();
 };
 
