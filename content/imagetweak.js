@@ -570,6 +570,7 @@ ImageTweak.prototype.IsVideoDocument = function IsVideoDocument() {
 	return this.Document instanceof HTMLDocument && this.Document.body.children.length == 1 && this.Document.body.children[0] instanceof HTMLVideoElement;
 };
 
+// returns true if the current document will be handled by ImageTweak
 ImageTweak.prototype.IsImageTweakDocument = function IsImageTweakDocument() {
 	return this.IsImageDocument() || this.IsVideoDocument();
 };
@@ -600,6 +601,7 @@ ImageTweak.prototype.SwitchBackground = function SwitchBackground() {
 };
 
 // get the image URL of the element (either image or background)
+// FIXME: handle videos
 ImageTweak.prototype.GetElementImageURL = function GetElementImageURL(elem) {
     if ( elem.tagName == "IMG" && ImageTweak.pref.ShortcutImg )
         return elem.src;
@@ -958,8 +960,10 @@ ImageTweak.ImageMax = 65535;
 // ImageTweak.entryPoint is the global entry point for imagetweak
 // This function is called from overlay.xul
 ImageTweak.entryPoint = function() {
+    // get the console for debugging purposes
     var ConsoleService = Cc["@mozilla.org/consoleservice;1"].getService(Ci.nsIConsoleService);
     ImageTweak.log = function(msg) ConsoleService.logStringMessage(msg);
+    // plug in the global event handlers
     gBrowser.addEventListener("load", ImageTweak.startEventHandler, true);
     gBrowser.addEventListener("focus", ImageTweak.startEventHandler, true);
     gBrowser.addEventListener("DOMContentLoaded", ImageTweak.startEventHandler, true);

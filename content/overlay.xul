@@ -35,7 +35,11 @@
 			utils.sendMouseEvent("contextmenu", rect.left, rect.top, 2, 1, 0);
 			document.getElementById("contentAreaContextMenu").moveTo(x, y);
 		};
-				
+
+        // ask firefox to hide the location bar in welcome.htm
+        if (typeof XULBrowserWindow == "object" && XULBrowserWindow.inContentWhitelist instanceof Array)
+            XULBrowserWindow.inContentWhitelist.push("chrome://imagetweak/content/welcome.htm");
+
     ]]></script>
     <popup id="contentAreaContextMenu">
 		<menuitem class="menuitem-iconic" image="chrome://imagetweak/skin/search.png" id="context-imagetweak-fit" insertbefore="context-copyimage-contents" label="&contextmenu.fit.label;" oncommand="gContextMenu.target.ownerDocument.ImageTweak.PerformZoomTypeSwitch('fit', true);"/>
