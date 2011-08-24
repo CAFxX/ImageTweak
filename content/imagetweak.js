@@ -620,7 +620,7 @@ ImageTweak.prototype.ClearSelection = function ClearSelection() {
 // http://stackoverflow.com/questions/5089941/allow-content-documents-to-detect-my-firefox-addon
 ImageTweak.prototype.InjectContentFlag = function InjectContentFlag() {
     try {
-        var s = new Cu.Sandbox(this.Window);
+        var s = new Cu.Sandbox( this.Window, { sandboxName: "ImageTweak content injector" } );
         s.window = this.Window;
         Cu.evalInSandbox(
             "try { window.wrappedJSObject.navigator.__defineGetter__('imageViewer', function() true); } catch(e) {}", 
