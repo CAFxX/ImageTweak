@@ -1,6 +1,7 @@
 <!ENTITY pref.window.title "ImageTweak - 选项">
 <!ENTITY pref.prefpane.label "图片显示设置">
 <!ENTITY pref.bgcolor.label "背景颜色">
+<!ENTITY pref.bordercolor.label "边框颜色">
 <!ENTITY pref.autoresize.label "载入时自动缩放图片">
 <!ENTITY pref.clip_movement.label "限制图片移动范围">
 <!ENTITY pref.zoomexp.label "缩放系数(&#37;)">
@@ -17,7 +18,9 @@
 <!ENTITY pref.invertmousewheel.label "反向鼠标滚轮缩放方向">
 <!ENTITY pref.invertkeyboard.label "反向键盘控制">
 <!ENTITY pref.startfromtopleft.label "对齐图片到左上方">
-<!ENTITY pref.bgcolor.tooltip "设置查看图片时的背景颜色">
+<!ENTITY pref.contentdetectable.label "通知网站">
+<!ENTITY pref.bgcolor.tooltip "设置查看图片时的背景颜色(CSS颜色或百分比, 0&#37;表示黑色, 100&#37;表示白色)">
+<!ENTITY pref.bordercolor.tooltip "设置查看图片时的边框颜色(CSS颜色或百分比, 0&#37;表示黑色, 100&#37;表示白色), 留空则禁用边框.">
 <!ENTITY pref.autoresize.tooltip "载入时自动缩放大于窗口的图片">
 <!ENTITY pref.clip_movement.tooltip "使图片只允许在窗口内移动">
 <!ENTITY pref.zoomexp.tooltip "每次缩放系数(200&#37; 表示每次放大两倍或缩小一半)">
@@ -31,5 +34,27 @@
 <!ENTITY pref.invertmousewheel.tooltip "反向鼠标滚轮缩放的方向">
 <!ENTITY pref.invertkeyboard.tooltip "反向键盘方向键的滚动方向">
 <!ENTITY pref.startfromtopleft.tooltip "当图片大于窗口时对齐到左上方">
+<!ENTITY pref.contentdetectable.tooltip "告知网站此浏览器有内置的图片查看器">
 <!ENTITY pref.pressf1forhelp.label "按下 F1 显示在线帮助">
 <!ENTITY about.window.title "ImageTweak - 关于">
+<!ENTITY pref.mousewheel.label "鼠标滚轮">
+<!ENTITY pref.mousewheel.new.label "使用滚轮进行滚动, ctrl+滚轮进行缩放">
+<!ENTITY pref.mousewheel.new.tooltip "Firefox默认滚轮设置">
+<!ENTITY pref.mousewheel.legacy.label "ctrl+滚轮进行滚动, 滚轮进行缩放">
+<!ENTITY pref.mousewheel.legacy.tooltip "ImageTweak 0.17版之前使用的设置">
+<!ENTITY pref.contextmenu.label "启用上下文菜单">
+<!ENTITY pref.contextmenu.tooltip "启用ImageTweak的上下文菜单以方便的在图片上执行操作">
+<!ENTITY pref.resamplingalgorithm.label "图片重新采样算法">
+<!ENTITY pref.resamplingalgorithm.nearestneighbor.label "Nearest neighbor">
+<!ENTITY pref.resamplingalgorithm.nearestneighbor.tooltip "速度快, 质量低">
+<!ENTITY pref.resamplingalgorithm.bilinear.label "Bilinear">
+<!ENTITY pref.resamplingalgorithm.bilinear.tooltip "比nearest neighbor略慢, 质量高">
+<!ENTITY contextmenu.fit.label "图片适合屏幕">
+<!ENTITY contextmenu.fill.label "填充屏幕">
+<!ENTITY contextmenu.unscaled.label "100&#37;">
+<!ENTITY contextmenu.zoomin.label "放大">
+<!ENTITY contextmenu.zoomout.label "缩小">
+<!ENTITY contextmenu.rotateclock.label "顺时针旋转">
+<!ENTITY contextmenu.rotatecounter.label "逆时针旋转">
+<!ENTITY contextmenu.options.label "ImageTweak 选项">
+<!ENTITY contextmenu.userguide.label "ImageTweak 用户指南">
