@@ -4,7 +4,7 @@
 		<em:id>{DB2EA31C-58F5-48b7-8D60-CB0739257904}</em:id>
 		<em:name>ImageTweak</em:name>
 		<em:type>2</em:type>
-		<em:version>0.23</em:version>
+		<em:version>0.24</em:version>
 		<em:description>Zoom and rotate images and videos</em:description>
 		<em:creator>CAFxX</em:creator>
 		<em:homepageURL>http://cafxx.strayorange.com/ImageTweak</em:homepageURL>
@@ -25,7 +25,7 @@
 				<!-- SeaMonkey -->
 				<em:id>{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}</em:id>
 				<em:minVersion>2.0</em:minVersion>
-				<em:maxVersion>2.1b1</em:maxVersion>
+				<em:maxVersion>2.*</em:maxVersion>
 			</Description>
 		</em:targetApplication> 		
 	</Description>
