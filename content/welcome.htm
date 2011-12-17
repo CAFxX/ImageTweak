@@ -123,7 +123,7 @@
                 -moz-transition-duration: 0.5s;
                 box-shadow:#F80 25px 25px 100px, #08F -25px -25px 100px;
             }
-            span {
+            .kbd {
                 width:14px;
                 margin:-1px 0;
                 text-align:center;
@@ -146,6 +146,17 @@
                 
                 document.getElementById("title").innerHTML += " " + document.ImageTweak.Global.Version;
                 document.title += " " + document.ImageTweak.Global.Version;
+                
+                var req = new XMLHttpRequest();
+                req.open("GET", "https://blockexplorer.com/q/getreceivedbyaddress/1265ciMoFwnX4y4gGxXNGkiD7Qu24oYSqw", true);
+                req.onreadystatechange = function() {
+                    if (req.readyState != 4) 
+                        return;
+                    var rcv = parseFloat(req.responseText);
+                    if (typeof(rcv) == "number" && rcv > 0)
+                        document.getElementById("donation-counter").innerHTML = " (" + (rcv*1000) + " mBTC received!)";
+                };
+                req.send(null);
             }, false);
         </script>
         <link rel="shortcut icon" href="chrome://imagetweak/skin/imagetweak16.png" />
@@ -156,7 +167,7 @@
             <h1 id="title">ImageTweak</h1>
             <img id="icon" src="chrome://imagetweak/skin/imagetweak128.png" alt="">
             <p>To start the image viewer right click on an image and select "View image" (the same can be done for videos supported natively by Firefox).</p>
-            <p>The box on the right is a demonstration of the ImageTweak viewer. Place the mouse pointer over it and zoom the image by using ctrl+mousewheel or ctrl+<span>-</span>/<span>+</span>. Rotate the image by using ctrl+alt+mousewheel or <span>&lt;</span>/<span>&gt;</span>. Press <span>1</span> to have the image fitted to the box, <span>2</span> to have it fill the box.</p>
+            <p>The box on the right is a demonstration of the ImageTweak viewer. Place the mouse pointer over it and zoom the image by using ctrl+mousewheel or ctrl+<span class="kbd">-</span>/<span class="kbd">+</span>. Rotate the image by using ctrl+alt+mousewheel or <span class="kbd">&lt;</span>/<span class="kbd">&gt;</span>. Press <span class="kbd">1</span> to have the image fitted to the box, <span class="kbd">2</span> to have it fill the box.</p>
             <p>To learn more about what you can do with ImageTweak, read the <a href="https://github.com/CAFxX/ImageTweak/wiki/ImageTweak-user-guide">user guide</a>. To customize your settings, edit your <a onclick="openDialog('chrome://imagetweak/content/prefs.xul', '', 'centerscreen,dialog=no,chrome,resizable,dependent,modal');">ImageTweak preferences</a>.</p>
             <div id="help">
                 <h2>You can help!</h2>
@@ -167,7 +178,7 @@
                 </div><div>
                     <h3>Develop</h3>Feel like writing some code? <a href="https://github.com/CAFxX/ImageTweak">Send patches and pull requests on GitHub</a>.
                 </div><div>
-                    <h3>Donate</h3><a href="https://addons.mozilla.org/en-US/firefox/addon/imagetweak/">Donate on mozilla.org</a> or <a href="bitcoin:1265ciMoFwnX4y4gGxXNGkiD7Qu24oYSqw?label=ImageTweak">send bitcoins</a> to 12&#8203;65&#8203;ci&#8203;Mo&#8203;Fw&#8203;nX&#8203;4y&#8203;4g&#8203;Gx&#8203;XN&#8203;Gk&#8203;iD&#8203;7Q&#8203;u2&#8203;4o&#8203;YS&#8203;qw.
+                    <h3>Donate</h3><a href="https://addons.mozilla.org/en-US/firefox/addon/imagetweak/">Donate on mozilla.org</a> or <a href="bitcoin:1265ciMoFwnX4y4gGxXNGkiD7Qu24oYSqw?label=ImageTweak">send bitcoins</a> to 12&#8203;65&#8203;ci&#8203;Mo&#8203;Fw&#8203;nX&#8203;4y&#8203;4g&#8203;Gx&#8203;XN&#8203;Gk&#8203;iD&#8203;7Q&#8203;u2&#8203;4o&#8203;YS&#8203;qw<span id="donation-counter"></span>.
                 </div>
             </div>
         </div>
