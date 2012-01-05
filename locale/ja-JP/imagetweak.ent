@@ -1,14 +1,14 @@
 <!ENTITY pref.window.title "ImageTweak - オプション">
 <!ENTITY pref.prefpane.label "画像表示オプション">
 <!ENTITY pref.bgcolor.label "背景色">
-<!ENTITY pref.bordercolor.label "Border color">
+<!ENTITY pref.bordercolor.label "外枠色">
 <!ENTITY pref.autoresize.label "読み込み時に画像を自動リサイズする">
 <!ENTITY pref.clip_movement.label "画像の移動範囲を制限する">
 <!ENTITY pref.zoomexp.label "拡大係数 (&#37;)">
 <!ENTITY pref.zoomonpointer.label "マウスポインタに拡大する">
-<!ENTITY pref.zoomtype.label "利用可能な拡大形式">
+<!ENTITY pref.zoomtype.label "有効にする拡大形式">
 <!ENTITY pref.zoomtype.default.label "既定の拡大形式">
-<!ENTITY pref.zoomtype.full.label "ウィンドウに合わせる">
+<!ENTITY pref.zoomtype.full.label "ウィンドウ内に収める">
 <!ENTITY pref.zoomtype.fill.label "ウィンドウをいっぱいにする">
 <!ENTITY pref.zoomtype.free.label "自由様式">
 <!ENTITY pref.zoomtype.unscaled.label "1:1">
@@ -20,32 +20,41 @@
 <!ENTITY pref.startfromtopleft.label "画像を左上に配置する">
 <!ENTITY pref.contentdetectable.label "Notify websites">
 <!ENTITY pref.bgcolor.tooltip "画像を表示する時に利用する背景色を設定します">
-<!ENTITY pref.bordercolor.tooltip "Set the color of the border around images (CSS color or percentage, 0&#37; being black and 100&#37; being white). If empty disables the border.">
-<!ENTITY pref.autoresize.tooltip "読み込みの際にウィンドウよりも大きな画像が収まるよう自動リサイズします">
+<!ENTITY pref.bordercolor.tooltip "画像の外周に表示する枠の色を設定します。空欄なら外枠は表示しません。">
+<!ENTITY pref.autoresize.tooltip "読み込みの際にウィンドウよりも大きな画像がウィンドウに収まるよう自動リサイズします">
 <!ENTITY pref.clip_movement.tooltip "画像をウィンドウ内部でのみ動かすようにします">
-<!ENTITY pref.zoomexp.tooltip "拡大段階係数 (200&#37; は段階ごとに二倍・半分にすることを意味します)">
+<!ENTITY pref.zoomexp.tooltip "拡大段階係数 (200&#37; なら段階ごとに2倍・半分にすることを意味します)">
 <!ENTITY pref.zoomonpointer.tooltip "スクロールホイール利用時にマウスポインタに向かって拡大します">
-<!ENTITY pref.zoomtype.full.tooltip "ダブルクリック時にウィンドウに合わせた表示を有効にします">
+<!ENTITY pref.zoomtype.full.tooltip "ダブルクリック時にウィンドウ内に収める表示を有効にします">
 <!ENTITY pref.zoomtype.fill.tooltip "ダブルクリック時にウィンドウいっぱいの表示を有効にします">
 <!ENTITY pref.zoomtype.free.tooltip "ダブルクリック時に拡大とドラッグが可能な自由表示を有効にします">
 <!ENTITY pref.zoomtype.unscaled.tooltip "ダブルクリック時の元倍率表示を有効にします">
-<!ENTITY pref.shortcut.img.tooltip "ウェブページの中で利用されている画像に関してショートカットを有効にします">
-<!ENTITY pref.shortcut.bg.tooltip "ウェブページの中で利用されている背景に関してショートカットを有効にします">
+<!ENTITY pref.shortcut.img.tooltip "ウェブページの中で利用されている画像から直接ImageTweakを起動するショートカットを有効にします">
+<!ENTITY pref.shortcut.bg.tooltip "ウェブページの中で利用されている背景から直接ImageTweakを起動するショートカットを有効にします">
 <!ENTITY pref.invertmousewheel.tooltip "拡大に関するマウスホイールのスクロール方向を反転します">
 <!ENTITY pref.invertkeyboard.tooltip "スクロールに関する矢印キーの方向を反転します">
 <!ENTITY pref.startfromtopleft.tooltip "ウィンドウより大きな画像を左上に配置します">
-<!ENTITY pref.contentdetectable.tooltip "Tell websites that this browser has a builtin image viewer">
+<!ENTITY pref.contentdetectable.tooltip "画像ビューアが使えるブラウザであることを、ウェブサイトに知らせます">
 <!ENTITY pref.pressf1forhelp.label "F1 を押してオンラインヘルプを表示">
 <!ENTITY about.window.title "ImageTweak について">
-<!ENTITY pref.mousewheel.label "Mouse wheel">
-<!ENTITY pref.mousewheel.new.label "wheel to scroll, ctrl+wheel to zoom">
-<!ENTITY pref.mousewheel.new.tooltip "Default Firefox behaviour of the mouse wheel">
-<!ENTITY pref.mousewheel.legacy.label "ctrl+wheel to scroll, wheel to zoom">
-<!ENTITY pref.mousewheel.legacy.tooltip "Alternate mouse wheel behaviour, used in ImageTweak prior to version 0.17">
-<!ENTITY pref.contextmenu.label "Enable context menu">
-<!ENTITY pref.contextmenu.tooltip "Enable the ImageTweak context menu that allows executing common operations on images">
-<!ENTITY pref.resamplingalgorithm.label "Image resampling algorithm">
-<!ENTITY pref.resamplingalgorithm.nearestneighbor.label "Nearest neighbor">
-<!ENTITY pref.resamplingalgorithm.nearestneighbor.tooltip "Fast, low quality">
-<!ENTITY pref.resamplingalgorithm.bilinear.label "Bilinear">
-<!ENTITY pref.resamplingalgorithm.bilinear.tooltip "Slighlty slower than nearest neighbor, good quality">
+<!ENTITY pref.mousewheel.label "マウスホイール">
+<!ENTITY pref.mousewheel.new.label "ホイールでスクロール、Ctrl+ホイールでズーム">
+<!ENTITY pref.mousewheel.new.tooltip "Firefoxの規定のホイール動作です">
+<!ENTITY pref.mousewheel.legacy.label "Ctrl+ホイールでスクロール、ホイールでズーム">
+<!ENTITY pref.mousewheel.legacy.tooltip "ImageTweak 0.17から使われているホイール動作です">
+<!ENTITY pref.contextmenu.label "コンテキストメニューを有効化">
+<!ENTITY pref.contextmenu.tooltip "画像を操作するためのコンテキストメニューを有効にします">
+<!ENTITY pref.resamplingalgorithm.label "画像処理アルゴリズム">
+<!ENTITY pref.resamplingalgorithm.nearestneighbor.label "最近傍補間">
+<!ENTITY pref.resamplingalgorithm.nearestneighbor.tooltip "速いけど品質は落ちます">
+<!ENTITY pref.resamplingalgorithm.bilinear.label "線形補間">
+<!ENTITY pref.resamplingalgorithm.bilinear.tooltip "最近傍補間よりやや遅いけど高品質です">
+<!ENTITY contextmenu.fit.label "画像をウィンドウ内に収める">
+<!ENTITY contextmenu.fill.label "画像をウィンドウいっぱいにする">
+<!ENTITY contextmenu.unscaled.label "100&#37;">
+<!ENTITY contextmenu.zoomin.label "拡大">
+<!ENTITY contextmenu.zoomout.label "縮小">
+<!ENTITY contextmenu.rotateclock.label "右回転">
+<!ENTITY contextmenu.rotatecounter.label "左回転">
+<!ENTITY contextmenu.options.label "ImageTweak オプション...">
+<!ENTITY contextmenu.userguide.label "ImageTweak ユーザーガイド">
