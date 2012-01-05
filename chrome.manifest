@@ -5,9 +5,9 @@ locale  imagetweak ar    locale/ar/
 locale  imagetweak de    locale/de/
 locale  imagetweak en-US locale/en-US/
 locale  imagetweak es-ES locale/es-ES/
-locale  imagetweak fi-FI locale/fi-FI/
+locale  imagetweak fi    locale/fi/
 locale  imagetweak fr    locale/fr/
-locale  imagetweak it-IT locale/it-IT/
+locale  imagetweak it    locale/it/
 locale  imagetweak ja-JP locale/ja-JP/
 locale  imagetweak nl    locale/nl/
 locale  imagetweak pl    locale/pl/
@@ -17,7 +17,7 @@ locale  imagetweak ru    locale/ru/
 locale  imagetweak sk-SK locale/sk-SK/
 locale  imagetweak sr    locale/sr/
 locale  imagetweak sv-SE locale/sv-SE/
-locale  imagetweak tr-TR locale/tr-TR/
-locale  imagetweak uk-UA locale/uk-UA/
+locale  imagetweak tr    locale/tr/
+locale  imagetweak uk    locale/uk/
 locale  imagetweak zh-CN locale/zh-CN/
 locale  imagetweak zh-TW locale/zh-TW/
