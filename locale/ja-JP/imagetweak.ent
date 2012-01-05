@@ -1,4 +1,4 @@
-<!ENTITY pref.window.title "ImageTweak - オプション">
+﻿<!ENTITY pref.window.title "ImageTweak - オプション">
 <!ENTITY pref.prefpane.label "画像表示オプション">
 <!ENTITY pref.bgcolor.label "背景色">
 <!ENTITY pref.bordercolor.label "外枠色">

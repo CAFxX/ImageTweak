@@ -1,4 +1,4 @@
-<!ENTITY pref.window.title "ImageTweak - Настройки">
+﻿<!ENTITY pref.window.title "ImageTweak - Настройки">
 <!ENTITY pref.prefpane.label "Настройки отображения изображения">
 <!ENTITY pref.bgcolor.label "Цвет фона">
 <!ENTITY pref.bordercolor.label "Цвет обводки">

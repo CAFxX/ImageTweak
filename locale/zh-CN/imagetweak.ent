@@ -1,4 +1,4 @@
-<!ENTITY pref.window.title "ImageTweak - 选项">
+﻿<!ENTITY pref.window.title "ImageTweak - 选项">
 <!ENTITY pref.prefpane.label "图片显示设置">
 <!ENTITY pref.bgcolor.label "背景颜色">
 <!ENTITY pref.bordercolor.label "边框颜色">
@@ -56,5 +56,5 @@
 <!ENTITY contextmenu.zoomout.label "缩小">
 <!ENTITY contextmenu.rotateclock.label "顺时针旋转">
 <!ENTITY contextmenu.rotatecounter.label "逆时针旋转">
-<!ENTITY contextmenu.options.label "ImageTweak 选项">
+<!ENTITY contextmenu.options.label "ImageTweak 选项...">
 <!ENTITY contextmenu.userguide.label "ImageTweak 用户指南">
