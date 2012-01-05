@@ -124,13 +124,13 @@ ImageTweak.prototype.ScreenCoordinates = function ScreenCoordinates() {
 ImageTweak.prototype.Repaint = function Repaint() {
     var Coordinates = this.ScreenCoordinates();
 
-	var CurCSS =    "position:absolute;" +
-                    "image-rendering:" + this.GetResamplingAlgorithm() + ";" +
-                    "left:"     + Math.round(Coordinates.imgLeft)       + "px;" +
-                    "top:"      + Math.round(Coordinates.imgTop)        + "px;" +
-                    "width:"    + Math.round(Coordinates.imgWidth)      + "px;" +
-                    "height:"   + Math.round(Coordinates.imgHeight)     + "px;" +
-                    "-moz-transform: rotate(" + this.Rotation + "deg);";
+	var CurCSS = "position:absolute;margin:0;padding:0;" +
+                     "image-rendering:" + this.GetResamplingAlgorithm() + ";" +
+                     "left:"     + Math.round(Coordinates.imgLeft)       + "px;" +
+                     "top:"      + Math.round(Coordinates.imgTop)        + "px;" +
+                     "width:"    + Math.round(Coordinates.imgWidth)      + "px;" +
+                     "height:"   + Math.round(Coordinates.imgHeight)     + "px;" +
+                     "-moz-transform: rotate(" + this.Rotation + "deg);";
 	
 	if (ImageTweak.pref.ShadowColor != "" && !this.Transparent && !this.IgnoreCustomBackground) {
 		var ShadowBlur = Math.sqrt( this.Window.innerWidth * this.Window.innerHeight ) * 0.025; // magic
