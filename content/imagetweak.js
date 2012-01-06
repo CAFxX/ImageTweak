@@ -623,7 +623,7 @@ ImageTweak.prototype.InjectContentFlag = function InjectContentFlag() {
         var s = new Cu.Sandbox( this.Window, { sandboxName: "ImageTweak content injector" } );
         s.window = this.Window;
         Cu.evalInSandbox(
-            "try { window.wrappedJSObject.navigator.__defineGetter__('imageViewer', function() true); } catch(e) {}", 
+            "try { Object.defineProperty(window.wrappedJSObject.navigator, 'imageViewer', { value:true, enumerable:true }); } catch(e) {}", 
             s
         );
         return true;
@@ -825,12 +825,15 @@ ImageTweak.log = function(msg) {
     ImageTweak.pref = {};
     for (var pref in preferences) {
         let id = pref;
-        ImageTweak.pref.__defineGetter__(pref, function() { 
-            var p = Application.prefs.getValue( preferences[id].pref, null );
-            return preferences[id].parse ? preferences[id].parse(p) : p;
-        });
-        ImageTweak.pref.__defineSetter__(pref, function(v) {
-            Application.prefs.setValue( preferences[id].pref, v );
+        Object.defineProperty(ImageTweak.pref, pref, {
+            get: function() { 
+                var p = Application.prefs.getValue( preferences[id].pref, null );
+                return preferences[id].parse ? preferences[id].parse(p) : p;
+            },
+            set: function(v) {
+                Application.prefs.setValue( preferences[id].pref, v );
+            },
+            enumerable: true
         });
     }
 })();
