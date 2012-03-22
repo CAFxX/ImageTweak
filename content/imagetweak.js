@@ -162,7 +162,7 @@ ImageTweak.prototype.Repaint = function Repaint() {
     if ( !this.IgnoreCustomBackground )
         this.Document.body.style.backgroundColor = ImageTweak.pref.BackgroundColor;
     else
-        this.Document.body.style.backgroundColor = "";
+        this.Document.body.style.backgroundColor = "#FFF";
 
     if ( this.Scrolling )
         this.StartScroll();
