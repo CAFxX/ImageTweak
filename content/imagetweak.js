@@ -35,7 +35,7 @@ function ImageTweak( hWindow ) {
 	if ( this.IsImageTweakDocument() ) {
         this.Browser = gBrowser.getBrowserForDocument( this.Document );
         this.BrowserAutoscroll = false;
-		this.Image = this.Document.querySelector("img, video");
+        this.Image = this.Document.querySelector("img, video");
         this.Zoom = 1; // start zoom = 1 (will be overriden later)
         this.ZoomMax = null; // max zoom to be used (to keep the image smaller than ImageMax pixel)
         this.CenterX = 0; // coordinates of the center of the image on the screen
@@ -124,45 +124,43 @@ ImageTweak.prototype.ScreenCoordinates = function ScreenCoordinates() {
 ImageTweak.prototype.Repaint = function Repaint() {
     var Coordinates = this.ScreenCoordinates();
 
-	var CurCSS = "position:absolute;margin:0;padding:0;" +
-                     "image-rendering:" + this.GetResamplingAlgorithm() + ";" +
-                     "left:"     + Math.round(Coordinates.imgLeft)       + "px;" +
-                     "top:"      + Math.round(Coordinates.imgTop)        + "px;" +
-                     "width:"    + Math.round(Coordinates.imgWidth)      + "px;" +
-                     "height:"   + Math.round(Coordinates.imgHeight)     + "px;" +
-                     "-moz-transform: rotate(" + this.Rotation + "deg);";
+    var CurCSS = "position:absolute;margin:0;padding:0;" +
+                 "image-rendering:" + this.GetResamplingAlgorithm() + ";" +
+                 "left:"     + Math.round(Coordinates.imgLeft)       + "px;" +
+                 "top:"      + Math.round(Coordinates.imgTop)        + "px;" +
+                 "width:"    + Math.round(Coordinates.imgWidth)      + "px;" +
+                 "height:"   + Math.round(Coordinates.imgHeight)     + "px;" +
+                 "-moz-transform: rotate(" + this.Rotation + "deg);";
 	
-	if (ImageTweak.pref.ShadowColor != "" && !this.Transparent && !this.IgnoreCustomBackground) {
-		var ShadowBlur = Math.sqrt( this.Window.innerWidth * this.Window.innerHeight ) * 0.025; // magic
-		CurCSS += "-moz-box-shadow: 0 0 " + Math.round(ShadowBlur) + "px 0 " + ImageTweak.pref.ShadowColor + ";";
-		CurCSS += "background-color: " + ImageTweak.pref.ShadowColor + ";";
-	}
+    if (ImageTweak.pref.ShadowColor != "" && !this.Transparent && !this.IgnoreCustomBackground) {
+        var ShadowBlur = Math.sqrt( this.Window.innerWidth * this.Window.innerHeight ) * 0.025; // magic
+        CurCSS += "-moz-box-shadow: 0 0 " + Math.round(ShadowBlur) + "px 0 " + ImageTweak.pref.ShadowColor + ";";
+        CurCSS += "background-color: " + ImageTweak.pref.ShadowColor + ";";
+    }
 	
-	if (ImageTweak.pref.BorderColor != "") {
+    if (ImageTweak.pref.BorderColor != "") {
         CurCSS += "border: 1px solid " + ImageTweak.pref.BorderColor + ";";
-	} else {
+    } else {
         CurCSS += "border: none;";
-	}
+    }
 			
+    this.Document.body.style.backgroundColor = this.IgnoreCustomBackground ? ImageTweak.pref.BrowserBackgroundColor : ImageTweak.pref.BackgroundColor;
+
     if ( this.Image.style.cssText != CurCSS ) 
         this.Image.style.cssText = CurCSS;
 
-	var CurTitleZoom = Math.round( Coordinates.CurZoom * 100 ) + "%";
-	var CurTitleRotation = ( this.Rotation % 360 != 0 ? ", " + ( ( ( this.Rotation % 360 ) + 360 ) % 360 ) + "°" : "" );
-	var CurTitle;
-	if ( this.IsImageDocument() ) 
-		CurTitle = this.Title.substring( 0, this.Title.lastIndexOf( ")" ) ) + ", " + CurTitleZoom + CurTitleRotation + ")";
-	else if ( this.IsVideoDocument() && ( CurTitleZoom != "100%" || CurTitleRotation != "" ) )
-		CurTitle = this.Title + " (" + CurTitleZoom + CurTitleRotation + ")";
-	else
-		CurTitle = this.Title;
+    // build and update the document title
+    var CurTitleZoom = Math.round( Coordinates.CurZoom * 100 ) + "%";
+    var CurTitleRotation = ( this.Rotation % 360 != 0 ? ", " + ( ( ( this.Rotation % 360 ) + 360 ) % 360 ) + "°" : "" );
+    var CurTitle;
+    if ( this.IsImageDocument() ) 
+        CurTitle = this.Title.substring( 0, this.Title.lastIndexOf( ")" ) ) + ", " + CurTitleZoom + CurTitleRotation + ")";
+    else if ( this.IsVideoDocument() && ( CurTitleZoom != "100%" || CurTitleRotation != "" ) )
+        CurTitle = this.Title + " (" + CurTitleZoom + CurTitleRotation + ")";
+    else
+        CurTitle = this.Title;
     if ( this.Document.title != CurTitle ) 
         this.Document.title = CurTitle;
-
-    if ( !this.IgnoreCustomBackground )
-        this.Document.body.style.backgroundColor = ImageTweak.pref.BackgroundColor;
-    else
-        this.Document.body.style.backgroundColor = "#FFF";
 
     if ( this.Scrolling )
         this.StartScroll();
@@ -804,6 +802,7 @@ ImageTweak.log = function(msg) {
         DefaultZoomType:                { pref: "extensions.imagetweak.zoomtype.default"                                                                     },
         ClipMovement:                   { pref: "extensions.imagetweak.clip_movement"                                                                        },
         BackgroundColor:                { pref: "extensions.imagetweak.bgcolor",                        parse: ImageTweak.parseColorExtended                 },
+        BrowserBackgroundColor:         { pref: "browser.display.background_color",                                                                          },
         BorderColor:                    { pref: "extensions.imagetweak.bordercolor",                    parse: ImageTweak.parseColorExtended                 },
         ShadowColor:                    { pref: "extensions.imagetweak.shadowcolor",                    parse: ImageTweak.parseColorExtended                 },
         ZoomFactor:                     { pref: "extensions.imagetweak.zoomexp2",                       parse: function(v) { return parseFloat(v)/100.0; }   },
