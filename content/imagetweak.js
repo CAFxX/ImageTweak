@@ -134,7 +134,7 @@ ImageTweak.prototype.Repaint = function Repaint() {
 	
     if (ImageTweak.pref.ShadowColor != "" && !this.Transparent && !this.IgnoreCustomBackground) {
         var ShadowBlur = Math.sqrt( this.Window.innerWidth * this.Window.innerHeight ) * 0.025; // magic
-        CurCSS += "-moz-box-shadow: 0 0 " + Math.round(ShadowBlur) + "px 0 " + ImageTweak.pref.ShadowColor + ";";
+        CurCSS += "box-shadow: 0 0 " + Math.round(ShadowBlur) + "px 0 " + ImageTweak.pref.ShadowColor + ";";
         CurCSS += "background-color: " + ImageTweak.pref.ShadowColor + ";";
     }
 	
