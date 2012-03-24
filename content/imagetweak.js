@@ -287,7 +287,7 @@ ImageTweak.prototype.OnKeyPress = function OnKeyPress(event) {
             case 43: /* plus sign */                this.PerformZoom( 1 ); break;
 			case 61: /* equal sign */               this.PerformZoom( 1 ); break;
             case 45: /* minus sign */               this.PerformZoom( -1 ); break;
-            case 48: /* 0 */                        this.DefaultZoomType(); break;
+            case 48: /* 0 */                        this.Rotation = 0; this.DefaultZoomType(); break;
             case 97: /* a */                        break; // prevent the select all command
             default:                                return;
         }
@@ -302,7 +302,7 @@ ImageTweak.prototype.OnKeyPress = function OnKeyPress(event) {
             case 45: /* minus sign */               this.PerformZoom( -1 ); break;
             case 60: /* < */                        this.PerformRotation( -90 ); break;
             case 62: /* > */                        this.PerformRotation( 90 ); break;
-            case 48: /* 0 */                        this.DefaultZoomType(); break;
+            case 48: /* 0 */                        this.Rotation = 0; this.DefaultZoomType(); break;
             case 49: /* 1 */                        this.PerformZoomTypeSwitch( "fit", true ); break;
             case 50: /* 2 */                        this.PerformZoomTypeSwitch( "fill", true ); break;
             case 51: /* 3 */                        this.PerformZoomTypeSwitch( "pixel", true ); break;
