@@ -933,6 +933,13 @@ ImageTweak.RepaintAll = function RepaintAll(url) {
     }, true);
 })();
 
+// logging facilities
+ImageTweak.console = Cc["@mozilla.org/consoleservice;1"].getService(Ci.nsIConsoleService);
+
+ImageTweak.prototype.Log = function Log(msg) { 
+    ImageTweak.console.logStringMessage( "ImageTweak " + arguments.callee.caller.name + ( typeof(msg) != "undefined" ? " " + msg : "" ) );
+};
+
 // the UUID of this extension
 ImageTweak.UUID = "{DB2EA31C-58F5-48b7-8D60-CB0739257904}";
 
