@@ -4,7 +4,7 @@
 		<em:id>{DB2EA31C-58F5-48b7-8D60-CB0739257904}</em:id>
 		<em:name>ImageTweak</em:name>
 		<em:type>2</em:type>
-		<em:version>0.24.1</em:version>
+		<em:version>0.25</em:version>
 		<em:description>Zoom and rotate images and videos</em:description>
 		<em:creator>CAFxX</em:creator>
 		<em:homepageURL>http://cafxx.strayorange.com/ImageTweak</em:homepageURL>
@@ -17,7 +17,7 @@
 				<!-- Firefox/Iceweasel -->
 				<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
 				<em:minVersion>13</em:minVersion>
-				<em:maxVersion>13.0.*</em:maxVersion>
+				<em:maxVersion>15.0a2</em:maxVersion>
 			</Description>
 		</em:targetApplication>
 		<em:targetApplication>
