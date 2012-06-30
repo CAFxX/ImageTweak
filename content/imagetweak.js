@@ -430,9 +430,6 @@ ImageTweak.prototype.StartScroll = function StartScroll(event) {
         if ( event ) {
             this.ClientXStart = event.clientX;
             this.ClientYStart = event.clientY;
-			ImageTweak.log(event);
-			ImageTweak.log(event.clientX);
-			ImageTweak.log(event.clientY);
             event.preventDefault();
         }
         if ( !this.ScrollIntervalHandle ) {
@@ -479,7 +476,6 @@ ImageTweak.prototype.PerformScroll = function PerformScroll(offset) {
     if ( this.Scrolling && this.ClientXStart != null ) {
         var ScaleFactor = ( ImageTweak.ScrollInterval + offset ) / ImageTweak.ScrollInterval * 0.1;
         this.PerformMove( ( this.ClientXStart - this.ClientXPrev ) * ScaleFactor, ( this.ClientYStart - this.ClientYPrev ) * ScaleFactor );
-		ImageTweak.log(this.ClientXStart + " " + this.ClientXPrev + " " + ScaleFactor + " " + offset + " " + ImageTweak.ScrollInterval);
     }
 };
 
@@ -977,9 +973,6 @@ ImageTweak.ImageMax = 65535;
 // ImageTweak.entryPoint is the global entry point for imagetweak
 // This function is called from overlay.xul
 ImageTweak.entryPoint = function() {
-    // get the console for debugging purposes
-    var ConsoleService = Cc["@mozilla.org/consoleservice;1"].getService(Ci.nsIConsoleService);
-    ImageTweak.log = function(msg) ConsoleService.logStringMessage(msg);
     // plug in the global event handlers
     gBrowser.addEventListener("load", ImageTweak.startEventHandler, true);
     gBrowser.addEventListener("focus", ImageTweak.startEventHandler, true);
