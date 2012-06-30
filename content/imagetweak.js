@@ -430,11 +430,15 @@ ImageTweak.prototype.StartScroll = function StartScroll(event) {
         if ( event ) {
             this.ClientXStart = event.clientX;
             this.ClientYStart = event.clientY;
+			ImageTweak.log(event);
+			ImageTweak.log(event.clientX);
+			ImageTweak.log(event.clientY);
             event.preventDefault();
         }
         if ( !this.ScrollIntervalHandle ) {
             var hImageTweak = this;
-            this.ScrollIntervalHandle = setInterval( function(offset) hImageTweak.PerformScroll(offset), ImageTweak.ScrollInterval );
+			// FIXME: replace the setInterval-based scrolling animation with something better
+            this.ScrollIntervalHandle = setInterval( function() hImageTweak.PerformScroll(0), ImageTweak.ScrollInterval );
         }
     } else {
         this.StopScroll();
@@ -475,6 +479,7 @@ ImageTweak.prototype.PerformScroll = function PerformScroll(offset) {
     if ( this.Scrolling && this.ClientXStart != null ) {
         var ScaleFactor = ( ImageTweak.ScrollInterval + offset ) / ImageTweak.ScrollInterval * 0.1;
         this.PerformMove( ( this.ClientXStart - this.ClientXPrev ) * ScaleFactor, ( this.ClientYStart - this.ClientYPrev ) * ScaleFactor );
+		ImageTweak.log(this.ClientXStart + " " + this.ClientXPrev + " " + ScaleFactor + " " + offset + " " + ImageTweak.ScrollInterval);
     }
 };
 
