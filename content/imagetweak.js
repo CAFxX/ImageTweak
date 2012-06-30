@@ -229,7 +229,7 @@ ImageTweak.prototype.OnMouseUp = function OnMouseUp(event) {
 };
 
 ImageTweak.prototype.OnMouseMove = function OnMouseMove(event) {
-    if ( event.ctrlKey && event.altKey && !this.Scrolling && !this.Dragging ) {
+    if ( event.ctrlKey && ( event.altKey || event.shiftKey ) && !this.Scrolling && !this.Dragging ) {
         if ( this.ClientXPivot == null && ImageTweak.pref.ZoomOnPointer ) {
             this.ClientXPivot = event.clientX;
             this.ClientYPivot = event.clientY;
@@ -237,16 +237,23 @@ ImageTweak.prototype.OnMouseMove = function OnMouseMove(event) {
             this.ClientXPivot = this.Window.innerWidth / 2;
             this.ClientYPivot = this.Window.innerHeight / 2;
         }
-        if ( event.shiftKey ) {
+        if ( event.shiftKey && event.altKey ) {
             this.PerformFreeZoomRotation( 
                 - ( event.clientY - this.ClientYPrev ) / this.Window.innerHeight * 10,
                 ( event.clientX - this.ClientXPrev ) / this.Window.innerWidth * 360,
                 this.ClientXPivot,
                 this.ClientYPivot
             );
-        } else {
+        } else if ( event.altKey ) {
             this.PerformRotation( ( event.clientX - this.ClientXPrev ) / this.Window.innerWidth * 360 );
-        }
+        } else if ( event.shiftKey ) {
+            this.PerformFreeZoomRotation( 
+                - ( event.clientY - this.ClientYPrev ) / this.Window.innerHeight * 10,
+                0,
+                this.ClientXPivot,
+                this.ClientYPivot
+            );		
+		}
     } else {
         this.ClientXPivot = null;
         this.ClientYPivot = null;
