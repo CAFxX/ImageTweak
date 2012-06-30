@@ -787,8 +787,10 @@ ImageTweak.parseColorExtended = function(v) {
 
 // console logging function
 ImageTweak.log = function(msg) {
-    if (ImageTweak.pref.LoggingEnabled)
-        Application.console.log(msg);
+    if (!ImageTweak.pref.LoggingEnabled)
+		return;
+	var m = "ImageTweak/" + arguments.callee.caller.name + ( typeof(msg) != "undefined" ? " " + msg : "" );
+	Application.console.log(m);
 };
 
 // create getters in pref for all items in preferences
@@ -932,13 +934,6 @@ ImageTweak.RepaintAll = function RepaintAll(url) {
         }
     }, true);
 })();
-
-// logging facilities
-ImageTweak.console = Cc["@mozilla.org/consoleservice;1"].getService(Ci.nsIConsoleService);
-
-ImageTweak.prototype.Log = function Log(msg) { 
-    ImageTweak.console.logStringMessage( "ImageTweak " + arguments.callee.caller.name + ( typeof(msg) != "undefined" ? " " + msg : "" ) );
-};
 
 // the UUID of this extension
 ImageTweak.UUID = "{DB2EA31C-58F5-48b7-8D60-CB0739257904}";
