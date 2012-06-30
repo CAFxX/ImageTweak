@@ -966,6 +966,7 @@ ImageTweak.ScrollInterval = 15;
 
 // maximum image size in pixel supported by gecko: it's actually higher than 
 // this, but strange things start to happen somewhere past this mark
+// FIXME: is this still true?
 ImageTweak.ImageMax = 65535; 
 
 // ImageTweak.entryPoint is the global entry point for imagetweak
