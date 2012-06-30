@@ -2,11 +2,11 @@
 echo Cleaning working directory...
 del ImageTweak.xpi >nul 2>nul
 echo Minifying js...
-copy content\imagetweak.js content\imagetweak.js.tmp
+copy content\imagetweak.js content\imagetweak.js.tmp >nul 2>nul
 tools\jsmin.exe < content\imagetweak.js.tmp > content\imagetweak.js
 echo Creating XPI...
 "%PROGRAMFILES%\7-Zip\7z" a -xr!bitcons -xr!newicon -xr!tools -x!skin\favicon.ico -xr!*.tmp -x!.git* -x!build.bat -x!desktop.ini -mx9 -tzip ImageTweak.xpi * >nul 2>nul
 echo Cleaning up...
-del content\imagetweak.js
-rename content\imagetweak.js.tmp imagetweak.js
+del content\imagetweak.js >nul 2>nul
+rename content\imagetweak.js.tmp imagetweak.js >nul 2>nul
 echo All done!
