@@ -78,27 +78,27 @@ ImageTweak.prototype.ScreenCoordinates = function ScreenCoordinates() {
                 case false:
                 case 0:
                 default:
-                    Coordinates.CurX = this.CenterX;
-                    Coordinates.CurY = this.CenterY;
                     break;
                 case 1:
-                    Coordinates.CurX = this.CenterX = ImageTweak.clip( this.CenterX, Math.abs( ( boundingWidth - this.Window.innerWidth ) / 2 ) );
-                    Coordinates.CurY = this.CenterY = ImageTweak.clip( this.CenterY, Math.abs( ( boundingHeight - this.Window.innerHeight ) / 2 ) );
+                    this.CenterX = ImageTweak.clip( this.CenterX, Math.abs( ( boundingWidth - this.Window.innerWidth ) / 2 ) );
+                    this.CenterY = ImageTweak.clip( this.CenterY, Math.abs( ( boundingHeight - this.Window.innerHeight ) / 2 ) );
                     break;
                 case 2:
-                    Coordinates.CurX = this.CenterX = ImageTweak.clip( this.CenterX, Math.abs( ( boundingWidth + this.Window.innerWidth ) / 2 ) );
-                    Coordinates.CurY = this.CenterY = ImageTweak.clip( this.CenterY, Math.abs( ( boundingHeight + this.Window.innerHeight ) / 2 ) );
+                    this.CenterX = ImageTweak.clip( this.CenterX, Math.abs( ( boundingWidth + this.Window.innerWidth ) / 2 ) );
+                    this.CenterY = ImageTweak.clip( this.CenterY, Math.abs( ( boundingHeight + this.Window.innerHeight ) / 2 ) );
                     break;
                 case true:
                 case 3:
-                    Coordinates.CurX = this.CenterX = ImageTweak.clip( this.CenterX, Math.max( 0, ( boundingWidth - this.Window.innerWidth ) / 2 ) );
-                    Coordinates.CurY = this.CenterY = ImageTweak.clip( this.CenterY, Math.max( 0, ( boundingHeight - this.Window.innerHeight ) / 2 ) );
+                    this.CenterX = ImageTweak.clip( this.CenterX, Math.max( 0, ( boundingWidth - this.Window.innerWidth ) / 2 ) );
+                    this.CenterY = ImageTweak.clip( this.CenterY, Math.max( 0, ( boundingHeight - this.Window.innerHeight ) / 2 ) );
                     break;
                 case 4:
-                    Coordinates.CurX = this.CenterX = ImageTweak.clip( this.CenterX, Math.max( 0, ( boundingWidth + this.Window.innerWidth ) / 2 ) );
-                    Coordinates.CurY = this.CenterY = ImageTweak.clip( this.CenterY, Math.max( 0, ( boundingHeight + this.Window.innerHeight ) / 2 ) );
+                    this.CenterX = ImageTweak.clip( this.CenterX, Math.max( 0, ( boundingWidth + this.Window.innerWidth ) / 2 ) );
+                    this.CenterY = ImageTweak.clip( this.CenterY, Math.max( 0, ( boundingHeight + this.Window.innerHeight ) / 2 ) );
                     break;
             }
+			Coordinates.CurX = this.CenterX;
+			Coordinates.CurY = this.CenterY;
             break;
         case "fill":
         case "pixel":
