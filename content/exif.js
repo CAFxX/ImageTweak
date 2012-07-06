@@ -623,7 +623,7 @@ function loadAllImages()
 	}
 }
 
-addEvent(window, "load", loadAllImages); 
+//addEvent(window, "load", loadAllImages); 
 
 })();
 
