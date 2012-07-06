@@ -7,7 +7,9 @@
 
 var EXIF = {};
 
-var bDebug = true;
+(function() {
+
+var bDebug = false;
 
 EXIF.Tags = {
 
@@ -308,99 +310,66 @@ function imageHasData(oImg)
 	return !!(oImg.exifdata);
 }
 
-function getByteAt(file, idx) {
-    return file.charCodeAt(idx);
-}
-
-function getStringAt(file, start, length) {
-    var str = "";
-    for (var i = 0; i < length; i++) {
-        var c = getByteAt(file, start + i);
-        if (c == 0) return str;
-        str += String.fromCharCode(c);
-    }
-    return new String(str);
-}
-
-function getShortAt(file, idx, swap) {
-    if (swap) {
-        return (getByteAt(file, idx) << 8) | (getByteAt(file, idx + 1));
-    } else {
-        return (getByteAt(file, idx)) | (getByteAt(file, idx + 1) << 8);
-    }
-}
-
-function getSLongAt(file, idx, swap) {
-    var res = getLongAt(file, idx, swap);
-    if (res > 2147483647)
-        return res - 4294967296;
-    else
-        return res;
-}
-
-function getLongAt(file, idx, swap) {
-    if (swap) {
-        return (getByteAt(file, idx + 0) << 24) |
-               (getByteAt(file, idx + 1) << 16) |
-               (getByteAt(file, idx + 2) << 8) |
-               (getByteAt(file, idx + 3) << 0);
-    } else {
-        return (getByteAt(file, idx + 0) << 0) |
-               (getByteAt(file, idx + 1) << 8) |
-               (getByteAt(file, idx + 2) << 16) |
-               (getByteAt(file, idx + 3) << 24);
-    }
+function getImageData(oImg, fncCallback) 
+{
+	BinaryAjax(
+		oImg.src,
+		function(oHTTP) {
+			var oEXIF = findEXIFinJPEG(oHTTP.binaryResponse);
+			oImg.exifdata = oEXIF || {};
+			if (fncCallback) fncCallback();
+		}
+	)
 }
 
 function findEXIFinJPEG(oFile) {
 	var aMarkers = [];
 
-	if (getByteAt(oFile, 0) != 0xFF || getByteAt(oFile, 1) != 0xD8) {
+	if (oFile.getByteAt(0) != 0xFF || oFile.getByteAt(1) != 0xD8) {
 		return false; // not a valid jpeg
 	}
 
 	var iOffset = 2;
-	var iLength = oFile.length;
-    var paul = 0;
+	var iLength = oFile.getLength();
 	while (iOffset < iLength) {
-		if (getByteAt(oFile, iOffset) != 0xFF) {
-			if (bDebug) log("Not a valid marker at offset " + iOffset + ", found: " + getByteAt(oFile, iOffset));
+		if (oFile.getByteAt(iOffset) != 0xFF) {
+			if (bDebug) console.log("Not a valid marker at offset " + iOffset + ", found: " + oFile.getByteAt(iOffset));
 			return false; // not a valid marker, something is wrong
 		}
 
-		var iMarker = getByteAt(oFile, iOffset+1);
+		var iMarker = oFile.getByteAt(iOffset+1);
 
 		// we could implement handling for other markers here, 
 		// but we're only looking for 0xFFE1 for EXIF data
 
 		if (iMarker == 22400) {
-			if (bDebug) log("Found 0xFFE1 marker");
-			return readEXIFData(oFile, iOffset + 4, getShortAt(oFile, iOffset+2, true)-2);
-			iOffset += 2 + getShortAt(oFile, iOffset+2, true);
+			if (bDebug) console.log("Found 0xFFE1 marker");
+			return readEXIFData(oFile, iOffset + 4, oFile.getShortAt(iOffset+2, true)-2);
+			iOffset += 2 + oFile.getShortAt(iOffset+2, true);
 
 		} else if (iMarker == 225) {
 			// 0xE1 = Application-specific 1 (for EXIF)
-			if (bDebug) log("Found 0xFFE1 marker");
-			return readEXIFData(oFile, iOffset + 4, getShortAt(oFile, iOffset+2, true)-2);
+			if (bDebug) console.log("Found 0xFFE1 marker");
+			return readEXIFData(oFile, iOffset + 4, oFile.getShortAt(iOffset+2, true)-2);
 
 		} else {
-			iOffset += 2 + getShortAt(oFile, iOffset+2, true);
+			iOffset += 2 + oFile.getShortAt(iOffset+2, true);
 		}
 
 	}
-    return null;
+
 }
 
 
 function readTags(oFile, iTIFFStart, iDirStart, oStrings, bBigEnd) 
 {
-	var iEntries = getShortAt(oFile, iDirStart, bBigEnd);
+	var iEntries = oFile.getShortAt(iDirStart, bBigEnd);
 	var oTags = {};
 	for (var i=0;i<iEntries;i++) {
 		var iEntryOffset = iDirStart + i*12 + 2;
-		var strTag = oStrings[getShortAt(oFile, iEntryOffset, bBigEnd)];
-		if (!strTag && bDebug) log("Unknown tag: " + getShortAt(oFile, iEntryOffset, bBigEnd));
-        oTags[strTag] = readTagValue(oFile, iEntryOffset, iTIFFStart, iDirStart, bBigEnd);
+		var strTag = oStrings[oFile.getShortAt(iEntryOffset, bBigEnd)];
+		if (!strTag && bDebug) console.log("Unknown tag: " + oFile.getShortAt(iEntryOffset, bBigEnd));
+		oTags[strTag] = readTagValue(oFile, iEntryOffset, iTIFFStart, iDirStart, bBigEnd);
 	}
 	return oTags;
 }
@@ -408,20 +377,20 @@ function readTags(oFile, iTIFFStart, iDirStart, oStrings, bBigEnd)
 
 function readTagValue(oFile, iEntryOffset, iTIFFStart, iDirStart, bBigEnd)
 {
-	var iType = getShortAt(oFile, iEntryOffset+2, bBigEnd);
-	var iNumValues = getLongAt(oFile, iEntryOffset+4, bBigEnd);
-	var iValueOffset = getLongAt(oFile, iEntryOffset+8, bBigEnd) + iTIFFStart;
+	var iType = oFile.getShortAt(iEntryOffset+2, bBigEnd);
+	var iNumValues = oFile.getLongAt(iEntryOffset+4, bBigEnd);
+	var iValueOffset = oFile.getLongAt(iEntryOffset+8, bBigEnd) + iTIFFStart;
 
 	switch (iType) {
 		case 1: // byte, 8-bit unsigned int
 		case 7: // undefined, 8-bit byte, value depending on field
 			if (iNumValues == 1) {
-				return getByteAt(oFile, iEntryOffset + 8, bBigEnd);
+				return oFile.getByteAt(iEntryOffset + 8, bBigEnd);
 			} else {
 				var iValOffset = iNumValues > 4 ? iValueOffset : (iEntryOffset + 8);
 				var aVals = [];
 				for (var n=0;n<iNumValues;n++) {
-					aVals[n] = getByteAt(oFile, iValOffset + n);
+					aVals[n] = oFile.getByteAt(iValOffset + n);
 				}
 				return aVals;
 			}
@@ -429,17 +398,17 @@ function readTagValue(oFile, iEntryOffset, iTIFFStart, iDirStart, bBigEnd)
 
 		case 2: // ascii, 8-bit byte
 			var iStringOffset = iNumValues > 4 ? iValueOffset : (iEntryOffset + 8);
-			return getStringAt(oFile, iStringOffset, iNumValues-1);
+			return oFile.getStringAt(iStringOffset, iNumValues-1);
 			break;
 
 		case 3: // short, 16 bit int
 			if (iNumValues == 1) {
-				return getShortAt(oFile, iEntryOffset + 8, bBigEnd);
+				return oFile.getShortAt(iEntryOffset + 8, bBigEnd);
 			} else {
 				var iValOffset = iNumValues > 2 ? iValueOffset : (iEntryOffset + 8);
 				var aVals = [];
 				for (var n=0;n<iNumValues;n++) {
-					aVals[n] = getShortAt(oFile, iValOffset + 2*n, bBigEnd);
+					aVals[n] = oFile.getShortAt(iValOffset + 2*n, bBigEnd);
 				}
 				return aVals;
 			}
@@ -447,57 +416,56 @@ function readTagValue(oFile, iEntryOffset, iTIFFStart, iDirStart, bBigEnd)
 
 		case 4: // long, 32 bit int
 			if (iNumValues == 1) {
-				return getLongAt(oFile, iEntryOffset + 8, bBigEnd);
+				return oFile.getLongAt(iEntryOffset + 8, bBigEnd);
 			} else {
 				var aVals = [];
 				for (var n=0;n<iNumValues;n++) {
-					aVals[n] = getLongAt(oFile, iValueOffset + 4*n, bBigEnd);
+					aVals[n] = oFile.getLongAt(iValueOffset + 4*n, bBigEnd);
 				}
 				return aVals;
 			}
 			break;
 		case 5:	// rational = two long values, first is numerator, second is denominator
 			if (iNumValues == 1) {
-				return getLongAt(oFile, iValueOffset, bBigEnd) / getLongAt(oFile, iValueOffset+4, bBigEnd);
+				return oFile.getLongAt(iValueOffset, bBigEnd) / oFile.getLongAt(iValueOffset+4, bBigEnd);
 			} else {
 				var aVals = [];
 				for (var n=0;n<iNumValues;n++) {
-					aVals[n] = getLongAt(oFile, iValueOffset + 8*n, bBigEnd) / getLongAt(oFile, iValueOffset+4 + 8*n, bBigEnd);
+					aVals[n] = oFile.getLongAt(iValueOffset + 8*n, bBigEnd) / oFile.getLongAt(iValueOffset+4 + 8*n, bBigEnd);
 				}
 				return aVals;
 			}
 			break;
 		case 9: // slong, 32 bit signed int
 			if (iNumValues == 1) {
-				return getSLongAt(oFile, iEntryOffset + 8, bBigEnd);
+				return oFile.getSLongAt(iEntryOffset + 8, bBigEnd);
 			} else {
 				var aVals = [];
 				for (var n=0;n<iNumValues;n++) {
-					aVals[n] = getSLongAt(oFile, iValueOffset + 4*n, bBigEnd);
+					aVals[n] = oFile.getSLongAt(iValueOffset + 4*n, bBigEnd);
 				}
 				return aVals;
 			}
 			break;
 		case 10: // signed rational, two slongs, first is numerator, second is denominator
 			if (iNumValues == 1) {
-				return getSLongAt(oFile, iValueOffset, bBigEnd) / getSLongAt(oFile, iValueOffset+4, bBigEnd);
+				return oFile.getSLongAt(iValueOffset, bBigEnd) / oFile.getSLongAt(iValueOffset+4, bBigEnd);
 			} else {
 				var aVals = [];
 				for (var n=0;n<iNumValues;n++) {
-					aVals[n] = getSLongAt(oFile, iValueOffset + 8*n, bBigEnd) / getSLongAt(oFile, iValueOffset+4 + 8*n, bBigEnd);
+					aVals[n] = oFile.getSLongAt(iValueOffset + 8*n, bBigEnd) / oFile.getSLongAt(iValueOffset+4 + 8*n, bBigEnd);
 				}
 				return aVals;
 			}
 			break;
 	}
-    return null;
 }
 
 
 function readEXIFData(oFile, iStart, iLength) 
 {
-	if (getStringAt(oFile, iStart, 4) != "Exif") {
-		if (bDebug) log("Not valid EXIF data! " + getStringAt(oFile, iStart, 4));
+	if (oFile.getStringAt(iStart, 4) != "Exif") {
+		if (bDebug) console.log("Not valid EXIF data! " + oFile.getStringAt(iStart, 4));
 		return false;
 	}
 
@@ -506,22 +474,22 @@ function readEXIFData(oFile, iStart, iLength)
 	var iTIFFOffset = iStart + 6;
 
 	// test for TIFF validity and endianness
-	if (getShortAt(oFile, iTIFFOffset) == 0x4949) {
+	if (oFile.getShortAt(iTIFFOffset) == 0x4949) {
 		bBigEnd = false;
-	} else if (getShortAt(oFile, iTIFFOffset) == 0x4D4D) {
+	} else if (oFile.getShortAt(iTIFFOffset) == 0x4D4D) {
 		bBigEnd = true;
 	} else {
-		if (bDebug) log("Not valid TIFF data! (no 0x4949 or 0x4D4D)");
+		if (bDebug) console.log("Not valid TIFF data! (no 0x4949 or 0x4D4D)");
 		return false;
 	}
 
-	if (getShortAt(oFile, iTIFFOffset+2, bBigEnd) != 0x002A) {
-		if (bDebug) log("Not valid TIFF data! (no 0x002A)");
+	if (oFile.getShortAt(iTIFFOffset+2, bBigEnd) != 0x002A) {
+		if (bDebug) console.log("Not valid TIFF data! (no 0x002A)");
 		return false;
 	}
 
-	if (getLongAt(oFile, iTIFFOffset+4, bBigEnd) != 0x00000008) {
-		if (bDebug) log("Not valid TIFF data! (First offset not 8)", getShortAt(oFile, iTIFFOffset+4, bBigEnd));
+	if (oFile.getLongAt(iTIFFOffset+4, bBigEnd) != 0x00000008) {
+		if (bDebug) console.log("Not valid TIFF data! (First offset not 8)", oFile.getShortAt(iTIFFOffset+4, bBigEnd));
 		return false;
 	}
 
@@ -585,9 +553,20 @@ function readEXIFData(oFile, iStart, iLength)
 }
 
 
+EXIF.getData = function(oImg, fncCallback) 
+{
+	if (!oImg.complete) return false;
+	if (!imageHasData(oImg)) {
+		getImageData(oImg, fncCallback);
+	} else {
+		if (fncCallback) fncCallback();
+	}
+	return true;
+}
+
 EXIF.getTag = function(oImg, strTag) 
 {
-	if (!imageHasData(oImg)) return null;
+	if (!imageHasData(oImg)) return;
 	return oImg.exifdata[strTag];
 }
 
@@ -625,4 +604,26 @@ EXIF.pretty = function(oImg)
 EXIF.readFromBinaryFile = function(oFile) {
 	return findEXIFinJPEG(oFile);
 }
+
+function loadAllImages() 
+{
+	var aImages = document.getElementsByTagName("img");
+	for (var i=0;i<aImages.length;i++) {
+		if (aImages[i].getAttribute("exif") == "true") {
+			if (!aImages[i].complete) {
+				addEvent(aImages[i], "load", 
+					function() {
+						EXIF.getData(this);
+					}
+				); 
+			} else {
+				EXIF.getData(aImages[i]);
+			}
+		}
+	}
+}
+
+addEvent(window, "load", loadAllImages); 
+
+})();
 
