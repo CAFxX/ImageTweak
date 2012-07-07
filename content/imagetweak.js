@@ -169,9 +169,6 @@ ImageTweak.prototype.Repaint = function Repaint() {
 /* Event Handlers ******************************************************************************************************************************************/
 
 ImageTweak.prototype.OnResize = function OnResize(event) {
-    if (this.ZoomType == "fit" || this.ZoomType == "fill") {
-        this.DefaultZoomType();
-    }
     this.Repaint();
 };
 
