@@ -23,7 +23,7 @@
 
 -->
 
-<prefwindow type="prefwindow" title="&pref.window.title;" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<prefwindow type="prefwindow" id="imagetweak_prefwindow" title="&pref.window.title;" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
     <script type="application/x-javascript" src="chrome://imagetweak/content/imagetweak.js" /> 
     <script type="application/x-javascript"><![CDATA[
         function $(id) {
