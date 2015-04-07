@@ -21,3 +21,4 @@ locale  imagetweak tr    locale/tr/
 locale  imagetweak uk    locale/uk/
 locale  imagetweak zh-CN locale/zh-CN/
 locale  imagetweak zh-TW locale/zh-TW/
+override chrome://global/skin/media/TopLevelImageDocument.css chrome://imagetweak/skin/TopLevelImageDocument.css
