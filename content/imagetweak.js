@@ -795,7 +795,7 @@ ImageTweak.log = function(msg) {
     if (!ImageTweak.pref.LoggingEnabled)
 		return;
 	var m = "ImageTweak/" + arguments.callee.caller.name + ( typeof(msg) != "undefined" ? " " + msg : "" );
-	Application.console.log(m);
+	console.log(m);
 };
 
 // create getters in pref for all items in preferences
@@ -829,15 +829,50 @@ ImageTweak.log = function(msg) {
     };
 
     ImageTweak.pref = {};
+
+    var get_pref = function(x) {
+      let type = gPrefService.getPrefType(x);
+      let v = null;
+      switch(type) {
+        case gPrefService.PREF_BOOL:
+          v = gPrefService.getBoolPref(x);
+          break;
+        case gPrefService.PREF_INT:
+          v = gPrefService.getIntPref(x);
+          break;
+        case gPrefService.PREF_STRING:
+          v = gPrefService.getCharPref(x);
+          break;
+      }
+      return v;
+    }
+
+    var set_pref = function(x, y) {
+      let type = gPrefService.getPrefType(x);
+      let v = null;
+      switch(type) {
+        case gPrefService.PREF_BOOL:
+          v = gPrefService.setBoolPref(x, y);
+          break;
+        case gPrefService.PREF_INT:
+          v = gPrefService.setIntPref(x, y);
+          break;
+        case gPrefService.PREF_STRING:
+          v = gPrefService.setCharPref(x, y);
+          break;
+      }
+      return v;
+    }
+
     for (var pref in preferences) {
         let id = pref;
         Object.defineProperty(ImageTweak.pref, pref, {
             get: function() { 
-                var p = Application.prefs.getValue( preferences[id].pref, null );
+                var p = get_pref(preferences[id].pref);
                 return preferences[id].parse ? preferences[id].parse(p) : p;
             },
             set: function(v) {
-                Application.prefs.setValue( preferences[id].pref, v );
+                set_pref( preferences[id].pref, v );
             },
             enumerable: true
         });
@@ -911,8 +946,8 @@ ImageTweak.Targets = {
 // this is used to instantly propagate changes to the pref window
 // FIXME: use preflisteners?
 ImageTweak.RepaintAll = function RepaintAll(url) {   
-    Application.windows.forEach(function(Window) {
-        Window.tabs.forEach(function(Tab) {
+    browserWindows().forEach(function(Window) {
+        Window.getBrowser().tabs.forEach(function(Tab) {
             var IT = ImageTweak.enabled(Tab.document);
             if (IT) 
                 IT.Repaint();
@@ -947,16 +982,13 @@ ImageTweak.UUID = "{DB2EA31C-58F5-48b7-8D60-CB0739257904}";
 // if we just got installed or updated, show the first run page
 (function() {
     var CheckVersion = function(extensions) {
-        ImageTweak.Version = extensions.get(ImageTweak.UUID).version;
+        ImageTweak.Version = extensions.version;
         if (ImageTweak.Version != ImageTweak.pref.Version) {
             gBrowser.selectedTab = gBrowser.addTab("chrome://imagetweak/content/welcome.htm");
             ImageTweak.pref.Version = ImageTweak.Version;
         }
     };
-    if (Application.getExtensions)
-        Application.getExtensions(CheckVersion);
-    else if (Application.extensions)
-        CheckVersion(Application.extensions);
+    AddonManager.getAddonByID(ImageTweak.UUID, CheckVersion)
 })();
 
 // ms between calls to the scroll event handler - somewhat higher than 60fps
