@@ -900,6 +900,8 @@ ImageTweak.isTransparentImage = function isTransparentImage(img) {
     switch (img.ownerDocument.contentType) {
         case "image/gif":
         case "image/png":
+            // takes too long for large images
+            return true;
             var { canvas, ctx, data } = ImageTweak.getImageCanvas(img);
             for (var i=3; i < data.data.length; i+=4)
                 if (data.data[i] != 255)
